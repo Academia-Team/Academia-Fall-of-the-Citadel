@@ -10,7 +10,8 @@ extents = Vector2( 15, 15 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 
-[node name="player" type="KinematicBody2D" parent="."]
+[node name="player" type="RigidBody2D" parent="."]
+gravity_scale = 0.0
 
 [node name="collisionbox" type="CollisionShape2D" parent="player"]
 position = Vector2( 1, 0 )
