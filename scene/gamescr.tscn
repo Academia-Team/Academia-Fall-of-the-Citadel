@@ -16,4 +16,7 @@ position = Vector2( 63, 218 )
 [node name="sword" parent="." instance=ExtResource( 2 )]
 position = Vector2( 172, 199 )
 
+[node name="sword2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 276, 200 )
+
 [connection signal="pick_up_weapon" from="player" to="infobar" method="_on_player_pick_up_weapon"]

@@ -16,6 +16,8 @@ func _ready():
 #	pass
 
 
-func _on_sword_area_entered(_body):
-	.hide()
-	call_deferred("free")
+func _on_sword_area_entered(body):
+	if body.has_method("has_weapon"):
+		if not body.has_weapon():
+			.hide()
+			call_deferred("free")

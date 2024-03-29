@@ -1,11 +1,14 @@
 extends Area2D
 
 var direction
-var has_sword
+var held_weapon
 
 signal pick_up_weapon(weapon_name)
 
 const SPEED = 200
+
+func has_weapon():
+	return (held_weapon != null)
 
 func _process(delta):
 	direction = Vector2.ZERO
@@ -28,7 +31,7 @@ func _process(delta):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	has_sword = false
+	held_weapon = null
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -39,5 +42,6 @@ func _ready():
 func _on_player_area_entered(area):
 	var collidedWith = area.name
 	if collidedWith == 'sword':
-		has_sword = true
-		emit_signal("pick_up_weapon", "sword")
+		if held_weapon == null:
+			held_weapon = collidedWith
+			emit_signal("pick_up_weapon", held_weapon)
