@@ -1,6 +1,9 @@
 extends Area2D
 
 var direction
+var has_sword
+
+signal pick_up_weapon(weapon_name)
 
 const SPEED = 200
 
@@ -25,9 +28,16 @@ func _process(delta):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	has_sword = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+
+func _on_player_area_entered(area):
+	var collidedWith = area.name
+	if collidedWith == 'sword':
+		has_sword = true
+		emit_signal("pick_up_weapon", "sword")
