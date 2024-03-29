@@ -1,11 +1,16 @@
 extends Area2D
+class_name player
 
 var direction
 var held_weapon
 
 signal pick_up_weapon(weapon_name)
+signal used_weapon(weapon_name)
 
 const SPEED = 200
+
+func get_class():
+	return "player"
 
 func has_weapon():
 	return (held_weapon != null)
@@ -20,6 +25,10 @@ func _process(delta):
 		direction.y = -1
 	if Input.is_action_pressed("move_down"):
 		direction.y = 1
+	if Input.is_action_just_pressed("action"):
+		if has_weapon():
+			emit_signal("used_weapon", held_weapon)
+			held_weapon = null
 	
 	position += direction * SPEED * delta
 
@@ -40,8 +49,8 @@ func _ready():
 
 
 func _on_player_area_entered(area):
-	var collidedWith = area.name
-	if collidedWith == 'sword':
-		if held_weapon == null:
-			held_weapon = collidedWith
+	var collisionCategory = area.get_class()
+	if collisionCategory == 'weapon':
+		if area.has_meta("type") and held_weapon == null:
+			held_weapon = area.get_meta("type")
 			emit_signal("pick_up_weapon", held_weapon)

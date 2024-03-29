@@ -20,3 +20,4 @@ position = Vector2( 172, 199 )
 position = Vector2( 276, 200 )
 
 [connection signal="pick_up_weapon" from="player" to="infobar" method="_on_player_pick_up_weapon"]
+[connection signal="used_weapon" from="player" to="infobar" method="_on_player_used_weapon"]

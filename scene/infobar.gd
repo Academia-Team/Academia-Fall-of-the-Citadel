@@ -18,3 +18,7 @@ func _ready():
 
 func _on_player_pick_up_weapon(weapon_name):
 	$weapon_info.add_text(weapon_name)
+
+
+func _on_player_used_weapon(_weapon_name):
+	$weapon_info.clear()
