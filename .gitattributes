@@ -6,3 +6,6 @@
 *.cfg text eol=lf
 *.import text eol=lf
 * text=auto
+
+# Force linguist to recognize Godot files.
+*.gd linguist-language=gdscript
