@@ -19,19 +19,19 @@ func has_weapon():
 func handle_action(delta):
 	direction = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):
-		direction.x = 1
+		direction.x = 32
 	if Input.is_action_pressed("move_left"):
-		direction.x = -1
+		direction.x = -32
 	if Input.is_action_pressed("move_up"):
-		direction.y = -1
+		direction.y = -32
 	if Input.is_action_pressed("move_down"):
-		direction.y = 1
+		direction.y = 32
 	if Input.is_action_just_pressed("action"):
 		if has_weapon():
 			emit_signal("used_weapon", held_weapon)
 			held_weapon = null
 		
-	position += direction * SPEED * delta
+	position += direction.normalized() * SPEED * delta
 
 func _process(delta):
 	if lives <= 0:
