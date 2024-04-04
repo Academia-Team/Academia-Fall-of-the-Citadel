@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Gathering Darkness.mp3-c6f88c1d8649578ae5aa2de13ab44ed3.mp3str"
+
+[deps]
+
+source_file="res://asset/Gathering Darkness.mp3"
+dest_files=[ "res://.import/Gathering Darkness.mp3-c6f88c1d8649578ae5aa2de13ab44ed3.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
