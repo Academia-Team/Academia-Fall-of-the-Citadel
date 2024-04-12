@@ -2,10 +2,10 @@ extends Area2D
 class_name player
 
 var curOrient
-var direction
 var held_weapon
 var lives
 
+enum DIRECTION {UP, DOWN, LEFT, RIGHT}
 enum ORIENTATION {NORTH, SOUTH, EAST, WEST}
 
 signal pick_up_weapon(weapon_name)
@@ -18,6 +18,21 @@ func get_class():
 
 func has_weapon():
 	return (held_weapon != null)
+	
+func set_dir(dir, delta):
+	var direction = Vector2.ZERO
+	
+	match dir:
+		DIRECTION.UP:
+			direction.y = -32
+		DIRECTION.DOWN:
+			direction.y = 32
+		DIRECTION.LEFT:
+			direction.x = -32
+		DIRECTION.RIGHT:
+			direction.x = 32
+			
+	position += direction.normalized() * SPEED * delta
 	
 func set_orient(orient):
 	match orient:
@@ -32,25 +47,22 @@ func set_orient(orient):
 	curOrient = orient
 
 func handle_action(delta):
-	direction = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):
-		direction.x = 32
+		if not Input.is_action_pressed("stay"): set_dir(DIRECTION.RIGHT, delta)
 		set_orient(ORIENTATION.EAST)
 	if Input.is_action_pressed("move_left"):
-		direction.x = -32
+		if not Input.is_action_pressed("stay"): set_dir(DIRECTION.LEFT, delta)
 		set_orient(ORIENTATION.WEST)
 	if Input.is_action_pressed("move_up"):
-		direction.y = -32
+		if not Input.is_action_pressed("stay"): set_dir(DIRECTION.UP, delta)
 		set_orient(ORIENTATION.NORTH)
 	if Input.is_action_pressed("move_down"):
-		direction.y = 32
+		if not Input.is_action_pressed("stay"): set_dir(DIRECTION.DOWN, delta)
 		set_orient(ORIENTATION.SOUTH)
 	if Input.is_action_just_pressed("action"):
 		if has_weapon():
 			emit_signal("used_weapon", held_weapon)
 			held_weapon = null
-		
-	position += direction.normalized() * SPEED * delta
 
 func _process(delta):
 	if lives <= 0:
