@@ -16,9 +16,9 @@ func _ready():
 #	pass
 
 
-func _on_player_pick_up_weapon(weapon_name):
-	$weapon_info.text = weapon_name
+func _on_player_pick_up_item(item_name):
+	$item_info.text = item_name
 
 
-func _on_player_used_weapon(_weapon_name):
-	$weapon_info.clear()
+func _on_player_used_item(_item_name):
+	$item_info.clear()

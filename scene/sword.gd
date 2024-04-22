@@ -1,12 +1,12 @@
 extends Area2D
-class_name weapon
+class_name item
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 
 func get_class():
-	return "weapon"
+	return "item"
 
 
 # Called when the node enters the scene tree for the first time.

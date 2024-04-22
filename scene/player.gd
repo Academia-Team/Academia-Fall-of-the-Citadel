@@ -3,23 +3,20 @@ class_name player
 
 var bounds = {"top": 0, "bottom": 0, "left": 0, "right": 0}
 var curOrient
-var held_weapon
+var held_item
 var lives
 
 
 enum DIRECTION {UP, DOWN, LEFT, RIGHT}
 enum ORIENTATION {NORTH, SOUTH, EAST, WEST}
 
-signal pick_up_weapon(weapon_name)
-signal used_weapon(weapon_name)
+signal pick_up_item(item_name)
+signal used_item(item_name)
 
 const SPEED = 200
 
 func get_class():
 	return "player"
-
-func has_weapon():
-	return (held_weapon != null)
 	
 func set_dir(dir, delta):
 	var direction = Vector2.ZERO
@@ -64,9 +61,12 @@ func handle_action(delta):
 		if not Input.is_action_pressed("stay"): set_dir(DIRECTION.DOWN, delta)
 		set_orient(ORIENTATION.SOUTH)
 	if Input.is_action_just_pressed("action"):
-		if has_weapon():
-			emit_signal("used_weapon", held_weapon)
-			held_weapon = null
+		use_item()
+			
+func use_item():
+	if held_item:
+		emit_signal("used_item", held_item)
+		held_item = null
 
 func _process(delta):
 	if lives <= 0:
@@ -78,7 +78,7 @@ func _process(delta):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	held_weapon = null
+	held_item = null
 	lives = 3
 	curOrient = ORIENTATION.SOUTH
 	hide()
@@ -96,9 +96,9 @@ func spawn(pos, topBound, bottomBound, leftBound, rightBound):
 
 func _on_player_area_entered(area):
 	var collisionCategory = area.get_class()
-	if collisionCategory == 'weapon':
-		if held_weapon == null:
-			held_weapon = area.acquire()
-			emit_signal("pick_up_weapon", held_weapon)
+	if collisionCategory == "item":
+		if not held_item:
+			held_item = area.acquire()
+			emit_signal("pick_up_item", held_item)
 	elif collisionCategory == 'enemy':
 		if (lives > 0): lives = lives - 1
