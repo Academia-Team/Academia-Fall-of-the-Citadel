@@ -7,6 +7,7 @@
 extents = Vector2( 5, 9 )
 
 [node name="sword" type="Area2D"]
+monitoring = false
 script = ExtResource( 2 )
 
 [node name="collisionbox" type="CollisionShape2D" parent="."]
@@ -15,5 +16,3 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
-
-[connection signal="area_entered" from="." to="." method="_on_sword_area_entered"]

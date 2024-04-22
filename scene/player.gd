@@ -97,8 +97,8 @@ func spawn(pos, topBound, bottomBound, leftBound, rightBound):
 func _on_player_area_entered(area):
 	var collisionCategory = area.get_class()
 	if collisionCategory == 'weapon':
-		if area.has_meta("type") and held_weapon == null:
-			held_weapon = area.get_meta("type")
+		if held_weapon == null:
+			held_weapon = area.acquire()
 			emit_signal("pick_up_weapon", held_weapon)
 	elif collisionCategory == 'enemy':
 		if (lives > 0): lives = lives - 1

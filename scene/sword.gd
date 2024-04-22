@@ -13,14 +13,7 @@ func get_class():
 func _ready():
 	set_meta("type", "sword")
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
-func _on_sword_area_entered(body):
-	if body.get_class() == "player":
-		if not body.has_weapon():
-			.hide()
-			call_deferred("free")
+func acquire():
+	.hide()
+	call_deferred("free")
+	return get_class()
