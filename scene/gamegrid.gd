@@ -12,11 +12,7 @@ func _ready():
 	var player = player_scene.instance()
 	var screen_size = get_viewport_rect().size
 	add_child(player)
-	player.spawn(Vector2(0,0), position.y, screen_size.y - 32, position.x, screen_size.x - 32)
-	print(to_global(Vector2(0,0)))
-	#player.position = Vector2(0,0)
-	#player.position = map_to_world(Vector2(0,0))
-	pass # Replace with function body.
+	player.spawn(position, position.y, screen_size.y - 32, position.x, screen_size.x - 32)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

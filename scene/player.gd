@@ -89,6 +89,8 @@ func spawn(pos, topBound, bottomBound, leftBound, rightBound):
 	bounds.right = rightBound
 	bounds.top = topBound
 	bounds.bottom = bottomBound
+	assert(position.x >= bounds.left && position.x <= bounds.right)
+	assert(position.y >= bounds.top && position.y <= bounds.bottom)
 	show()
 
 
