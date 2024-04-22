@@ -1,9 +1,11 @@
 extends Area2D
 class_name player
 
+var bounds = {"top": 0, "bottom": 0, "left": 0, "right": 0}
 var curOrient
 var held_weapon
 var lives
+
 
 enum DIRECTION {UP, DOWN, LEFT, RIGHT}
 enum ORIENTATION {NORTH, SOUTH, EAST, WEST}
@@ -33,6 +35,8 @@ func set_dir(dir, delta):
 			direction.x = 32
 			
 	position += direction.normalized() * SPEED * delta
+	position.x = clamp(position.x, bounds.left, bounds.right)
+	position.y = clamp(position.y, bounds.top, bounds.bottom)
 	
 func set_orient(orient):
 	match orient:
@@ -77,6 +81,15 @@ func _ready():
 	held_weapon = null
 	lives = 3
 	curOrient = ORIENTATION.SOUTH
+	hide()
+	
+func spawn(pos, topBound, bottomBound, leftBound, rightBound):
+	position = pos
+	bounds.left = leftBound
+	bounds.right = rightBound
+	bounds.top = topBound
+	bounds.bottom = bottomBound
+	show()
 
 
 func _on_player_area_entered(area):
