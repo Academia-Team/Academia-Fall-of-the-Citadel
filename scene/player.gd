@@ -96,15 +96,14 @@ func use_sword():
 		var target_cell = cell_collision.instance()
 		add_child(target_cell)
 		target_cell.set_pos(target_pos)
-		yield(target_cell, "checked_for_collisions")
+		yield(target_cell, "ready")
 		
 		if target_cell.obj_found():
 			print("Found")
-			var obj_ref_list = target_cell.get_obj_refs()
+			var obj_ref = target_cell.get_obj_ref()
 			
-			for obj_ref in obj_ref_list:
-				if obj_ref.get_class() == "Enemy":
-					obj_ref.attack()
+			if obj_ref.get_class() == "Enemy":
+				obj_ref.attack()
 		
 		remove_child(target_cell)
 
