@@ -8,6 +8,7 @@ var cur_orient
 var future_dir
 var held_item
 var lives
+var targets = {"top": null, "bottom": null, "left": null, "right": null}
 
 const MOVE_QUEUE_SZ = 256
 var move_queue
@@ -119,15 +120,15 @@ func get_opposing_dir(dir):
 	
 	return opposing_dir
 
-func _on_player_area_entered(area):
-	var collisionCategory = area.get_class()
+func handle_collision(obj):
+	var collisionCategory = obj.get_class()
 	if collisionCategory == "item":
 		if not held_item:
-			held_item = area.acquire()
+			held_item = obj.acquire()
 			emit_signal("pick_up_item", held_item)
 	elif collisionCategory == 'enemy':
 		if (lives > 0): lives = lives - 1
-		area.attack()
+		obj.attack()
 
 
 func _on_move_timer_timeout():
@@ -149,3 +150,33 @@ func _on_move_timer_timeout():
 			position = future_pos
 		else:
 			move_queue.clear()
+
+
+func _on_player_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	var triggered_collisionbox = shape_owner_get_owner(local_shape_index)
+	
+	if triggered_collisionbox.name == "collisionbox":
+		handle_collision(area)
+	elif area.get_class() == "Enemy":
+		match triggered_collisionbox.name:
+			"right_collisionbox":
+				targets["right"] = area
+			"left_collisionbox":
+				targets["left"] = area
+			"top_collisionbox":
+				targets["top"] = area
+			"bottom_collisionbox":
+				targets["bottom"] = area
+
+
+func _on_player_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
+	var triggered_collisionbox = shape_owner_get_owner(local_shape_index)
+	match triggered_collisionbox.name:
+		"right_collisionbox":
+			targets["right"] = null
+		"left_collisionbox":
+			targets["left"] = null
+		"top_collisionbox":
+			targets["top"] = null
+		"bottom_collisionbox":
+			targets["bottom"] = null
