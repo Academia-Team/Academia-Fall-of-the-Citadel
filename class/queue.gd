@@ -54,3 +54,10 @@ func peek():
 	if read_idx >= write_idx:
 		return null
 	return array[read_idx]
+
+func contains(val):
+	if not empty():
+		for i in range(read_idx, write_idx):
+			if array[i] == val:
+				return true
+	return false
