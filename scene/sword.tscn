@@ -11,9 +11,9 @@ monitoring = false
 script = ExtResource( 2 )
 
 [node name="collisionbox" type="CollisionShape2D" parent="."]
-position = Vector2( 16, -16.3333 )
+position = Vector2( 16, 16.6667 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 16, -16 )
+position = Vector2( 16, 16 )
 texture = ExtResource( 1 )
