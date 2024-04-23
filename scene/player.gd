@@ -24,9 +24,17 @@ func get_class():
 	return "player"
 	
 func set_dir(dir):
-	if $move_input_timer.is_stopped():
+	$move_timer.set_paused(true)
+	
+	if move_queue.contains(get_opposing_dir(dir)):
+		$move_timer.stop()
+		move_queue.clear()
+		$move_input_timer.start()
+	elif $move_input_timer.is_stopped():
 		move_queue.queue(dir)
 		$move_input_timer.start()
+		
+	$move_timer.set_paused(false)
 
 func pos_in_bounds(pos):
 	return pos.x >= bounds.left && pos.x <= bounds.right && \
@@ -97,6 +105,19 @@ func spawn(pos, topBound, bottomBound, leftBound, rightBound):
 	
 	show()
 
+func get_opposing_dir(dir):
+	var opposing_dir
+	match dir:
+		DIRECTION.UP:
+			opposing_dir = DIRECTION.DOWN
+		DIRECTION.DOWN:
+			opposing_dir = DIRECTION.UP
+		DIRECTION.LEFT:
+			opposing_dir = DIRECTION.RIGHT
+		DIRECTION.RIGHT:
+			opposing_dir = DIRECTION.LEFT
+	
+	return opposing_dir
 
 func _on_player_area_entered(area):
 	var collisionCategory = area.get_class()
