@@ -71,8 +71,31 @@ func handle_action():
 			
 func use_item():
 	if held_item:
+		match held_item:
+			"sword":
+				use_sword()
 		emit_signal("used_item", held_item)
 		held_item = null
+
+func use_sword():
+	var target_obj
+	
+	match cur_orient:
+		ORIENTATION.NORTH:
+			target_obj = targets["top"]
+			targets["top"] = null
+		ORIENTATION.SOUTH:
+			target_obj = targets["bottom"]
+			targets["bottom"] = null
+		ORIENTATION.WEST:
+			target_obj = targets["left"]
+			targets["left"] = null
+		ORIENTATION.EAST:
+			target_obj = targets["right"]
+			targets["right"] = null
+			
+	if target_obj != null:
+		target_obj.attack()
 
 func _process(_delta):
 	if lives <= 0:
