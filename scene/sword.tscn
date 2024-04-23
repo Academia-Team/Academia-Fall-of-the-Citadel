@@ -4,14 +4,14 @@
 [ext_resource path="res://scene/sword.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 16 )
+extents = Vector2( 15, 15 )
 
 [node name="sword" type="Area2D"]
 monitoring = false
 script = ExtResource( 2 )
 
 [node name="collisionbox" type="CollisionShape2D" parent="."]
-position = Vector2( 16, 16.6667 )
+position = Vector2( 15, 15.6667 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
