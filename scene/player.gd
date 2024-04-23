@@ -1,6 +1,7 @@
 extends Area2D
 class_name player
 
+const cell_collision = preload("res://scene/cell_collision.tscn")
 const queue = preload("res://class/queue.gd")
 
 var bounds = {"top": 0, "bottom": 0, "left": 0, "right": 0}
@@ -70,8 +71,41 @@ func handle_action():
 			
 func use_item():
 	if held_item:
+		match held_item:
+			"sword":
+				use_sword()
 		emit_signal("used_item", held_item)
 		held_item = null
+
+func use_sword():
+	var target_pos = position
+	
+	match cur_orient:
+		ORIENTATION.NORTH:
+			target_pos.y -= 32
+		ORIENTATION.SOUTH:
+			target_pos.y += 32
+		ORIENTATION.WEST:
+			target_pos.x -= 32
+		ORIENTATION.EAST:
+			target_pos.x += 32
+	
+	print(target_pos)
+	if pos_in_bounds(target_pos):
+		print("Hi")
+		var target_cell = cell_collision.instance()
+		add_child(target_cell)
+		target_cell.set_pos(target_pos)
+		yield(target_cell, "ready")
+		
+		if target_cell.obj_found():
+			print("Found")
+			var obj_ref = target_cell.get_obj_ref()
+			
+			if obj_ref.get_class() == "Enemy":
+				obj_ref.attack()
+		
+		remove_child(target_cell)
 
 func _process(_delta):
 	if lives <= 0:
