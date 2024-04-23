@@ -16,4 +16,4 @@ func _ready():
 func acquire():
 	.hide()
 	call_deferred("free")
-	return get_class()
+	return get_meta("type")

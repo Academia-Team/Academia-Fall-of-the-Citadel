@@ -21,4 +21,4 @@ func _on_player_pick_up_item(item_name):
 
 
 func _on_player_used_item(_item_name):
-	$item_info.clear()
+	$item_info.text = ""
