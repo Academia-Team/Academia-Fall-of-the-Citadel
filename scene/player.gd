@@ -127,6 +127,7 @@ func _on_player_area_entered(area):
 			emit_signal("pick_up_item", held_item)
 	elif collisionCategory == 'enemy':
 		if (lives > 0): lives = lives - 1
+		area.attack()
 
 
 func _on_move_timer_timeout():
