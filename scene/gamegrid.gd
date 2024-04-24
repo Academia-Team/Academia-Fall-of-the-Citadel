@@ -33,6 +33,10 @@ func _ready():
 	var zombie2 = zombie_scene.instance()
 	var zombie3 = zombie_scene.instance()
 	
+	zombie1.connect("enemy_destroyed", self, "_on_enemy_destroyed")
+	zombie2.connect("enemy_destroyed", self, "_on_enemy_destroyed")
+	zombie3.connect("enemy_destroyed", self, "_on_enemy_destroyed")
+	
 	add_child(zombie1)
 	add_child(zombie2)
 	add_child(zombie3)
@@ -49,3 +53,8 @@ func _on_player_pick_up_item(item_name):
 
 func _on_passive_timer_timeout():
 	emit_signal("score_change", PASSIVE_SCORE)
+
+func _on_enemy_destroyed(enemy_type):
+	match enemy_type:
+		"zombie":
+			emit_signal("score_change", ZOMBIE_SCORE)
