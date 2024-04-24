@@ -17,6 +17,7 @@ margin_left = -20.0
 margin_top = -20.0
 margin_right = 20.0
 margin_bottom = 20.0
+grow_horizontal = 2
 align = 1
 valign = 1
 
