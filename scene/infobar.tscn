@@ -19,3 +19,11 @@ margin_right = 20.0
 margin_bottom = 20.0
 align = 1
 valign = 1
+
+[node name="lives_counter" type="Label" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -7.0
+margin_right = 40.0
+margin_bottom = 7.0
+valign = 1

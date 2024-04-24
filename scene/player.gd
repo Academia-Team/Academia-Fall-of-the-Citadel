@@ -19,6 +19,7 @@ const NUM_ORIENT = 4
 enum DIRECTION {UP, DOWN, LEFT, RIGHT}
 enum ORIENTATION {NORTH, SOUTH, EAST, WEST}
 
+signal health_change(lives)
 signal pick_up_item(item_name)
 signal used_item(item_name)
 
@@ -103,6 +104,7 @@ func _ready():
 	lives = 3
 	cur_orient = ORIENTATION.SOUTH
 	move_queue = Queue.new(MOVE_QUEUE_SZ)
+	emit_signal("health_change", lives)
 	
 	hide()
 	
@@ -140,6 +142,7 @@ func handle_collision(obj):
 			emit_signal("pick_up_item", held_item)
 	elif collisionCategory == 'enemy':
 		if (lives > 0): lives = lives - 1
+		emit_signal("health_change", lives)
 		obj.attack()
 
 
