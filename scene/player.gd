@@ -175,6 +175,10 @@ func _on_player_area_shape_entered(area_rid, area, area_shape_index, local_shape
 		print("event triggered by %s" % area.name)
 		
 		var target_orient = orient_from_collision_box(triggered_collisionbox)
+		
+		if targets[target_orient] != null:
+			yield(self, "area_shape_exited")
+			
 		targets[target_orient] = area
 		print(targets)
 
