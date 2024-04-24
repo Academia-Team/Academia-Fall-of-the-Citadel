@@ -10,10 +10,9 @@ extents = Vector2( 15, 15 )
 script = ExtResource( 2 )
 
 [node name="collisionBox" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 1 )
+position = Vector2( 15, 15 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 16, 16 )
 texture = ExtResource( 1 )
-
-[connection signal="area_entered" from="." to="." method="_on_zombie_area_entered"]
