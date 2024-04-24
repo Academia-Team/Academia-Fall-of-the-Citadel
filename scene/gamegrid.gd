@@ -45,3 +45,7 @@ func _ready():
 func _on_player_pick_up_item(item_name):
 	ref_counter[item_name] -= 1
 	emit_signal("score_change", ITEM_SCORE)
+
+
+func _on_passive_timer_timeout():
+	emit_signal("score_change", PASSIVE_SCORE)
