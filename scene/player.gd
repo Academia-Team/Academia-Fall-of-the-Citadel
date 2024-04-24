@@ -180,7 +180,7 @@ func _on_player_area_shape_entered(area_rid, area, area_shape_index, local_shape
 	
 	if triggered_collisionbox.name == "collisionbox":
 		handle_collision(area)
-	elif area.get_class() == "Enemy":
+	elif area.get_class() == "enemy":
 		match triggered_collisionbox.name:
 			"right_collisionbox":
 				targets["right"] = area
@@ -190,6 +190,8 @@ func _on_player_area_shape_entered(area_rid, area, area_shape_index, local_shape
 				targets["top"] = area
 			"bottom_collisionbox":
 				targets["bottom"] = area
+			_:
+				printerr("Collisionbox not handled")
 
 
 func _on_player_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
