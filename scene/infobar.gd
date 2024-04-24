@@ -1,14 +1,9 @@
 extends ColorRect
 
+var score
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	score = 0
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,3 +20,7 @@ func _on_player_used_item(_item_name):
 
 func _on_player_health_change(lives):
 	$lives_counter.text = "Lives: %d" % lives
+
+func _on_gamegrid_score_change(score_diff):
+	score += score_diff
+	$score_counter.text = "Score: %d" % score
