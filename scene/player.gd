@@ -82,7 +82,6 @@ func use_item():
 
 func use_sword():
 	var target_obj = targets[cur_orient]
-	targets[cur_orient] = null
 			
 	if target_obj != null:
 		target_obj.attack()
@@ -180,10 +179,11 @@ func _on_player_area_shape_entered(area_rid, area, area_shape_index, local_shape
 
 
 func _on_player_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
-	var triggered_collisionbox = shape_owner_get_owner(local_shape_index)
-	if triggered_collisionbox.name != "collisionbox" and area.get_class() == "enemy":
-		var target_orient = orient_from_collision_box(triggered_collisionbox)
-		targets[target_orient] = null
+	if area != null:
+		var triggered_collisionbox = shape_owner_get_owner(local_shape_index)
+		if triggered_collisionbox.name != "collisionbox" and area.get_class() == "enemy":
+			var target_orient = orient_from_collision_box(triggered_collisionbox)
+			targets[target_orient] = null
 
 func orient_from_collision_box(collisionbox):
 	var orient
