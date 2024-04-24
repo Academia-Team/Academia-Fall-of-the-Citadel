@@ -38,19 +38,19 @@ wait_time = 0.2
 one_shot = true
 
 [node name="right_collisionbox" type="CollisionShape2D" parent="."]
-position = Vector2( 45, 15 )
+position = Vector2( 46, 15 )
 shape = SubResource( 2 )
 
 [node name="left_collisionbox" type="CollisionShape2D" parent="."]
-position = Vector2( -15, 15 )
+position = Vector2( -16, 15 )
 shape = SubResource( 3 )
 
 [node name="top_collisionbox" type="CollisionShape2D" parent="."]
-position = Vector2( 15, -15 )
+position = Vector2( 15, -16 )
 shape = SubResource( 4 )
 
 [node name="bottom_collisionbox" type="CollisionShape2D" parent="."]
-position = Vector2( 15, 45 )
+position = Vector2( 15, 46 )
 shape = SubResource( 5 )
 
 [connection signal="area_shape_entered" from="." to="." method="_on_player_area_shape_entered"]

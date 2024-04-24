@@ -181,6 +181,8 @@ func _on_player_area_shape_entered(area_rid, area, area_shape_index, local_shape
 	if triggered_collisionbox.name == "collisionbox":
 		handle_collision(area)
 	elif area.get_class() == "enemy":
+		print("adding enemy from %s" % triggered_collisionbox.name)
+		print("event triggered by %s" % area.name)
 		match triggered_collisionbox.name:
 			"right_collisionbox":
 				targets["right"] = area
@@ -192,16 +194,21 @@ func _on_player_area_shape_entered(area_rid, area, area_shape_index, local_shape
 				targets["bottom"] = area
 			_:
 				printerr("Collisionbox not handled")
+		print(targets)
 
 
 func _on_player_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
 	var triggered_collisionbox = shape_owner_get_owner(local_shape_index)
-	match triggered_collisionbox.name:
-		"right_collisionbox":
-			targets["right"] = null
-		"left_collisionbox":
-			targets["left"] = null
-		"top_collisionbox":
-			targets["top"] = null
-		"bottom_collisionbox":
-			targets["bottom"] = null
+	if triggered_collisionbox.name != "collisionbox" and area.get_class() == "enemy":
+		print("removing enemy from %s" % triggered_collisionbox.name)
+		print("event triggered by %s" % area.name)
+		match triggered_collisionbox.name:
+			"right_collisionbox":
+				targets["right"] = null
+			"left_collisionbox":
+				targets["left"] = null
+			"top_collisionbox":
+				targets["top"] = null
+			"bottom_collisionbox":
+				targets["bottom"] = null
+	print(targets)
