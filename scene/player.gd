@@ -171,27 +171,19 @@ func _on_player_area_shape_entered(area_rid, area, area_shape_index, local_shape
 	if triggered_collisionbox.name == "collisionbox":
 		handle_collision(area)
 	elif area.get_class() == "enemy":
-		print("adding enemy from %s" % triggered_collisionbox.name)
-		print("event triggered by %s" % area.name)
-		
 		var target_orient = orient_from_collision_box(triggered_collisionbox)
 		
 		if targets[target_orient] != null:
 			yield(self, "area_shape_exited")
 			
 		targets[target_orient] = area
-		print(targets)
 
 
 func _on_player_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
 	var triggered_collisionbox = shape_owner_get_owner(local_shape_index)
 	if triggered_collisionbox.name != "collisionbox" and area.get_class() == "enemy":
-		print("removing enemy from %s" % triggered_collisionbox.name)
-		print("event triggered by %s" % area.name)
-		
 		var target_orient = orient_from_collision_box(triggered_collisionbox)
 		targets[target_orient] = null
-		print(targets)
 
 func orient_from_collision_box(collisionbox):
 	var orient
