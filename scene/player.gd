@@ -8,10 +8,13 @@ var cur_orient
 var future_dir
 var held_item
 var lives
-var targets = {"top": null, "bottom": null, "left": null, "right": null}
+var targets = [null, null, null, null]
 
 const MOVE_QUEUE_SZ = 256
 var move_queue
+
+const NUM_DIRS = 4
+const NUM_ORIENT = 4
 
 enum DIRECTION {UP, DOWN, LEFT, RIGHT}
 enum ORIENTATION {NORTH, SOUTH, EAST, WEST}
@@ -78,21 +81,8 @@ func use_item():
 		held_item = null
 
 func use_sword():
-	var target_obj
-	
-	match cur_orient:
-		ORIENTATION.NORTH:
-			target_obj = targets["top"]
-			targets["top"] = null
-		ORIENTATION.SOUTH:
-			target_obj = targets["bottom"]
-			targets["bottom"] = null
-		ORIENTATION.WEST:
-			target_obj = targets["left"]
-			targets["left"] = null
-		ORIENTATION.EAST:
-			target_obj = targets["right"]
-			targets["right"] = null
+	var target_obj = targets[cur_orient]
+	targets[cur_orient] = null
 			
 	if target_obj != null:
 		target_obj.attack()
@@ -185,13 +175,13 @@ func _on_player_area_shape_entered(area_rid, area, area_shape_index, local_shape
 		print("event triggered by %s" % area.name)
 		match triggered_collisionbox.name:
 			"right_collisionbox":
-				targets["right"] = area
+				targets[ORIENTATION.EAST] = area
 			"left_collisionbox":
-				targets["left"] = area
+				targets[ORIENTATION.WEST] = area
 			"top_collisionbox":
-				targets["top"] = area
+				targets[ORIENTATION.NORTH] = area
 			"bottom_collisionbox":
-				targets["bottom"] = area
+				targets[ORIENTATION.SOUTH] = area
 			_:
 				printerr("Collisionbox not handled")
 		print(targets)
@@ -204,11 +194,11 @@ func _on_player_area_shape_exited(area_rid, area, area_shape_index, local_shape_
 		print("event triggered by %s" % area.name)
 		match triggered_collisionbox.name:
 			"right_collisionbox":
-				targets["right"] = null
+				targets[ORIENTATION.EAST] = null
 			"left_collisionbox":
-				targets["left"] = null
+				targets[ORIENTATION.WEST] = null
 			"top_collisionbox":
-				targets["top"] = null
+				targets[ORIENTATION.NORTH] = null
 			"bottom_collisionbox":
-				targets["bottom"] = null
+				targets[ORIENTATION.SOUTH] = null
 	print(targets)
