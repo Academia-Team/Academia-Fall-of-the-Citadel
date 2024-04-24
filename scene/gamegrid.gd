@@ -57,4 +57,5 @@ func _on_passive_timer_timeout():
 func _on_enemy_destroyed(enemy_type):
 	match enemy_type:
 		"zombie":
+			ref_counter["zombie"] -= 1
 			emit_signal("score_change", ZOMBIE_SCORE)
