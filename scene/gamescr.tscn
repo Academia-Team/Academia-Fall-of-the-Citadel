@@ -38,4 +38,5 @@ script = ExtResource( 2 )
 wait_time = 60.0
 autostart = true
 
+[connection signal="score_change" from="gamegrid" to="infobar" method="_on_gamegrid_score_change"]
 [connection signal="timeout" from="gamegrid/passive_timer" to="gamegrid" method="_on_passive_timer_timeout"]
