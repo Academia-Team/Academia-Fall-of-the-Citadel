@@ -173,17 +173,9 @@ func _on_player_area_shape_entered(area_rid, area, area_shape_index, local_shape
 	elif area.get_class() == "enemy":
 		print("adding enemy from %s" % triggered_collisionbox.name)
 		print("event triggered by %s" % area.name)
-		match triggered_collisionbox.name:
-			"right_collisionbox":
-				targets[ORIENTATION.EAST] = area
-			"left_collisionbox":
-				targets[ORIENTATION.WEST] = area
-			"top_collisionbox":
-				targets[ORIENTATION.NORTH] = area
-			"bottom_collisionbox":
-				targets[ORIENTATION.SOUTH] = area
-			_:
-				printerr("Collisionbox not handled")
+		
+		var target_orient = orient_from_collision_box(triggered_collisionbox)
+		targets[target_orient] = area
 		print(targets)
 
 
@@ -192,13 +184,24 @@ func _on_player_area_shape_exited(area_rid, area, area_shape_index, local_shape_
 	if triggered_collisionbox.name != "collisionbox" and area.get_class() == "enemy":
 		print("removing enemy from %s" % triggered_collisionbox.name)
 		print("event triggered by %s" % area.name)
-		match triggered_collisionbox.name:
-			"right_collisionbox":
-				targets[ORIENTATION.EAST] = null
-			"left_collisionbox":
-				targets[ORIENTATION.WEST] = null
-			"top_collisionbox":
-				targets[ORIENTATION.NORTH] = null
-			"bottom_collisionbox":
-				targets[ORIENTATION.SOUTH] = null
-	print(targets)
+		
+		var target_orient = orient_from_collision_box(triggered_collisionbox)
+		targets[target_orient] = null
+		print(targets)
+
+func orient_from_collision_box(collisionbox):
+	var orient
+	
+	match collisionbox.name:
+		"right_collisionbox":
+			orient = ORIENTATION.EAST
+		"left_collisionbox":
+			orient = ORIENTATION.WEST
+		"top_collisionbox":
+			orient = ORIENTATION.NORTH
+		"bottom_collisionbox":
+			orient = ORIENTATION.SOUTH
+		_:
+			orient = -1
+	
+	return orient
