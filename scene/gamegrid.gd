@@ -5,6 +5,12 @@ var sword_scene = preload("res://scene/sword.tscn")
 var zombie_scene = preload("res://scene/zombie.tscn")
 var ref_counter = {}
 
+const ITEM_SCORE = 5
+const PASSIVE_SCORE = 1
+const ZOMBIE_SCORE = 10
+
+signal score_change(score_diff)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var player = player_scene.instance()
@@ -38,3 +44,4 @@ func _ready():
 
 func _on_player_pick_up_item(item_name):
 	ref_counter[item_name] -= 1
+	emit_signal("score_change", ITEM_SCORE)
