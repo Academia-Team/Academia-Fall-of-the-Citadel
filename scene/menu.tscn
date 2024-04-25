@@ -58,4 +58,5 @@ focus_previous = NodePath("../enter_button")
 theme = ExtResource( 2 )
 text = "Perish"
 
+[connection signal="pressed" from="enter_button" to="." method="_on_enter_button_pressed"]
 [connection signal="pressed" from="perish_button" to="." method="_on_perish_button_pressed"]
