@@ -39,7 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Academia: Fall of the Citadel"
-run/main_scene="res://scene/gamescr.tscn"
+run/main_scene="res://scene/intro.tscn"
 config/icon="res://icon.png"
 
 [display]
