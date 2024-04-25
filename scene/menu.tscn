@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://asset/biometric_joe/Biometric Joe.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://resource/button_theme.tres" type="Theme" id=2]
+[ext_resource path="res://scene/menu.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=3]
 size = 64
@@ -14,6 +15,7 @@ default_font = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
+script = ExtResource( 3 )
 
 [node name="title" type="RichTextLabel" parent="."]
 anchor_left = 0.5
@@ -55,3 +57,5 @@ focus_next = NodePath("../enter_button")
 focus_previous = NodePath("../enter_button")
 theme = ExtResource( 2 )
 text = "Perish"
+
+[connection signal="pressed" from="perish_button" to="." method="_on_perish_button_pressed"]
