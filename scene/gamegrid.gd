@@ -4,7 +4,7 @@ var player_ref
 var player_scene = preload("res://scene/player.tscn")
 var sword_scene = preload("res://scene/sword.tscn")
 var zombie_scene = preload("res://scene/zombie.tscn")
-var ref_counter = {}
+var ref_counter = {"sword": 0, "zombie": 0}
 
 const ITEM_SCORE = 5
 const PASSIVE_SCORE = 1
@@ -25,9 +25,7 @@ func _ready():
 	var sword = sword_scene.instance()
 	add_child(sword)
 	sword.position = Vector2(position.x + 32, position.y + 32)
-	ref_counter["sword"] = 1
-	
-	ref_counter["zombie"] = 0
+	ref_counter["sword"] += 1
 
 func set_up_player():
 	player_ref = player_scene.instance()
