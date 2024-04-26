@@ -14,3 +14,4 @@ func attack():
 	.hide()
 	call_deferred("free")
 	emit_signal("enemy_destroyed", get_meta("type"))
+	$Sprite.self_modulate = Color.tomato
