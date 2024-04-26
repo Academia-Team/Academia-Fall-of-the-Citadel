@@ -86,6 +86,9 @@ func use_sword():
 			
 	if target_obj != null:
 		target_obj.attack()
+		var slash_anim = load("res://scene/sword_attack.tscn").instance()
+		slash_anim.position = target_obj.position
+		add_child(slash_anim)
 
 func _process(_delta):
 	if lives <= 0:
