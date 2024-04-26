@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:points")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ PoolVector2Array(  ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Slash"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:points")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 0, 0, 0, 0 ), PoolVector2Array( 0, 0, 31, 31 ), PoolVector2Array( 31, 31, 31, 31 ) ]
+}
+
+[node name="Line2D" type="Line2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/Slash = SubResource( 2 )
