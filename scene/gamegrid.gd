@@ -14,18 +14,14 @@ const MAX_ZOMBIES = 5
 const VALID_DIST_FROM_PLAYER = 64
 const ZOMBIE_SPAWN_PROB = 0.5
 
+const MAX_ITEMS = 2
+
 signal score_change(score_diff)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	
 	set_up_player()
-	
-	var sword = sword_scene.instance()
-	add_child(sword)
-	sword.position = Vector2(position.x + 32, position.y + 32)
-	ref_counter["sword"] += 1
 
 func set_up_player():
 	player_ref = player_scene.instance()
@@ -89,6 +85,16 @@ func valid_spawn_pos(pos):
 func spawn_enemy(scene, pos):
 	var instance = scene.instance()
 	instance.connect("enemy_destroyed", self, "_on_enemy_destroyed")
+	add_child(instance)
+	instance.position = pos
+	ref_counter[instance.get_meta("type")] += 1
+
+func _on_item_spawn_timer_timeout():
+	if ref_counter["sword"] <= MAX_ITEMS:
+		spawn_item(sword_scene, get_spawn_pos())
+
+func spawn_item(scene, pos):
+	var instance = scene.instance()
 	add_child(instance)
 	instance.position = pos
 	ref_counter[instance.get_meta("type")] += 1
