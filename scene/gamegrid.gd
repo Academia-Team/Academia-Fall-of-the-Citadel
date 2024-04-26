@@ -9,10 +9,15 @@ const ITEM_SCORE = 5
 const PASSIVE_SCORE = 1
 const ZOMBIE_SCORE = 10
 
+const MAX_ZOMBIES = 5
+const ZOMBIE_SPAWN_PROB = 0.5
+
 signal score_change(score_diff)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	randomize()
+	
 	var player = player_scene.instance()
 	var screen_size = get_viewport_rect().size
 
@@ -67,3 +72,8 @@ func _on_player_health_change(lives):
 		get_parent().add_child(gameover)
 		gameover.set_info_src($"../infobar")
 		call_deferred("free")
+
+func _on_zombie_spawn_timer_timeout():
+	if ref_counter["zombie"] < MAX_ZOMBIES:
+		if randf() <= ZOMBIE_SPAWN_PROB:
+			print("Spawn zombie")
