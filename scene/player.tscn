@@ -39,6 +39,11 @@ shape = ExtResource( 3 )
 position = Vector2( 15, 46 )
 shape = ExtResource( 3 )
 
+[node name="hurt_timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
 [connection signal="area_shape_entered" from="." to="." method="_on_player_area_shape_entered"]
 [connection signal="area_shape_exited" from="." to="." method="_on_player_area_shape_exited"]
 [connection signal="timeout" from="move_timer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="hurt_timer" to="." method="_on_hurt_timer_timeout"]

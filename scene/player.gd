@@ -141,9 +141,14 @@ func handle_collision(obj):
 			held_item = obj.acquire()
 			emit_signal("pick_up_item", held_item)
 	elif collisionCategory == 'enemy':
-		if (lives > 0): lives = lives - 1
-		emit_signal("health_change", lives)
+		hurt()
 		obj.attack()
+		
+func hurt():
+	if (lives > 0): lives -= 1
+	emit_signal("health_change", lives)
+	$Sprite.self_modulate = Color.tomato
+	$hurt_timer.start()
 
 
 func _on_move_timer_timeout():
@@ -204,3 +209,6 @@ func orient_from_collision_box(collisionbox):
 			orient = -1
 	
 	return orient
+
+func _on_hurt_timer_timeout():
+	$Sprite.self_modulate = Color(1, 1, 1, 1)
