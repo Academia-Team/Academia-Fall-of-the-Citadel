@@ -61,3 +61,4 @@ text = "Give Up"
 flat = true
 
 [connection signal="draw" from="." to="." method="_on_gameover_draw"]
+[connection signal="pressed" from="give_up_button" to="." method="_on_give_up_button_pressed"]
