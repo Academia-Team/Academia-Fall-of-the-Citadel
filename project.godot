@@ -50,6 +50,7 @@ window/size/height=450
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+theme/custom="res://resource/default_theme.tres"
 
 [input]
 
