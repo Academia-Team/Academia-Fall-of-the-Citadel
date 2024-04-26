@@ -65,4 +65,5 @@ func _on_player_health_change(lives):
 	if lives <= 0:
 		var gameover = load("res://scene/gameover.tscn").instance()
 		get_parent().add_child(gameover)
+		gameover.set_info_src($"../infobar")
 		call_deferred("free")
