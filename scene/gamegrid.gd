@@ -61,9 +61,9 @@ func _on_player_health_change(lives):
 		call_deferred("free")
 
 func _on_zombie_spawn_timer_timeout():
-	if ref_counter["zombie"] < MAX_ZOMBIES:
+	if ref_counter["zombie"] <= MAX_ZOMBIES:
 		if randf() <= ZOMBIE_SPAWN_PROB:
-			print(get_spawn_pos())
+			spawn_enemy(zombie_scene, get_spawn_pos())
 
 
 func get_spawn_pos():
@@ -81,23 +81,13 @@ func get_spawn_pos():
 			
 	return spawn_pos
 
-func spawn(scene):
-	var available_cells = get_used_cells()
-	var num_cells = available_cells.size()
-	var placed_obj = false
-	
-	while not placed_obj:
-		var rand_cell_idx = randi() % num_cells
-		var target_pos = available_cells[rand_cell_idx]
-		
-		if valid_spawn_pos(target_pos):
-			var instance = scene.instance()
-			instance.connect("enemy_destroyed", self, "_on_enemy_destroyed")
-			add_child(instance)
-			instance.position = target_pos
-			ref_counter[instance.get_meta("type")] += 1
-			placed_obj = true
-
 func valid_spawn_pos(pos):
 	return abs(pos.x - player_ref.position.x) >= VALID_DIST_FROM_PLAYER and \
 		abs(pos.y - player_ref.position.y) >= VALID_DIST_FROM_PLAYER
+
+func spawn_enemy(scene, pos):
+	var instance = scene.instance()
+	instance.connect("enemy_destroyed", self, "_on_enemy_destroyed")
+	add_child(instance)
+	instance.position = pos
+	ref_counter[instance.get_meta("type")] += 1
