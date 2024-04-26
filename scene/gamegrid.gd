@@ -74,7 +74,7 @@ func get_spawn_pos():
 	
 	while not got_valid_pos:
 		var rand_cell_idx = randi() % num_cells
-		spawn_pos = available_cells[rand_cell_idx]
+		spawn_pos = to_global(map_to_world(available_cells[rand_cell_idx]))
 		
 		if valid_spawn_pos(spawn_pos):
 			got_valid_pos = true
@@ -99,6 +99,5 @@ func spawn(scene):
 			placed_obj = true
 
 func valid_spawn_pos(pos):
-	return true
-	#return abs(pos.x - player_ref.position.x) >= VALID_DIST_FROM_PLAYER and \
-	#	abs(pos.y - player_ref.position.y) >= VALID_DIST_FROM_PLAYER
+	return abs(pos.x - player_ref.position.x) >= VALID_DIST_FROM_PLAYER and \
+		abs(pos.y - player_ref.position.y) >= VALID_DIST_FROM_PLAYER
