@@ -15,7 +15,8 @@ signal score_change(score_diff)
 func _ready():
 	var player = player_scene.instance()
 	var screen_size = get_viewport_rect().size
-	
+
+	player.connect("health_change", self, "_on_player_health_change")
 	player.connect("health_change", $"../infobar", "_on_player_health_change")
 	player.connect("pick_up_item", self, "_on_player_pick_up_item")
 	player.connect("pick_up_item", $"../infobar", "_on_player_pick_up_item")
@@ -59,3 +60,10 @@ func _on_enemy_destroyed(enemy_type):
 		"zombie":
 			ref_counter["zombie"] -= 1
 			emit_signal("score_change", ZOMBIE_SCORE)
+
+func _on_player_health_change(lives):
+	if lives <= 0:
+		var gameover = load("res://scene/gameover.tscn").instance()
+		get_parent().add_child(gameover)
+		gameover.set_info_src($"../infobar")
+		call_deferred("free")
