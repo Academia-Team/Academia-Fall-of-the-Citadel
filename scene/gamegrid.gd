@@ -63,8 +63,23 @@ func _on_player_health_change(lives):
 func _on_zombie_spawn_timer_timeout():
 	if ref_counter["zombie"] < MAX_ZOMBIES:
 		if randf() <= ZOMBIE_SPAWN_PROB:
-			spawn(zombie_scene)
+			print(get_spawn_pos())
 
+
+func get_spawn_pos():
+	var available_cells = get_used_cells()
+	var num_cells = available_cells.size()
+	var spawn_pos
+	var got_valid_pos = false
+	
+	while not got_valid_pos:
+		var rand_cell_idx = randi() % num_cells
+		spawn_pos = available_cells[rand_cell_idx]
+		
+		if valid_spawn_pos(spawn_pos):
+			got_valid_pos = true
+			
+	return spawn_pos
 
 func spawn(scene):
 	var available_cells = get_used_cells()
@@ -84,5 +99,6 @@ func spawn(scene):
 			placed_obj = true
 
 func valid_spawn_pos(pos):
-	return abs(pos.x - player_ref.position.x) >= VALID_DIST_FROM_PLAYER and \
-		abs(pos.y - player_ref.position.y) >= VALID_DIST_FROM_PLAYER
+	return true
+	#return abs(pos.x - player_ref.position.x) >= VALID_DIST_FROM_PLAYER and \
+	#	abs(pos.y - player_ref.position.y) >= VALID_DIST_FROM_PLAYER
