@@ -31,6 +31,7 @@ tracks/0/keys = {
 }
 
 [node name="Line2D" type="Line2D"]
+width = 3.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )
