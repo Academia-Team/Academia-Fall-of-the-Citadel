@@ -20,6 +20,16 @@ signal score_change(score_diff)
 func _ready():
 	randomize()
 	
+	set_up_player()
+	
+	var sword = sword_scene.instance()
+	add_child(sword)
+	sword.position = Vector2(position.x + 32, position.y + 32)
+	ref_counter["sword"] = 1
+	
+	ref_counter["zombie"] = 0
+
+func set_up_player():
 	player_ref = player_scene.instance()
 	var screen_size = get_viewport_rect().size
 
@@ -31,13 +41,6 @@ func _ready():
 	
 	add_child(player_ref)
 	player_ref.spawn(position, position.y, screen_size.y - 32, position.x, screen_size.x - 32)
-	
-	var sword = sword_scene.instance()
-	add_child(sword)
-	sword.position = Vector2(position.x + 32, position.y + 32)
-	ref_counter["sword"] = 1
-	
-	ref_counter["zombie"] = 0
 
 func _on_player_pick_up_item(item_name):
 	ref_counter[item_name] -= 1
