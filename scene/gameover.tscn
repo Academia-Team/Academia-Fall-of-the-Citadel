@@ -9,7 +9,8 @@ color = Color( 0, 0, 0, 1 )
 
 [node name="header" type="Label" parent="."]
 anchor_right = 1.0
-margin_bottom = 65.0
+margin_top = 26.0
+margin_bottom = 91.0
 grow_horizontal = 2
 theme = ExtResource( 1 )
 text = "Game Over"
