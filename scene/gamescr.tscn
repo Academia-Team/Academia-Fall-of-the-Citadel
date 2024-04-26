@@ -40,5 +40,15 @@ script = ExtResource( 2 )
 wait_time = 60.0
 autostart = true
 
+[node name="zombie_spawn_timer" type="Timer" parent="gamegrid"]
+wait_time = 5.0
+autostart = true
+
+[node name="item_spawn_timer" type="Timer" parent="gamegrid"]
+wait_time = 3.0
+autostart = true
+
 [connection signal="score_change" from="gamegrid" to="infobar" method="_on_gamegrid_score_change"]
 [connection signal="timeout" from="gamegrid/passive_timer" to="gamegrid" method="_on_passive_timer_timeout"]
+[connection signal="timeout" from="gamegrid/zombie_spawn_timer" to="gamegrid" method="_on_zombie_spawn_timer_timeout"]
+[connection signal="timeout" from="gamegrid/item_spawn_timer" to="gamegrid" method="_on_item_spawn_timer_timeout"]
