@@ -23,7 +23,13 @@ func _on_gameover_draw():
 		set_score(info_ref.score)
 
 func _on_give_up_button_pressed():
-	get_tree().change_scene_to(load("res://scene/menu.tscn"))
+	var status = get_tree().change_scene_to(load("res://scene/menu.tscn"))
+	
+	if status != OK:
+			printerr("Failed to switch to menu.")
 
 func _on_revive_button_pressed():
-	get_tree().change_scene_to(load("res://scene/gamescr.tscn"))
+	var status = get_tree().change_scene_to(load("res://scene/gamescr.tscn"))
+	
+	if status != OK:
+			printerr("Failed to switch to game.")

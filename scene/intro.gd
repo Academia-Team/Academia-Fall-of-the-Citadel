@@ -44,4 +44,7 @@ func _on_fadetimer_timeout():
 	if not shouldFadeLabelOut:
 		shouldFadeLabelOut = true
 	else:
-		get_tree().change_scene_to(menu_scene)
+		var status = get_tree().change_scene_to(menu_scene)
+		
+		if status != OK:
+			printerr("Failed to switch to menu.")

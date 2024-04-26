@@ -11,7 +11,10 @@ func _process(_delta):
 		$perish_button.emit_signal("pressed")
 
 func _on_enter_button_pressed():
-	get_tree().change_scene_to(game_scene)
+	var status = get_tree().change_scene_to(game_scene)
+	
+	if status != OK:
+			printerr("Failed to switch to game.")
 
 func _on_perish_button_pressed():
 	get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)
