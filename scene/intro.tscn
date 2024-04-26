@@ -6,6 +6,7 @@
 [node name="intro" type="ColorRect"]
 margin_right = 800.0
 margin_bottom = 450.0
+mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
 script = ExtResource( 1 )
 
@@ -18,6 +19,8 @@ margin_left = -55.0
 margin_top = -7.0
 margin_right = 55.0
 margin_bottom = 7.0
+grow_horizontal = 2
+mouse_filter = 1
 text = "\"I have returned!\""
 align = 1
 valign = 1
