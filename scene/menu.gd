@@ -3,6 +3,7 @@ extends ColorRect
 const game_scene = preload("res://scene/gamescr.tscn")
 
 func _ready():
+	yield(self, "ready")
 	$enter_button.grab_focus()
 
 func _process(_delta):

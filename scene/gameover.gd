@@ -1,6 +1,5 @@
 extends ColorRect
 
 func _init():
-	if $revive_button == null:
-		print("Panic")
+	yield(self, "ready")
 	$revive_button.grab_focus()
