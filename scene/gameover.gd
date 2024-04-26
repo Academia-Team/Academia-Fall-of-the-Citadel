@@ -24,3 +24,6 @@ func _on_gameover_draw():
 
 func _on_give_up_button_pressed():
 	get_tree().change_scene_to(load("res://scene/menu.tscn"))
+
+func _on_revive_button_pressed():
+	get_tree().change_scene_to(load("res://scene/gamescr.tscn"))
