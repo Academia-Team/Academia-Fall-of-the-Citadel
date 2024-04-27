@@ -12,9 +12,9 @@ func _unhandled_input(event):
 		event is InputEventJoypadButton or \
 		event is InputEventJoypadMotion or \
 		event is InputEventMouseButton:
-		$AnimationPlayer.emit_signal("animation_finished")
+			$AnimationPlayer.emit_signal("animation_finished", "Fade In")
 
-func _on_AnimationPlayer_animation_finished(anim_name):
+func _on_AnimationPlayer_animation_finished(_anim_name):
 	var status = get_tree().change_scene_to(menu_scene)
 	
 	if status != OK:
