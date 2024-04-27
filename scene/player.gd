@@ -59,21 +59,32 @@ func set_orient(orient):
 	cur_orient = orient
 
 func handle_action():
-	if Input.is_action_pressed("move_right"):
-		if not Input.is_action_pressed("stay"): set_dir(DIRECTION.RIGHT)
-		set_orient(ORIENTATION.EAST)
-	if Input.is_action_pressed("move_left"):
-		if not Input.is_action_pressed("stay"): set_dir(DIRECTION.LEFT)
-		set_orient(ORIENTATION.WEST)
-	if Input.is_action_pressed("move_up"):
-		if not Input.is_action_pressed("stay"): set_dir(DIRECTION.UP)
-		set_orient(ORIENTATION.NORTH)
-	if Input.is_action_pressed("move_down"):
-		if not Input.is_action_pressed("stay"): set_dir(DIRECTION.DOWN)
-		set_orient(ORIENTATION.SOUTH)
+	handle_movement()
 	if Input.is_action_just_pressed("action"):
 		use_item()
-			
+
+func handle_movement():
+	var desired_dir = null
+	var desired_orient = null
+	
+	if Input.is_action_pressed("move_up"):
+		desired_dir = DIRECTION.UP
+		desired_orient = ORIENTATION.NORTH
+	if Input.is_action_pressed("move_down"):
+		desired_dir = DIRECTION.DOWN
+		desired_orient = ORIENTATION.SOUTH
+	if Input.is_action_pressed("move_right"):
+		desired_dir = DIRECTION.RIGHT
+		desired_orient = ORIENTATION.EAST
+	if Input.is_action_pressed("move_left"):
+		desired_dir = DIRECTION.LEFT
+		desired_orient = ORIENTATION.WEST
+	
+	if desired_dir != null:
+		if not Input.is_action_pressed("stay"):
+			set_dir(desired_dir)
+		set_orient(desired_orient)
+
 func use_item():
 	if held_item:
 		match held_item:
