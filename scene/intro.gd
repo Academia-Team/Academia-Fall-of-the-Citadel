@@ -2,15 +2,8 @@ extends ColorRect
 
 const menu_scene = preload("res://scene/menu.tscn")
 
-var shouldFadeLabelOut
-var fontRGBVal
-var fontColor
-
 func _ready():
-	shouldFadeLabelOut = false
-	fontRGBVal = 0
-	fontColor = Color8(fontRGBVal, fontRGBVal, fontRGBVal)
-	$Label.add_color_override("font_color", getDesiredColor())
+	$AnimationPlayer.play("Fade In")
 	
 # Allow for skipping the animation.
 func _unhandled_input(event):
@@ -19,31 +12,12 @@ func _unhandled_input(event):
 		event is InputEventJoypadButton or \
 		event is InputEventJoypadMotion or \
 		event is InputEventMouseButton:
-		$fadetimer.emit_signal("timeout")
+			var remaining_anim_len = $AnimationPlayer.current_animation_length - \
+				$AnimationPlayer.current_animation_position
+			$AnimationPlayer.advance(remaining_anim_len)
 
-func _process(_delta):
-	if not shouldFadeLabelOut:
-		fadeLabelIn()
-	else:
-		fadeLabelOut()
-
-func getDesiredColor():
-	return Color8(fontRGBVal, fontRGBVal, fontRGBVal)
-
-func fadeLabelIn():
-	if fontRGBVal <= 0xFF:
-		fontRGBVal = fontRGBVal + 1
-		$Label.add_color_override("font_color", getDesiredColor())
-		
-func fadeLabelOut():
-	if fontRGBVal >= 0:
-		fontRGBVal = fontRGBVal - 1
-		$Label.add_color_override("font_color", getDesiredColor())
-
-func _on_fadetimer_timeout():
-	if not shouldFadeLabelOut:
-		shouldFadeLabelOut = true
-	else:
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "Fade Out":
 		var status = get_tree().change_scene_to(menu_scene)
 		
 		if status != OK:
