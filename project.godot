@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Sprite",
+"class": "CharacterSprite",
+"language": "GDScript",
+"path": "res://class/character_sprite.gd"
+}, {
 "base": "Reference",
 "class": "Direction",
 "language": "GDScript",
@@ -35,6 +40,7 @@ _global_script_classes=[ {
 "path": "res://scene/player.gd"
 } ]
 _global_script_class_icons={
+"CharacterSprite": "",
 "Direction": "",
 "Queue": "",
 "enemy": "",
