@@ -1,9 +1,10 @@
 extends Area2D
 class_name player
 
+const direction = preload("res://class/direction.gd")
 const queue = preload("res://class/queue.gd")
 
-var bounds = {"top": 0, "bottom": 0, "left": 0, "right": 0}
+var bounds = {direction.NORTH: 0, direction.SOUTH: 0, direction.WEST: 0, direction.EAST: 0}
 var cur_orient
 var future_dir
 var held_item
@@ -17,9 +18,6 @@ var move_queue
 const NUM_DIRS = 4
 const NUM_ORIENT = 4
 
-enum DIRECTION {UP, DOWN, LEFT, RIGHT}
-enum ORIENTATION {NORTH, SOUTH, EAST, WEST}
-
 signal health_change(lives)
 signal pick_up_item(item_name)
 signal used_item(item_name)
@@ -32,11 +30,21 @@ func get_class():
 func set_dir(dir):
 	$move_timer.set_paused(true)
 	
-	if move_queue.contains(get_opposing_dir(dir)):
-		$move_timer.stop()
-		move_queue.clear()
-		$move_input_timer.start()
-	elif $move_input_timer.is_stopped():
+	var found_opposing_dir = false
+	var opposing_dir_array = Direction.get_opposing_dirs(dir)
+	var opposing_dir_sz = opposing_dir_array.size()
+	var opposing_dir_idx = 0
+	
+	while not found_opposing_dir and opposing_dir_idx < opposing_dir_sz:
+		if move_queue.contains(opposing_dir_array[opposing_dir_idx]):
+			$move_timer.stop()
+			move_queue.clear()
+			$move_input_timer.start()
+			found_opposing_dir = true
+		
+		opposing_dir_idx += 1
+	
+	if not found_opposing_dir and $move_input_timer.is_stopped():
 		move_queue.queue(dir)
 		$move_input_timer.start()
 		
@@ -47,15 +55,16 @@ func pos_in_bounds(pos):
 		pos.y >= bounds.top && pos.y <= bounds.bottom
 	
 func set_orient(orient):
+	orient = direction.get_horz_component(orient)
 	match orient:
-		ORIENTATION.NORTH:
+		direction.NORTH:
 			$Sprite.set_texture(load("res://asset/Player_NORTH.png"))
-		ORIENTATION.SOUTH:
+		direction.SOUTH:
 			$Sprite.set_texture(load("res://asset/Player_SOUTH.png"))
 		_:
 			$Sprite.set_texture(load("res://asset/Player_SIDE.png"))
 			
-	$Sprite.flip_h = (orient == ORIENTATION.WEST)
+	$Sprite.flip_h = (orient == direction.WEST)
 	cur_orient = orient
 
 func handle_action():
@@ -65,25 +74,28 @@ func handle_action():
 
 func handle_movement():
 	var desired_dir = null
-	var desired_orient = null
 	
 	if Input.is_action_pressed("move_up"):
-		desired_dir = DIRECTION.UP
-		desired_orient = ORIENTATION.NORTH
+		desired_dir = direction.combine_dir(direction.NORTH, desired_dir)
 	if Input.is_action_pressed("move_down"):
-		desired_dir = DIRECTION.DOWN
-		desired_orient = ORIENTATION.SOUTH
+		desired_dir = direction.combine_dir(direction.SOUTH, desired_dir)
 	if Input.is_action_pressed("move_right"):
-		desired_dir = DIRECTION.RIGHT
-		desired_orient = ORIENTATION.EAST
+		desired_dir = direction.combine_dir(direction.EAST, desired_dir)
 	if Input.is_action_pressed("move_left"):
-		desired_dir = DIRECTION.LEFT
-		desired_orient = ORIENTATION.WEST
+		desired_dir = direction.combine_dir(direction.WEST, desired_dir)
+	if Input.is_action_pressed("move_up_left"):
+		desired_dir = direction.combine_dir(direction.NORTHWEST, desired_dir)
+	if Input.is_action_pressed("move_up_right"):
+		desired_dir = direction.combine_dir(direction.NORTHEAST, desired_dir)
+	if Input.is_action_pressed("move_down_left"):
+		desired_dir = direction.combine_dir(direction.SOUTHWEST, desired_dir)
+	if Input.is_action_pressed("move_down_right"):
+		desired_dir = direction.combine_dir(direction.SOUTHEAST, desired_dir)
 	
 	if desired_dir != null:
 		if not Input.is_action_pressed("stay"):
 			set_dir(desired_dir)
-		set_orient(desired_orient)
+		set_orient(desired_dir)
 
 func use_item():
 	if held_item:
@@ -99,7 +111,7 @@ func use_sword():
 	if target_to_destroy != null:
 		target_to_destroy.attack()
 		var slash_anim = load("res://scene/sword_attack.tscn").instance()
-		slash_anim.position = orient_to_rel_pos(cur_orient)
+		slash_anim.position = direction.dir_to_rel_pos(cur_orient, 32)
 		slash_anim.connect("animation_finished", self, "_slash_anim_finished")
 		add_child(slash_anim)
 
@@ -115,7 +127,7 @@ func _process(_delta):
 func _ready():
 	held_item = null
 	lives = 3
-	cur_orient = ORIENTATION.SOUTH
+	cur_orient = direction.SOUTH
 	move_queue = Queue.new(MOVE_QUEUE_SZ)
 	emit_signal("health_change", lives)
 	
@@ -132,20 +144,6 @@ func spawn(pos, topBound, bottomBound, leftBound, rightBound):
 	assert(position.y >= bounds.top && position.y <= bounds.bottom)
 	
 	show()
-
-func get_opposing_dir(dir):
-	var opposing_dir
-	match dir:
-		DIRECTION.UP:
-			opposing_dir = DIRECTION.DOWN
-		DIRECTION.DOWN:
-			opposing_dir = DIRECTION.UP
-		DIRECTION.LEFT:
-			opposing_dir = DIRECTION.RIGHT
-		DIRECTION.RIGHT:
-			opposing_dir = DIRECTION.LEFT
-	
-	return opposing_dir
 
 func handle_collision(obj):
 	var collisionCategory = obj.get_class()
@@ -172,17 +170,7 @@ func hurt():
 func _on_move_timer_timeout():
 	if not move_queue.empty():
 		var dir = move_queue.dequeue()
-		var future_pos = position
-		
-		match dir:
-			DIRECTION.UP:
-				future_pos.y -= 32
-			DIRECTION.DOWN:
-				future_pos.y += 32
-			DIRECTION.LEFT:
-				future_pos.x -= 32
-			DIRECTION.RIGHT:
-				future_pos.x += 32
+		var future_pos = direction.translate_pos(position, dir, 32)
 		
 		if pos_in_bounds(future_pos):
 			position = future_pos
@@ -216,13 +204,13 @@ func orient_from_collision_box(collisionbox):
 	
 	match collisionbox.name:
 		"right_collisionbox":
-			orient = ORIENTATION.EAST
+			orient = direction.EAST
 		"left_collisionbox":
-			orient = ORIENTATION.WEST
+			orient = direction.WEST
 		"top_collisionbox":
-			orient = ORIENTATION.NORTH
+			orient = direction.NORTH
 		"bottom_collisionbox":
-			orient = ORIENTATION.SOUTH
+			orient = direction.SOUTH
 		_:
 			orient = -1
 	
@@ -233,18 +221,3 @@ func _on_hurt_timer_timeout():
 
 func _slash_anim_finished():
 	target_to_destroy.queue_free()
-
-func orient_to_rel_pos(orient):
-	var pos = Vector2(0, 0)
-		
-	match orient:
-		ORIENTATION.NORTH:
-			pos.y = -32
-		ORIENTATION.SOUTH:
-			pos.y = 32
-		ORIENTATION.WEST:
-			pos.x = -32
-		ORIENTATION.EAST:
-			pos.x = 32
-	
-	return pos
