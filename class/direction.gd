@@ -44,17 +44,17 @@ static func dir_to_rel_pos(dir, step):
 			return Vector2(-step, step)
 
 static func get_horz_component(dir):
-	if NORTHEAST or SOUTHEAST:
+	if dir == NORTHEAST or dir == SOUTHEAST:
 		return EAST
-	elif NORTHWEST or SOUTHWEST:
+	elif dir == NORTHWEST or dir == SOUTHWEST:
 		return WEST
 	else:
 		return dir
 
 static func get_vert_component(dir):
-	if NORTHEAST or NORTHWEST:
+	if dir == NORTHEAST or dir == NORTHWEST:
 		return NORTH
-	elif SOUTHWEST or SOUTHEAST:
+	elif dir == SOUTHWEST or dir == SOUTHEAST:
 		return SOUTH
 	else:
 		return dir
