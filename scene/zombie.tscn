@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://asset/Block Guy 32-px.bmp" type="Texture" id=1]
+[ext_resource path="res://asset/Zombie_SOUTH.png" type="Texture" id=1]
 [ext_resource path="res://scene/zombie.gd" type="Script" id=2]
 [ext_resource path="res://resource/collision_rect.tres" type="Shape2D" id=3]
 
