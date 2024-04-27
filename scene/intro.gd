@@ -21,4 +21,4 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		var status = get_tree().change_scene_to(menu_scene)
 		
 		if status != OK:
-				printerr("Failed to switch to menu.")
+			printerr("Failed to switch to menu.")
