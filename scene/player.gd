@@ -91,10 +91,7 @@ func use_sword():
 		add_child(slash_anim)
 
 func _process(_delta):
-	if lives <= 0:
-		.hide()
-		call_deferred("free")
-	else:
+	if lives > 0:
 		if not move_queue.empty() and $move_timer.is_stopped():
 			$move_timer.start()
 			
@@ -152,6 +149,10 @@ func hurt():
 	emit_signal("health_change", lives)
 	$Sprite.self_modulate = Color.tomato
 	$hurt_timer.start()
+	
+	if lives <= 0:
+		$collisionbox.set_deferred("monitoring", false)
+		$collisionbox.set_deferred("monitorable", false)
 
 
 func _on_move_timer_timeout():
