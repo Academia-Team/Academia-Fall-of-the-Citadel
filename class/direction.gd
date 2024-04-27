@@ -115,17 +115,18 @@ static func translate_pos(pos, dir, step):
 	return pos
 
 static func get_cardinal_dir_facing(pos_to_face, pos):
-	if abs(pos.x - pos_to_face.x) < abs(pos.y - pos_to_face.y):
-		if (pos.x - pos_to_face.x):
-			return SOUTH
+	if abs(pos.x - pos_to_face.x) < abs(pos.y - pos_to_face.y) and (pos.x - pos_to_face.x) != 0:
+		if (pos.x - pos_to_face.x) >= 0:
+			return WEST
 		else:
+			return EAST
+	elif (pos.y - pos_to_face.y) != 0:
+		if (pos.y - pos_to_face.y) >= 0:
 			return NORTH
+		else:
+			return SOUTH
 	else:
-		if (pos.y - pos_to_face.y):
-			if (pos.y - pos_to_face.y) >= 0:
-				return WEST
-			else:
-				return EAST
+		return null
 
 static func rel_pos_to_dir(pos):
 	return combine_dir(_get_horz_dir_from_pos(pos), _get_vert_dir_from_pos(pos))
