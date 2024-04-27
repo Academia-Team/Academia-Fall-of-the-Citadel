@@ -5,7 +5,6 @@ const direction = preload("res://class/direction.gd")
 const queue = preload("res://class/queue.gd")
 
 var bounds = {direction.NORTH: 0, direction.SOUTH: 0, direction.WEST: 0, direction.EAST: 0}
-var cur_orient
 var future_dir
 var held_item
 var lives
@@ -93,12 +92,12 @@ func use_item():
 		held_item = null
 
 func use_sword():
-	target_to_destroy = targets[cur_orient]
+	target_to_destroy = targets[$CharacterSprite.orientation]
 			
 	if target_to_destroy != null:
 		target_to_destroy.attack()
 		var slash_anim = load("res://scene/sword_attack.tscn").instance()
-		slash_anim.position = direction.dir_to_rel_pos(cur_orient, 32)
+		slash_anim.position = direction.dir_to_rel_pos($CharacterSprite.orientation, 32)
 		slash_anim.connect("animation_finished", self, "_slash_anim_finished")
 		add_child(slash_anim)
 
@@ -114,7 +113,6 @@ func _process(_delta):
 func _ready():
 	held_item = null
 	lives = 3
-	cur_orient = direction.SOUTH
 	move_queue = Queue.new(MOVE_QUEUE_SZ)
 	emit_signal("health_change", lives)
 	
