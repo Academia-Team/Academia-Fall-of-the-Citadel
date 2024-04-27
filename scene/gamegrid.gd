@@ -58,7 +58,7 @@ func _on_player_health_change(lives):
 		call_deferred("free")
 
 func _on_zombie_spawn_timer_timeout():
-	if ref_counter["zombie"] <= MAX_ZOMBIES:
+	if ref_counter["zombie"] < MAX_ZOMBIES:
 		if randf() <= ZOMBIE_SPAWN_PROB:
 			spawn_enemy(zombie_scene, get_spawn_pos())
 
@@ -90,7 +90,7 @@ func spawn_enemy(scene, pos):
 	ref_counter[instance.get_meta("type")] += 1
 
 func _on_item_spawn_timer_timeout():
-	if ref_counter["sword"] <= MAX_ITEMS:
+	if ref_counter["sword"] < MAX_ITEMS:
 		spawn_item(sword_scene, get_spawn_pos())
 
 func spawn_item(scene, pos):

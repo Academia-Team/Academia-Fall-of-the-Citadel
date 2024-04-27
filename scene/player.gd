@@ -9,6 +9,7 @@ var future_dir
 var held_item
 var lives
 var targets = [null, null, null, null]
+var target_to_destroy
 
 const MOVE_QUEUE_SZ = 256
 var move_queue
@@ -82,16 +83,17 @@ func use_item():
 		held_item = null
 
 func use_sword():
-	var target_obj = targets[cur_orient]
+	target_to_destroy = targets[cur_orient]
 			
-	if target_obj != null:
-		target_obj.attack()
+	if target_to_destroy != null:
+		target_to_destroy.attack()
+		var slash_anim = load("res://scene/sword_attack.tscn").instance()
+		slash_anim.position = orient_to_rel_pos(cur_orient)
+		slash_anim.connect("animation_finished", self, "_slash_anim_finished")
+		add_child(slash_anim)
 
 func _process(_delta):
-	if lives <= 0:
-		.hide()
-		call_deferred("free")
-	else:
+	if lives > 0:
 		if not move_queue.empty() and $move_timer.is_stopped():
 			$move_timer.start()
 			
@@ -141,9 +143,19 @@ func handle_collision(obj):
 			held_item = obj.acquire()
 			emit_signal("pick_up_item", held_item)
 	elif collisionCategory == 'enemy':
-		if (lives > 0): lives = lives - 1
-		emit_signal("health_change", lives)
+		hurt()
 		obj.attack()
+		obj.queue_free()
+		
+func hurt():
+	if (lives > 0): lives -= 1
+	emit_signal("health_change", lives)
+	$Sprite.self_modulate = Color.tomato
+	$hurt_timer.start()
+	
+	if lives <= 0:
+		$collisionbox.set_deferred("monitoring", false)
+		$collisionbox.set_deferred("monitorable", false)
 
 
 func _on_move_timer_timeout():
@@ -204,3 +216,24 @@ func orient_from_collision_box(collisionbox):
 			orient = -1
 	
 	return orient
+
+func _on_hurt_timer_timeout():
+	$Sprite.self_modulate = Color(1, 1, 1, 1)
+
+func _slash_anim_finished():
+	target_to_destroy.queue_free()
+
+func orient_to_rel_pos(orient):
+	var pos = Vector2(0, 0)
+		
+	match orient:
+		ORIENTATION.NORTH:
+			pos.y = -32
+		ORIENTATION.SOUTH:
+			pos.y = 32
+		ORIENTATION.WEST:
+			pos.x = -32
+		ORIENTATION.EAST:
+			pos.x = 32
+	
+	return pos
