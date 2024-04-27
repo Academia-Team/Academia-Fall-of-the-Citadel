@@ -1,8 +1,6 @@
 extends Area2D
 class_name enemy
 
-const direction = preload("res://class/direction.gd")
-
 signal enemy_destroyed(enemy_type)
 
 func get_class():
@@ -23,7 +21,7 @@ func attack():
 	$CharacterSprite.show_hurt()
 
 func move(dir):
-	position = direction.translate_pos(position, dir, 32)
+	position = Direction.translate_pos(position, dir, 32)
 	$CharacterSprite.set_orient(dir)
 
 func spawn(pos, orient):
