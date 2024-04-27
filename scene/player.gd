@@ -88,7 +88,7 @@ func use_sword():
 	if target_to_destroy != null:
 		target_to_destroy.attack()
 		var slash_anim = load("res://scene/sword_attack.tscn").instance()
-		slash_anim.position = to_local(target_to_destroy.position)
+		slash_anim.position = orient_to_rel_pos(cur_orient)
 		slash_anim.connect("animation_finished", self, "_slash_anim_finished")
 		add_child(slash_anim)
 
@@ -222,3 +222,18 @@ func _on_hurt_timer_timeout():
 
 func _slash_anim_finished():
 	target_to_destroy.queue_free()
+
+func orient_to_rel_pos(orient):
+	var pos = Vector2(0, 0)
+		
+	match orient:
+		ORIENTATION.NORTH:
+			pos.y = -32
+		ORIENTATION.SOUTH:
+			pos.y = 32
+		ORIENTATION.WEST:
+			pos.x = -32
+		ORIENTATION.EAST:
+			pos.x = 32
+	
+	return pos
