@@ -7,12 +7,12 @@ export(Texture) var north_texture
 export(Texture) var south_texture
 export(Texture) var side_texture
 
-enum player_orientation {NORTH = direction.NORTH, SOUTH = direction.SOUTH,
+enum valid_orientation {NORTH = direction.NORTH, SOUTH = direction.SOUTH,
 	EAST = direction.EAST, WEST = direction.WEST}
 
 export(Color) var hurt_color = Color.tomato
 export(float) var hurt_length = 0.3
-export(player_orientation) var orientation = direction.SOUTH
+export(valid_orientation) var orientation = direction.SOUTH
 
 var hurt_timer
 onready var orig_self_modulate = self_modulate
