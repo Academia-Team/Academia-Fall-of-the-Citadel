@@ -99,7 +99,8 @@ func spawn_enemy(scene, pos):
 	var instance = scene.instance()
 	instance.connect("enemy_destroyed", self, "_on_enemy_destroyed")
 	add_child(instance)
-	instance.spawn(pos, get_orient_facing_player(pos))
+	var orient_facing_player = Direction.get_cardinal_dir_facing(player_ref.position, pos)
+	instance.spawn(pos, orient_facing_player)
 	ref_counter[instance.get_meta("type")] += 1
 
 func _on_item_spawn_timer_timeout():
@@ -111,21 +112,3 @@ func spawn_item(scene, pos):
 	add_child(instance)
 	instance.position = pos
 	ref_counter[instance.get_meta("type")] += 1
-
-func get_orient_facing_player(pos):
-	var diff_x = pos.x - player_ref.position.x
-	var diff_y = pos.y - player_ref.position.y
-	var orient
-	
-	if abs(diff_x) < abs(diff_y):
-		if diff_x >= 0:
-			orient = Direction.SOUTH
-		else:
-			orient = Direction.NORTH
-	else:
-		if diff_y >= 0:
-			orient = Direction.WEST
-		else:
-			orient = Direction.EAST
-	
-	return orient

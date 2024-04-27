@@ -113,3 +113,16 @@ static func translate_pos(pos, dir, step):
 			EAST:
 				pos.x += step
 	return pos
+
+static func get_cardinal_dir_facing(pos_to_face, pos):
+	if abs(pos.x - pos_to_face.x) < abs(pos.y - pos_to_face.y):
+		if (pos.x - pos_to_face.x):
+			return SOUTH
+		else:
+			return NORTH
+	else:
+		if (pos.y - pos_to_face.y):
+			if (pos.y - pos_to_face.y) >= 0:
+				return WEST
+			else:
+				return EAST
