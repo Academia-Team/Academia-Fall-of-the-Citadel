@@ -22,6 +22,10 @@ func attack():
 	emit_signal("enemy_destroyed", get_meta("type"))
 	$CharacterSprite.show_hurt()
 
+func move(dir):
+	position = direction.translate_pos(position, dir, 32)
+	$CharacterSprite.set_orient(dir)
+
 func spawn(pos, orient):
 	position = pos
 	$CharacterSprite.set_orient(orient)
