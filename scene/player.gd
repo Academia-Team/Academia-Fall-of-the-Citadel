@@ -53,19 +53,6 @@ func set_dir(dir):
 func pos_in_bounds(pos):
 	return pos.x >= bounds.left && pos.x <= bounds.right && \
 		pos.y >= bounds.top && pos.y <= bounds.bottom
-	
-func set_orient(orient):
-	orient = direction.get_horz_component(orient)
-	match orient:
-		direction.NORTH:
-			$Sprite.set_texture(load("res://asset/Player_NORTH.png"))
-		direction.SOUTH:
-			$Sprite.set_texture(load("res://asset/Player_SOUTH.png"))
-		_:
-			$Sprite.set_texture(load("res://asset/Player_SIDE.png"))
-			
-	$Sprite.flip_h = (orient == direction.WEST)
-	cur_orient = orient
 
 func handle_action():
 	handle_movement()
@@ -95,7 +82,7 @@ func handle_movement():
 	if desired_dir != null:
 		if not Input.is_action_pressed("stay"):
 			set_dir(desired_dir)
-		set_orient(desired_dir)
+		$CharacterSprite.set_orient(desired_dir)
 
 func use_item():
 	if held_item:
@@ -142,7 +129,6 @@ func spawn(pos, topBound, bottomBound, leftBound, rightBound):
 	
 	assert(position.x >= bounds.left && position.x <= bounds.right)
 	assert(position.y >= bounds.top && position.y <= bounds.bottom)
-	
 	show()
 
 func handle_collision(obj):
@@ -159,8 +145,7 @@ func handle_collision(obj):
 func hurt():
 	if (lives > 0): lives -= 1
 	emit_signal("health_change", lives)
-	$Sprite.self_modulate = Color.tomato
-	$hurt_timer.start()
+	$CharacterSprite.show_hurt()
 	
 	if lives <= 0:
 		$collisionbox.set_deferred("monitoring", false)
@@ -215,9 +200,6 @@ func orient_from_collision_box(collisionbox):
 			orient = -1
 	
 	return orient
-
-func _on_hurt_timer_timeout():
-	$Sprite.self_modulate = Color(1, 1, 1, 1)
 
 func _slash_anim_finished():
 	target_to_destroy.queue_free()
