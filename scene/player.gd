@@ -9,6 +9,7 @@ var future_dir
 var held_item
 var lives
 var targets = [null, null, null, null]
+var target_to_destroy
 
 const MOVE_QUEUE_SZ = 256
 var move_queue
@@ -82,12 +83,13 @@ func use_item():
 		held_item = null
 
 func use_sword():
-	var target_obj = targets[cur_orient]
+	target_to_destroy = targets[cur_orient]
 			
-	if target_obj != null:
-		target_obj.attack()
+	if target_to_destroy != null:
+		target_to_destroy.attack()
 		var slash_anim = load("res://scene/sword_attack.tscn").instance()
-		slash_anim.position = to_local(target_obj.position)
+		slash_anim.position = to_local(target_to_destroy.position)
+		slash_anim.connect("animation_finished", self, "_slash_anim_finished")
 		add_child(slash_anim)
 
 func _process(_delta):
@@ -143,6 +145,7 @@ func handle_collision(obj):
 	elif collisionCategory == 'enemy':
 		hurt()
 		obj.attack()
+		obj.queue_free()
 		
 func hurt():
 	if (lives > 0): lives -= 1
@@ -216,3 +219,6 @@ func orient_from_collision_box(collisionbox):
 
 func _on_hurt_timer_timeout():
 	$Sprite.self_modulate = Color(1, 1, 1, 1)
+
+func _slash_anim_finished():
+	target_to_destroy.queue_free()
