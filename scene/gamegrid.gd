@@ -98,6 +98,7 @@ func valid_spawn_pos(pos):
 func spawn_enemy(scene, pos):
 	var instance = scene.instance()
 	instance.connect("enemy_destroyed", self, "_on_enemy_destroyed")
+	instance.connect("move_request", self, "_on_enemy_move_request")
 	add_child(instance)
 	var orient_facing_player = Direction.get_cardinal_dir_facing(player_ref.position, pos)
 	instance.spawn(pos, orient_facing_player)
@@ -112,3 +113,12 @@ func spawn_item(scene, pos):
 	add_child(instance)
 	instance.position = pos
 	ref_counter[instance.get_meta("type")] += 1
+
+func _on_enemy_move_request(ref):
+	var desired_pos = ref.desired_pos(player_ref.position)
+	
+	# Want to ensure that all the enemies aren't moving on top of each other. If that is happening,
+	# just have the enemy lose its turn.
+	if valid_spawn_pos(desired_pos):
+		ref.move(desired_pos)
+	

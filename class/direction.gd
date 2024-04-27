@@ -126,3 +126,22 @@ static func get_cardinal_dir_facing(pos_to_face, pos):
 				return WEST
 			else:
 				return EAST
+
+static func rel_pos_to_dir(pos):
+	return combine_dir(_get_horz_dir_from_pos(pos), _get_vert_dir_from_pos(pos))
+
+static func _get_horz_dir_from_pos(pos):
+	if pos.x > 0:
+		return EAST
+	elif pos.x < 0:
+		return WEST
+	else:
+		return null
+
+static func _get_vert_dir_from_pos(pos):
+	if pos.y > 0:
+		return SOUTH
+	elif pos.y < 0:
+		return NORTH
+	else:
+		return null
