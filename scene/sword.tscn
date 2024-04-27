@@ -4,7 +4,7 @@
 [ext_resource path="res://scene/sword.gd" type="Script" id=2]
 [ext_resource path="res://resource/collision_rect.tres" type="Shape2D" id=3]
 
-[node name="sword" type="Area2D"]
+[node name="sword" type="Area2D" groups=["interactable", "item"]]
 monitoring = false
 script = ExtResource( 2 )
 

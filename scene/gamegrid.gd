@@ -80,8 +80,20 @@ func get_spawn_pos():
 	return spawn_pos
 
 func valid_spawn_pos(pos):
-	return abs(pos.x - player_ref.position.x) >= VALID_DIST_FROM_PLAYER and \
-		abs(pos.y - player_ref.position.y) >= VALID_DIST_FROM_PLAYER
+	var valid_pos = false
+	
+	if abs(pos.x - player_ref.position.x) >= VALID_DIST_FROM_PLAYER and \
+		abs(pos.y - player_ref.position.y) >= VALID_DIST_FROM_PLAYER:
+			var node_array = get_tree().get_nodes_in_group("interactable")
+			var node_array_sz = node_array.size()
+			var idx = 0
+			valid_pos = true
+			
+			while valid_pos and idx < node_array_sz:
+				valid_pos = node_array[idx].position != pos
+				idx += 1
+				
+	return valid_pos
 
 func spawn_enemy(scene, pos):
 	var instance = scene.instance()

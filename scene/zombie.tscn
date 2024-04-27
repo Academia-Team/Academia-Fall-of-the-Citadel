@@ -4,7 +4,7 @@
 [ext_resource path="res://scene/zombie.gd" type="Script" id=2]
 [ext_resource path="res://resource/collision_rect.tres" type="Shape2D" id=3]
 
-[node name="zombie" type="Area2D"]
+[node name="zombie" type="Area2D" groups=["enemy", "interactable"]]
 script = ExtResource( 2 )
 
 [node name="collisionbox" type="CollisionShape2D" parent="."]
