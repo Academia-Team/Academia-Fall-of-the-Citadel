@@ -34,7 +34,8 @@ func set_up_player():
 	player_ref.connect("used_item", $"../infobar", "_on_player_used_item")
 	
 	add_child(player_ref)
-	player_ref.spawn(position, position.y, screen_size.y - 32, position.x, screen_size.x - 32)
+	player_ref.spawn(position, position.y,
+		screen_size.y - cell_size.y * 2, position.x, screen_size.x - cell_size.x)
 
 func _on_player_pick_up_item(item_name):
 	ref_counter[item_name] -= 1
