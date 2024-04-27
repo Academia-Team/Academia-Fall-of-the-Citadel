@@ -15,6 +15,7 @@ export(float) var hurt_length = 0.3
 export(valid_orientation) var orientation = direction.SOUTH
 
 var hurt_timer
+var initial_texture
 onready var orig_self_modulate = self_modulate
 
 signal orientation_changed(old_orient, new_orient)
@@ -23,26 +24,39 @@ signal hurt_finish()
 
 func _init():
 	._init()
-	set_orient(orientation)
 	
 	hurt_timer = Timer.new()
 	hurt_timer.one_shot = true
 	hurt_timer.connect("timeout", self, "_on_hurt_timeout")
 	add_child(hurt_timer)
 
-func set_orient(orient):
-	var old_orient = orientation
+# A hack due to the fact that when a character_sprite is placed, its texture will
+# be overwritten. If _ready() is redefined, set_orient() will have to be manually
+# called.
+func _ready():
+	set_orient(orientation)
+
+func get_orient_texture(orient):
 	orient = direction.get_horz_component(orient)
+	var target_texture
 	match orient:
 		direction.NORTH:
-			set_texture(north_texture)
+			target_texture = north_texture
 		direction.SOUTH:
-			set_texture(south_texture)
+			target_texture = south_texture
 		_:
-			set_texture(side_texture)
-			
+			target_texture = side_texture
+	
+	return target_texture
+
+func set_orient(orient):
+	var old_orient = orientation
+	var new_texture = get_orient_texture(orient)
+	
+	orient = direction.get_horz_component(orient)
 	flip_h = (orient == direction.WEST)
 	orientation = orient
+	texture = new_texture
 	
 	if orient != old_orient:
 		emit_signal("orientation_changed", old_orient, orient)
