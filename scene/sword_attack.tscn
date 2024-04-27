@@ -19,6 +19,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "Slash"
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:points")
 tracks/0/interp = 1
