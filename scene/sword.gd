@@ -15,7 +15,7 @@ func _ready():
 
 func acquire():
 	.hide()
-	$collisionbox.set_deferred("monitorable", false)
+	set_deferred("monitorable", false)
 	$acquire_sfx.play()
 	return get_meta("type")
 

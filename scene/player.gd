@@ -113,8 +113,8 @@ func _ready():
 	emit_signal("health_change", lives)
 	
 	hide()
-	$collisionbox.set_deferred("monitoring", false)
-	$collisionbox.set_deferred("monitorable", false)
+	set_deferred("monitoring", false)
+	set_deferred("monitorable", false)
 	
 func spawn(pos, topBound, bottomBound, leftBound, rightBound):
 	position = pos
@@ -126,8 +126,8 @@ func spawn(pos, topBound, bottomBound, leftBound, rightBound):
 	assert(position.x >= bounds.left && position.x <= bounds.right)
 	assert(position.y >= bounds.top && position.y <= bounds.bottom)
 	show()
-	$collisionbox.set_deferred("monitoring", true)
-	$collisionbox.set_deferred("monitorable", true)
+	set_deferred("monitoring", true)
+	set_deferred("monitorable", true)
 
 func handle_collision(obj):
 	var collisionCategory = obj.get_class()
@@ -147,8 +147,8 @@ func hurt():
 	$hurt_sfx.play()
 	
 	if lives <= 0:
-		$collisionbox.set_deferred("monitoring", false)
-		$collisionbox.set_deferred("monitorable", false)
+		set_deferred("monitoring", false)
+		set_deferred("monitorable", false)
 
 
 func _on_move_timer_timeout():
