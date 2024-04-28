@@ -79,7 +79,7 @@ func use_sword():
 
 func _process(_delta):
 	if lives > 0:
-		if future_dir != null and not $move_timer.is_stopped():
+		if future_dir != null and $move_timer.is_stopped():
 			$move_timer.start()
 			
 		handle_action()
