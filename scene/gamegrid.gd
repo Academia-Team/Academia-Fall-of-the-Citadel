@@ -5,6 +5,7 @@ var player_scene = preload("res://scene/player.tscn")
 var sword_scene = preload("res://scene/sword.tscn")
 var zombie_scene = preload("res://scene/zombie.tscn")
 var ref_counter = {"sword": 0, "zombie": 0}
+var seed_val = null
 
 const ITEM_SCORE = 5
 const PASSIVE_SCORE = 1
@@ -20,7 +21,13 @@ signal score_change(score_diff)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	randomize()
+	if seed_val == null:
+		seed_val = hash(Time.get_datetime_dict_from_system())
+	
+		if OS.is_debug_build():
+			print("Seed: %d" % seed_val)
+		
+	seed(seed_val)
 	set_up_player()
 
 func set_up_player():
