@@ -26,10 +26,6 @@ side_texture = ExtResource( 6 )
 wait_time = 0.5
 one_shot = true
 
-[node name="move_input_timer" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
-
 [node name="right_collisionbox" type="CollisionShape2D" parent="."]
 position = Vector2( 46, 15 )
 shape = ExtResource( 3 )
