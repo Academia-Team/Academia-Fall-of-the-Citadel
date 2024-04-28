@@ -2,7 +2,6 @@ extends Area2D
 class_name player
 
 var bounds = {Direction.NORTH: 0, Direction.SOUTH: 0, Direction.WEST: 0, Direction.EAST: 0}
-var future_dir
 var held_item
 var lives
 var targets = [null, null, null, null]
