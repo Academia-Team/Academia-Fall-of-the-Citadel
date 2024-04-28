@@ -55,10 +55,9 @@ func handle_movement():
 	if Input.is_action_pressed("move_down_right"):
 		desired_dir = Direction.combine_dir(Direction.SOUTHEAST, desired_dir)
 	
-	if desired_dir != null:
-		if not Input.is_action_pressed("stay"):
-			set_dir(desired_dir)
-		$CharacterSprite.set_orient(desired_dir)
+	if not Input.is_action_pressed("stay"):
+		set_dir(desired_dir)
+	$CharacterSprite.set_orient(desired_dir)
 
 func use_item():
 	if held_item:
