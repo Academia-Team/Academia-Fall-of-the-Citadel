@@ -64,18 +64,21 @@ func use_item():
 		match held_item:
 			"sword":
 				use_sword()
-		emit_signal("used_item", held_item)
-		held_item = null
 
 func use_sword():
 	target_to_destroy = targets[$CharacterSprite.orientation]
-			
-	if target_to_destroy != null:
-		target_to_destroy.attack()
+	
+	if pos_in_bounds(Direction.translate_pos(position, $CharacterSprite.orientation, 32)):
 		var slash_anim = load("res://scene/sword_attack.tscn").instance()
 		slash_anim.position = Direction.dir_to_rel_pos($CharacterSprite.orientation, 32)
 		slash_anim.connect("animation_finished", self, "_slash_anim_finished")
 		add_child(slash_anim)
+		
+		if target_to_destroy != null:
+			target_to_destroy.attack()
+		
+		emit_signal("used_item", "sword")
+		held_item = null
 
 func _process(_delta):
 	if lives > 0:
@@ -180,4 +183,5 @@ func orient_from_collision_box(collisionbox):
 	return orient
 
 func _slash_anim_finished():
-	target_to_destroy.destroy()
+	if target_to_destroy != null:
+		target_to_destroy.destroy()
