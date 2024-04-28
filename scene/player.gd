@@ -144,6 +144,7 @@ func hurt():
 	if (lives > 0): lives -= 1
 	emit_signal("health_change", lives)
 	$CharacterSprite.show_hurt()
+	$hurt_sfx.play()
 	
 	if lives <= 0:
 		$collisionbox.set_deferred("monitoring", false)
