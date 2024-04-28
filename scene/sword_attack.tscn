@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scene/sword_attack.gd" type="Script" id=1]
+[ext_resource path="res://asset/Socapex - Swordsmall.wav" type="AudioStream" id=2]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -42,4 +43,9 @@ script = ExtResource( 1 )
 anims/RESET = SubResource( 1 )
 anims/Slash = SubResource( 2 )
 
+[node name="sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+autoplay = true
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="finished" from="sfx" to="." method="_on_sfx_finished"]

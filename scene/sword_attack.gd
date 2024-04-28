@@ -8,5 +8,12 @@ func _init():
 
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
-	emit_signal("animation_finished")
-	call_deferred("free")
+	if not $sfx.is_playing():
+		emit_signal("animation_finished")
+		queue_free()
+
+
+func _on_sfx_finished():
+	if not $AnimationPlayer.is_playing():
+		emit_signal("animation_finished")
+		queue_free()
