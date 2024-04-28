@@ -20,12 +20,18 @@ func attack():
 	$collisionbox.set_deferred("monitorable", false)
 	emit_signal("enemy_destroyed", get_meta("type"))
 	$CharacterSprite.show_hurt()
-
-func desired_pos(target_pos):
-	var dir = Direction.get_cardinal_dir_facing(target_pos, position)
-	var pos = Direction.translate_pos(position, dir, 32)
 	
-	return pos
+func desired_positions(target_pos):
+	var dir = Direction.get_dir_facing(target_pos, position)
+	
+	var component_directions = Direction.get_dir_components(dir)
+	
+	var possible_positions = []
+	
+	for direction in component_directions:
+		possible_positions.append(Direction.translate_pos(position, direction, 32))
+	
+	return possible_positions
 
 func move(pos):
 	var diff_pos = pos - position

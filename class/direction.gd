@@ -129,6 +129,9 @@ static func get_cardinal_dir_facing(pos_to_face, pos):
 	else:
 		return null
 
+static func get_dir_facing(pos_to_face, pos):
+	return rel_pos_to_dir(pos_to_face - pos)
+
 static func rel_pos_to_dir(pos):
 	return combine_dir(_get_horz_dir_from_pos(pos), _get_vert_dir_from_pos(pos))
 

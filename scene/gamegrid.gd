@@ -121,9 +121,11 @@ func spawn_item(scene, pos):
 	ref_counter[instance.get_meta("type")] += 1
 
 func _on_enemy_move_request(ref):
-	var desired_pos = ref.desired_pos(player_ref.position)
+	var desired_positions = ref.desired_positions(player_ref.position)
 	
-	# Want to ensure that all the enemies aren't moving on top of each other. If that is happening,
-	# just have the enemy lose its turn.
-	if valid_move_pos(desired_pos):
-		ref.move(desired_pos)
+	for pos in desired_positions:
+		# Want to ensure that all the enemies aren't moving on top of each other. If that is happening,
+		# just have the enemy lose its turn.
+		if valid_move_pos(pos):
+			ref.move(pos)
+			break
