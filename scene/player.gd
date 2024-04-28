@@ -7,8 +7,7 @@ var lives
 var targets = [null, null, null, null]
 var target_to_destroy
 
-const MOVE_QUEUE_SZ = 256
-var move_queue
+var future_dir
 
 const NUM_DIRS = 4
 const NUM_ORIENT = 4
@@ -24,25 +23,7 @@ func get_class():
 	
 func set_dir(dir):
 	$move_timer.set_paused(true)
-	
-	var found_opposing_dir = false
-	var opposing_dir_array = Direction.get_opposing_dirs(dir)
-	var opposing_dir_sz = opposing_dir_array.size()
-	var opposing_dir_idx = 0
-	
-	while not found_opposing_dir and opposing_dir_idx < opposing_dir_sz:
-		if move_queue.contains(opposing_dir_array[opposing_dir_idx]):
-			$move_timer.stop()
-			move_queue.clear()
-			$move_input_timer.start()
-			found_opposing_dir = true
-		
-		opposing_dir_idx += 1
-	
-	if not found_opposing_dir and $move_input_timer.is_stopped():
-		move_queue.queue(dir)
-		$move_input_timer.start()
-		
+	future_dir = dir
 	$move_timer.set_paused(false)
 
 func pos_in_bounds(pos):
@@ -74,10 +55,9 @@ func handle_movement():
 	if Input.is_action_pressed("move_down_right"):
 		desired_dir = Direction.combine_dir(Direction.SOUTHEAST, desired_dir)
 	
-	if desired_dir != null:
-		if not Input.is_action_pressed("stay"):
-			set_dir(desired_dir)
-		$CharacterSprite.set_orient(desired_dir)
+	if not Input.is_action_pressed("stay"):
+		set_dir(desired_dir)
+	$CharacterSprite.set_orient(desired_dir)
 
 func use_item():
 	if held_item:
@@ -99,7 +79,7 @@ func use_sword():
 
 func _process(_delta):
 	if lives > 0:
-		if not move_queue.empty() and $move_timer.is_stopped():
+		if future_dir != null and $move_timer.is_stopped():
 			$move_timer.start()
 			
 		handle_action()
@@ -109,7 +89,7 @@ func _process(_delta):
 func _ready():
 	held_item = null
 	lives = 3
-	move_queue = Queue.new(MOVE_QUEUE_SZ)
+	future_dir = null
 	emit_signal("health_change", lives)
 	
 	hide()
@@ -154,15 +134,12 @@ func hurt():
 
 
 func _on_move_timer_timeout():
-	if not move_queue.empty():
-		var dir = move_queue.dequeue()
-		var future_pos = Direction.translate_pos(position, dir, 32)
+	if future_dir != null:
+		var future_pos = Direction.translate_pos(position, future_dir, 32)
+		future_dir = null
 		
 		if pos_in_bounds(future_pos):
 			position = future_pos
-		else:
-			move_queue.clear()
-
 
 func _on_player_area_shape_entered(_area_rid, area, _area_shape_index, local_shape_index):
 	var triggered_collisionbox = shape_owner_get_owner(local_shape_index)

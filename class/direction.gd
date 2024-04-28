@@ -150,3 +150,6 @@ static func _get_vert_dir_from_pos(pos):
 		return NORTH
 	else:
 		return null
+
+static func is_cardinal_dir(dir):
+	return dir == NORTH or dir == SOUTH or dir == EAST or dir == WEST
