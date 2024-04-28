@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://asset/tile.png" type="Texture" id=1]
 [ext_resource path="res://scene/gamegrid.gd" type="Script" id=2]
 [ext_resource path="res://scene/infobar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scene/gamescr.gd" type="Script" id=4]
 [ext_resource path="res://asset/slow_melancholic_theme_c64_style.ogg" type="AudioStream" id=5]
+[ext_resource path="res://asset/game_over.wav" type="AudioStream" id=6]
 
 [sub_resource type="TileSet" id=1]
 0/name = "tile.png 0"
@@ -53,7 +54,11 @@ autostart = true
 stream = ExtResource( 5 )
 autoplay = true
 
+[node name="gameover_sfx" type="AudioStreamPlayer" parent="gamegrid"]
+stream = ExtResource( 6 )
+
 [connection signal="score_change" from="gamegrid" to="infobar" method="_on_gamegrid_score_change"]
 [connection signal="timeout" from="gamegrid/passive_timer" to="gamegrid" method="_on_passive_timer_timeout"]
 [connection signal="timeout" from="gamegrid/zombie_spawn_timer" to="gamegrid" method="_on_zombie_spawn_timer_timeout"]
 [connection signal="timeout" from="gamegrid/item_spawn_timer" to="gamegrid" method="_on_item_spawn_timer_timeout"]
+[connection signal="finished" from="gamegrid/gameover_sfx" to="gamegrid" method="_on_gameover_sfx_finished"]

@@ -53,10 +53,8 @@ func _on_enemy_destroyed(enemy_type):
 
 func _on_player_health_change(lives):
 	if lives <= 0:
-		var gameover = load("res://scene/gameover.tscn").instance()
-		get_parent().add_child(gameover)
-		gameover.set_info_src($"../infobar")
-		call_deferred("free")
+		$music.stop()
+		$gameover_sfx.play()
 
 func _on_zombie_spawn_timer_timeout():
 	if ref_counter["zombie"] < MAX_ZOMBIES:
@@ -89,15 +87,18 @@ func valid_spawn_pos(pos):
 	return valid_pos
 	
 func valid_move_pos(pos):
-	var node_array = get_tree().get_nodes_in_group("interactable")
-	var node_array_sz = node_array.size()
-	var idx = 0
-	var valid_pos = true
+	var valid_pos = false
 	
-	while valid_pos and idx < node_array_sz:
-		if node_array[idx] != player_ref:
-			valid_pos = node_array[idx].position != pos
-		idx += 1
+	if not $gameover_sfx.is_playing():
+		var node_array = get_tree().get_nodes_in_group("interactable")
+		var node_array_sz = node_array.size()
+		var idx = 0
+		valid_pos = true
+		
+		while valid_pos and idx < node_array_sz:
+			if node_array[idx] != player_ref:
+				valid_pos = node_array[idx].position != pos
+			idx += 1
 	
 	return valid_pos
 
@@ -129,3 +130,10 @@ func _on_enemy_move_request(ref):
 		if valid_move_pos(pos):
 			ref.move(pos)
 			break
+
+
+func _on_gameover_sfx_finished():
+	var gameover = load("res://scene/gameover.tscn").instance()
+	get_parent().add_child(gameover)
+	gameover.set_info_src($"../infobar")
+	call_deferred("free")
