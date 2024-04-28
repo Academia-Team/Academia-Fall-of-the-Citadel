@@ -100,8 +100,11 @@ func _ready():
 	emit_signal("health_change", lives)
 	
 	hide()
-	set_deferred("monitoring", false)
-	set_deferred("monitorable", false)
+	$collisionbox.set_deferred("disabled", true)
+	$right_collisionbox.set_deferred("disabled", true)
+	$left_collisionbox.set_deferred("disabled", true)
+	$top_collisionbox.set_deferred("disabled", true)
+	$bottom_collisionbox.set_deferred("disabled", true)
 	
 func spawn(pos, topBound, bottomBound, leftBound, rightBound):
 	position = pos
@@ -113,8 +116,12 @@ func spawn(pos, topBound, bottomBound, leftBound, rightBound):
 	assert(position.x >= bounds.left && position.x <= bounds.right)
 	assert(position.y >= bounds.top && position.y <= bounds.bottom)
 	show()
-	set_deferred("monitoring", true)
-	set_deferred("monitorable", true)
+	
+	$collisionbox.set_deferred("disabled", false)
+	$right_collisionbox.set_deferred("disabled", false)
+	$left_collisionbox.set_deferred("disabled", false)
+	$top_collisionbox.set_deferred("disabled", false)
+	$bottom_collisionbox.set_deferred("disabled", false)
 
 func handle_collision(obj):
 	var collisionCategory = obj.get_class()
@@ -136,8 +143,11 @@ func hurt():
 		$immunity_timer.start()
 		
 		if lives <= 0:
-			set_deferred("monitoring", false)
-			set_deferred("monitorable", false)
+			$collisionbox.set_deferred("disabled", true)
+			$right_collisionbox.set_deferred("disabled", true)
+			$left_collisionbox.set_deferred("disabled", true)
+			$top_collisionbox.set_deferred("disabled", true)
+			$bottom_collisionbox.set_deferred("disabled", true)
 
 
 func _on_move_timer_timeout():

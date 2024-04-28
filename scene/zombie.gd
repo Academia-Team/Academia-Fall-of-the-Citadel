@@ -17,13 +17,11 @@ func _ready():
 	set_meta("type", "zombie")
 	
 	hide()
-	set_deferred("monitoring", false)
-	set_deferred("monitorable", false)
+	$collisionbox.set_deferred("disabled", true)
 
 func attack():
 	alive = false
-	set_deferred("monitoring", false)
-	set_deferred("monitorable", false)
+	$collisionbox.set_deferred("disabled", true)
 	emit_signal("enemy_destroyed", get_meta("type"))
 	$CharacterSprite.show_hurt()
 	$hurt_sfx.play()
@@ -60,8 +58,7 @@ func spawn(pos, orient):
 	$CharacterSprite.set_orient(orient)
 	
 	show()
-	set_deferred("monitoring", true)
-	set_deferred("monitorable", true)
+	$collisionbox.set_deferred("disabled", false)
 	$spawn_sfx.play()
 	$move_timer.start()
 
