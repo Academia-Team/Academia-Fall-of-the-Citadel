@@ -138,7 +138,7 @@ func handle_collision(obj):
 	elif collisionCategory == 'enemy':
 		hurt()
 		obj.attack()
-		obj.queue_free()
+		obj.destroy()
 		
 func hurt():
 	if (lives > 0): lives -= 1
@@ -201,4 +201,4 @@ func orient_from_collision_box(collisionbox):
 	return orient
 
 func _slash_anim_finished():
-	target_to_destroy.queue_free()
+	target_to_destroy.destroy()

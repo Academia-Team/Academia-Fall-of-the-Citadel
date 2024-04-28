@@ -5,6 +5,7 @@ signal enemy_destroyed(enemy_type)
 signal move_request(ref)
 
 var alive
+var destroy
 
 func get_class():
 	return "enemy"
@@ -24,6 +25,7 @@ func attack():
 	$collisionbox.set_deferred("monitorable", false)
 	emit_signal("enemy_destroyed", get_meta("type"))
 	$CharacterSprite.show_hurt()
+	$hurt_sfx.play()
 	$move_timer.stop()
 	
 func desired_positions(target_pos):
@@ -38,6 +40,14 @@ func desired_positions(target_pos):
 			possible_positions.append(Direction.translate_pos(position, direction, 32))
 	
 	return possible_positions
+
+func destroy():
+	hide()
+	
+	if $hurt_sfx.playing:
+		$hurt_sfx.connect("finished", self, "destroy")
+	else:
+		queue_free()
 
 func move(pos):
 	if alive:
