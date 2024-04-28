@@ -64,6 +64,8 @@ func use_item():
 		match held_item:
 			"sword":
 				use_sword()
+			_:
+				$forbidden_sfx.play()
 
 func use_sword():
 	target_to_destroy = targets[$CharacterSprite.orientation]
@@ -79,6 +81,8 @@ func use_sword():
 		
 		emit_signal("used_item", "sword")
 		held_item = null
+	else:
+		$forbidden_sfx.play()
 
 func _process(_delta):
 	if lives > 0:
@@ -143,6 +147,8 @@ func _on_move_timer_timeout():
 		
 		if pos_in_bounds(future_pos):
 			position = future_pos
+		else:
+			$forbidden_sfx.play()
 
 func _on_player_area_shape_entered(_area_rid, area, _area_shape_index, local_shape_index):
 	var triggered_collisionbox = shape_owner_get_owner(local_shape_index)
