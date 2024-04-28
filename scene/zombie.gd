@@ -5,7 +5,6 @@ signal enemy_destroyed(enemy_type)
 signal move_request(ref)
 
 var alive
-var destroy
 
 func get_class():
 	return "enemy"
@@ -48,6 +47,9 @@ func destroy():
 		$hurt_sfx.connect("finished", self, "destroy")
 	else:
 		queue_free()
+		
+		if $hurt_sfx.is_connected("finished", self, "destroy"):
+			$hurt_sfx.disconnect("finished", self, "destroy")
 
 func move(pos):
 	if alive:
@@ -62,6 +64,7 @@ func spawn(pos, orient):
 	show()
 	$collisionbox.set_deferred("monitoring", true)
 	$collisionbox.set_deferred("monitorable", true)
+	$spawn_sfx.play()
 	$move_timer.start()
 
 
