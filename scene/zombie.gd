@@ -5,6 +5,7 @@ signal enemy_destroyed(enemy_type)
 signal move_request(ref)
 
 var alive
+var to_destroy
 
 func get_class():
 	return "enemy"
@@ -12,6 +13,7 @@ func get_class():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	alive = true
+	to_destroy = false
 	set_meta("type", "zombie")
 	
 	hide()
@@ -42,14 +44,10 @@ func desired_positions(target_pos):
 
 func destroy():
 	hide()
+	to_destroy = true
 	
-	if $hurt_sfx.playing:
-		$hurt_sfx.connect("finished", self, "destroy")
-	else:
+	if not $hurt_sfx.playing:
 		queue_free()
-		
-		if $hurt_sfx.is_connected("finished", self, "destroy"):
-			$hurt_sfx.disconnect("finished", self, "destroy")
 
 func move(pos):
 	if alive:
@@ -71,3 +69,7 @@ func spawn(pos, orient):
 func _on_move_timer_timeout():
 	if alive:
 		emit_signal("move_request", self)
+
+func _on_hurt_sfx_finished():
+	if to_destroy:
+		destroy()

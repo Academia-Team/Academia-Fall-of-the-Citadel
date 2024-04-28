@@ -33,3 +33,4 @@ stream = ExtResource( 7 )
 stream = ExtResource( 8 )
 
 [connection signal="timeout" from="move_timer" to="." method="_on_move_timer_timeout"]
+[connection signal="finished" from="hurt_sfx" to="." method="_on_hurt_sfx_finished"]
