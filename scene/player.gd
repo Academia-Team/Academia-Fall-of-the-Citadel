@@ -141,14 +141,16 @@ func handle_collision(obj):
 		obj.destroy()
 		
 func hurt():
-	if (lives > 0): lives -= 1
-	emit_signal("health_change", lives)
-	$CharacterSprite.show_hurt()
-	$hurt_sfx.play()
-	
-	if lives <= 0:
-		set_deferred("monitoring", false)
-		set_deferred("monitorable", false)
+	if $immunity_timer.is_stopped():
+		if (lives > 0): lives -= 1
+		emit_signal("health_change", lives)
+		$CharacterSprite.show_hurt()
+		$hurt_sfx.play()
+		$immunity_timer.start()
+		
+		if lives <= 0:
+			set_deferred("monitoring", false)
+			set_deferred("monitorable", false)
 
 
 func _on_move_timer_timeout():
