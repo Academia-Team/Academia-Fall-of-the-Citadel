@@ -23,6 +23,5 @@ side_texture = ExtResource( 5 )
 
 [node name="move_timer" type="Timer" parent="."]
 wait_time = 0.6
-autostart = true
 
 [connection signal="timeout" from="move_timer" to="." method="_on_move_timer_timeout"]
