@@ -84,20 +84,27 @@ func valid_spawn_pos(pos):
 	
 	if abs(pos.x - player_ref.position.x) >= VALID_DIST_FROM_PLAYER and \
 		abs(pos.y - player_ref.position.y) >= VALID_DIST_FROM_PLAYER:
-			var node_array = get_tree().get_nodes_in_group("interactable")
-			var node_array_sz = node_array.size()
-			var idx = 0
-			valid_pos = true
-			
-			while valid_pos and idx < node_array_sz:
-				valid_pos = node_array[idx].position != pos
-				idx += 1
+			valid_pos = valid_move_pos(pos)
 				
+	return valid_pos
+	
+func valid_move_pos(pos):
+	var node_array = get_tree().get_nodes_in_group("interactable")
+	var node_array_sz = node_array.size()
+	var idx = 0
+	var valid_pos = true
+	
+	while valid_pos and idx < node_array_sz:
+		if node_array[idx] != player_ref:
+			valid_pos = node_array[idx].position != pos
+		idx += 1
+	
 	return valid_pos
 
 func spawn_enemy(scene, pos):
 	var instance = scene.instance()
 	instance.connect("enemy_destroyed", self, "_on_enemy_destroyed")
+	instance.connect("move_request", self, "_on_enemy_move_request")
 	add_child(instance)
 	var orient_facing_player = Direction.get_cardinal_dir_facing(player_ref.position, pos)
 	instance.spawn(pos, orient_facing_player)
@@ -112,3 +119,13 @@ func spawn_item(scene, pos):
 	add_child(instance)
 	instance.position = pos
 	ref_counter[instance.get_meta("type")] += 1
+
+func _on_enemy_move_request(ref):
+	var desired_positions = ref.desired_positions(player_ref.position)
+	
+	for pos in desired_positions:
+		# Want to ensure that all the enemies aren't moving on top of each other. If that is happening,
+		# just have the enemy lose its turn.
+		if valid_move_pos(pos):
+			ref.move(pos)
+			break

@@ -1,10 +1,7 @@
 extends Area2D
 class_name player
 
-const direction = preload("res://class/direction.gd")
-const queue = preload("res://class/queue.gd")
-
-var bounds = {direction.NORTH: 0, direction.SOUTH: 0, direction.WEST: 0, direction.EAST: 0}
+var bounds = {Direction.NORTH: 0, Direction.SOUTH: 0, Direction.WEST: 0, Direction.EAST: 0}
 var future_dir
 var held_item
 var lives
@@ -62,21 +59,21 @@ func handle_movement():
 	var desired_dir = null
 	
 	if Input.is_action_pressed("move_up"):
-		desired_dir = direction.combine_dir(direction.NORTH, desired_dir)
+		desired_dir = Direction.combine_dir(Direction.NORTH, desired_dir)
 	if Input.is_action_pressed("move_down"):
-		desired_dir = direction.combine_dir(direction.SOUTH, desired_dir)
+		desired_dir = Direction.combine_dir(Direction.SOUTH, desired_dir)
 	if Input.is_action_pressed("move_right"):
-		desired_dir = direction.combine_dir(direction.EAST, desired_dir)
+		desired_dir = Direction.combine_dir(Direction.EAST, desired_dir)
 	if Input.is_action_pressed("move_left"):
-		desired_dir = direction.combine_dir(direction.WEST, desired_dir)
+		desired_dir = Direction.combine_dir(Direction.WEST, desired_dir)
 	if Input.is_action_pressed("move_up_left"):
-		desired_dir = direction.combine_dir(direction.NORTHWEST, desired_dir)
+		desired_dir = Direction.combine_dir(Direction.NORTHWEST, desired_dir)
 	if Input.is_action_pressed("move_up_right"):
-		desired_dir = direction.combine_dir(direction.NORTHEAST, desired_dir)
+		desired_dir = Direction.combine_dir(Direction.NORTHEAST, desired_dir)
 	if Input.is_action_pressed("move_down_left"):
-		desired_dir = direction.combine_dir(direction.SOUTHWEST, desired_dir)
+		desired_dir = Direction.combine_dir(Direction.SOUTHWEST, desired_dir)
 	if Input.is_action_pressed("move_down_right"):
-		desired_dir = direction.combine_dir(direction.SOUTHEAST, desired_dir)
+		desired_dir = Direction.combine_dir(Direction.SOUTHEAST, desired_dir)
 	
 	if desired_dir != null:
 		if not Input.is_action_pressed("stay"):
@@ -97,7 +94,7 @@ func use_sword():
 	if target_to_destroy != null:
 		target_to_destroy.attack()
 		var slash_anim = load("res://scene/sword_attack.tscn").instance()
-		slash_anim.position = direction.dir_to_rel_pos($CharacterSprite.orientation, 32)
+		slash_anim.position = Direction.dir_to_rel_pos($CharacterSprite.orientation, 32)
 		slash_anim.connect("animation_finished", self, "_slash_anim_finished")
 		add_child(slash_anim)
 
@@ -157,7 +154,7 @@ func hurt():
 func _on_move_timer_timeout():
 	if not move_queue.empty():
 		var dir = move_queue.dequeue()
-		var future_pos = direction.translate_pos(position, dir, 32)
+		var future_pos = Direction.translate_pos(position, dir, 32)
 		
 		if pos_in_bounds(future_pos):
 			position = future_pos
@@ -191,13 +188,13 @@ func orient_from_collision_box(collisionbox):
 	
 	match collisionbox.name:
 		"right_collisionbox":
-			orient = direction.EAST
+			orient = Direction.EAST
 		"left_collisionbox":
-			orient = direction.WEST
+			orient = Direction.WEST
 		"top_collisionbox":
-			orient = direction.NORTH
+			orient = Direction.NORTH
 		"bottom_collisionbox":
-			orient = direction.SOUTH
+			orient = Direction.SOUTH
 		_:
 			orient = -1
 	
