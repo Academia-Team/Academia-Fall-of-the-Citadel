@@ -15,5 +15,10 @@ func _ready():
 
 func acquire():
 	.hide()
-	call_deferred("free")
+	$collisionbox.set_deferred("monitorable", false)
+	$acquire_sfx.play()
 	return get_meta("type")
+
+
+func _on_acquire_sfx_finished():
+	queue_free()
