@@ -48,16 +48,17 @@ func get_orient_texture(orient):
 	return target_texture
 
 func set_orient(orient):
-	var old_orient = orientation
-	var new_texture = get_orient_texture(orient)
-	
-	orient = Direction.get_horz_component(orient)
-	flip_h = (orient == Direction.WEST)
-	orientation = orient
-	texture = new_texture
-	
-	if orient != old_orient:
-		emit_signal("orientation_changed", old_orient, orient)
+	if orient != null:
+		var old_orient = orientation
+		var new_texture = get_orient_texture(orient)
+		
+		orient = Direction.get_horz_component(orient)
+		flip_h = (orient == Direction.WEST)
+		orientation = orient
+		texture = new_texture
+		
+		if orient != old_orient:
+			emit_signal("orientation_changed", old_orient, orient)
 
 func show_hurt(length = hurt_length):
 	hurt_timer.wait_time = length
