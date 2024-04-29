@@ -88,10 +88,10 @@ text = "Perish"
 flat = true
 
 [node name="Option" type="Control" parent="."]
-margin_left = 79.0
-margin_top = 287.0
-margin_right = 119.0
-margin_bottom = 327.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -40.0
+margin_right = 40.0
 
 [node name="option_label" type="Label" parent="Option"]
 margin_left = 85.0
@@ -102,9 +102,9 @@ theme = ExtResource( 4 )
 text = "Option:"
 
 [node name="option_enter" type="TextEdit" parent="Option"]
-margin_left = 151.0
+margin_left = 135.0
 margin_top = 3.0
-margin_right = 688.0
+margin_right = 672.0
 margin_bottom = 43.0
 theme = ExtResource( 4 )
 custom_styles/focus = ExtResource( 5 )
