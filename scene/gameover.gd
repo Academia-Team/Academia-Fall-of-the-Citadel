@@ -2,7 +2,7 @@ extends ColorRect
 
 var info_ref = null
 
-func _init():
+func _ready():
 	hide()
 
 func _process(_delta):

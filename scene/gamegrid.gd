@@ -5,8 +5,6 @@ var player_scene = preload("res://scene/player.tscn")
 var sword_scene = preload("res://scene/sword.tscn")
 var zombie_scene = preload("res://scene/zombie.tscn")
 var ref_counter = {"sword": 0, "zombie": 0}
-var seed_val = null
-var info_ref = null
 
 const ITEM_SCORE = 5
 const PASSIVE_SCORE = 1
@@ -20,14 +18,11 @@ const MAX_ITEMS = 2
 
 signal score_change(score_diff)
 
-func start(infobar_ref, seed_value):
-	seed_val = seed_value
-	info_ref = infobar_ref
-		
+func start(info_ref, seed_val):
 	seed(seed_val)
-	set_up_player()
+	set_up_player(info_ref)
 
-func set_up_player():
+func set_up_player(info_ref):
 	player_ref = player_scene.instance()
 	var screen_size = get_viewport_rect().size
 
@@ -137,7 +132,4 @@ func _on_enemy_move_request(ref):
 
 
 func _on_gameover_sfx_finished():
-	var gameover = load("res://scene/gameover.tscn").instance()
-	get_parent().add_child(gameover)
-	gameover.start(info_ref, seed_val)
 	call_deferred("queue_free")

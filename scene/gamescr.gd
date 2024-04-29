@@ -21,3 +21,9 @@ func gen_seed():
 	var gen_seed_val = hash(Time.get_datetime_dict_from_system())
 	
 	return gen_seed_val
+
+
+func _on_gamegrid_tree_exited():
+	var gameover = load("res://scene/gameover.tscn").instance()
+	add_child(gameover)
+	gameover.start($infobar, seed_val)
