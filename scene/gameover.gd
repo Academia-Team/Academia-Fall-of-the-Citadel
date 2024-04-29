@@ -18,6 +18,9 @@ func set_info_src(info_obj):
 func set_score(score_val):
 	$score.text = "Score: %d" % score_val
 
+func set_seed(seed_val):
+	$seed.text = "Seed: %d" % seed_val
+
 func _on_gameover_draw():
 	if info_ref != null:
 		set_score(info_ref.score)

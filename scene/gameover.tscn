@@ -30,6 +30,13 @@ grow_horizontal = 2
 theme = ExtResource( 2 )
 text = "Score: "
 
+[node name="seed" type="Label" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -19.0
+margin_right = 45.0
+text = "Seed:"
+
 [node name="revive_button" type="Button" parent="."]
 margin_left = 36.0
 margin_top = 211.0
