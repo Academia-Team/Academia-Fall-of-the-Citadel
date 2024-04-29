@@ -20,13 +20,9 @@ const MAX_ITEMS = 2
 
 signal score_change(score_diff)
 
-func start(infobar_ref):
+func start(infobar_ref, seed_value):
+	seed_val = seed_value
 	info_ref = infobar_ref
-	if seed_val == null:
-		seed_val = hash(Time.get_datetime_dict_from_system())
-	
-		if OS.is_debug_build():
-			print("Seed: %d" % seed_val)
 		
 	seed(seed_val)
 	set_up_player()
