@@ -26,5 +26,19 @@ func gen_seed():
 
 func _on_gamegrid_tree_exited():
 	var gameover = load("res://scene/gameover.tscn").instance()
+	gameover.connect("retry", self, "_on_gameover_retry")
+	gameover.connect("leave", self, "_on_gameover_leave")
 	add_child(gameover)
 	gameover.start($infobar, seed_val)
+
+func _on_gameover_retry():
+	var status = get_tree().reload_current_scene()
+	
+	if status != OK:
+		printerr("Failed to reload game.")
+
+func _on_gameover_leave():
+	var status = get_tree().change_scene_to(load("res://scene/menu.tscn"))
+	
+	if status != OK:
+			printerr("Failed to switch to menu.")

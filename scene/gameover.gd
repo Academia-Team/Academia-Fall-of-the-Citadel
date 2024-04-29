@@ -2,6 +2,9 @@ extends ColorRect
 
 var info_ref = null
 
+signal leave()
+signal retry()
+
 func _ready():
 	hide()
 
@@ -26,13 +29,7 @@ func _on_gameover_draw():
 		_set_score(info_ref.score)
 
 func _on_give_up_button_pressed():
-	var status = get_tree().change_scene_to(load("res://scene/menu.tscn"))
-	
-	if status != OK:
-			printerr("Failed to switch to menu.")
+	emit_signal("leave")
 
 func _on_revive_button_pressed():
-	var status = get_tree().change_scene_to(load("res://scene/gamescr.tscn"))
-	
-	if status != OK:
-			printerr("Failed to switch to game.")
+	emit_signal("retry")
