@@ -34,7 +34,7 @@ func set_up_player(info_ref):
 	player_ref.connect("used_item", info_ref, "_on_player_used_item")
 	
 	add_child(player_ref)
-	player_ref.spawn(position, 0,
+	player_ref.spawn(Vector2(0, 0), 0,
 		screen_size.y - cell_size.y * 2, 0, screen_size.x - cell_size.x)
 
 func _on_player_pick_up_item(item_name):
