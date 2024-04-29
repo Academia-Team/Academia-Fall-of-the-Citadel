@@ -64,14 +64,16 @@ margin_bottom = 25.0
 theme = ExtResource( 4 )
 text = "Option:"
 
-[node name="option_enter" type="TextEdit" parent="Option"]
-margin_left = 177.0
-margin_top = 3.0
-margin_right = 217.0
-margin_bottom = 43.0
+[node name="option_text" type="Label" parent="Option"]
+margin_left = 149.0
+margin_top = 10.0
+margin_right = 189.0
+margin_bottom = 29.0
+focus_mode = 2
+theme = ExtResource( 4 )
 
 [connection signal="gui_input" from="enter_button" to="." method="_on_enter_button_gui_input"]
 [connection signal="pressed" from="enter_button" to="." method="_on_enter_button_pressed"]
 [connection signal="pressed" from="perish_button" to="." method="_on_perish_button_pressed"]
-[connection signal="breakpoint_toggled" from="Option/option_enter" to="." method="_on_option_enter_breakpoint_toggled"]
-[connection signal="focus_exited" from="Option/option_enter" to="." method="_on_option_enter_focus_exited"]
+[connection signal="focus_exited" from="Option/option_text" to="." method="_on_option_text_focus_exited"]
+[connection signal="gui_input" from="Option/option_text" to="." method="_on_option_text_gui_input"]
