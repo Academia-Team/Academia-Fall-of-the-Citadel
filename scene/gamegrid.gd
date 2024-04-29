@@ -142,7 +142,6 @@ func _on_enemy_move_request(ref):
 
 func _on_gameover_sfx_finished():
 	var gameover = load("res://scene/gameover.tscn").instance()
-	gameover.set_info_src(info_ref)
-	gameover.set_seed(seed_val)
 	get_parent().add_child(gameover)
+	gameover.start(info_ref, seed_val)
 	call_deferred("queue_free")
