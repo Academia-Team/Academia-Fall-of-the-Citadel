@@ -32,7 +32,7 @@ func set_dir(dir):
 func kill():
 	while lives > 0:
 		hurt()
-		$immunity_timer.stop()
+		yield($immunity_timer, "timeout")
 
 func pos_in_bounds(pos):
 	return pos.x >= bounds.left && pos.x <= bounds.right && \
