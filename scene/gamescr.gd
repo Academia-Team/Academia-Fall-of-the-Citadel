@@ -1,7 +1,7 @@
 extends Control
 
 func _ready():
-	$gamegrid.start()
+	$gamegrid.start($infobar)
 
 func _process(_delta):
 	if Input.is_action_just_pressed("quit"):

@@ -6,6 +6,7 @@ var sword_scene = preload("res://scene/sword.tscn")
 var zombie_scene = preload("res://scene/zombie.tscn")
 var ref_counter = {"sword": 0, "zombie": 0}
 var seed_val = null
+var info_ref = null
 
 const ITEM_SCORE = 5
 const PASSIVE_SCORE = 1
@@ -19,7 +20,8 @@ const MAX_ITEMS = 2
 
 signal score_change(score_diff)
 
-func start():
+func start(infobar_ref):
+	info_ref = infobar_ref
 	if seed_val == null:
 		seed_val = hash(Time.get_datetime_dict_from_system())
 	
@@ -34,10 +36,10 @@ func set_up_player():
 	var screen_size = get_viewport_rect().size
 
 	player_ref.connect("health_change", self, "_on_player_health_change")
-	player_ref.connect("health_change", $"../infobar", "_on_player_health_change")
+	player_ref.connect("health_change", info_ref, "_on_player_health_change")
 	player_ref.connect("pick_up_item", self, "_on_player_pick_up_item")
-	player_ref.connect("pick_up_item", $"../infobar", "_on_player_pick_up_item")
-	player_ref.connect("used_item", $"../infobar", "_on_player_used_item")
+	player_ref.connect("pick_up_item", info_ref, "_on_player_pick_up_item")
+	player_ref.connect("used_item", info_ref, "_on_player_used_item")
 	
 	add_child(player_ref)
 	player_ref.spawn(position, position.y,
@@ -140,7 +142,7 @@ func _on_enemy_move_request(ref):
 
 func _on_gameover_sfx_finished():
 	var gameover = load("res://scene/gameover.tscn").instance()
-	gameover.set_info_src($"../infobar")
+	gameover.set_info_src(info_ref)
 	gameover.set_seed(seed_val)
 	get_parent().add_child(gameover)
 	call_deferred("queue_free")
