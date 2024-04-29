@@ -161,7 +161,7 @@ func hurt():
 
 
 func _on_move_timer_timeout():
-	if future_dir != null:
+	if future_dir != null and lives > 0:
 		var future_pos = Direction.translate_pos(position, future_dir, 32)
 		future_dir = null
 		
