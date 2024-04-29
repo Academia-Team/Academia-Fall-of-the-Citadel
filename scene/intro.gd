@@ -1,7 +1,5 @@
 extends ColorRect
 
-const menu_scene = preload("res://scene/menu.tscn")
-
 func _ready():
 	$AnimationPlayer.play("Fade In")
 	
@@ -18,7 +16,4 @@ func _unhandled_input(event):
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Fade Out":
-		var status = get_tree().change_scene_to(menu_scene)
-		
-		if status != OK:
-			printerr("Failed to switch to menu.")
+		SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.MENU)

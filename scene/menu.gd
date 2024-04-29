@@ -1,7 +1,5 @@
 extends ColorRect
 
-const game_scene = preload("res://scene/gamescr.tscn")
-
 var enter_seed
 var game_playing
 
@@ -17,10 +15,7 @@ func _process(_delta):
 
 func _on_enter_button_pressed():
 	game_playing = true
-	var status = get_tree().change_scene_to(game_scene)
-	
-	if status != OK:
-			printerr("Failed to switch to game.")
+	SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.GAME)
 
 func _on_perish_button_pressed():
 	get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)
@@ -54,7 +49,7 @@ func _on_option_enter_text_changed():
 		else:
 			seed_val = hash(seed_str)
 		
-		var game_instance = game_scene.instance()
+		var game_instance = SceneSwitcher.get_scene(SceneSwitcher.GAME).instance()
 		game_instance.seed_val = seed_val
 		
 		self_modulate.a = 0
