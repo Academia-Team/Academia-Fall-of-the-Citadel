@@ -1,6 +1,5 @@
 extends Control
 
-const game_over_scene = preload("res://scene/gameover.tscn")
 var menu_scene = load("res://scene/menu.tscn")
 
 var seed_val = null
@@ -28,11 +27,7 @@ func gen_seed():
 
 
 func _on_gamegrid_tree_exited():
-	var gameover = game_over_scene.instance()
-	gameover.connect("retry", self, "_on_gameover_retry")
-	gameover.connect("leave", self, "_on_gameover_leave")
-	add_child(gameover)
-	gameover.start($infobar, seed_val)
+	$gameover.start($infobar, seed_val)
 
 func _on_gameover_retry():
 	var status = get_tree().reload_current_scene()
