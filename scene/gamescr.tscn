@@ -15,6 +15,7 @@ script = ExtResource( 4 )
 [node name="gamegrid" parent="." instance=ExtResource( 1 )]
 
 [node name="gameover" parent="." instance=ExtResource( 2 )]
+visible = false
 
 [connection signal="game_over" from="gamegrid" to="." method="_on_gamegrid_game_over"]
 [connection signal="score_change" from="gamegrid" to="infobar" method="_on_gamegrid_score_change"]
