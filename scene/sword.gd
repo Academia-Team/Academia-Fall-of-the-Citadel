@@ -19,6 +19,9 @@ func acquire():
 	$acquire_sfx.play()
 	return get_meta("type")
 
+func exists():
+	return visible
+
 
 func _on_acquire_sfx_finished():
 	queue_free()

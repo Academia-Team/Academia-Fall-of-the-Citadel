@@ -46,6 +46,9 @@ func destroy():
 	
 	if not $hurt_sfx.playing:
 		queue_free()
+		
+func exists():
+	return visible
 
 func move(pos):
 	if alive:

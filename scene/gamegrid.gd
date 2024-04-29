@@ -96,7 +96,7 @@ func valid_move_pos(pos):
 		valid_pos = true
 		
 		while valid_pos and idx < node_array_sz:
-			if node_array[idx] != player_ref:
+			if node_array[idx] != player_ref and node_array[idx].exists():
 				valid_pos = node_array[idx].position != pos
 			idx += 1
 	

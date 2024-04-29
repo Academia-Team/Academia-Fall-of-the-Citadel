@@ -21,6 +21,9 @@ const SPEED = 200
 func get_class():
 	return "player"
 	
+func exists():
+	return visible
+	
 func set_dir(dir):
 	$move_timer.set_paused(true)
 	future_dir = dir
