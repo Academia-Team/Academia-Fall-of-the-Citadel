@@ -26,5 +26,5 @@ func gen_seed():
 
 func _on_gamegrid_tree_exited():
 	var gameover = load("res://scene/gameover.tscn").instance()
-	call_deferred("add_child", gameover)
+	add_child(gameover)
 	gameover.start($infobar, seed_val)

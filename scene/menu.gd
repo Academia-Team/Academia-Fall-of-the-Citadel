@@ -52,4 +52,5 @@ func _on_option_enter_text_changed():
 		var game_instance = game_scene.instance()
 		game_instance.seed_val = seed_val
 		
+		self_modulate.a = 0
 		call_deferred("add_child", game_instance)
