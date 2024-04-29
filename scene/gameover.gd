@@ -1,10 +1,8 @@
 extends ColorRect
 
-var info_ref
-var score
+var info_ref = null
 
 func _init():
-	info_ref = null
 	yield(self, "ready")
 	$revive_button.grab_focus()
 
