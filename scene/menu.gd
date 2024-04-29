@@ -36,6 +36,8 @@ func _on_enter_button_gui_input(event):
 
 func _on_option_enter_focus_exited():
 	enter_seed = false
+	$Option/option_enter.text = ""
+	$Option/option_label.text = "Option:"
 	$Option.hide()
 
 
@@ -59,3 +61,8 @@ func _on_option_enter_text_changed():
 		$Option/option_enter.release_focus()
 		call_deferred("add_child", game_instance)
 		game_playing = true
+
+
+func _on_option_enter_gui_input(event):
+	if event.is_action("ui_cancel", true):
+		$enter_button.grab_focus()
