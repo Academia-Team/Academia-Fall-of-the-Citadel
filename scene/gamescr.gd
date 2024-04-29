@@ -30,7 +30,7 @@ func _on_gamegrid_tree_exited():
 	$gameover.start($infobar, seed_val)
 
 func _on_gameover_retry():
-	var status = get_tree().reload_current_scene()
+	var status = get_tree().change_scene_to(load("res://scene/gamescr.tscn"))
 	
 	if status != OK:
 		printerr("Failed to reload game.")
