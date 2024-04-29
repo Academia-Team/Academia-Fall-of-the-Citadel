@@ -3,6 +3,8 @@ extends Control
 var seed_val = null
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	
 	if seed_val == null:
 		seed_val = gen_seed()
 	
@@ -29,4 +31,5 @@ func _on_gameover_leave():
 
 func _on_gamegrid_game_over():
 	call_deferred("remove_child", $gamegrid)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$gameover.start($infobar, seed_val)
