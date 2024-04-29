@@ -37,7 +37,7 @@ func _on_option_enter_focus_exited():
 
 
 func _on_option_enter_text_changed():
-	if not $Option/option_enter.text.empty() and $Option/option_enter.text[-1] == '\n':
+	if $Option/option_enter.text.ends_with("\n"):
 		enter_seed = false
 		var seed_str = $Option/option_enter.text
 		seed_str = seed_str.strip_escapes()
