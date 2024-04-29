@@ -1,5 +1,7 @@
 extends Control
 
+const game_over_scene = preload("res://scene/gameover.tscn")
+
 var seed_val = null
 
 func _ready():
@@ -25,7 +27,7 @@ func gen_seed():
 
 
 func _on_gamegrid_tree_exited():
-	var gameover = load("res://scene/gameover.tscn").instance()
+	var gameover = game_over_scene.instance()
 	gameover.connect("retry", self, "_on_gameover_retry")
 	gameover.connect("leave", self, "_on_gameover_leave")
 	add_child(gameover)
