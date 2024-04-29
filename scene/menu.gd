@@ -17,3 +17,8 @@ func _on_enter_button_pressed():
 
 func _on_perish_button_pressed():
 	get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)
+
+
+func _on_enter_button_gui_input(event):
+	if event.is_action("button_options", true):
+		print("Extra options")
