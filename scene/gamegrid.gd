@@ -74,7 +74,7 @@ func get_spawn_pos():
 	
 	while not got_valid_pos:
 		var rand_cell_idx = randi() % num_cells
-		spawn_pos = to_global(map_to_world(available_cells[rand_cell_idx]))
+		spawn_pos = map_to_world(available_cells[rand_cell_idx])
 		
 		if valid_spawn_pos(spawn_pos):
 			got_valid_pos = true
