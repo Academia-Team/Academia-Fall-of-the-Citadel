@@ -19,10 +19,12 @@ func start(info_obj, seed_val):
 	$revive_button.grab_focus()
 
 func _set_score(score_val):
-	$score.text = "Score: %d" % score_val
+	if score_val != null:
+		$score.text = "Score: %d" % score_val
 
 func _set_seed(seed_val):
-	$seed.text = "Seed: %d" % seed_val
+	if seed_val != null:
+		$seed.text = "Seed: %d" % seed_val
 
 func _on_gameover_draw():
 	if info_ref != null:
