@@ -3,17 +3,20 @@ extends ColorRect
 const game_scene = preload("res://scene/gamescr.tscn")
 
 var enter_seed
+var game_playing
 
 func _ready():
 	$Option.hide()
 	$enter_button.grab_focus()
 	enter_seed = false
+	game_playing = false
 
 func _process(_delta):
-	if Input.is_action_just_pressed("quit"):
+	if Input.is_action_just_pressed("quit") and not game_playing:
 		$perish_button.emit_signal("pressed")
 
 func _on_enter_button_pressed():
+	game_playing = true
 	var status = get_tree().change_scene_to(game_scene)
 	
 	if status != OK:
@@ -55,3 +58,4 @@ func _on_option_enter_text_changed():
 		self_modulate.a = 0
 		$Option/option_enter.release_focus()
 		call_deferred("add_child", game_instance)
+		game_playing = true
