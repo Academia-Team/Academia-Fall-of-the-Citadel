@@ -17,21 +17,21 @@ const ZOMBIE_SPAWN_PROB = 0.5
 const MAX_ITEMS = 2
 
 signal score_change(score_diff)
+signal game_over()
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	randomize()
-	set_up_player()
+func start(info_ref, seed_val):
+	seed(seed_val)
+	set_up_player(info_ref)
 
-func set_up_player():
+func set_up_player(info_ref):
 	player_ref = player_scene.instance()
 	var screen_size = get_viewport_rect().size
 
 	player_ref.connect("health_change", self, "_on_player_health_change")
-	player_ref.connect("health_change", $"../infobar", "_on_player_health_change")
+	player_ref.connect("health_change", info_ref, "_on_player_health_change")
 	player_ref.connect("pick_up_item", self, "_on_player_pick_up_item")
-	player_ref.connect("pick_up_item", $"../infobar", "_on_player_pick_up_item")
-	player_ref.connect("used_item", $"../infobar", "_on_player_used_item")
+	player_ref.connect("pick_up_item", info_ref, "_on_player_pick_up_item")
+	player_ref.connect("used_item", info_ref, "_on_player_used_item")
 	
 	add_child(player_ref)
 	player_ref.spawn(position, position.y,
@@ -54,6 +54,10 @@ func _on_enemy_destroyed(enemy_type):
 func _on_player_health_change(lives):
 	if lives <= 0:
 		$music.stop()
+		$passive_timer.stop()
+		$zombie_spawn_timer.stop()
+		$item_spawn_timer.stop()
+		set_process(false)
 		$gameover_sfx.play()
 
 func _on_zombie_spawn_timer_timeout():
@@ -133,7 +137,4 @@ func _on_enemy_move_request(ref):
 
 
 func _on_gameover_sfx_finished():
-	var gameover = load("res://scene/gameover.tscn").instance()
-	get_parent().add_child(gameover)
-	gameover.set_info_src($"../infobar")
-	call_deferred("queue_free")
+	emit_signal("game_over")

@@ -29,6 +29,10 @@ func set_dir(dir):
 	future_dir = dir
 	$move_timer.set_paused(false)
 
+func kill():
+	lives = 1
+	hurt()
+
 func pos_in_bounds(pos):
 	return pos.x >= bounds.left && pos.x <= bounds.right && \
 		pos.y >= bounds.top && pos.y <= bounds.bottom
@@ -37,6 +41,9 @@ func handle_action():
 	handle_movement()
 	if Input.is_action_just_pressed("action"):
 		use_item()
+	if OS.is_debug_build():
+		if Input.is_action_just_pressed("suicide"):
+			kill()
 
 func handle_movement():
 	var desired_dir = null
@@ -154,7 +161,7 @@ func hurt():
 
 
 func _on_move_timer_timeout():
-	if future_dir != null:
+	if future_dir != null and lives > 0:
 		var future_pos = Direction.translate_pos(position, future_dir, 32)
 		future_dir = null
 		
