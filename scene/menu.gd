@@ -12,6 +12,8 @@ func _ready():
 func _process(_delta):
 	if Input.is_action_just_pressed("quit") and not game_playing:
 		$perish_button.emit_signal("pressed")
+	elif Input.is_action_just_pressed("ui_focus_next") and get_focus_owner() == null:
+		$enter_button.grab_focus()
 
 func _on_enter_button_pressed():
 	game_playing = true
@@ -61,3 +63,19 @@ func _on_option_enter_text_changed():
 func _on_option_enter_gui_input(event):
 	if event.is_action("ui_cancel", true):
 		$enter_button.grab_focus()
+
+
+func _on_enter_button_mouse_entered():
+	$enter_button.grab_focus()
+
+
+func _on_enter_button_mouse_exited():
+	$enter_button.release_focus()
+
+
+func _on_perish_button_mouse_entered():
+	$perish_button.grab_focus()
+
+
+func _on_perish_button_mouse_exited():
+	$perish_button.release_focus()

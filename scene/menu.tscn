@@ -33,6 +33,9 @@ focus_neighbour_bottom = NodePath("../perish_button")
 focus_next = NodePath("../perish_button")
 focus_previous = NodePath("../perish_button")
 theme = ExtResource( 2 )
+custom_colors/font_color_focus = Color( 0.921569, 0.0156863, 0.0156863, 1 )
+custom_colors/font_color_hover = Color( 0.921569, 0.0156863, 0.0156863, 1 )
+custom_colors/font_color_pressed = Color( 0.921569, 0.0156863, 0.0156863, 1 )
 text = "Enter"
 flat = true
 
@@ -48,6 +51,9 @@ focus_neighbour_bottom = NodePath("../enter_button")
 focus_next = NodePath("../enter_button")
 focus_previous = NodePath("../enter_button")
 theme = ExtResource( 2 )
+custom_colors/font_color_focus = Color( 0.921569, 0.0156863, 0.0156863, 1 )
+custom_colors/font_color_hover = Color( 0.921569, 0.0156863, 0.0156863, 1 )
+custom_colors/font_color_pressed = Color( 0.921569, 0.0156863, 0.0156863, 1 )
 text = "Perish"
 flat = true
 
@@ -75,7 +81,11 @@ custom_styles/focus = ExtResource( 5 )
 custom_styles/normal = ExtResource( 5 )
 
 [connection signal="gui_input" from="enter_button" to="." method="_on_enter_button_gui_input"]
+[connection signal="mouse_entered" from="enter_button" to="." method="_on_enter_button_mouse_entered"]
+[connection signal="mouse_exited" from="enter_button" to="." method="_on_enter_button_mouse_exited"]
 [connection signal="pressed" from="enter_button" to="." method="_on_enter_button_pressed"]
+[connection signal="mouse_entered" from="perish_button" to="." method="_on_perish_button_mouse_entered"]
+[connection signal="mouse_exited" from="perish_button" to="." method="_on_perish_button_mouse_exited"]
 [connection signal="pressed" from="perish_button" to="." method="_on_perish_button_pressed"]
 [connection signal="focus_exited" from="Option/option_enter" to="." method="_on_option_enter_focus_exited"]
 [connection signal="gui_input" from="Option/option_enter" to="." method="_on_option_enter_gui_input"]

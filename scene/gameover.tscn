@@ -51,6 +51,9 @@ focus_neighbour_bottom = NodePath("../give_up_button")
 focus_next = NodePath("../give_up_button")
 focus_previous = NodePath("../give_up_button")
 theme = ExtResource( 3 )
+custom_colors/font_color_focus = Color( 0.921569, 0.0156863, 0.0156863, 1 )
+custom_colors/font_color_hover = Color( 0.921569, 0.0156863, 0.0156863, 1 )
+custom_colors/font_color_pressed = Color( 0.921569, 0.0156863, 0.0156863, 1 )
 text = "Revive"
 flat = true
 
@@ -66,6 +69,9 @@ focus_neighbour_bottom = NodePath("../revive_button")
 focus_next = NodePath("../revive_button")
 focus_previous = NodePath("../revive_button")
 theme = ExtResource( 3 )
+custom_colors/font_color_focus = Color( 0.921569, 0.0156863, 0.0156863, 1 )
+custom_colors/font_color_hover = Color( 0.921569, 0.0156863, 0.0156863, 1 )
+custom_colors/font_color_pressed = Color( 0.921569, 0.0156863, 0.0156863, 1 )
 text = "Give Up"
 flat = true
 
