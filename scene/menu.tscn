@@ -94,17 +94,16 @@ margin_top = -40.0
 margin_right = 40.0
 
 [node name="option_label" type="Label" parent="Option"]
-margin_left = 85.0
 margin_top = 6.0
-margin_right = 133.0
+margin_right = 48.0
 margin_bottom = 25.0
 theme = ExtResource( 4 )
 text = "Option:"
 
 [node name="option_enter" type="TextEdit" parent="Option"]
-margin_left = 135.0
+margin_left = 56.0
 margin_top = 3.0
-margin_right = 672.0
+margin_right = 593.0
 margin_bottom = 43.0
 theme = ExtResource( 4 )
 custom_styles/focus = ExtResource( 5 )
