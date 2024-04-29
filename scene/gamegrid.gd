@@ -21,6 +21,9 @@ signal score_change(score_diff)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	start()
+
+func start():
 	if seed_val == null:
 		seed_val = hash(Time.get_datetime_dict_from_system())
 	
