@@ -1,12 +1,13 @@
 extends Control
 
-var seed_val
+var seed_val = null
 
 func _ready():
-	seed_val = gen_seed()
+	if seed_val == null:
+		seed_val = gen_seed()
 	
-	if OS.is_debug_build():
-		print("Seed: %d" % seed_val)
+		if OS.is_debug_build():
+			print("Seed: %d" % seed_val)
 
 	$gamegrid.start($infobar, seed_val)
 
