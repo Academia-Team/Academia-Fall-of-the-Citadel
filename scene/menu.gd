@@ -37,10 +37,10 @@ func _on_option_enter_focus_exited():
 
 
 func _on_option_enter_text_changed():
-	if len($Option/option_enter.text) > 0 and $Option/option_enter.text[-1] == '\n':
+	if not $Option/option_enter.text.empty() and $Option/option_enter.text[-1] == '\n':
 		enter_seed = false
 		var seed_str = $Option/option_enter.text
-		seed_str.rstrip("\r\n")
+		seed_str = seed_str.strip_escapes()
 		
 		var seed_val = 0
 		
@@ -48,7 +48,7 @@ func _on_option_enter_text_changed():
 			seed_val = seed_str.to_int()
 		else:
 			seed_val = hash(seed_str)
-			
+		
 		var game_instance = game_scene.instance()
 		game_instance.seed_val = seed_val
 		
