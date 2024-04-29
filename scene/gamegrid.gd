@@ -17,6 +17,7 @@ const ZOMBIE_SPAWN_PROB = 0.5
 const MAX_ITEMS = 2
 
 signal score_change(score_diff)
+signal game_over()
 
 func start(info_ref, seed_val):
 	seed(seed_val)
@@ -53,6 +54,10 @@ func _on_enemy_destroyed(enemy_type):
 func _on_player_health_change(lives):
 	if lives <= 0:
 		$music.stop()
+		$passive_timer.stop()
+		$zombie_spawn_timer.stop()
+		$item_spawn_timer.stop()
+		set_process(false)
 		$gameover_sfx.play()
 
 func _on_zombie_spawn_timer_timeout():
@@ -132,4 +137,4 @@ func _on_enemy_move_request(ref):
 
 
 func _on_gameover_sfx_finished():
-	call_deferred("queue_free")
+	emit_signal("game_over")

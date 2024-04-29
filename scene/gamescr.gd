@@ -25,10 +25,6 @@ func gen_seed():
 	
 	return gen_seed_val
 
-
-func _on_gamegrid_tree_exited():
-	$gameover.start($infobar, seed_val)
-
 func _on_gameover_retry():
 	var status = get_tree().change_scene_to(load("res://scene/gamescr.tscn"))
 	
@@ -40,3 +36,8 @@ func _on_gameover_leave():
 	
 	if status != OK:
 			printerr("Failed to switch to menu.")
+
+
+func _on_gamegrid_game_over():
+	call_deferred("remove_child", $gamegrid)
+	$gameover.start($infobar, seed_val)
