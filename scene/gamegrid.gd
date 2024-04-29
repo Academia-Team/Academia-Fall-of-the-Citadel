@@ -143,5 +143,5 @@ func _on_gameover_sfx_finished():
 	var gameover = load("res://scene/gameover.tscn").instance()
 	get_parent().add_child(gameover)
 	gameover.set_info_src($"../infobar")
-	gameover.set_seed_val(seed_val)
+	gameover.set_seed(seed_val)
 	call_deferred("queue_free")
