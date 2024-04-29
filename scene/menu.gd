@@ -53,4 +53,5 @@ func _on_option_enter_text_changed():
 		game_instance.seed_val = seed_val
 		
 		self_modulate.a = 0
+		$Option/option_enter.release_focus()
 		call_deferred("add_child", game_instance)
