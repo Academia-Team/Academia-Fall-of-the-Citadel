@@ -1,6 +1,7 @@
 extends Control
 
 const game_over_scene = preload("res://scene/gameover.tscn")
+var menu_scene = load("res://scene/menu.tscn")
 
 var seed_val = null
 
@@ -15,7 +16,7 @@ func _ready():
 
 func _process(_delta):
 	if Input.is_action_just_pressed("quit"):
-		var status = get_tree().change_scene_to(load("res://scene/menu.tscn"))
+		var status = get_tree().change_scene_to(menu_scene)
 		
 		if status != OK:
 			printerr("Failed to switch to menu.")
@@ -40,7 +41,7 @@ func _on_gameover_retry():
 		printerr("Failed to reload game.")
 
 func _on_gameover_leave():
-	var status = get_tree().change_scene_to(load("res://scene/menu.tscn"))
+	var status = get_tree().change_scene_to(menu_scene)
 	
 	if status != OK:
 			printerr("Failed to switch to menu.")
