@@ -11,13 +11,9 @@ func _ready():
 	hide_all_pages()
 	handle_page_request()
 
-func _unhandled_input(event):
-	if event is InputEventKey or \
-		event is InputEventGesture or \
-		event is InputEventJoypadButton or \
-		event is InputEventJoypadMotion or \
-		event is InputEventMouseButton:
-			handle_page_request()
+func _process(_delta):
+	if Input.is_action_just_pressed("ui_advance"):
+		handle_page_request()
 
 func get_next_page():
 	var next_page = null
