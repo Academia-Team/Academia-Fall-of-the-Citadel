@@ -49,3 +49,11 @@ func hide_all_pages():
 	for child in children:
 		if child.name.begins_with("Pg"):
 			child.hide()
+
+func reset():
+	curr_page = null
+	page_counter = 0
+
+func _on_Instructions_visibility_changed():
+	reset()
+	_ready()

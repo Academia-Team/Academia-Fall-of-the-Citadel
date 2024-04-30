@@ -79,3 +79,20 @@ func _on_perish_button_mouse_entered():
 
 func _on_perish_button_mouse_exited():
 	$perish_button.release_focus()
+
+func _on_help_me_button_mouse_entered():
+	$help_me_button.grab_focus()
+
+
+func _on_help_me_button_mouse_exited():
+	$help_me_button.release_focus()
+
+
+func _on_help_me_button_pressed():
+	$help_me_button.release_focus()
+	$Instructions.show()
+
+
+func _on_Instructions_finished():
+	$Instructions.hide()
+	$enter_button.grab_focus()
