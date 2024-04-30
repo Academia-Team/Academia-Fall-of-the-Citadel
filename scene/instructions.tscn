@@ -1,17 +1,22 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://resource/emphasized_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scene/instructions.gd" type="Script" id=2]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_arrow_up.svg" type="Texture" id=3]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_k.svg" type="Texture" id=4]
 [ext_resource path="res://asset/kenney_input-prompts/Generic/generic_stick_up.svg" type="Texture" id=5]
+[ext_resource path="res://resource/tech_theme.tres" type="Theme" id=6]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_j.svg" type="Texture" id=7]
 [ext_resource path="res://asset/kenney_input-prompts/Generic/generic_stick_down.svg" type="Texture" id=8]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_arrow_left.svg" type="Texture" id=9]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_h.svg" type="Texture" id=10]
 [ext_resource path="res://asset/kenney_input-prompts/Generic/generic_stick_left.svg" type="Texture" id=11]
+[ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_y.svg" type="Texture" id=12]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_l.svg" type="Texture" id=13]
 [ext_resource path="res://asset/kenney_input-prompts/Generic/generic_stick_right.svg" type="Texture" id=14]
+[ext_resource path="res://asset/kenney_input-prompts/Generic/generic_joystick_left.svg" type="Texture" id=15]
+[ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_u.svg" type="Texture" id=16]
+[ext_resource path="res://asset/kenney_input-prompts/Generic/generic_joystick_right.svg" type="Texture" id=17]
 
 [node name="Instructions" type="ColorRect"]
 anchor_right = 1.0
@@ -50,6 +55,7 @@ Now that the city has fallen, the corrupted army marches towards you and the cit
 autowrap = true
 
 [node name="Pg2" type="Control" parent="." groups=["Page"]]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -195,3 +201,157 @@ margin_left = 256.0
 margin_right = 320.0
 margin_bottom = 64.0
 texture = ExtResource( 14 )
+
+[node name="Pg3" type="Control" parent="." groups=["Page"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Title" type="Label" parent="Pg3"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_top = 26.0
+margin_right = 75.0
+margin_bottom = 71.0
+theme = ExtResource( 1 )
+text = "Controls"
+align = 1
+
+[node name="Table" type="GridContainer" parent="Pg3"]
+margin_top = 82.0
+margin_right = 800.0
+margin_bottom = 447.0
+custom_constants/hseparation = 200
+columns = 2
+
+[node name="MoveTopLeft" type="Label" parent="Pg3/Table"]
+margin_top = 22.0
+margin_right = 143.0
+margin_bottom = 41.0
+text = "Move Top-Left"
+
+[node name="MoveTopLeftControls" type="GridContainer" parent="Pg3/Table"]
+margin_left = 343.0
+margin_right = 744.0
+margin_bottom = 64.0
+custom_constants/hseparation = 64
+columns = 3
+
+[node name="TopLeftArrows" type="GridContainer" parent="Pg3/Table/MoveTopLeftControls"]
+margin_right = 145.0
+margin_bottom = 64.0
+columns = 3
+
+[node name="UpArrow" type="TextureRect" parent="Pg3/Table/MoveTopLeftControls/TopLeftArrows"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 3 )
+
+[node name="Plus" type="Label" parent="Pg3/Table/MoveTopLeftControls/TopLeftArrows"]
+margin_left = 68.0
+margin_top = 22.0
+margin_right = 77.0
+margin_bottom = 41.0
+theme = ExtResource( 6 )
+text = "+"
+
+[node name="LeftArrow" type="TextureRect" parent="Pg3/Table/MoveTopLeftControls/TopLeftArrows"]
+margin_left = 81.0
+margin_right = 145.0
+margin_bottom = 64.0
+texture = ExtResource( 9 )
+
+[node name="YButton" type="TextureRect" parent="Pg3/Table/MoveTopLeftControls"]
+margin_left = 209.0
+margin_right = 273.0
+margin_bottom = 64.0
+texture = ExtResource( 12 )
+
+[node name="TopLeftJoy" type="TextureRect" parent="Pg3/Table/MoveTopLeftControls"]
+margin_left = 337.0
+margin_right = 401.0
+margin_bottom = 64.0
+texture = ExtResource( 15 )
+
+[node name="MoveTopRight" type="Label" parent="Pg3/Table"]
+margin_top = 90.0
+margin_right = 143.0
+margin_bottom = 109.0
+text = "Move Top-Right"
+
+[node name="MoveTopRightControls" type="GridContainer" parent="Pg3/Table"]
+margin_left = 343.0
+margin_top = 68.0
+margin_right = 744.0
+margin_bottom = 132.0
+custom_constants/hseparation = 64
+columns = 3
+
+[node name="TopRightArrows" type="GridContainer" parent="Pg3/Table/MoveTopRightControls"]
+margin_right = 145.0
+margin_bottom = 64.0
+columns = 3
+
+[node name="UpArrow" type="TextureRect" parent="Pg3/Table/MoveTopRightControls/TopRightArrows"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 3 )
+
+[node name="Plus" type="Label" parent="Pg3/Table/MoveTopRightControls/TopRightArrows"]
+margin_left = 68.0
+margin_top = 22.0
+margin_right = 77.0
+margin_bottom = 41.0
+theme = ExtResource( 6 )
+text = "+"
+
+[node name="RightArrow" type="TextureRect" parent="Pg3/Table/MoveTopRightControls/TopRightArrows"]
+margin_left = 81.0
+margin_right = 145.0
+margin_bottom = 64.0
+texture = ExtResource( 9 )
+flip_h = true
+
+[node name="UButton" type="TextureRect" parent="Pg3/Table/MoveTopRightControls"]
+margin_left = 209.0
+margin_right = 273.0
+margin_bottom = 64.0
+texture = ExtResource( 16 )
+
+[node name="TopLeftJoy" type="TextureRect" parent="Pg3/Table/MoveTopRightControls"]
+margin_left = 337.0
+margin_right = 401.0
+margin_bottom = 64.0
+texture = ExtResource( 17 )
+
+[node name="MoveDown" type="Label" parent="Pg3/Table"]
+margin_top = 158.0
+margin_right = 143.0
+margin_bottom = 177.0
+text = "Move Down"
+
+[node name="MoveDownControls" type="GridContainer" parent="Pg3/Table"]
+margin_left = 343.0
+margin_top = 136.0
+margin_right = 744.0
+margin_bottom = 200.0
+custom_constants/hseparation = 64
+columns = 3
+
+[node name="DownArrow" type="TextureRect" parent="Pg3/Table/MoveDownControls"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 3 )
+flip_v = true
+
+[node name="JButton" type="TextureRect" parent="Pg3/Table/MoveDownControls"]
+margin_left = 128.0
+margin_right = 192.0
+margin_bottom = 64.0
+texture = ExtResource( 7 )
+
+[node name="DownJoy" type="TextureRect" parent="Pg3/Table/MoveDownControls"]
+margin_left = 256.0
+margin_right = 320.0
+margin_bottom = 64.0
+texture = ExtResource( 8 )
