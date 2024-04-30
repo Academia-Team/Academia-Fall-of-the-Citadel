@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://resource/emphasized_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scene/instructions.gd" type="Script" id=2]
@@ -19,6 +19,10 @@
 [ext_resource path="res://asset/kenney_input-prompts/Generic/generic_joystick_right.svg" type="Texture" id=17]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_b.svg" type="Texture" id=18]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_n.svg" type="Texture" id=19]
+[ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_space.svg" type="Texture" id=20]
+[ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_ctrl.svg" type="Texture" id=21]
+[ext_resource path="res://asset/kenney_input-prompts/Generic/generic_button_circle_outline.svg" type="Texture" id=22]
+[ext_resource path="res://asset/kenney_input-prompts/Generic/generic_button_circle_fill.svg" type="Texture" id=23]
 
 [node name="Instructions" type="ColorRect"]
 anchor_right = 1.0
@@ -205,6 +209,7 @@ margin_bottom = 64.0
 texture = ExtResource( 14 )
 
 [node name="Pg3" type="Control" parent="." groups=["Page"]]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -428,3 +433,148 @@ margin_left = 337.0
 margin_right = 401.0
 margin_bottom = 64.0
 texture = ExtResource( 17 )
+
+[node name="Pg4" type="Control" parent="." groups=["Page"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Title" type="Label" parent="Pg4"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_top = 26.0
+margin_right = 75.0
+margin_bottom = 71.0
+theme = ExtResource( 1 )
+text = "Controls"
+align = 1
+
+[node name="Table" type="GridContainer" parent="Pg4"]
+margin_top = 82.0
+margin_right = 800.0
+margin_bottom = 447.0
+custom_constants/hseparation = 200
+columns = 2
+
+[node name="UseItem" type="Label" parent="Pg4/Table"]
+margin_top = 56.0
+margin_right = 79.0
+margin_bottom = 75.0
+text = "Use Item"
+
+[node name="UseItemControls" type="GridContainer" parent="Pg4/Table"]
+margin_left = 279.0
+margin_right = 607.0
+margin_bottom = 132.0
+custom_constants/hseparation = 64
+columns = 2
+
+[node name="SpaceButton" type="TextureRect" parent="Pg4/Table/UseItemControls"]
+margin_right = 64.0
+margin_bottom = 132.0
+texture = ExtResource( 20 )
+
+[node name="ArcadeButtons" type="GridContainer" parent="Pg4/Table/UseItemControls"]
+margin_left = 128.0
+margin_right = 328.0
+margin_bottom = 132.0
+columns = 3
+
+[node name="PressedButton" type="TextureRect" parent="Pg4/Table/UseItemControls/ArcadeButtons"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 23 )
+
+[node name="Button" type="TextureRect" parent="Pg4/Table/UseItemControls/ArcadeButtons"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+texture = ExtResource( 22 )
+
+[node name="Button2" type="TextureRect" parent="Pg4/Table/UseItemControls/ArcadeButtons"]
+margin_left = 136.0
+margin_right = 200.0
+margin_bottom = 64.0
+texture = ExtResource( 22 )
+
+[node name="Button3" type="TextureRect" parent="Pg4/Table/UseItemControls/ArcadeButtons"]
+margin_top = 68.0
+margin_right = 64.0
+margin_bottom = 132.0
+texture = ExtResource( 22 )
+
+[node name="Button4" type="TextureRect" parent="Pg4/Table/UseItemControls/ArcadeButtons"]
+margin_left = 68.0
+margin_top = 68.0
+margin_right = 132.0
+margin_bottom = 132.0
+texture = ExtResource( 22 )
+
+[node name="Button5" type="TextureRect" parent="Pg4/Table/UseItemControls/ArcadeButtons"]
+margin_left = 136.0
+margin_top = 68.0
+margin_right = 200.0
+margin_bottom = 132.0
+texture = ExtResource( 22 )
+
+[node name="Stay" type="Label" parent="Pg4/Table"]
+margin_top = 192.0
+margin_right = 79.0
+margin_bottom = 211.0
+text = "Stay"
+
+[node name="StayControls" type="GridContainer" parent="Pg4/Table"]
+margin_left = 279.0
+margin_top = 136.0
+margin_right = 607.0
+margin_bottom = 268.0
+custom_constants/hseparation = 64
+columns = 2
+
+[node name="CtrlButton" type="TextureRect" parent="Pg4/Table/StayControls"]
+margin_right = 64.0
+margin_bottom = 132.0
+texture = ExtResource( 21 )
+
+[node name="ArcadeButtons" type="GridContainer" parent="Pg4/Table/StayControls"]
+margin_left = 128.0
+margin_right = 328.0
+margin_bottom = 132.0
+columns = 3
+
+[node name="Button" type="TextureRect" parent="Pg4/Table/StayControls/ArcadeButtons"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 22 )
+
+[node name="PressedButton" type="TextureRect" parent="Pg4/Table/StayControls/ArcadeButtons"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+texture = ExtResource( 23 )
+
+[node name="Button2" type="TextureRect" parent="Pg4/Table/StayControls/ArcadeButtons"]
+margin_left = 136.0
+margin_right = 200.0
+margin_bottom = 64.0
+texture = ExtResource( 22 )
+
+[node name="Button3" type="TextureRect" parent="Pg4/Table/StayControls/ArcadeButtons"]
+margin_top = 68.0
+margin_right = 64.0
+margin_bottom = 132.0
+texture = ExtResource( 22 )
+
+[node name="Button4" type="TextureRect" parent="Pg4/Table/StayControls/ArcadeButtons"]
+margin_left = 68.0
+margin_top = 68.0
+margin_right = 132.0
+margin_bottom = 132.0
+texture = ExtResource( 22 )
+
+[node name="Button5" type="TextureRect" parent="Pg4/Table/StayControls/ArcadeButtons"]
+margin_left = 136.0
+margin_top = 68.0
+margin_right = 200.0
+margin_bottom = 132.0
+texture = ExtResource( 22 )
