@@ -54,7 +54,3 @@ func hide_all_pages():
 func reset():
 	curr_page = null
 	page_counter = 0
-
-func _on_Instructions_visibility_changed():
-	reset()
-	_ready()
