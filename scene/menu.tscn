@@ -136,7 +136,7 @@ text = "Option:"
 [node name="option_enter" type="TextEdit" parent="Option"]
 margin_left = 56.0
 margin_top = 3.0
-margin_right = 593.0
+margin_right = 800.0
 margin_bottom = 43.0
 theme = ExtResource( 4 )
 custom_styles/focus = ExtResource( 5 )
