@@ -1,17 +1,15 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://resource/emphasized_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scene/instructions.gd" type="Script" id=2]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_arrow_up.svg" type="Texture" id=3]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_k.svg" type="Texture" id=4]
 [ext_resource path="res://asset/kenney_input-prompts/Generic/generic_stick_up.svg" type="Texture" id=5]
-[ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_arrow_down.svg" type="Texture" id=6]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_j.svg" type="Texture" id=7]
 [ext_resource path="res://asset/kenney_input-prompts/Generic/generic_stick_down.svg" type="Texture" id=8]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_arrow_left.svg" type="Texture" id=9]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_h.svg" type="Texture" id=10]
 [ext_resource path="res://asset/kenney_input-prompts/Generic/generic_stick_left.svg" type="Texture" id=11]
-[ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_arrow_right.svg" type="Texture" id=12]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_l.svg" type="Texture" id=13]
 [ext_resource path="res://asset/kenney_input-prompts/Generic/generic_stick_right.svg" type="Texture" id=14]
 
@@ -120,7 +118,8 @@ columns = 3
 [node name="DownArrow" type="TextureRect" parent="Pg2/Table/MoveDownControls"]
 margin_right = 64.0
 margin_bottom = 64.0
-texture = ExtResource( 6 )
+texture = ExtResource( 3 )
+flip_v = true
 
 [node name="JButton" type="TextureRect" parent="Pg2/Table/MoveDownControls"]
 margin_left = 128.0
@@ -182,7 +181,8 @@ columns = 3
 [node name="RightArrow" type="TextureRect" parent="Pg2/Table/MoveRightControls"]
 margin_right = 64.0
 margin_bottom = 64.0
-texture = ExtResource( 12 )
+texture = ExtResource( 9 )
+flip_h = true
 
 [node name="LButton" type="TextureRect" parent="Pg2/Table/MoveRightControls"]
 margin_left = 128.0
