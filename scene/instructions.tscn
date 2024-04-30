@@ -1,13 +1,16 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://resource/emphasized_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scene/instructions.gd" type="Script" id=2]
 
 [node name="Instructions" type="ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
+script = ExtResource( 2 )
 
-[node name="Pg1" type="Control" parent="."]
+[node name="Pg1" type="Control" parent="." groups=["Page"]]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -34,3 +37,7 @@ Now that the city has fallen, the corrupted army marches towards you and the cit
 
 \"I will defend what I have sworn to defend\", you swear, as you watch the walls surrounding you slowly crack. The nightmare has arrived."
 autowrap = true
+
+[node name="Pg2" type="Control" parent="." groups=["Page"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
