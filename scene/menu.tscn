@@ -1,11 +1,10 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://resource/title_theme.tres" type="Theme" id=1]
 [ext_resource path="res://resource/button_theme.tres" type="Theme" id=2]
 [ext_resource path="res://scene/menu.gd" type="Script" id=3]
 [ext_resource path="res://resource/tech_theme.tres" type="Theme" id=4]
 [ext_resource path="res://resource/black_style_box.tres" type="StyleBox" id=5]
-[ext_resource path="res://scene/instructions.tscn" type="PackedScene" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -143,9 +142,6 @@ theme = ExtResource( 4 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/normal = ExtResource( 5 )
 
-[node name="Instructions" parent="." instance=ExtResource( 6 )]
-visible = false
-
 [connection signal="gui_input" from="enter_button" to="." method="_on_enter_button_gui_input"]
 [connection signal="mouse_entered" from="enter_button" to="." method="_on_enter_button_mouse_entered"]
 [connection signal="mouse_exited" from="enter_button" to="." method="_on_enter_button_mouse_exited"]
@@ -159,4 +155,3 @@ visible = false
 [connection signal="focus_exited" from="Option/option_enter" to="." method="_on_option_enter_focus_exited"]
 [connection signal="gui_input" from="Option/option_enter" to="." method="_on_option_enter_gui_input"]
 [connection signal="text_changed" from="Option/option_enter" to="." method="_on_option_enter_text_changed"]
-[connection signal="finished" from="Instructions" to="." method="_on_Instructions_finished"]

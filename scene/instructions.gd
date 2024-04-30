@@ -42,6 +42,7 @@ func handle_page_request():
 		emit_signal("switched_to_page", page_counter)
 	else:
 		emit_signal("finished")
+		SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.MENU)
 
 func hide_all_pages():
 	var children = get_children()
