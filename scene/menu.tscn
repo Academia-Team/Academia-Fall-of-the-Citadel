@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://resource/title_theme.tres" type="Theme" id=1]
 [ext_resource path="res://resource/button_theme.tres" type="Theme" id=2]
@@ -26,6 +26,16 @@
 
 [sub_resource type="StyleBoxEmpty" id=10]
 
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="StyleBoxEmpty" id=12]
+
+[sub_resource type="StyleBoxEmpty" id=13]
+
+[sub_resource type="StyleBoxEmpty" id=14]
+
+[sub_resource type="StyleBoxEmpty" id=15]
+
 [node name="menu" type="ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -42,9 +52,9 @@ text = "Academia: Fall of the Citadel"
 align = 1
 
 [node name="enter_button" type="Button" parent="."]
-margin_left = 298.0
+margin_left = 300.0
 margin_top = 114.0
-margin_right = 403.0
+margin_right = 405.0
 margin_bottom = 156.0
 focus_neighbour_left = NodePath("../perish_button")
 focus_neighbour_top = NodePath("../perish_button")
@@ -71,9 +81,9 @@ margin_right = 417.0
 margin_bottom = 232.0
 focus_neighbour_left = NodePath("../enter_button")
 focus_neighbour_top = NodePath("../enter_button")
-focus_neighbour_right = NodePath("../enter_button")
-focus_neighbour_bottom = NodePath("../enter_button")
-focus_next = NodePath("../enter_button")
+focus_neighbour_right = NodePath("../help_me_button")
+focus_neighbour_bottom = NodePath("../help_me_button")
+focus_next = NodePath("../help_me_button")
 focus_previous = NodePath("../enter_button")
 theme = ExtResource( 2 )
 custom_colors/font_color_focus = Color( 0.921569, 0.0156863, 0.0156863, 1 )
@@ -85,6 +95,29 @@ custom_styles/focus = SubResource( 8 )
 custom_styles/disabled = SubResource( 9 )
 custom_styles/normal = SubResource( 10 )
 text = "Perish"
+flat = true
+
+[node name="help_me_button" type="Button" parent="."]
+margin_left = 300.0
+margin_top = 266.0
+margin_right = 382.0
+margin_bottom = 291.0
+focus_neighbour_left = NodePath("../perish_button")
+focus_neighbour_top = NodePath("../perish_button")
+focus_neighbour_right = NodePath("../enter_button")
+focus_neighbour_bottom = NodePath("../enter_button")
+focus_next = NodePath("../enter_button")
+focus_previous = NodePath("../perish_button")
+theme = ExtResource( 2 )
+custom_colors/font_color_focus = Color( 0.921569, 0.0156863, 0.0156863, 1 )
+custom_colors/font_color_hover = Color( 0.921569, 0.0156863, 0.0156863, 1 )
+custom_colors/font_color_pressed = Color( 0.921569, 0.0156863, 0.0156863, 1 )
+custom_styles/hover = SubResource( 11 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/focus = SubResource( 13 )
+custom_styles/disabled = SubResource( 14 )
+custom_styles/normal = SubResource( 15 )
+text = "Help Me"
 flat = true
 
 [node name="Option" type="Control" parent="."]
