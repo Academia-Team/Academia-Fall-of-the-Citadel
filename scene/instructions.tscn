@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://resource/emphasized_theme.tres" type="Theme" id=1]
+
+[node name="Instructions" type="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Pg1" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Title" type="Label" parent="Pg1"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_top = 26.0
+margin_right = 75.0
+margin_bottom = 71.0
+theme = ExtResource( 1 )
+text = "Story"
+align = 1
+
+[node name="Body" type="Label" parent="Pg1"]
+margin_top = 82.0
+margin_right = 800.0
+margin_bottom = 447.0
+text = "\"This can't be happening\", you cry to yourself, as your tears uselessly hit the ground with a dying clunk.
+
+A few days ago, your friends and colleagues were alive, united by a common dream--to push back the darkness sweeping across the land. Now that dream is dead along with them. You would have joined them if not for shattering your knees during the initial defence of the city of Caditan.
+
+Now that the city has fallen, the corrupted army marches towards you and the citadel in which you live. All other fortresses in the North have been destroyed. As well, communication with the South has been lost. You are the only one who remains.
+
+\"I will defend what I have sworn to defend\", you swear, as you watch the walls surrounding you slowly crack. The nightmare has arrived."
+autowrap = true
