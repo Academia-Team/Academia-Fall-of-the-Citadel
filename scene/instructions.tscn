@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://resource/emphasized_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scene/instructions.gd" type="Script" id=2]
@@ -26,6 +26,8 @@
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_slash_back.svg" type="Texture" id=24]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_delete.svg" type="Texture" id=25]
 [ext_resource path="res://asset/Anonymous-Time-icon.svg" type="Texture" id=26]
+[ext_resource path="res://asset/sword.png" type="Texture" id=27]
+[ext_resource path="res://asset/Zombie_SOUTH.png" type="Texture" id=28]
 
 [node name="Instructions" type="ColorRect"]
 anchor_right = 1.0
@@ -801,9 +803,9 @@ margin_right = 800.0
 margin_bottom = 447.0
 custom_constants/vseparation = 32
 custom_constants/hseparation = 32
-columns = 3
+columns = 2
 
-[node name="TimeImage" type="TextureRect" parent="Pg8/Table"]
+[node name="Time" type="TextureRect" parent="Pg8/Table"]
 margin_right = 93.0
 margin_bottom = 93.0
 rect_min_size = Vector2( 32, 32 )
@@ -814,6 +816,54 @@ texture = ExtResource( 26 )
 [node name="PassiveBonus" type="Label" parent="Pg8/Table"]
 margin_left = 125.0
 margin_top = 37.0
-margin_right = 421.0
+margin_right = 437.0
 margin_bottom = 56.0
 text = "1 pt for every minute survived."
+
+[node name="SwordBox" type="ColorRect" parent="Pg8/Table"]
+margin_top = 125.0
+margin_right = 93.0
+margin_bottom = 157.0
+rect_min_size = Vector2( 32, 32 )
+
+[node name="Sword" type="TextureRect" parent="Pg8/Table/SwordBox"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+texture = ExtResource( 27 )
+
+[node name="SwordBonus" type="Label" parent="Pg8/Table"]
+margin_left = 125.0
+margin_top = 131.0
+margin_right = 437.0
+margin_bottom = 150.0
+text = "5 pt for every sword collected."
+
+[node name="ZombieBox" type="ColorRect" parent="Pg8/Table"]
+margin_top = 189.0
+margin_right = 93.0
+margin_bottom = 221.0
+rect_min_size = Vector2( 32, 32 )
+
+[node name="Zombie" type="TextureRect" parent="Pg8/Table/ZombieBox"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+texture = ExtResource( 28 )
+
+[node name="ZombieBonus" type="Label" parent="Pg8/Table"]
+margin_left = 125.0
+margin_top = 195.0
+margin_right = 437.0
+margin_bottom = 214.0
+text = "10 pt for every zombie killed."
