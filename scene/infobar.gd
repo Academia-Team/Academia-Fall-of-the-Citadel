@@ -1,10 +1,8 @@
 extends ColorRect
 
 var orig_item_text = ""
-var _score
-
-func _ready():
-	_score = 0
+var _score = 0
+var _seed = null
 
 func incr_score(score_delta):
 	_score += score_delta
@@ -26,6 +24,12 @@ func get_score():
 
 func get_score_text():
 	return $score_counter.text
+
+func set_seed(seed_val):
+	_seed = seed_val
+
+func get_seed():
+	return _seed
 
 func _on_player_pick_up_item(item_name):
 	orig_item_text = $item_info.text
