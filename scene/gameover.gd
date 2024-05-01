@@ -14,13 +14,13 @@ func _process(_delta):
 	elif Input.is_action_just_pressed("ui_focus_next") and get_focus_owner() == null:
 		$enter_button.grab_focus()
 
-func start(info_obj, seed_val):
+func start(info_obj):
 	info_ref = info_obj
-	_set_seed(seed_val)
+	_set_seed_text(info_obj.get_seed())
 	show()
 	$revive_button.grab_focus()
 
-func _set_seed(seed_val):
+func _set_seed_text(seed_val):
 	if seed_val != null:
 		$seed.text = "Seed: %d" % seed_val
 

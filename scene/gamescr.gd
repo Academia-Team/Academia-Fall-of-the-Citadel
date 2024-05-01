@@ -11,6 +11,7 @@ func _ready():
 		if OS.is_debug_build():
 			print("Seed: %d" % seed_val)
 
+	$infobar.set_seed(seed_val)
 	$gamegrid.start($infobar, seed_val)
 
 func _process(_delta):
@@ -32,4 +33,4 @@ func _on_gameover_leave():
 func _on_gamegrid_game_over():
 	call_deferred("remove_child", $gamegrid)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	$gameover.start($infobar, seed_val)
+	$gameover.start($infobar)
