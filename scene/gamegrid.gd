@@ -22,14 +22,13 @@ signal game_over()
 func start(info_obj, seed_val):
 	info_ref = info_obj
 	seed(seed_val)
-	set_up_player(info_obj)
+	set_up_player()
 
-func set_up_player(info_obj):
+func set_up_player():
 	player_ref = player_scene.instance()
 	var screen_size = get_viewport_rect().size
 
 	player_ref.connect("health_change", self, "_on_player_health_change")
-	player_ref.connect("health_change", info_obj, "_on_player_health_change")
 	player_ref.connect("pick_up_item", self, "_on_player_pick_up_item")
 	player_ref.connect("used_item", self, "_on_player_used_item")
 	
@@ -56,6 +55,8 @@ func _on_enemy_destroyed(enemy_type):
 			info_ref.incr_score(ZOMBIE_SCORE)
 
 func _on_player_health_change(lives):
+	info_ref.set_lives(lives)
+	
 	if lives <= 0:
 		$music.stop()
 		$passive_timer.stop()
