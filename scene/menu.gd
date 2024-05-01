@@ -2,14 +2,12 @@ extends ColorRect
 
 const MAX_INT_LEN = 19
 
-var enter_seed
-var game_playing
+var game_playing = false
+var seed_val = null
 
 func _ready():
 	$Option.hide()
 	$enter_button.grab_focus()
-	enter_seed = false
-	game_playing = false
 
 func _process(_delta):
 	if Input.is_action_just_pressed("quit") and not game_playing:
@@ -18,44 +16,39 @@ func _process(_delta):
 		$enter_button.grab_focus()
 
 func _on_enter_button_pressed():
+	var game_instance = SceneSwitcher.get_scene(SceneSwitcher.GAME).instance()
+	game_instance.seed_val = seed_val
+	self_modulate.a = 0
+	
+	call_deferred("add_child", game_instance)
 	game_playing = true
-	SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.GAME)
 
 func _on_perish_button_pressed():
 	get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)
 
 
 func _on_enter_button_gui_input(event):
-	if event.is_action("button_options", true) and not enter_seed:
-		enter_seed = true
+	if event.is_action("button_options", true):
 		$Option.show()
 		$Option/option_label.text = "Seed:"
 		$Option/option_line.grab_focus()
 
 
 func _on_option_line_focus_exited():
-	enter_seed = false
 	$Option/option_line.text = ""
 	$Option/option_label.text = "Option:"
 	$Option.hide()
+	$enter_button.grab_focus()
 
 func _on_option_line_text_entered(new_text):
-	enter_seed = false
-	
-	var seed_val = 0
+	seed_val = 0
 	
 	if new_text.is_valid_integer() and new_text.length() <= MAX_INT_LEN + int(new_text[0] == '-'):
 		seed_val = new_text.to_int()
 	else:
 		seed_val = hash(new_text)
 	
-	var game_instance = SceneSwitcher.get_scene(SceneSwitcher.GAME).instance()
-	game_instance.seed_val = seed_val
-	
-	self_modulate.a = 0
 	$Option/option_line.release_focus()
-	call_deferred("add_child", game_instance)
-	game_playing = true
 
 
 func _on_option_line_gui_input(event):
