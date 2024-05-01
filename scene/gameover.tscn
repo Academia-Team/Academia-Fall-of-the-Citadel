@@ -26,14 +26,14 @@
 
 [sub_resource type="StyleBoxEmpty" id=10]
 
-[node name="gameover" type="ColorRect"]
+[node name="GameOver" type="ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
 script = ExtResource( 4 )
 
-[node name="header" type="Label" parent="."]
+[node name="Header" type="Label" parent="."]
 anchor_right = 1.0
 margin_top = 26.0
 margin_bottom = 91.0
@@ -42,7 +42,7 @@ theme = ExtResource( 1 )
 text = "Game Over"
 align = 1
 
-[node name="score" type="Label" parent="."]
+[node name="Score" type="Label" parent="."]
 margin_left = 365.0
 margin_top = 101.0
 margin_right = 477.0
@@ -51,7 +51,7 @@ grow_horizontal = 2
 theme = ExtResource( 2 )
 text = "Score: ?"
 
-[node name="seed" type="Label" parent="."]
+[node name="Seed" type="Label" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -19.0
@@ -59,17 +59,21 @@ margin_right = 45.0
 theme = ExtResource( 5 )
 text = "Seed: ?"
 
-[node name="revive_button" type="Button" parent="."]
+[node name="Buttons" type="MarginContainer" parent="."]
+margin_top = 139.0
+margin_right = 799.0
+margin_bottom = 431.0
+
+[node name="Arise" type="Button" parent="Buttons"]
 margin_left = 36.0
-margin_top = 211.0
-margin_right = 103.0
-margin_bottom = 236.0
-focus_neighbour_left = NodePath("../give_up_button")
-focus_neighbour_top = NodePath("../give_up_button")
-focus_neighbour_right = NodePath("../give_up_button")
-focus_neighbour_bottom = NodePath("../give_up_button")
-focus_next = NodePath("../give_up_button")
-focus_previous = NodePath("../give_up_button")
+margin_right = 799.0
+margin_bottom = 292.0
+focus_neighbour_left = NodePath("../GiveUp")
+focus_neighbour_top = NodePath("../GiveUp")
+focus_neighbour_right = NodePath("../GiveUp")
+focus_neighbour_bottom = NodePath("../GiveUp")
+focus_next = NodePath("../GiveUp")
+focus_previous = NodePath("../GiveUp")
 theme = ExtResource( 3 )
 custom_colors/font_color_focus = Color( 0.921569, 0.0156863, 0.0156863, 1 )
 custom_colors/font_color_hover = Color( 0.921569, 0.0156863, 0.0156863, 1 )
@@ -79,20 +83,19 @@ custom_styles/pressed = SubResource( 2 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
-text = "Revive"
+text = "Arise"
 flat = true
+align = 0
 
-[node name="give_up_button" type="Button" parent="."]
-margin_left = 632.0
-margin_top = 211.0
-margin_right = 767.0
-margin_bottom = 253.0
-focus_neighbour_left = NodePath("../revive_button")
-focus_neighbour_top = NodePath("../revive_button")
-focus_neighbour_right = NodePath("../revive_button")
-focus_neighbour_bottom = NodePath("../revive_button")
-focus_next = NodePath("../revive_button")
-focus_previous = NodePath("../revive_button")
+[node name="GiveUp" type="Button" parent="Buttons"]
+margin_right = 763.0
+margin_bottom = 292.0
+focus_neighbour_left = NodePath("../Arise")
+focus_neighbour_top = NodePath("../Arise")
+focus_neighbour_right = NodePath("../Arise")
+focus_neighbour_bottom = NodePath("../Arise")
+focus_next = NodePath("../Arise")
+focus_previous = NodePath("../Arise")
 theme = ExtResource( 3 )
 custom_colors/font_color_focus = Color( 0.921569, 0.0156863, 0.0156863, 1 )
 custom_colors/font_color_hover = Color( 0.921569, 0.0156863, 0.0156863, 1 )
@@ -104,11 +107,12 @@ custom_styles/disabled = SubResource( 9 )
 custom_styles/normal = SubResource( 10 )
 text = "Give Up"
 flat = true
+align = 2
 
 [connection signal="draw" from="." to="." method="_on_gameover_draw"]
-[connection signal="mouse_entered" from="revive_button" to="." method="_on_revive_button_mouse_entered"]
-[connection signal="mouse_exited" from="revive_button" to="." method="_on_revive_button_mouse_exited"]
-[connection signal="pressed" from="revive_button" to="." method="_on_revive_button_pressed"]
-[connection signal="mouse_entered" from="give_up_button" to="." method="_on_give_up_button_mouse_entered"]
-[connection signal="mouse_exited" from="give_up_button" to="." method="_on_give_up_button_mouse_exited"]
-[connection signal="pressed" from="give_up_button" to="." method="_on_give_up_button_pressed"]
+[connection signal="mouse_entered" from="Buttons/Arise" to="." method="_on_Arise_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/Arise" to="." method="_on_Arise_mouse_exited"]
+[connection signal="pressed" from="Buttons/Arise" to="." method="_on_Arise_pressed"]
+[connection signal="mouse_entered" from="Buttons/GiveUp" to="." method="_on_GiveUp_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/GiveUp" to="." method="_on_GiveUp_mouse_exited"]
+[connection signal="pressed" from="Buttons/GiveUp" to="." method="_on_GiveUp_pressed"]
