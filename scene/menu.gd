@@ -30,6 +30,7 @@ func _on_Enter_pressed():
 	
 	call_deferred("add_child", game_instance)
 	set_process(false)
+	$Buttons/Enter.release_focus()
 
 func _on_Perish_pressed():
 	get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)
