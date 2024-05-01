@@ -78,7 +78,7 @@ func use_item():
 				$forbidden_sfx.play()
 
 func use_sword():
-	targets_to_destroy = targets[$CharacterSprite.orientation]
+	targets_to_destroy = targets[$CharacterSprite.orientation].duplicate(true)
 	
 	if pos_in_bounds(Direction.translate_pos(position, $CharacterSprite.orientation, 32)):
 		var slash_anim = load("res://scene/sword_attack.tscn").instance()
