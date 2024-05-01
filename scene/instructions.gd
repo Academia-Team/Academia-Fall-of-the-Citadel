@@ -1,6 +1,6 @@
 extends ColorRect
 
-const NUM_PAGES = 5
+const NUM_PAGES = 7
 var curr_page = null
 var page_counter = 0
 

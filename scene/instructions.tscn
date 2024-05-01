@@ -583,6 +583,7 @@ margin_bottom = 132.0
 texture = ExtResource( 22 )
 
 [node name="Pg5" type="Control" parent="." groups=["Page"]]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -727,3 +728,52 @@ margin_top = 68.0
 margin_right = 200.0
 margin_bottom = 132.0
 texture = ExtResource( 23 )
+
+[node name="Pg6" type="Control" parent="." groups=["Page"]]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Title" type="Label" parent="Pg6"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_top = 26.0
+margin_right = 75.0
+margin_bottom = 71.0
+theme = ExtResource( 1 )
+text = "Gameplay"
+align = 1
+
+[node name="Body" type="Label" parent="Pg6"]
+margin_top = 82.0
+margin_right = 800.0
+margin_bottom = 447.0
+text = "The game is a grid-based survival horror game. It is not possible to survive; rather, the goal is to survive as long as possible.
+
+The player is able to move horizontally, vertically, and diagonally in all directions. (No enemy is able to move diagonally, thus giving the player a chance to escape tricky situations.) When relevant movement input is provided, the player will only move after half a second has passed. During that time, if a complementary movement request is provided without a gap between providing the original input (such as holding down the up arrow key while holding the left arrow key), then the player will move diagonally based on what inputs have been provided. If input ceases or if conflicting input is provided (such as left and right arrow keys pressed simultaneously) when time runs out, then the player won't move."
+autowrap = true
+
+[node name="Pg7" type="Control" parent="." groups=["Page"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Title" type="Label" parent="Pg7"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_top = 26.0
+margin_right = 75.0
+margin_bottom = 71.0
+theme = ExtResource( 1 )
+text = "Gameplay"
+align = 1
+
+[node name="Body" type="Label" parent="Pg7"]
+margin_top = 82.0
+margin_right = 800.0
+margin_bottom = 447.0
+text = "Player movement is separate from player orientation. When movement is requested, the player orientation changes immediately. Orientation can never be diagonal. In the case of a request for diagonal movement, the orientation will become the horizontal component of that movement request. To only change orientation without moving, the stay button should be pressed before inputting a direction.
+
+Orientation is important when it comes to wielding weapons. A weapon will affect different cells depending on which way the player is facing. For instance, the sword will slay all enemies on whatever adjacent cell the player is orientated towards."
+autowrap = true
