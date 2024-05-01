@@ -142,6 +142,7 @@ margin_bottom = 43.0
 theme = ExtResource( 4 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/normal = ExtResource( 5 )
+max_length = 80
 caret_blink = true
 
 [node name="reject" type="AudioStreamPlayer" parent="Option"]
