@@ -45,13 +45,13 @@ script/source = "extends PopupPanel
 class_name HorzDialog
 "
 
-[node name="menu" type="ColorRect"]
+[node name="Menu" type="ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
 script = ExtResource( 3 )
 
-[node name="title" type="Label" parent="."]
+[node name="Title" type="Label" parent="."]
 anchor_right = 1.0
 margin_top = 26.0
 margin_bottom = 91.0
@@ -60,17 +60,21 @@ theme = ExtResource( 1 )
 text = "Academia: Fall of the Citadel"
 align = 1
 
-[node name="enter_button" type="Button" parent="."]
-margin_left = 300.0
+[node name="Buttons" type="VBoxContainer" parent="."]
 margin_top = 114.0
-margin_right = 405.0
-margin_bottom = 156.0
-focus_neighbour_left = NodePath("../perish_button")
-focus_neighbour_top = NodePath("../perish_button")
-focus_neighbour_right = NodePath("../perish_button")
-focus_neighbour_bottom = NodePath("../perish_button")
-focus_next = NodePath("../perish_button")
-focus_previous = NodePath("../perish_button")
+margin_right = 798.0
+margin_bottom = 447.0
+custom_constants/separation = 30
+
+[node name="Enter" type="Button" parent="Buttons"]
+margin_right = 798.0
+margin_bottom = 36.0
+focus_neighbour_left = NodePath("../Perish")
+focus_neighbour_top = NodePath("../Perish")
+focus_neighbour_right = NodePath("../Perish")
+focus_neighbour_bottom = NodePath("../Perish")
+focus_next = NodePath("../Perish")
+focus_previous = NodePath("../Perish")
 theme = ExtResource( 2 )
 custom_colors/font_color_focus = Color( 0.921569, 0.0156863, 0.0156863, 1 )
 custom_colors/font_color_hover = Color( 0.921569, 0.0156863, 0.0156863, 1 )
@@ -83,17 +87,16 @@ custom_styles/normal = SubResource( 5 )
 text = "Enter"
 flat = true
 
-[node name="perish_button" type="Button" parent="."]
-margin_left = 300.0
-margin_top = 190.0
-margin_right = 417.0
-margin_bottom = 232.0
-focus_neighbour_left = NodePath("../enter_button")
-focus_neighbour_top = NodePath("../enter_button")
-focus_neighbour_right = NodePath("../help_me_button")
-focus_neighbour_bottom = NodePath("../help_me_button")
-focus_next = NodePath("../help_me_button")
-focus_previous = NodePath("../enter_button")
+[node name="Perish" type="Button" parent="Buttons"]
+margin_top = 66.0
+margin_right = 798.0
+margin_bottom = 102.0
+focus_neighbour_left = NodePath("../Enter")
+focus_neighbour_top = NodePath("../Enter")
+focus_neighbour_right = NodePath("../HelpMe")
+focus_neighbour_bottom = NodePath("../HelpMe")
+focus_next = NodePath("../HelpMe")
+focus_previous = NodePath("../Enter")
 theme = ExtResource( 2 )
 custom_colors/font_color_focus = Color( 0.921569, 0.0156863, 0.0156863, 1 )
 custom_colors/font_color_hover = Color( 0.921569, 0.0156863, 0.0156863, 1 )
@@ -106,17 +109,16 @@ custom_styles/normal = SubResource( 10 )
 text = "Perish"
 flat = true
 
-[node name="help_me_button" type="Button" parent="."]
-margin_left = 300.0
-margin_top = 266.0
-margin_right = 382.0
-margin_bottom = 291.0
-focus_neighbour_left = NodePath("../perish_button")
-focus_neighbour_top = NodePath("../perish_button")
-focus_neighbour_right = NodePath("../enter_button")
-focus_neighbour_bottom = NodePath("../enter_button")
-focus_next = NodePath("../enter_button")
-focus_previous = NodePath("../perish_button")
+[node name="HelpMe" type="Button" parent="Buttons"]
+margin_top = 132.0
+margin_right = 798.0
+margin_bottom = 168.0
+focus_neighbour_left = NodePath("../Perish")
+focus_neighbour_top = NodePath("../Perish")
+focus_neighbour_right = NodePath("../Enter")
+focus_neighbour_bottom = NodePath("../Enter")
+focus_next = NodePath("../Enter")
+focus_previous = NodePath("../Perish")
 theme = ExtResource( 2 )
 custom_colors/font_color_focus = Color( 0.921569, 0.0156863, 0.0156863, 1 )
 custom_colors/font_color_hover = Color( 0.921569, 0.0156863, 0.0156863, 1 )
@@ -161,16 +163,16 @@ caret_blink = true
 [node name="Reject" type="AudioStreamPlayer" parent="SeedDialog"]
 stream = ExtResource( 6 )
 
-[connection signal="gui_input" from="enter_button" to="." method="_on_enter_button_gui_input"]
-[connection signal="mouse_entered" from="enter_button" to="." method="_on_enter_button_mouse_entered"]
-[connection signal="mouse_exited" from="enter_button" to="." method="_on_enter_button_mouse_exited"]
-[connection signal="pressed" from="enter_button" to="." method="_on_enter_button_pressed"]
-[connection signal="mouse_entered" from="perish_button" to="." method="_on_perish_button_mouse_entered"]
-[connection signal="mouse_exited" from="perish_button" to="." method="_on_perish_button_mouse_exited"]
-[connection signal="pressed" from="perish_button" to="." method="_on_perish_button_pressed"]
-[connection signal="mouse_entered" from="help_me_button" to="." method="_on_help_me_button_mouse_entered"]
-[connection signal="mouse_exited" from="help_me_button" to="." method="_on_help_me_button_mouse_exited"]
-[connection signal="pressed" from="help_me_button" to="." method="_on_help_me_button_pressed"]
+[connection signal="gui_input" from="Buttons/Enter" to="." method="_on_Enter_gui_input"]
+[connection signal="mouse_entered" from="Buttons/Enter" to="." method="_on_Enter_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/Enter" to="." method="_on_Enter_mouse_exited"]
+[connection signal="pressed" from="Buttons/Enter" to="." method="_on_Enter_pressed"]
+[connection signal="mouse_entered" from="Buttons/Perish" to="." method="_on_Perish_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/Perish" to="." method="_on_Perish_mouse_exited"]
+[connection signal="pressed" from="Buttons/Perish" to="." method="_on_Perish_pressed"]
+[connection signal="mouse_entered" from="Buttons/HelpMe" to="." method="_on_HelpMe_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/HelpMe" to="." method="_on_HelpMe_mouse_exited"]
+[connection signal="pressed" from="Buttons/HelpMe" to="." method="_on_HelpMe_pressed"]
 [connection signal="popup_hide" from="SeedDialog" to="." method="_on_SeedDialog_popup_hide"]
 [connection signal="text_change_rejected" from="SeedDialog/HBoxContainer/Line" to="." method="_on_SeedDialog_Line_text_change_rejected"]
 [connection signal="text_entered" from="SeedDialog/HBoxContainer/Line" to="." method="_on_SeedDialog_Line_text_entered"]

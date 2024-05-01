@@ -5,15 +5,15 @@ const MAX_INT_LEN = 19
 var seed_val = null
 
 func _ready():
-	$enter_button.grab_focus()
+	$Buttons/Enter.grab_focus()
 
 func _process(_delta):
 	if Input.is_action_just_pressed("quit"):
-		$perish_button.emit_signal("pressed")
+		$Buttons/Perish.emit_signal("pressed")
 	elif Input.is_action_just_pressed("ui_focus_next") and get_focus_owner() == null:
-		$enter_button.grab_focus()
+		$Buttons/Enter.grab_focus()
 
-func _on_enter_button_pressed():
+func _on_Enter_pressed():
 	var game_instance = SceneSwitcher.get_scene(SceneSwitcher.GAME).instance()
 	game_instance.seed_val = seed_val
 	self_modulate.a = 0
@@ -21,11 +21,11 @@ func _on_enter_button_pressed():
 	call_deferred("add_child", game_instance)
 	set_process(false)
 
-func _on_perish_button_pressed():
+func _on_Perish_pressed():
 	get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)
 
 
-func _on_enter_button_gui_input(event):
+func _on_Enter_gui_input(event):
 	if event.is_action("button_options", true):
 		$SeedDialog.show_modal()
 		$SeedDialog/HBoxContainer/Line.grab_focus()
@@ -41,7 +41,7 @@ func _on_SeedDialog_Line_text_entered(new_text):
 		seed_val = hash(new_text)
 	
 	$SeedDialog.hide()
-	_on_SeedDialog_popup_hide()
+	$SeedDialog.emit_signal("popup_hide")
 
 
 func _on_SeedDialog_Line_text_change_rejected(_rejected_substring):
@@ -50,32 +50,32 @@ func _on_SeedDialog_Line_text_change_rejected(_rejected_substring):
 
 func _on_SeedDialog_popup_hide():
 	$SeedDialog/HBoxContainer/Line.text = ""
-	$enter_button.grab_focus()
+	$Buttons/Enter.grab_focus()
 	set_process(true)
 
 
-func _on_enter_button_mouse_entered():
-	$enter_button.grab_focus()
+func _on_Enter_mouse_entered():
+	$Buttons/Enter.grab_focus()
 
 
-func _on_enter_button_mouse_exited():
-	$enter_button.release_focus()
+func _on_Enter_mouse_exited():
+	$Buttons/Enter.release_focus()
 
 
-func _on_perish_button_mouse_entered():
-	$perish_button.grab_focus()
+func _on_Perish_mouse_entered():
+	$Buttons/Perish.grab_focus()
 
 
-func _on_perish_button_mouse_exited():
-	$perish_button.release_focus()
+func _on_Perish_mouse_exited():
+	$Buttons/Perish.release_focus()
 
-func _on_help_me_button_mouse_entered():
-	$help_me_button.grab_focus()
-
-
-func _on_help_me_button_mouse_exited():
-	$help_me_button.release_focus()
+func _on_HelpMe_mouse_entered():
+	$Buttons/HelpMe.grab_focus()
 
 
-func _on_help_me_button_pressed():
+func _on_HelpMe_mouse_exited():
+	$Buttons/HelpMe.release_focus()
+
+
+func _on_HelpMe_pressed():
 	SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.HELP)
