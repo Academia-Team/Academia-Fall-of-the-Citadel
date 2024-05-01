@@ -12,7 +12,7 @@ func _ready():
 			print("Seed: %d" % seed_val)
 
 	$infobar.set_seed(seed_val)
-	$gamegrid.start($infobar, seed_val)
+	$gamegrid.start($infobar)
 
 func _process(_delta):
 	if Input.is_action_just_pressed("quit"):
