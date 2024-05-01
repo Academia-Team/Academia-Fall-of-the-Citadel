@@ -163,6 +163,7 @@ caret_blink = true
 [node name="Reject" type="AudioStreamPlayer" parent="SeedDialog"]
 stream = ExtResource( 6 )
 
+[connection signal="gui_input" from="." to="." method="_on_Menu_gui_input"]
 [connection signal="gui_input" from="Buttons/Enter" to="." method="_on_Enter_gui_input"]
 [connection signal="mouse_entered" from="Buttons/Enter" to="." method="_on_Enter_mouse_entered"]
 [connection signal="mouse_exited" from="Buttons/Enter" to="." method="_on_Enter_mouse_exited"]
