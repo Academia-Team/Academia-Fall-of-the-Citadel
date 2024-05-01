@@ -60,12 +60,14 @@ theme = ExtResource( 5 )
 text = "Seed: ?"
 
 [node name="Buttons" type="MarginContainer" parent="."]
-margin_left = 36.0
-margin_right = 763.0
+margin_top = 139.0
+margin_right = 799.0
+margin_bottom = 431.0
 
 [node name="Arise" type="Button" parent="Buttons"]
-margin_right = 727.0
-margin_bottom = 36.0
+margin_left = 36.0
+margin_right = 799.0
+margin_bottom = 292.0
 focus_neighbour_left = NodePath("../GiveUp")
 focus_neighbour_top = NodePath("../GiveUp")
 focus_neighbour_right = NodePath("../GiveUp")
@@ -86,8 +88,8 @@ flat = true
 align = 0
 
 [node name="GiveUp" type="Button" parent="Buttons"]
-margin_right = 727.0
-margin_bottom = 36.0
+margin_right = 763.0
+margin_bottom = 292.0
 focus_neighbour_left = NodePath("../Arise")
 focus_neighbour_top = NodePath("../Arise")
 focus_neighbour_right = NodePath("../Arise")
