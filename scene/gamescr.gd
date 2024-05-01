@@ -34,3 +34,7 @@ func _on_gamegrid_game_over():
 	call_deferred("remove_child", $gamegrid)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$gameover.start($infobar)
+
+
+func _on_gamescr_tree_exiting():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
