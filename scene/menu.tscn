@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://resource/title_theme.tres" type="Theme" id=1]
 [ext_resource path="res://resource/button_theme.tres" type="Theme" id=2]
@@ -36,6 +36,14 @@
 [sub_resource type="StyleBoxEmpty" id=14]
 
 [sub_resource type="StyleBoxEmpty" id=15]
+
+[sub_resource type="StyleBoxEmpty" id=16]
+
+[sub_resource type="GDScript" id=17]
+script/source = "extends PopupPanel
+
+class_name HorzDialog
+"
 
 [node name="menu" type="ColorRect"]
 anchor_right = 1.0
@@ -121,27 +129,35 @@ custom_styles/normal = SubResource( 15 )
 text = "Help Me"
 flat = true
 
-[node name="SeedDialog" type="PopupDialog" parent="."]
+[node name="SeedDialog" type="PopupPanel" parent="."]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = -27.0
+custom_styles/panel = SubResource( 16 )
+script = SubResource( 17 )
 
-[node name="Label" type="Label" parent="SeedDialog"]
-margin_top = -34.0
-margin_right = 48.0
-margin_bottom = -15.0
+[node name="HBoxContainer" type="HBoxContainer" parent="SeedDialog"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 796.0
+margin_bottom = 23.0
+
+[node name="Label" type="Label" parent="SeedDialog/HBoxContainer"]
+margin_right = 35.0
+margin_bottom = 19.0
 theme = ExtResource( 4 )
 text = "Seed:"
 
-[node name="Line" type="LineEdit" parent="SeedDialog"]
-margin_left = 56.0
-margin_top = -37.0
-margin_right = 800.0
-margin_bottom = 3.0
+[node name="Line" type="LineEdit" parent="SeedDialog/HBoxContainer"]
+margin_left = 39.0
+margin_right = 87.0
+margin_bottom = 19.0
 theme = ExtResource( 4 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/normal = ExtResource( 5 )
 max_length = 80
+expand_to_text_length = true
 caret_blink = true
 
 [node name="Reject" type="AudioStreamPlayer" parent="SeedDialog"]
@@ -157,5 +173,5 @@ stream = ExtResource( 6 )
 [connection signal="mouse_entered" from="help_me_button" to="." method="_on_help_me_button_mouse_entered"]
 [connection signal="mouse_exited" from="help_me_button" to="." method="_on_help_me_button_mouse_exited"]
 [connection signal="pressed" from="help_me_button" to="." method="_on_help_me_button_pressed"]
-[connection signal="text_change_rejected" from="SeedDialog/Line" to="." method="_on_SeedDialog_Line_text_change_rejected"]
-[connection signal="text_entered" from="SeedDialog/Line" to="." method="_on_SeedDialog_Line_text_entered"]
+[connection signal="text_change_rejected" from="SeedDialog/HBoxContainer/Line" to="." method="_on_SeedDialog_Line_text_change_rejected"]
+[connection signal="text_entered" from="SeedDialog/HBoxContainer/Line" to="." method="_on_SeedDialog_Line_text_entered"]
