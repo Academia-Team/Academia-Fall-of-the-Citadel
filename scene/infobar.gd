@@ -32,11 +32,11 @@ func get_seed():
 	return _seed
 
 func _on_player_pick_up_item(item_name):
-	orig_item_text = $item_info.text
-	$item_info.text = item_name
+	orig_item_text = $status.text
+	$status.text = item_name
 
 func _on_player_used_item(_item_name):
-	$item_info.text = orig_item_text
+	$status.text = orig_item_text
 
 func _on_player_health_change(lives):
 	$lives_counter.text = "Lives: %d" % lives
