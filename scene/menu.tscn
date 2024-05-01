@@ -17,16 +17,6 @@
 
 [sub_resource type="StyleBoxEmpty" id=5]
 
-[sub_resource type="StyleBoxEmpty" id=6]
-
-[sub_resource type="StyleBoxEmpty" id=7]
-
-[sub_resource type="StyleBoxEmpty" id=8]
-
-[sub_resource type="StyleBoxEmpty" id=9]
-
-[sub_resource type="StyleBoxEmpty" id=10]
-
 [sub_resource type="StyleBoxEmpty" id=11]
 
 [sub_resource type="StyleBoxEmpty" id=12]
@@ -36,6 +26,16 @@
 [sub_resource type="StyleBoxEmpty" id=14]
 
 [sub_resource type="StyleBoxEmpty" id=15]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=10]
 
 [sub_resource type="StyleBoxEmpty" id=16]
 
@@ -71,9 +71,9 @@ margin_right = 798.0
 margin_bottom = 36.0
 focus_neighbour_left = NodePath("../Perish")
 focus_neighbour_top = NodePath("../Perish")
-focus_neighbour_right = NodePath("../Perish")
-focus_neighbour_bottom = NodePath("../Perish")
-focus_next = NodePath("../Perish")
+focus_neighbour_right = NodePath("../HelpMe")
+focus_neighbour_bottom = NodePath("../HelpMe")
+focus_next = NodePath("../HelpMe")
 focus_previous = NodePath("../Perish")
 theme = ExtResource( 2 )
 custom_colors/font_color_focus = Color( 0.921569, 0.0156863, 0.0156863, 1 )
@@ -87,38 +87,16 @@ custom_styles/normal = SubResource( 5 )
 text = "Enter"
 flat = true
 
-[node name="Perish" type="Button" parent="Buttons"]
+[node name="HelpMe" type="Button" parent="Buttons"]
 margin_top = 66.0
 margin_right = 798.0
 margin_bottom = 102.0
 focus_neighbour_left = NodePath("../Enter")
 focus_neighbour_top = NodePath("../Enter")
-focus_neighbour_right = NodePath("../HelpMe")
-focus_neighbour_bottom = NodePath("../HelpMe")
-focus_next = NodePath("../HelpMe")
+focus_neighbour_right = NodePath("../Perish")
+focus_neighbour_bottom = NodePath("../Perish")
+focus_next = NodePath("../Perish")
 focus_previous = NodePath("../Enter")
-theme = ExtResource( 2 )
-custom_colors/font_color_focus = Color( 0.921569, 0.0156863, 0.0156863, 1 )
-custom_colors/font_color_hover = Color( 0.921569, 0.0156863, 0.0156863, 1 )
-custom_colors/font_color_pressed = Color( 0.921569, 0.0156863, 0.0156863, 1 )
-custom_styles/hover = SubResource( 6 )
-custom_styles/pressed = SubResource( 7 )
-custom_styles/focus = SubResource( 8 )
-custom_styles/disabled = SubResource( 9 )
-custom_styles/normal = SubResource( 10 )
-text = "Perish"
-flat = true
-
-[node name="HelpMe" type="Button" parent="Buttons"]
-margin_top = 132.0
-margin_right = 798.0
-margin_bottom = 168.0
-focus_neighbour_left = NodePath("../Perish")
-focus_neighbour_top = NodePath("../Perish")
-focus_neighbour_right = NodePath("../Enter")
-focus_neighbour_bottom = NodePath("../Enter")
-focus_next = NodePath("../Enter")
-focus_previous = NodePath("../Perish")
 theme = ExtResource( 2 )
 custom_colors/font_color_focus = Color( 0.921569, 0.0156863, 0.0156863, 1 )
 custom_colors/font_color_hover = Color( 0.921569, 0.0156863, 0.0156863, 1 )
@@ -129,6 +107,28 @@ custom_styles/focus = SubResource( 13 )
 custom_styles/disabled = SubResource( 14 )
 custom_styles/normal = SubResource( 15 )
 text = "Help Me"
+flat = true
+
+[node name="Perish" type="Button" parent="Buttons"]
+margin_top = 132.0
+margin_right = 798.0
+margin_bottom = 168.0
+focus_neighbour_left = NodePath("../HelpMe")
+focus_neighbour_top = NodePath("../HelpMe")
+focus_neighbour_right = NodePath("../Enter")
+focus_neighbour_bottom = NodePath("../Enter")
+focus_next = NodePath("../Enter")
+focus_previous = NodePath("../HelpMe")
+theme = ExtResource( 2 )
+custom_colors/font_color_focus = Color( 0.921569, 0.0156863, 0.0156863, 1 )
+custom_colors/font_color_hover = Color( 0.921569, 0.0156863, 0.0156863, 1 )
+custom_colors/font_color_pressed = Color( 0.921569, 0.0156863, 0.0156863, 1 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
+text = "Perish"
 flat = true
 
 [node name="SeedDialog" type="PopupPanel" parent="."]
@@ -167,12 +167,12 @@ stream = ExtResource( 6 )
 [connection signal="mouse_entered" from="Buttons/Enter" to="." method="_on_Enter_mouse_entered"]
 [connection signal="mouse_exited" from="Buttons/Enter" to="." method="_on_Enter_mouse_exited"]
 [connection signal="pressed" from="Buttons/Enter" to="." method="_on_Enter_pressed"]
-[connection signal="mouse_entered" from="Buttons/Perish" to="." method="_on_Perish_mouse_entered"]
-[connection signal="mouse_exited" from="Buttons/Perish" to="." method="_on_Perish_mouse_exited"]
-[connection signal="pressed" from="Buttons/Perish" to="." method="_on_Perish_pressed"]
 [connection signal="mouse_entered" from="Buttons/HelpMe" to="." method="_on_HelpMe_mouse_entered"]
 [connection signal="mouse_exited" from="Buttons/HelpMe" to="." method="_on_HelpMe_mouse_exited"]
 [connection signal="pressed" from="Buttons/HelpMe" to="." method="_on_HelpMe_pressed"]
+[connection signal="mouse_entered" from="Buttons/Perish" to="." method="_on_Perish_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/Perish" to="." method="_on_Perish_mouse_exited"]
+[connection signal="pressed" from="Buttons/Perish" to="." method="_on_Perish_pressed"]
 [connection signal="popup_hide" from="SeedDialog" to="." method="_on_SeedDialog_popup_hide"]
 [connection signal="text_change_rejected" from="SeedDialog/HBoxContainer/Line" to="." method="_on_SeedDialog_Line_text_change_rejected"]
 [connection signal="text_entered" from="SeedDialog/HBoxContainer/Line" to="." method="_on_SeedDialog_Line_text_entered"]
