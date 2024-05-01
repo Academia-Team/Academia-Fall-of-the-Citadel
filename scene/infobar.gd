@@ -1,6 +1,6 @@
 extends ColorRect
 
-var orig_item_text = ""
+var _orig_item_text = ""
 var _score = 0
 var _seed = null
 
@@ -31,12 +31,12 @@ func set_seed(seed_val):
 func get_seed():
 	return _seed
 
-func _on_player_pick_up_item(item_name):
-	orig_item_text = $status.text
-	$status.text = item_name
+func set_status(status_str):
+	_orig_item_text = $status.text
+	$status.text = status_str
 
-func _on_player_used_item(_item_name):
-	$status.text = orig_item_text
+func reset_status():
+	$status.text = _orig_item_text
 
 func _on_player_health_change(lives):
 	$lives_counter.text = "Lives: %d" % lives
