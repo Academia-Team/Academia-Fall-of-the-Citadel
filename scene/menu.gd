@@ -24,20 +24,22 @@ func _process(_delta):
 				ignore_mouse_warp = true
 
 func _on_Enter_pressed():
-	var game_instance = SceneSwitcher.get_scene(SceneSwitcher.GAME).instance()
-	game_instance.seed_val = seed_val
-	self_modulate.a = 0
-	
-	call_deferred("add_child", game_instance)
-	set_process(false)
-	$Buttons/Enter.release_focus()
+	if is_processing():
+		var game_instance = SceneSwitcher.get_scene(SceneSwitcher.GAME).instance()
+		game_instance.seed_val = seed_val
+		self_modulate.a = 0
+		
+		call_deferred("add_child", game_instance)
+		set_process(false)
+		$Buttons/Enter.release_focus()
 
 func _on_Perish_pressed():
-	get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)
+	if is_processing():
+		get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)
 
 
 func _on_Enter_gui_input(event):
-	if event.is_action("button_options", true):
+	if is_processing() and event.is_action("button_options", true):
 		$SeedDialog.show_modal()
 		$SeedDialog/HBoxContainer/Line.grab_focus()
 		set_process(false)
@@ -95,7 +97,8 @@ func _on_HelpMe_mouse_exited():
 
 
 func _on_HelpMe_pressed():
-	SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.HELP)
+	if is_processing():
+		SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.HELP)
 
 
 func _on_Menu_gui_input(event):
