@@ -14,6 +14,7 @@ func _process(_delta):
 		$perish_button.emit_signal("pressed")
 	elif Input.is_action_just_pressed("ui_focus_next") and get_focus_owner() == null:
 		$enter_button.grab_focus()
+		print("Drat")
 
 func _on_enter_button_pressed():
 	game_playing = true
@@ -79,3 +80,14 @@ func _on_perish_button_mouse_entered():
 
 func _on_perish_button_mouse_exited():
 	$perish_button.release_focus()
+
+func _on_help_me_button_mouse_entered():
+	$help_me_button.grab_focus()
+
+
+func _on_help_me_button_mouse_exited():
+	$help_me_button.release_focus()
+
+
+func _on_help_me_button_pressed():
+	SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.HELP)
