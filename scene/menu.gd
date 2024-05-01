@@ -2,6 +2,8 @@ extends ColorRect
 
 const MAX_INT_LEN = 19
 
+var ignore_mouse_warp = false
+var mouse_over = null
 var seed_val = null
 
 func _ready():
@@ -10,8 +12,16 @@ func _ready():
 func _process(_delta):
 	if Input.is_action_just_pressed("quit"):
 		$Buttons/Perish.emit_signal("pressed")
-	elif Input.is_action_just_pressed("ui_focus_next") and get_focus_owner() == null:
-		$Buttons/Enter.grab_focus()
+	elif Input.is_action_just_pressed("ui_focus_next"):
+		if get_focus_owner() == null:
+			$Buttons/Enter.grab_focus()
+		
+		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
+			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+			
+			if mouse_over != null:
+				warp_mouse(get_global_mouse_position() - Vector2(0, mouse_over.rect_size.y))
+				ignore_mouse_warp = true
 
 func _on_Enter_pressed():
 	var game_instance = SceneSwitcher.get_scene(SceneSwitcher.GAME).instance()
@@ -55,27 +65,40 @@ func _on_SeedDialog_popup_hide():
 
 
 func _on_Enter_mouse_entered():
+	mouse_over = $Buttons/Enter
 	$Buttons/Enter.grab_focus()
 
 
 func _on_Enter_mouse_exited():
+	mouse_over = null
 	$Buttons/Enter.release_focus()
 
 
 func _on_Perish_mouse_entered():
+	mouse_over = $Buttons/Perish
 	$Buttons/Perish.grab_focus()
 
 
 func _on_Perish_mouse_exited():
+	mouse_over = null
 	$Buttons/Perish.release_focus()
 
 func _on_HelpMe_mouse_entered():
+	mouse_over = $Buttons/HelpMe
 	$Buttons/HelpMe.grab_focus()
 
 
 func _on_HelpMe_mouse_exited():
+	mouse_over = null
 	$Buttons/HelpMe.release_focus()
 
 
 func _on_HelpMe_pressed():
 	SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.HELP)
+
+
+func _on_Menu_gui_input(event):
+	if event is InputEventMouseMotion and Input.mouse_mode != Input.MOUSE_MODE_VISIBLE:
+		if not ignore_mouse_warp:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		ignore_mouse_warp = false
