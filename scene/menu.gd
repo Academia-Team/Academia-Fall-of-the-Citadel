@@ -29,7 +29,7 @@ func _on_perish_button_pressed():
 func _on_enter_button_gui_input(event):
 	if event.is_action("button_options", true):
 		$SeedDialog.show_modal()
-		$SeedDialog/Line.grab_focus()
+		$SeedDialog/HBoxContainer/Line.grab_focus()
 
 
 func _on_SeedDialog_Line_text_entered(new_text):
@@ -40,7 +40,7 @@ func _on_SeedDialog_Line_text_entered(new_text):
 	else:
 		seed_val = hash(new_text)
 	
-	$SeedDialog/Line.text = ""
+	$SeedDialog/HBoxContainer/Line.text = ""
 	$SeedDialog.hide()
 	$enter_button.grab_focus()
 
