@@ -18,6 +18,5 @@ script = ExtResource( 4 )
 visible = false
 
 [connection signal="game_over" from="gamegrid" to="." method="_on_gamegrid_game_over"]
-[connection signal="score_change" from="gamegrid" to="infobar" method="_on_gamegrid_score_change"]
 [connection signal="leave" from="gameover" to="." method="_on_gameover_leave"]
 [connection signal="retry" from="gameover" to="." method="_on_gameover_retry"]
