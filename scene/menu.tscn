@@ -121,31 +121,30 @@ custom_styles/normal = SubResource( 15 )
 text = "Help Me"
 flat = true
 
-[node name="Option" type="Control" parent="."]
+[node name="SeedDialog" type="PopupDialog" parent="."]
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -40.0
-margin_right = 40.0
 
-[node name="option_label" type="Label" parent="Option"]
-margin_top = 6.0
+[node name="Label" type="Label" parent="SeedDialog"]
+margin_top = -34.0
 margin_right = 48.0
-margin_bottom = 25.0
+margin_bottom = -15.0
 theme = ExtResource( 4 )
-text = "Option:"
+text = "Seed:"
 
-[node name="option_line" type="LineEdit" parent="Option"]
+[node name="Line" type="LineEdit" parent="SeedDialog"]
 margin_left = 56.0
-margin_top = 3.0
+margin_top = -37.0
 margin_right = 800.0
-margin_bottom = 43.0
+margin_bottom = 3.0
 theme = ExtResource( 4 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/normal = ExtResource( 5 )
 max_length = 80
 caret_blink = true
 
-[node name="reject" type="AudioStreamPlayer" parent="Option"]
+[node name="Reject" type="AudioStreamPlayer" parent="SeedDialog"]
 stream = ExtResource( 6 )
 
 [connection signal="gui_input" from="enter_button" to="." method="_on_enter_button_gui_input"]
@@ -158,7 +157,5 @@ stream = ExtResource( 6 )
 [connection signal="mouse_entered" from="help_me_button" to="." method="_on_help_me_button_mouse_entered"]
 [connection signal="mouse_exited" from="help_me_button" to="." method="_on_help_me_button_mouse_exited"]
 [connection signal="pressed" from="help_me_button" to="." method="_on_help_me_button_pressed"]
-[connection signal="focus_exited" from="Option/option_line" to="." method="_on_option_line_focus_exited"]
-[connection signal="gui_input" from="Option/option_line" to="." method="_on_option_line_gui_input"]
-[connection signal="text_change_rejected" from="Option/option_line" to="." method="_on_option_line_text_change_rejected"]
-[connection signal="text_entered" from="Option/option_line" to="." method="_on_option_line_text_entered"]
+[connection signal="text_change_rejected" from="SeedDialog/Line" to="." method="_on_SeedDialog_Line_text_change_rejected"]
+[connection signal="text_entered" from="SeedDialog/Line" to="." method="_on_SeedDialog_Line_text_entered"]

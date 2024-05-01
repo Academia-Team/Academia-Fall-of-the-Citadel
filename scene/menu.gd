@@ -6,7 +6,6 @@ var game_playing = false
 var seed_val = null
 
 func _ready():
-	$Option.hide()
 	$enter_button.grab_focus()
 
 func _process(_delta):
@@ -29,18 +28,11 @@ func _on_perish_button_pressed():
 
 func _on_enter_button_gui_input(event):
 	if event.is_action("button_options", true):
-		$Option.show()
-		$Option/option_label.text = "Seed:"
-		$Option/option_line.grab_focus()
+		$SeedDialog.show_modal()
+		$SeedDialog/Line.grab_focus()
 
 
-func _on_option_line_focus_exited():
-	$Option/option_line.text = ""
-	$Option/option_label.text = "Option:"
-	$Option.hide()
-	$enter_button.grab_focus()
-
-func _on_option_line_text_entered(new_text):
+func _on_SeedDialog_Line_text_entered(new_text):
 	seed_val = 0
 	
 	if new_text.is_valid_integer() and new_text.length() <= MAX_INT_LEN + int(new_text[0] == '-'):
@@ -48,16 +40,13 @@ func _on_option_line_text_entered(new_text):
 	else:
 		seed_val = hash(new_text)
 	
-	$Option/option_line.release_focus()
+	$SeedDialog/Line.text = ""
+	$SeedDialog.hide()
+	$enter_button.grab_focus()
 
 
-func _on_option_line_gui_input(event):
-	if event.is_action("ui_cancel", true):
-		$enter_button.grab_focus()
-
-
-func _on_option_line_text_change_rejected(_rejected_substring):
-	$Option/reject.play()
+func _on_SeedDialog_Line_text_change_rejected(_rejected_substring):
+	$SeedDialog/Reject.play()
 
 
 func _on_enter_button_mouse_entered():
