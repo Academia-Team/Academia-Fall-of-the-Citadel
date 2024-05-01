@@ -1,5 +1,7 @@
 extends ColorRect
 
+const MAX_INT_LEN = 19
+
 var enter_seed
 var game_playing
 
@@ -42,7 +44,7 @@ func _on_option_line_text_entered(new_text):
 	
 	var seed_val = 0
 	
-	if new_text.is_valid_integer():
+	if new_text.is_valid_integer() and new_text.length() <= MAX_INT_LEN + int(new_text[0] == '-'):
 		seed_val = new_text.to_int()
 	else:
 		seed_val = hash(new_text)
