@@ -4,8 +4,8 @@ class_name player
 var bounds = {Direction.NORTH: 0, Direction.SOUTH: 0, Direction.WEST: 0, Direction.EAST: 0}
 var held_item
 var lives
-var targets = [null, null, null, null]
-var target_to_destroy
+var targets = [[], [], [], []]
+var targets_to_destroy = []
 
 var future_dir
 
@@ -78,7 +78,7 @@ func use_item():
 				$forbidden_sfx.play()
 
 func use_sword():
-	target_to_destroy = targets[$CharacterSprite.orientation]
+	targets_to_destroy = targets[$CharacterSprite.orientation]
 	
 	if pos_in_bounds(Direction.translate_pos(position, $CharacterSprite.orientation, 32)):
 		var slash_anim = load("res://scene/sword_attack.tscn").instance()
@@ -86,8 +86,9 @@ func use_sword():
 		slash_anim.connect("animation_finished", self, "_slash_anim_finished")
 		add_child(slash_anim)
 		
-		if target_to_destroy != null:
-			target_to_destroy.attack()
+		for target_to_destroy in targets_to_destroy:
+			if target_to_destroy != null:
+				target_to_destroy.attack()
 		
 		emit_signal("used_item", "sword")
 		held_item = null
@@ -177,11 +178,8 @@ func _on_player_area_shape_entered(_area_rid, area, _area_shape_index, local_sha
 		handle_collision(area)
 	elif area.get_class() == "enemy":
 		var target_orient = orient_from_collision_box(triggered_collisionbox)
-		
-		while targets[target_orient] != null:
-			yield(self, "area_shape_exited")
 			
-		targets[target_orient] = area
+		targets[target_orient].append(area)
 
 
 func _on_player_area_shape_exited(_area_rid, area, _area_shape_index, local_shape_index):
@@ -189,7 +187,7 @@ func _on_player_area_shape_exited(_area_rid, area, _area_shape_index, local_shap
 		var triggered_collisionbox = shape_owner_get_owner(local_shape_index)
 		if triggered_collisionbox.name != "collisionbox" and area.get_class() == "enemy":
 			var target_orient = orient_from_collision_box(triggered_collisionbox)
-			targets[target_orient] = null
+			targets[target_orient].erase(area)
 
 func orient_from_collision_box(collisionbox):
 	var orient
@@ -209,5 +207,8 @@ func orient_from_collision_box(collisionbox):
 	return orient
 
 func _slash_anim_finished():
-	if target_to_destroy != null:
-		target_to_destroy.destroy()
+	for target_to_destroy in targets_to_destroy:
+		if target_to_destroy != null:
+			target_to_destroy.destroy()
+	
+	targets_to_destroy.clear()
