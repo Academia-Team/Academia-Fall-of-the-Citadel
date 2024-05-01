@@ -5,6 +5,7 @@ var player_scene = preload("res://scene/player.tscn")
 var sword_scene = preload("res://scene/sword.tscn")
 var zombie_scene = preload("res://scene/zombie.tscn")
 var ref_counter = {"sword": 0, "zombie": 0}
+var info_ref = null
 
 const ITEM_SCORE = 5
 const PASSIVE_SCORE = 1
@@ -16,22 +17,22 @@ const ZOMBIE_SPAWN_PROB = 0.5
 
 const MAX_ITEMS = 2
 
-signal score_change(score_diff)
 signal game_over()
 
-func start(info_ref, seed_val):
+func start(info_obj, seed_val):
+	info_ref = info_obj
 	seed(seed_val)
-	set_up_player(info_ref)
+	set_up_player(info_obj)
 
-func set_up_player(info_ref):
+func set_up_player(info_obj):
 	player_ref = player_scene.instance()
 	var screen_size = get_viewport_rect().size
 
 	player_ref.connect("health_change", self, "_on_player_health_change")
-	player_ref.connect("health_change", info_ref, "_on_player_health_change")
+	player_ref.connect("health_change", info_obj, "_on_player_health_change")
 	player_ref.connect("pick_up_item", self, "_on_player_pick_up_item")
-	player_ref.connect("pick_up_item", info_ref, "_on_player_pick_up_item")
-	player_ref.connect("used_item", info_ref, "_on_player_used_item")
+	player_ref.connect("pick_up_item", info_obj, "_on_player_pick_up_item")
+	player_ref.connect("used_item", info_obj, "_on_player_used_item")
 	
 	add_child(player_ref)
 	player_ref.spawn(Vector2(0, 0), 0,
@@ -39,17 +40,17 @@ func set_up_player(info_ref):
 
 func _on_player_pick_up_item(item_name):
 	ref_counter[item_name] -= 1
-	emit_signal("score_change", ITEM_SCORE)
+	info_ref.incr_score(ITEM_SCORE)
 
 
 func _on_passive_timer_timeout():
-	emit_signal("score_change", PASSIVE_SCORE)
+	info_ref.incr_score(PASSIVE_SCORE)
 
 func _on_enemy_destroyed(enemy_type):
 	match enemy_type:
 		"zombie":
 			ref_counter["zombie"] -= 1
-			emit_signal("score_change", ZOMBIE_SCORE)
+			info_ref.incr_score(ZOMBIE_SCORE)
 
 func _on_player_health_change(lives):
 	if lives <= 0:
