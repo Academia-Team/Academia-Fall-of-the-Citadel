@@ -35,7 +35,6 @@ color = Color( 0, 0, 0, 1 )
 script = ExtResource( 2 )
 
 [node name="Pg1" type="Control" parent="." groups=["Page"]]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -56,11 +55,11 @@ margin_right = 800.0
 margin_bottom = 447.0
 text = "\"This can't be happening\", you cry to yourself, as your tears uselessly hit the ground with a dying clunk.
 
-A few days ago, your friends and colleagues were alive, united by a common dream--to push back the darkness sweeping across the land. Now that dream is dead along with them. You would have joined them if not for shattering your knees during the initial defence of the city of Caditan.
+A few days ago, your friends and colleagues were alive, united by a common dream--to push back the darkness sweeping across the land. Now that dream is dead along with them. You would have joined them if not for the injuries you sustained during the initial defence of the city of Caditan.
 
 Now that the city has fallen, the corrupted army marches towards you and the citadel in which you live. All other fortresses in the North have been destroyed. As well, communication with the South has been lost. You are the only one who remains.
 
-\"I will defend what I have sworn to defend\", you swear, as you watch the walls surrounding you slowly crack. The nightmare has arrived."
+\"I will defend what I have sworn to defend\", you scream, as you watch the walls surrounding you slowly crack. The nightmare has arrived."
 autowrap = true
 
 [node name="Pg2" type="Control" parent="." groups=["Page"]]
@@ -669,6 +668,7 @@ margin_bottom = 132.0
 texture = ExtResource( 22 )
 
 [node name="Pg5" type="Control" parent="." groups=["Page"]]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -776,10 +776,8 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="DelButton" type="TextureRect" parent="Pg5/Table/SuicideControls/DelContainer"]
-margin_left = -12.0
-margin_top = -12.0
-margin_right = 52.0
-margin_bottom = 52.0
+margin_right = 64.0
+margin_bottom = 64.0
 texture = ExtResource( 25 )
 
 [node name="ArcadeButtons" type="GridContainer" parent="Pg5/Table/SuicideControls"]
