@@ -2,14 +2,13 @@ extends ColorRect
 
 const MAX_INT_LEN = 19
 
-var game_playing = false
 var seed_val = null
 
 func _ready():
 	$enter_button.grab_focus()
 
 func _process(_delta):
-	if Input.is_action_just_pressed("quit") and not game_playing:
+	if Input.is_action_just_pressed("quit"):
 		$perish_button.emit_signal("pressed")
 	elif Input.is_action_just_pressed("ui_focus_next") and get_focus_owner() == null:
 		$enter_button.grab_focus()
@@ -20,7 +19,7 @@ func _on_enter_button_pressed():
 	self_modulate.a = 0
 	
 	call_deferred("add_child", game_instance)
-	game_playing = true
+	set_process(false)
 
 func _on_perish_button_pressed():
 	get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)
@@ -30,6 +29,7 @@ func _on_enter_button_gui_input(event):
 	if event.is_action("button_options", true):
 		$SeedDialog.show_modal()
 		$SeedDialog/HBoxContainer/Line.grab_focus()
+		set_process(false)
 
 
 func _on_SeedDialog_Line_text_entered(new_text):
@@ -40,13 +40,18 @@ func _on_SeedDialog_Line_text_entered(new_text):
 	else:
 		seed_val = hash(new_text)
 	
-	$SeedDialog/HBoxContainer/Line.text = ""
 	$SeedDialog.hide()
-	$enter_button.grab_focus()
+	_on_SeedDialog_popup_hide()
 
 
 func _on_SeedDialog_Line_text_change_rejected(_rejected_substring):
 	$SeedDialog/Reject.play()
+
+
+func _on_SeedDialog_popup_hide():
+	$SeedDialog/HBoxContainer/Line.text = ""
+	$enter_button.grab_focus()
+	set_process(true)
 
 
 func _on_enter_button_mouse_entered():

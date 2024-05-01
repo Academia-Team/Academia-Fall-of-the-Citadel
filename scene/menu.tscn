@@ -138,10 +138,8 @@ custom_styles/panel = SubResource( 16 )
 script = SubResource( 17 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SeedDialog"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 796.0
-margin_bottom = 23.0
+margin_right = 800.0
+margin_bottom = 27.0
 
 [node name="Label" type="Label" parent="SeedDialog/HBoxContainer"]
 margin_right = 35.0
@@ -173,5 +171,6 @@ stream = ExtResource( 6 )
 [connection signal="mouse_entered" from="help_me_button" to="." method="_on_help_me_button_mouse_entered"]
 [connection signal="mouse_exited" from="help_me_button" to="." method="_on_help_me_button_mouse_exited"]
 [connection signal="pressed" from="help_me_button" to="." method="_on_help_me_button_pressed"]
+[connection signal="popup_hide" from="SeedDialog" to="." method="_on_SeedDialog_popup_hide"]
 [connection signal="text_change_rejected" from="SeedDialog/HBoxContainer/Line" to="." method="_on_SeedDialog_Line_text_change_rejected"]
 [connection signal="text_entered" from="SeedDialog/HBoxContainer/Line" to="." method="_on_SeedDialog_Line_text_entered"]
