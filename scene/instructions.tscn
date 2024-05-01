@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://resource/emphasized_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scene/instructions.gd" type="Script" id=2]
@@ -14,9 +14,7 @@
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_y.svg" type="Texture" id=12]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_l.svg" type="Texture" id=13]
 [ext_resource path="res://asset/kenney_input-prompts/Generic/generic_stick_right.svg" type="Texture" id=14]
-[ext_resource path="res://asset/kenney_input-prompts/Generic/generic_joystick_left.svg" type="Texture" id=15]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_u.svg" type="Texture" id=16]
-[ext_resource path="res://asset/kenney_input-prompts/Generic/generic_joystick_right.svg" type="Texture" id=17]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_b.svg" type="Texture" id=18]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_n.svg" type="Texture" id=19]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_space.svg" type="Texture" id=20]
@@ -214,7 +212,6 @@ margin_bottom = 64.0
 texture = ExtResource( 14 )
 
 [node name="Pg3" type="Control" parent="." groups=["Page"]]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -233,7 +230,6 @@ align = 1
 margin_top = 82.0
 margin_right = 800.0
 margin_bottom = 447.0
-custom_constants/hseparation = 200
 columns = 2
 
 [node name="MoveTopLeft" type="Label" parent="Pg3/Table"]
@@ -243,8 +239,8 @@ margin_bottom = 41.0
 text = "Move Top-Left"
 
 [node name="MoveTopLeftControls" type="GridContainer" parent="Pg3/Table"]
-margin_left = 382.0
-margin_right = 783.0
+margin_left = 186.0
+margin_right = 668.0
 margin_bottom = 64.0
 custom_constants/hseparation = 64
 columns = 3
@@ -279,11 +275,30 @@ margin_right = 273.0
 margin_bottom = 64.0
 texture = ExtResource( 12 )
 
-[node name="TopLeftJoy" type="TextureRect" parent="Pg3/Table/MoveTopLeftControls"]
+[node name="TopLeftJoy" type="GridContainer" parent="Pg3/Table/MoveTopLeftControls"]
 margin_left = 337.0
-margin_right = 401.0
+margin_right = 482.0
 margin_bottom = 64.0
-texture = ExtResource( 15 )
+columns = 3
+
+[node name="UpJoy" type="TextureRect" parent="Pg3/Table/MoveTopLeftControls/TopLeftJoy"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 5 )
+
+[node name="Plus" type="Label" parent="Pg3/Table/MoveTopLeftControls/TopLeftJoy"]
+margin_left = 68.0
+margin_top = 22.0
+margin_right = 77.0
+margin_bottom = 41.0
+theme = ExtResource( 6 )
+text = "+"
+
+[node name="LeftJoy" type="TextureRect" parent="Pg3/Table/MoveTopLeftControls/TopLeftJoy"]
+margin_left = 81.0
+margin_right = 145.0
+margin_bottom = 64.0
+texture = ExtResource( 11 )
 
 [node name="MoveTopRight" type="Label" parent="Pg3/Table"]
 margin_top = 90.0
@@ -292,9 +307,9 @@ margin_bottom = 109.0
 text = "Move Top-Right"
 
 [node name="MoveTopRightControls" type="GridContainer" parent="Pg3/Table"]
-margin_left = 382.0
+margin_left = 186.0
 margin_top = 68.0
-margin_right = 783.0
+margin_right = 668.0
 margin_bottom = 132.0
 custom_constants/hseparation = 64
 columns = 3
@@ -330,11 +345,30 @@ margin_right = 273.0
 margin_bottom = 64.0
 texture = ExtResource( 16 )
 
-[node name="TopLeftJoy" type="TextureRect" parent="Pg3/Table/MoveTopRightControls"]
+[node name="TopRightJoy" type="GridContainer" parent="Pg3/Table/MoveTopRightControls"]
 margin_left = 337.0
-margin_right = 401.0
+margin_right = 482.0
 margin_bottom = 64.0
-texture = ExtResource( 17 )
+columns = 3
+
+[node name="UpJoy" type="TextureRect" parent="Pg3/Table/MoveTopRightControls/TopRightJoy"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 5 )
+
+[node name="Plus" type="Label" parent="Pg3/Table/MoveTopRightControls/TopRightJoy"]
+margin_left = 68.0
+margin_top = 22.0
+margin_right = 77.0
+margin_bottom = 41.0
+theme = ExtResource( 6 )
+text = "+"
+
+[node name="RightJoy" type="TextureRect" parent="Pg3/Table/MoveTopRightControls/TopRightJoy"]
+margin_left = 81.0
+margin_right = 145.0
+margin_bottom = 64.0
+texture = ExtResource( 14 )
 
 [node name="MoveBottomLeft" type="Label" parent="Pg3/Table"]
 margin_top = 158.0
@@ -343,9 +377,9 @@ margin_bottom = 177.0
 text = "Move Bottom-Left"
 
 [node name="MoveBottomLeftControls" type="GridContainer" parent="Pg3/Table"]
-margin_left = 382.0
+margin_left = 186.0
 margin_top = 136.0
-margin_right = 783.0
+margin_right = 668.0
 margin_bottom = 200.0
 custom_constants/hseparation = 64
 columns = 3
@@ -381,11 +415,30 @@ margin_right = 273.0
 margin_bottom = 64.0
 texture = ExtResource( 18 )
 
-[node name="BottomLeftJoy" type="TextureRect" parent="Pg3/Table/MoveBottomLeftControls"]
+[node name="BottomLeftJoy" type="GridContainer" parent="Pg3/Table/MoveBottomLeftControls"]
 margin_left = 337.0
-margin_right = 401.0
+margin_right = 482.0
 margin_bottom = 64.0
-texture = ExtResource( 15 )
+columns = 3
+
+[node name="DownJoy" type="TextureRect" parent="Pg3/Table/MoveBottomLeftControls/BottomLeftJoy"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 8 )
+
+[node name="Plus" type="Label" parent="Pg3/Table/MoveBottomLeftControls/BottomLeftJoy"]
+margin_left = 68.0
+margin_top = 22.0
+margin_right = 77.0
+margin_bottom = 41.0
+theme = ExtResource( 6 )
+text = "+"
+
+[node name="LeftJoy" type="TextureRect" parent="Pg3/Table/MoveBottomLeftControls/BottomLeftJoy"]
+margin_left = 81.0
+margin_right = 145.0
+margin_bottom = 64.0
+texture = ExtResource( 11 )
 
 [node name="MoveBottomRight" type="Label" parent="Pg3/Table"]
 margin_top = 226.0
@@ -394,9 +447,9 @@ margin_bottom = 245.0
 text = "Move Bottom-Right"
 
 [node name="MoveBottomRightControls" type="GridContainer" parent="Pg3/Table"]
-margin_left = 382.0
+margin_left = 186.0
 margin_top = 204.0
-margin_right = 783.0
+margin_right = 668.0
 margin_bottom = 268.0
 custom_constants/hseparation = 64
 columns = 3
@@ -433,11 +486,30 @@ margin_right = 273.0
 margin_bottom = 64.0
 texture = ExtResource( 19 )
 
-[node name="BottomRightJoy" type="TextureRect" parent="Pg3/Table/MoveBottomRightControls"]
+[node name="BottomRightJoy" type="GridContainer" parent="Pg3/Table/MoveBottomRightControls"]
 margin_left = 337.0
-margin_right = 401.0
+margin_right = 482.0
 margin_bottom = 64.0
-texture = ExtResource( 17 )
+columns = 3
+
+[node name="DownJoy" type="TextureRect" parent="Pg3/Table/MoveBottomRightControls/BottomRightJoy"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 8 )
+
+[node name="Plus" type="Label" parent="Pg3/Table/MoveBottomRightControls/BottomRightJoy"]
+margin_left = 68.0
+margin_top = 22.0
+margin_right = 77.0
+margin_bottom = 41.0
+theme = ExtResource( 6 )
+text = "+"
+
+[node name="RightJoy" type="TextureRect" parent="Pg3/Table/MoveBottomRightControls/BottomRightJoy"]
+margin_left = 81.0
+margin_right = 145.0
+margin_bottom = 64.0
+texture = ExtResource( 14 )
 
 [node name="Pg4" type="Control" parent="." groups=["Page"]]
 visible = false
@@ -783,6 +855,7 @@ Orientation is important when it comes to wielding weapons. A weapon will affect
 autowrap = true
 
 [node name="Pg8" type="Control" parent="." groups=["Page"]]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
