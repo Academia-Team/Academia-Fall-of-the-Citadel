@@ -513,6 +513,7 @@ margin_bottom = 64.0
 texture = ExtResource( 14 )
 
 [node name="Pg4" type="Control" parent="." groups=["Page"]]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -668,7 +669,6 @@ margin_bottom = 132.0
 texture = ExtResource( 22 )
 
 [node name="Pg5" type="Control" parent="." groups=["Page"]]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -703,9 +703,14 @@ margin_bottom = 132.0
 custom_constants/hseparation = 64
 columns = 2
 
-[node name="BslashButton" type="TextureRect" parent="Pg5/Table/ButtonOptionsControls"]
+[node name="BslashContainer" type="CenterContainer" parent="Pg5/Table/ButtonOptionsControls"]
 margin_right = 64.0
 margin_bottom = 132.0
+
+[node name="BslashButton" type="TextureRect" parent="Pg5/Table/ButtonOptionsControls/BslashContainer"]
+margin_top = 34.0
+margin_right = 64.0
+margin_bottom = 98.0
 texture = ExtResource( 24 )
 
 [node name="ArcadeButtons" type="GridContainer" parent="Pg5/Table/ButtonOptionsControls"]
@@ -766,9 +771,15 @@ margin_bottom = 268.0
 custom_constants/hseparation = 64
 columns = 2
 
-[node name="DelButton" type="TextureRect" parent="Pg5/Table/SuicideControls"]
-margin_right = 64.0
-margin_bottom = 132.0
+[node name="DelContainer" type="CenterContainer" parent="Pg5/Table/SuicideControls"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="DelButton" type="TextureRect" parent="Pg5/Table/SuicideControls/DelContainer"]
+margin_left = -12.0
+margin_top = -12.0
+margin_right = 52.0
+margin_bottom = 52.0
 texture = ExtResource( 25 )
 
 [node name="ArcadeButtons" type="GridContainer" parent="Pg5/Table/SuicideControls"]
