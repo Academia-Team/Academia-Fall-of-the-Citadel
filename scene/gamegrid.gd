@@ -1,11 +1,10 @@
 extends TileMap
 
-var player_ref
-var player_scene = preload("res://scene/player.tscn")
 var sword_scene = preload("res://scene/sword.tscn")
 var zombie_scene = preload("res://scene/zombie.tscn")
 var ref_counter = {"sword": 0, "zombie": 0}
 var info_ref = null
+var started = false
 
 const ITEM_SCORE = 5
 const PASSIVE_SCORE = 1
@@ -18,22 +17,19 @@ const ZOMBIE_SPAWN_PROB = 0.5
 const MAX_ITEMS = 2
 
 signal game_over()
+signal started()
 
-func start(info_obj, seed_val):
+func start(info_obj):
 	info_ref = info_obj
-	seed(seed_val)
+	seed(info_obj.get_seed())
 	set_up_player()
+	emit_signal("started")
+	started = true
 
 func set_up_player():
-	player_ref = player_scene.instance()
 	var screen_size = get_viewport_rect().size
 
-	player_ref.connect("health_change", self, "_on_player_health_change")
-	player_ref.connect("pick_up_item", self, "_on_player_pick_up_item")
-	player_ref.connect("used_item", self, "_on_player_used_item")
-	
-	add_child(player_ref)
-	player_ref.spawn(Vector2(0, 0), 0,
+	$player.spawn(Vector2(0, 0), 0,
 		screen_size.y - cell_size.y * 2, 0, screen_size.x - cell_size.x)
 
 func _on_player_pick_up_item(item_name):
@@ -55,6 +51,9 @@ func _on_enemy_destroyed(enemy_type):
 			info_ref.incr_score(ZOMBIE_SCORE)
 
 func _on_player_health_change(lives):
+	if not started:
+		yield(self, "started")
+	
 	info_ref.set_lives(lives)
 	
 	if lives <= 0:
@@ -89,8 +88,8 @@ func get_spawn_pos():
 func valid_spawn_pos(pos):
 	var valid_pos = false
 	
-	if abs(pos.x - player_ref.position.x) >= VALID_DIST_FROM_PLAYER and \
-		abs(pos.y - player_ref.position.y) >= VALID_DIST_FROM_PLAYER:
+	if abs(pos.x - $player.position.x) >= VALID_DIST_FROM_PLAYER and \
+		abs(pos.y - $player.position.y) >= VALID_DIST_FROM_PLAYER:
 			valid_pos = valid_move_pos(pos)
 				
 	return valid_pos
@@ -105,7 +104,7 @@ func valid_move_pos(pos):
 		valid_pos = true
 		
 		while valid_pos and idx < node_array_sz:
-			if node_array[idx] != player_ref and node_array[idx].exists():
+			if node_array[idx] != $player and node_array[idx].exists():
 				valid_pos = node_array[idx].position != pos
 			idx += 1
 	
@@ -116,7 +115,7 @@ func spawn_enemy(scene, pos):
 	instance.connect("enemy_destroyed", self, "_on_enemy_destroyed")
 	instance.connect("move_request", self, "_on_enemy_move_request")
 	add_child(instance)
-	var orient_facing_player = Direction.get_cardinal_dir_facing(player_ref.position, pos)
+	var orient_facing_player = Direction.get_cardinal_dir_facing($player.position, pos)
 	instance.spawn(pos, orient_facing_player)
 	ref_counter[instance.get_meta("type")] += 1
 
@@ -131,7 +130,7 @@ func spawn_item(scene, pos):
 	ref_counter[instance.get_meta("type")] += 1
 
 func _on_enemy_move_request(ref):
-	var desired_positions = ref.desired_positions(player_ref.position)
+	var desired_positions = ref.desired_positions($player.position)
 	
 	for pos in desired_positions:
 		# Want to ensure that all the enemies aren't moving on top of each other. If that is happening,
