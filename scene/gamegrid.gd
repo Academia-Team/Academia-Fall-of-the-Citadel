@@ -31,8 +31,7 @@ func set_up_player(info_obj):
 	player_ref.connect("health_change", self, "_on_player_health_change")
 	player_ref.connect("health_change", info_obj, "_on_player_health_change")
 	player_ref.connect("pick_up_item", self, "_on_player_pick_up_item")
-	player_ref.connect("pick_up_item", info_obj, "_on_player_pick_up_item")
-	player_ref.connect("used_item", info_obj, "_on_player_used_item")
+	player_ref.connect("used_item", self, "_on_player_used_item")
 	
 	add_child(player_ref)
 	player_ref.spawn(Vector2(0, 0), 0,
@@ -41,6 +40,10 @@ func set_up_player(info_obj):
 func _on_player_pick_up_item(item_name):
 	ref_counter[item_name] -= 1
 	info_ref.incr_score(ITEM_SCORE)
+	info_ref.set_status(item_name)
+
+func _on_player_used_item(_item_name):
+	info_ref.reset_status()
 
 
 func _on_passive_timer_timeout():
