@@ -110,7 +110,7 @@ func _on_Menu_gui_input(event):
 
 func _on_Credit_pressed():
 	if is_processing():
-		print("Pressed")
+		SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.CREDIT)
 
 
 func _on_Credit_mouse_entered():
