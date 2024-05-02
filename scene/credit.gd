@@ -6,6 +6,11 @@ func _ready():
 	$ScrollContainer.grab_focus()
 
 
+func _process(_delta):
+	if Input.is_action_just_pressed("quit"):
+		SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.MENU)
+
+
 func _on_ScrollContainer_gui_input(event):
 	var curr_vscroll_val = $ScrollContainer.get_v_scroll()
 	if event.is_action("ui_scroll_down", true):
