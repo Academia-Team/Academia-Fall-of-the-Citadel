@@ -31,7 +31,7 @@ scroll_horizontal_enabled = false
 
 [node name="Body" type="Label" parent="ScrollContainer"]
 margin_right = 784.0
-margin_bottom = 28113.0
+margin_bottom = 28311.0
 rect_min_size = Vector2( 784, 0 )
 theme = ExtResource( 2 )
 custom_constants/line_spacing = 3
@@ -139,6 +139,13 @@ SPDX-License-Identifier: CC-BY-3.0 OR CC0-1.0
 Slow Melancholic Theme C64 Style
 slow_melancholic_theme_c64_style.ogg
 By: skrjablin
+
+
+Tileset:
+https://opengameart.org/content/dungeon-crawl-32x32-tiles-supplemental
+SPDX-License-Identifier: CC0-1.0
+
+You can use these tilesets in your program freely. No attribution is required. As a courtesy, include a link to the OGA page: http://opengameart.org/content/dungeon-crawl-32x32-tiles-supplemental, or the crawl-tiles page: https://github.com/crawl/tiles
 
 
 This game uses Godot Engine, available under the following license:
