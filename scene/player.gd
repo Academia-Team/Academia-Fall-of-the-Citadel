@@ -79,13 +79,10 @@ func use_item():
 
 func use_sword():
 	targets_to_destroy = targets[$CharacterSprite.orientation].duplicate(true)
+	var slash_generated = _generate_sword_slash(32)
+	slash_generated = _generate_sword_slash(64) or slash_generated
 	
-	if pos_in_bounds(Direction.translate_pos(position, $CharacterSprite.orientation, 32)):
-		var slash_anim = load("res://scene/sword_attack.tscn").instance()
-		slash_anim.position = Direction.dir_to_rel_pos($CharacterSprite.orientation, 32)
-		slash_anim.connect("animation_finished", self, "_slash_anim_finished")
-		add_child(slash_anim)
-		
+	if slash_generated:
 		for target_to_destroy in targets_to_destroy:
 			if target_to_destroy != null:
 				target_to_destroy.attack()
@@ -94,6 +91,17 @@ func use_sword():
 		held_item = null
 	else:
 		$forbidden_sfx.play()
+
+func _generate_sword_slash(num_pixels_away):
+	var slash_anim = null
+	
+	if pos_in_bounds(Direction.translate_pos(position, $CharacterSprite.orientation, num_pixels_away)):
+		slash_anim = load("res://scene/sword_attack.tscn").instance()
+		slash_anim.position = Direction.dir_to_rel_pos($CharacterSprite.orientation, num_pixels_away)
+		slash_anim.connect("animation_finished", self, "_slash_anim_finished")
+		add_child(slash_anim)
+	
+	return slash_anim
 
 func _process(_delta):
 	if lives > 0:
