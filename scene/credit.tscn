@@ -31,7 +31,7 @@ scroll_horizontal_enabled = false
 
 [node name="Body" type="Label" parent="ScrollContainer"]
 margin_right = 784.0
-margin_bottom = 54975.0
+margin_bottom = 55151.0
 rect_min_size = Vector2( 784, 0 )
 theme = ExtResource( 2 )
 custom_constants/line_spacing = 3
@@ -198,6 +198,14 @@ stereostereo - 05 broken hand foley                         (CC-BY 3.0  -- http:
 velvorn - punches                                           (CC0        -- http://www.freesound.org/people/Velvorn/sounds/96486/)
 xenognosis - egg pulp                                       (CC0        -- http://www.freesound.org/people/xenognosis/sounds/137254/)
 ztrees1 - punch                                             (CC-BY 3.0  -- http://www.freesound.org/people/ztrees1/sounds/134934/)
+
+Sword Pickup SFX:
+https://opengameart.org/content/water-harp
+SPDX-License-Identifier: CC-BY-SA-3.0
+
+Samples sourced from: http://commons.wikimedia.org/wiki/File:Waterharpsound.ogg
+Waterharpsound-ding01.wav from ding.7z
+Authored by: Shizhao
 
 
 This game uses Godot Engine, available under the following license:
