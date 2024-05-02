@@ -53,7 +53,7 @@ func set_orient(orient):
 		var new_texture = get_orient_texture(orient)
 		
 		orient = Direction.get_horz_component(orient)
-		flip_h = (orient == Direction.WEST)
+		flip_h = (orient == Direction.EAST)
 		orientation = orient
 		texture = new_texture
 		
