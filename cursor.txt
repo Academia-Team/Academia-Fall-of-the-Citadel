@@ -1,4 +1,5 @@
 https://opengameart.org/content/13-unique-cursors -- The red cursor
+The background of the image has been removed.
 
 From README:
 Follow me on Soundcloud!
