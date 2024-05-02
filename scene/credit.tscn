@@ -30,9 +30,9 @@ focus_mode = 2
 scroll_horizontal_enabled = false
 
 [node name="Body" type="Label" parent="ScrollContainer"]
-margin_right = 800.0
+margin_right = 784.0
 margin_bottom = 899.0
-rect_min_size = Vector2( 800, 0 )
+rect_min_size = Vector2( 784, 0 )
 theme = ExtResource( 2 )
 custom_constants/line_spacing = 3
 custom_styles/normal = SubResource( 3 )
