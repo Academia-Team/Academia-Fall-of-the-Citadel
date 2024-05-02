@@ -1,7 +1,7 @@
 extends Reference
 class_name SceneSwitcher
 
-enum {MENU, GAME, HELP}
+enum {MENU, GAME, HELP, CREDIT}
 
 static func get_scene(scene_ID):
 	match scene_ID:
@@ -11,6 +11,8 @@ static func get_scene(scene_ID):
 			return load("res://scene/gamescr.tscn")
 		HELP:
 			return load("res://scene/instructions.tscn")
+		CREDIT:
+			return load("res://scene/credit.tscn")
 		_:
 			return null
 
@@ -26,5 +28,7 @@ static func scene_to_str(scene_ID):
 			return "game"
 		HELP:
 			return "help"
+		CREDIT:
+			return "credit"
 		_:
 			return "invalid"

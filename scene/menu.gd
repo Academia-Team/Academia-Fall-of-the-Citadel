@@ -106,3 +106,18 @@ func _on_Menu_gui_input(event):
 		if not ignore_mouse_warp:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		ignore_mouse_warp = false
+
+
+func _on_Credit_pressed():
+	if is_processing():
+		SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.CREDIT)
+
+
+func _on_Credit_mouse_entered():
+	mouse_over = $Buttons/Credit
+	$Buttons/Credit.grab_focus()
+
+
+func _on_Credit_mouse_exited():
+	mouse_over = null
+	$Buttons/Credit.release_focus()
