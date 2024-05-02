@@ -25,7 +25,6 @@ align = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 margin_top = 69.0
-margin_right = 4290.0
 margin_bottom = 445.0
 focus_mode = 2
 scroll_horizontal_enabled = false
