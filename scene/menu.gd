@@ -61,7 +61,7 @@ func _on_SeedDialog_Line_text_change_rejected(_rejected_substring):
 	$SeedDialog/Reject.play()
 
 
-func _on_SeedDialog_popup_hide():
+func _on_SeedDialog_hide():
 	$SeedDialog/HBoxContainer/Line.text = ""
 	$Buttons/Enter.grab_focus()
 	set_process(true)

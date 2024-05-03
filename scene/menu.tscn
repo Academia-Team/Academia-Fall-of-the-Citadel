@@ -199,6 +199,6 @@ stream = ExtResource( 6 )
 [connection signal="mouse_entered" from="Buttons/Perish" to="." method="_on_Perish_mouse_entered"]
 [connection signal="mouse_exited" from="Buttons/Perish" to="." method="_on_Perish_mouse_exited"]
 [connection signal="pressed" from="Buttons/Perish" to="." method="_on_Perish_pressed"]
-[connection signal="popup_hide" from="SeedDialog" to="." method="_on_SeedDialog_popup_hide"]
+[connection signal="hide" from="SeedDialog" to="." method="_on_SeedDialog_hide"]
 [connection signal="text_change_rejected" from="SeedDialog/HBoxContainer/Line" to="." method="_on_SeedDialog_Line_text_change_rejected"]
 [connection signal="text_entered" from="SeedDialog/HBoxContainer/Line" to="." method="_on_SeedDialog_Line_text_entered"]
