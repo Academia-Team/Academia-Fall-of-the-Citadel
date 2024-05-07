@@ -870,7 +870,7 @@ margin_right = 800.0
 margin_bottom = 447.0
 text = "Player movement is separate from player orientation. When movement is requested, the player orientation changes immediately. Orientation can never be diagonal. In the case of a request for diagonal movement, the orientation will become the horizontal component of that movement request. To only change orientation without moving, the stay button should be pressed before inputting a direction.
 
-Orientation is important when it comes to wielding weapons. A weapon will affect different cells depending on which way the player is facing. For instance, the sword will slay all enemies on whatever adjacent cell the player is orientated towards."
+Orientation is important when it comes to wielding weapons. A weapon will affect different cells depending on which way the player is facing. For instance, the sword will slay all enemies on whatever two cells the player is orientated towards."
 autowrap = true
 
 [node name="Pg8" type="Control" parent="." groups=["Page"]]
