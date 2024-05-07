@@ -1,6 +1,6 @@
 extends ColorRect
 
-const NUM_PAGES = 8
+const NUM_PAGES = 9
 var curr_page = null
 var page_counter = 0
 
@@ -28,8 +28,8 @@ func get_next_page():
 
 func _handle_debug_only_options():
 	if OS.is_debug_build():
-		$Pg5/Table/Suicide.show()
-		$Pg5/Table/SuicideControls.show()
+		$Pg6/Table/Suicide.show()
+		$Pg6/Table/SuicideControls.show()
 
 func handle_page_request():
 	var next_page = get_next_page()
