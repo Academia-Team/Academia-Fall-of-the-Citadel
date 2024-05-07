@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://resource/emphasized_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scene/instructions.gd" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_y.svg" type="Texture" id=12]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_l.svg" type="Texture" id=13]
 [ext_resource path="res://asset/kenney_input-prompts/Generic/generic_stick_right.svg" type="Texture" id=14]
+[ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_q.svg" type="Texture" id=15]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_u.svg" type="Texture" id=16]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_b.svg" type="Texture" id=18]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_n.svg" type="Texture" id=19]
@@ -35,6 +36,7 @@ color = Color( 0, 0, 0, 1 )
 script = ExtResource( 2 )
 
 [node name="Pg1" type="Control" parent="." groups=["Page"]]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -668,7 +670,6 @@ margin_bottom = 132.0
 texture = ExtResource( 22 )
 
 [node name="Pg5" type="Control" parent="." groups=["Page"]]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -772,12 +773,13 @@ custom_constants/hseparation = 64
 columns = 2
 
 [node name="DelContainer" type="CenterContainer" parent="Pg5/Table/SuicideControls"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 64.0
+margin_bottom = 132.0
 
 [node name="DelButton" type="TextureRect" parent="Pg5/Table/SuicideControls/DelContainer"]
+margin_top = 34.0
 margin_right = 64.0
-margin_bottom = 64.0
+margin_bottom = 98.0
 texture = ExtResource( 25 )
 
 [node name="ArcadeButtons" type="GridContainer" parent="Pg5/Table/SuicideControls"]
@@ -822,6 +824,73 @@ margin_top = 68.0
 margin_right = 200.0
 margin_bottom = 132.0
 texture = ExtResource( 23 )
+
+[node name="Quit" type="Label" parent="Pg5/Table"]
+margin_top = 192.0
+margin_right = 149.0
+margin_bottom = 211.0
+text = "Quit"
+
+[node name="QuitControls2" type="GridContainer" parent="Pg5/Table"]
+margin_left = 349.0
+margin_top = 136.0
+margin_right = 677.0
+margin_bottom = 268.0
+custom_constants/hseparation = 64
+columns = 2
+
+[node name="QContainer" type="CenterContainer" parent="Pg5/Table/QuitControls2"]
+margin_right = 64.0
+margin_bottom = 132.0
+
+[node name="QButton" type="TextureRect" parent="Pg5/Table/QuitControls2/QContainer"]
+margin_top = 34.0
+margin_right = 64.0
+margin_bottom = 98.0
+texture = ExtResource( 15 )
+
+[node name="ArcadeButtons" type="GridContainer" parent="Pg5/Table/QuitControls2"]
+margin_left = 128.0
+margin_right = 328.0
+margin_bottom = 132.0
+columns = 3
+
+[node name="Button" type="TextureRect" parent="Pg5/Table/QuitControls2/ArcadeButtons"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 22 )
+
+[node name="Button2" type="TextureRect" parent="Pg5/Table/QuitControls2/ArcadeButtons"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+texture = ExtResource( 22 )
+
+[node name="Button3" type="TextureRect" parent="Pg5/Table/QuitControls2/ArcadeButtons"]
+margin_left = 136.0
+margin_right = 200.0
+margin_bottom = 64.0
+texture = ExtResource( 22 )
+
+[node name="Button4" type="TextureRect" parent="Pg5/Table/QuitControls2/ArcadeButtons"]
+margin_top = 68.0
+margin_right = 64.0
+margin_bottom = 132.0
+texture = ExtResource( 22 )
+
+[node name="PressedButton" type="TextureRect" parent="Pg5/Table/QuitControls2/ArcadeButtons"]
+margin_left = 68.0
+margin_top = 68.0
+margin_right = 132.0
+margin_bottom = 132.0
+texture = ExtResource( 23 )
+
+[node name="Button5" type="TextureRect" parent="Pg5/Table/QuitControls2/ArcadeButtons"]
+margin_left = 136.0
+margin_top = 68.0
+margin_right = 200.0
+margin_bottom = 132.0
+texture = ExtResource( 22 )
 
 [node name="Pg6" type="Control" parent="." groups=["Page"]]
 visible = false
