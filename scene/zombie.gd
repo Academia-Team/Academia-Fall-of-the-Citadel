@@ -58,6 +58,7 @@ func move(pos):
 		var diff_pos = pos - position
 		position = pos
 		$CharacterSprite.set_orient(Direction.rel_pos_to_dir(diff_pos))
+		$walk_sfx.play()
 
 func spawn(pos, orient):
 	position = pos
