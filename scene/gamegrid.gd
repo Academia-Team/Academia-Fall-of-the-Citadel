@@ -102,9 +102,11 @@ func get_interactable_obj_at_pos(pos):
 	var idx = 0
 	
 	while interactable_obj == null and idx < node_array_sz:
-		if node_array[idx].exists():
+		if node_array[idx].position == pos and node_array[idx].exists():
 			interactable_obj = node_array[idx]
 		idx += 1
+	
+	return interactable_obj
 
 func spawn_enemy(scene, pos):
 	var instance = scene.instance()
