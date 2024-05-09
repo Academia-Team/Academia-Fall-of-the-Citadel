@@ -138,26 +138,18 @@ func _on_enemy_move_request(ref):
 			break
 		elif obj_at_pos.is_shovable():
 			var dir_to_shove = Direction.get_cardinal_dir_facing(pos, ref.position)
-			move_shovable_obj(obj_at_pos, dir_to_shove)
-			break
+			if move_shovable_obj(obj_at_pos, dir_to_shove):
+				break
 
 func move_shovable_obj(ref, shove_dir):
-	var shove_pos = Vector2(0, 0)
+	var dest_pos = Direction.translate_pos(ref.position, shove_dir, 32)
+	var success = false
 	
-	if Direction.is_horz(shove_dir):
-		shove_pos = ref.get_h_shove_pos()
+	if get_interactable_obj_at_pos(dest_pos) == null:
+		ref.shove_to(dest_pos)
+		success = true
 		
-		if get_interactable_obj_at_pos(shove_pos) == null:
-			ref.shove_to(shove_pos)
-		else:
-			ref.h_shove_blocked()
-	else:
-		shove_pos = ref.get_v_shove_pos()
-		
-		if get_interactable_obj_at_pos(shove_pos) == null:
-			ref.shove_to(shove_pos)
-		else:
-			ref.v_shove_blocked()
+	return success
 
 
 func _on_gameover_sfx_finished():
