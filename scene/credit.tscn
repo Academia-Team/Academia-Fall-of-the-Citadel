@@ -31,7 +31,7 @@ scroll_horizontal_enabled = false
 
 [node name="Body" type="Label" parent="ScrollContainer"]
 margin_right = 784.0
-margin_bottom = 64171.0
+margin_bottom = 64787.0
 rect_min_size = Vector2( 784, 0 )
 theme = ExtResource( 2 )
 custom_constants/line_spacing = 3
@@ -215,6 +215,34 @@ SPDX-License-Identifier: LicenseRef-OGA-BY-3.0 OR CC0-1.0
 sounds effects.ogg
 Authored by: Augmentality (Brandon Morris)
 First few seconds were used to create Zombie_hurt.wav
+
+
+Walking SFX:
+https://kenney.nl/assets/impact-sounds
+Most of the files were removed.
+SPDX-License-Identifier: CC0-1.0
+
+	Impact Sounds (1.0)
+
+	Created/distributed by Kenney (www.kenney.nl)
+	Creation date: 19-12-2019
+
+			------------------------------
+
+	License: (Creative Commons Zero, CC0)
+	http://creativecommons.org/publicdomain/zero/1.0/
+
+	This content is free to use in personal, educational and commercial projects.
+	Support us by crediting Kenney or www.kenney.nl (this is not mandatory)
+
+			------------------------------
+
+	Donate:   http://support.kenney.nl
+	Request:  http://request.kenney.nl
+	Patreon:  http://patreon.com/kenney/
+
+	Follow on Twitter for updates:
+	http://twitter.com/KenneyNL
 
 
 This game uses Godot Engine, available under the following license:

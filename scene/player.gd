@@ -175,6 +175,7 @@ func _on_move_timer_timeout():
 		
 		if pos_in_bounds(future_pos):
 			position = future_pos
+			$walk_sfx.play()
 		else:
 			$forbidden_sfx.play()
 
