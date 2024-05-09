@@ -90,25 +90,23 @@ func valid_spawn_pos(pos):
 	
 	if abs(pos.x - $player.position.x) >= VALID_DIST_FROM_PLAYER and \
 		abs(pos.y - $player.position.y) >= VALID_DIST_FROM_PLAYER:
-			valid_pos = valid_move_pos(pos)
+			valid_pos = get_interactable_obj_at_pos(pos) == null
 				
 	return valid_pos
+
+func get_interactable_obj_at_pos(pos):
+	var interactable_obj = null
 	
-func valid_move_pos(pos):
-	var valid_pos = false
+	var node_array = get_tree().get_nodes_in_group("interactable")
+	var node_array_sz = node_array.size()
+	var idx = 0
 	
-	if not $gameover_sfx.is_playing():
-		var node_array = get_tree().get_nodes_in_group("interactable")
-		var node_array_sz = node_array.size()
-		var idx = 0
-		valid_pos = true
-		
-		while valid_pos and idx < node_array_sz:
-			if node_array[idx] != $player and node_array[idx].exists():
-				valid_pos = node_array[idx].position != pos
-			idx += 1
+	while interactable_obj == null and idx < node_array_sz:
+		if node_array[idx].position == pos and node_array[idx].exists():
+			interactable_obj = node_array[idx]
+		idx += 1
 	
-	return valid_pos
+	return interactable_obj
 
 func spawn_enemy(scene, pos):
 	var instance = scene.instance()
@@ -135,9 +133,25 @@ func _on_enemy_move_request(ref):
 	for pos in desired_positions:
 		# Want to ensure that all the enemies aren't moving on top of each other. If that is happening,
 		# just have the enemy lose its turn.
-		if valid_move_pos(pos):
+		var obj_at_pos = get_interactable_obj_at_pos(pos)
+		
+		if obj_at_pos == null:
 			ref.move(pos)
 			break
+		elif obj_at_pos.is_shovable():
+			var dir_to_shove = Direction.get_cardinal_dir_facing(pos, ref.position)
+			if move_shovable_obj(obj_at_pos, dir_to_shove):
+				break
+
+func move_shovable_obj(ref, shove_dir):
+	var dest_pos = Direction.translate_pos(ref.position, shove_dir, 32)
+	var success = false
+	
+	if get_interactable_obj_at_pos(dest_pos) == null:
+		ref.shove_to(dest_pos)
+		success = true
+		
+	return success
 
 
 func _on_gameover_sfx_finished():

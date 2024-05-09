@@ -50,6 +50,9 @@ func destroy():
 func exists():
 	return visible
 
+func is_shovable():
+	return false
+
 func move(pos):
 	if alive:
 		var diff_pos = pos - position

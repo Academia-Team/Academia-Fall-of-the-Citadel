@@ -1,15 +1,10 @@
 extends Area2D
 class_name item
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 func get_class():
 	return "item"
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	set_meta("type", "sword")
 
@@ -22,6 +17,12 @@ func acquire():
 func exists():
 	return visible
 
+func shove_to(pos):
+	position = pos
+	$shove_sfx.play()
+
+func is_shovable():
+	return true
 
 func _on_acquire_sfx_finished():
 	queue_free()
