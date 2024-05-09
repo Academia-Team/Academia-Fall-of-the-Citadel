@@ -35,5 +35,8 @@ func v_shove_blocked():
 func shove_to(pos):
 	position = pos
 
+func is_shovable():
+	return true
+
 func _on_acquire_sfx_finished():
 	queue_free()
