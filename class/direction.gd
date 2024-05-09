@@ -153,3 +153,9 @@ static func _get_vert_dir_from_pos(pos):
 
 static func is_cardinal_dir(dir):
 	return dir == NORTH or dir == SOUTH or dir == EAST or dir == WEST
+	
+static func is_horz(dir):
+	return dir == EAST or dir == WEST
+
+static func is_vert(dir):
+	return dir == NORTH or dir == SOUTH
