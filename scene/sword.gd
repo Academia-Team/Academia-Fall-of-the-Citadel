@@ -19,6 +19,7 @@ func exists():
 
 func shove_to(pos):
 	position = pos
+	$shove_sfx.play()
 
 func is_shovable():
 	return true
