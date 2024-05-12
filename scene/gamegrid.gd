@@ -89,7 +89,8 @@ func valid_spawn_pos(pos):
 	var valid_pos = false
 	
 	if abs(pos.x - $player.position.x) >= VALID_DIST_FROM_PLAYER and \
-		abs(pos.y - $player.position.y) >= VALID_DIST_FROM_PLAYER:
+		abs(pos.y - $player.position.y) >= VALID_DIST_FROM_PLAYER and \
+		get_cellv(world_to_map(pos)) != INVALID_CELL:
 			valid_pos = get_interactable_obj_at_pos(pos) == null
 				
 	return valid_pos
@@ -147,7 +148,8 @@ func move_shovable_obj(ref, shove_dir):
 	var dest_pos = Direction.translate_pos(ref.position, shove_dir, 32)
 	var success = false
 	
-	if get_interactable_obj_at_pos(dest_pos) == null:
+	if get_interactable_obj_at_pos(dest_pos) == null and \
+		get_cellv(world_to_map(dest_pos)) != INVALID_CELL:
 		ref.shove_to(dest_pos)
 		success = true
 		
