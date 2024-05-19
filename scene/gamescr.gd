@@ -1,5 +1,8 @@
 extends Control
 
+const CHEAT_COUNT_REQ = 3
+
+var cheat_key_counter = 0
 var mode = "Regular"
 var seed_val = null
 
@@ -17,6 +20,14 @@ func _ready():
 func _process(_delta):
 	if Input.is_action_just_pressed("quit"):
 		SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.MENU)
+	elif Input.is_action_just_pressed("cheat_mode"):
+		if $CheatInputTimeout.is_stopped():
+			$CheatInputTimeout.start()
+		cheat_key_counter += 1
+		
+		if cheat_key_counter == CHEAT_COUNT_REQ:
+			cheat_key_counter = 0
+			print("Cheats activated.")
 
 func gen_seed():
 	var gen_seed_val = hash(Time.get_datetime_dict_from_system())
@@ -42,3 +53,7 @@ func _on_gamegrid_game_over():
 
 func _on_gamescr_tree_exiting():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+
+func _on_CheatInputTimeout_timeout():
+	cheat_key_counter = 0
