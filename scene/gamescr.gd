@@ -21,18 +21,21 @@ func _process(_delta):
 	if Input.is_action_just_pressed("quit"):
 		SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.MENU)
 	elif Input.is_action_just_pressed("cheat_mode"):
-		if $CheatInputTimeout.is_stopped():
+		handle_cheat_toggling()
+
+func handle_cheat_toggling():
+	if $CheatInputTimeout.is_stopped():
 			$CheatInputTimeout.start()
-		cheat_key_counter += 1
+	cheat_key_counter += 1
+	
+	if cheat_key_counter == CHEAT_COUNT_REQ:
+		cheat_key_counter = 0
+		$infobar.toggle_cheats()
 		
-		if cheat_key_counter == CHEAT_COUNT_REQ:
-			cheat_key_counter = 0
-			$infobar.toggle_cheats()
-			
-			if $infobar.is_cheat_enabled():
-				$infobar.set_timed_status("You are a CHEATER!!!")
-			else:
-				$infobar.set_timed_status("Cheats disabled--for now.")
+		if $infobar.is_cheat_enabled():
+			$infobar.set_timed_status("You are a CHEATER!!!")
+		else:
+			$infobar.set_timed_status("Cheats disabled--for now.")
 
 func gen_seed():
 	var gen_seed_val = hash(Time.get_datetime_dict_from_system())
