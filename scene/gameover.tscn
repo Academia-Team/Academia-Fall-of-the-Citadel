@@ -126,6 +126,19 @@ text = "Give Up"
 flat = true
 align = 2
 
+[node name="Tainted" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -48.0
+margin_top = -73.5
+margin_right = 82.0
+margin_bottom = -28.5
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 0.992157, 0.027451, 0.027451, 1 )
+text = "Cheater"
+
 [connection signal="draw" from="." to="." method="_on_gameover_draw"]
 [connection signal="gui_input" from="." to="." method="_on_GameOver_gui_input"]
 [connection signal="mouse_entered" from="Buttons/Arise" to="." method="_on_Arise_mouse_entered"]

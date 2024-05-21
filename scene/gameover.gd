@@ -30,7 +30,11 @@ func start(info_obj):
 	info_ref = info_obj
 	_set_seed_text(info_obj.get_seed())
 	_set_mode_text(info_obj.get_mode())
+	
+	if not info_obj.is_tainted():
+		$Tainted.hide()
 	show()
+	
 	$Buttons/Arise.grab_focus()
 
 func stop():

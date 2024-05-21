@@ -115,6 +115,9 @@ func toggle_cheats():
 func is_cheat_enabled():
 	return _cheat_enabled
 
+func is_tainted():
+	return _tainted
+
 
 func _on_StatusTimer_timeout():
 	$status.text = _cur_status_text
