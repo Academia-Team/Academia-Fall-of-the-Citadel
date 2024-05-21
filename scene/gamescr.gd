@@ -7,9 +7,7 @@ func _ready():
 	
 	if seed_val == null:
 		seed_val = gen_seed()
-	
-		if OS.is_debug_build():
-			print("Seed: %d" % seed_val)
+		print("Seed: %d" % seed_val)
 
 	$infobar.set_seed(seed_val)
 	$gamegrid.start($infobar)
