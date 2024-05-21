@@ -27,7 +27,12 @@ func _process(_delta):
 		
 		if cheat_key_counter == CHEAT_COUNT_REQ:
 			cheat_key_counter = 0
-			print("Cheats activated.")
+			$infobar.toggle_cheats()
+			
+			if $infobar.is_cheat_enabled():
+				$infobar.set_timed_status("You are a CHEATER!!!")
+			else:
+				$infobar.set_timed_status("Cheats disabled--for now.")
 
 func gen_seed():
 	var gen_seed_val = hash(Time.get_datetime_dict_from_system())
