@@ -1,9 +1,14 @@
 extends ColorRect
 
+var _cur_status_text = ""
 var _lives = 0
-var _orig_item_text = ""
+var _orig_status_text = ""
 var _score = 0
 var _seed = null
+
+func _ready():
+	_cur_status_text = $status.text
+	_orig_status_text = $status.text
 
 func incr_score(score_delta):
 	_score += score_delta
@@ -55,12 +60,34 @@ func set_seed(seed_val):
 func get_seed():
 	return _seed
 
-func set_status(status_str):
-	_orig_item_text = $status.text
+func set_timed_status(status_str, sec = 3):
 	$status.text = status_str
+	
+	# Ensure all other timed status messages are replaced.
+	if not $StatusTimer.is_stopped():
+		$StatusTimer.stop()
+	
+	$StatusTimer.start(sec)
+
+# All timed status messages have priority above non-timed status messages.
+func set_status(status_str):
+	if $StatusTimer.is_stopped():
+		_orig_status_text = $status.text
+		$status.text = status_str
+		
+	_cur_status_text = status_str
 
 func get_status():
 	return $status.text
 
+# Has no effect on temporary (timed) status messages.
+# Those will be reset when the timer times out.
 func reset_status():
-	$status.text = _orig_item_text
+	if $StatusTimer.is_stopped():
+		$status.text = _orig_status_text
+
+	_cur_status_text = _orig_status_text
+
+
+func _on_StatusTimer_timeout():
+	$status.text = _cur_status_text
