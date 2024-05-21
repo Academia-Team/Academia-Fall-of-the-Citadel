@@ -42,6 +42,13 @@ func _process(_delta):
 	if started and info_ref.is_cheat_enabled():
 		if Input.is_action_just_pressed("cheat_suicide"):
 			$player.kill()
+		elif Input.is_action_just_pressed("cheat_god"):
+			$player.toggle_immortality()
+			
+			if $player.is_immortal():
+				info_ref.set_timed_status("Feeling Powerful?")
+			else:
+				info_ref.set_timed_status("Death waits for you.")
 
 func set_up_player():
 	var screen_size = get_viewport_rect().size

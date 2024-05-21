@@ -10,6 +10,7 @@ var targets = [[], [], [], []]
 var targets_to_destroy = []
 
 var future_dir = null
+var immortal = false
 
 const NUM_DIRS = 4
 const NUM_ORIENT = 4
@@ -33,8 +34,12 @@ func set_dir(dir):
 	$move_timer.set_paused(false)
 
 func kill():
-	lives = 1
-	hurt()
+	while (lives > 0):
+		if is_immortal():
+			toggle_immortality()
+		
+		hurt()
+		yield($immunity_timer, "timeout")
 
 func pos_in_bounds(pos):
 	return pos.x >= bounds.left && pos.x <= bounds.right && \
@@ -162,7 +167,7 @@ func handle_collision(obj):
 		obj.destroy()
 		
 func hurt():
-	if $immunity_timer.is_stopped():
+	if $immunity_timer.is_stopped() and not is_immortal():
 		if (lives > 0): lives -= 1
 		emit_signal("health_change", lives)
 		$CharacterSprite.show_hurt()
@@ -231,3 +236,9 @@ func _slash_anim_finished():
 			target_to_destroy.destroy()
 	
 	targets_to_destroy.clear()
+
+func is_immortal():
+	return immortal
+
+func toggle_immortality():
+	immortal = not immortal
