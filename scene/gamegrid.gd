@@ -38,6 +38,11 @@ func restart():
 func cleanup():
 	for interactable in get_tree().get_nodes_in_group("interactable"):
 		interactable.queue_free()
+func _process(_delta):
+	if started and info_ref.is_cheat_enabled():
+		if Input.is_action_just_pressed("cheat_suicide"):
+			$player.kill()
+
 func set_up_player():
 	var screen_size = get_viewport_rect().size
 

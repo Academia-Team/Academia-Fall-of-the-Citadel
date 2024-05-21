@@ -44,9 +44,6 @@ func handle_action():
 	handle_movement()
 	if Input.is_action_just_pressed("action"):
 		use_item()
-	if OS.is_debug_build():
-		if Input.is_action_just_pressed("suicide"):
-			kill()
 
 func handle_movement():
 	var desired_dir = null
