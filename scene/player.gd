@@ -73,6 +73,8 @@ func use_item():
 	match held_item.type:
 		"sword":
 			use_sword()
+		"duck":
+			use_duck()
 		_:
 			$Reject.play()
 
@@ -102,6 +104,11 @@ func _generate_sword_slash(num_pixels_away):
 		add_child(slash_anim)
 	
 	return slash_anim
+
+func use_duck():
+	$duck_sfx.play()
+	emit_signal("used_item", "duck")
+	held_item = null
 
 func _process(_delta):
 	if lives > 0:

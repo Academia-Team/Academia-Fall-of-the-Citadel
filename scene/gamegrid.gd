@@ -111,12 +111,17 @@ func spawn_enemy(scene, pos):
 func _on_item_spawn_timer_timeout():
 	if ref_counter["sword"] < MAX_ITEMS:
 		spawn_item(sword_scene, get_spawn_pos())
+	spawn_item(load("res://scene/duck.tscn"), get_spawn_pos()) # DEBUG
 
 func spawn_item(scene, pos):
 	var instance = scene.instance()
 	add_child(instance)
 	instance.position = pos
-	ref_counter[instance.type] += 1
+	
+	if ref_counter.has(instance.type):
+		ref_counter[instance.type] += 1
+	else:
+		ref_counter[instance.type] = 1
 
 func _on_enemy_move_request(ref):
 	var desired_positions = ref.desired_positions($player.position)

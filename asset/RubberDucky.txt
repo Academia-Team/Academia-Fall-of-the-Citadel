@@ -1,0 +1,2 @@
+https://opengameart.org/content/rubber-duck
+Shrunk to 32px by 32px and background coloured green.
