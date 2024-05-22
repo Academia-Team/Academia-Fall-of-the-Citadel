@@ -143,7 +143,7 @@ func spawn(pos, topBound, bottomBound, leftBound, rightBound):
 
 func handle_collision(obj):
 	var collisionCategory = obj.get_class()
-	if collisionCategory == "item":
+	if collisionCategory == "Item":
 		if not held_item:
 			held_item = obj.acquire()
 			emit_signal("pick_up_item", held_item)
