@@ -35,7 +35,7 @@ func _on_Enter_pressed():
 
 func _on_Perish_pressed():
 	if is_processing():
-		get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)
+		SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.QUIT)
 
 
 func _on_Enter_gui_input(event):
