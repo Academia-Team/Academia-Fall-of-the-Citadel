@@ -14,4 +14,5 @@ func _process(_delta):
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Fade Out":
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		$Sound.stop()
 		SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.MENU)
