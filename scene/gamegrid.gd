@@ -88,10 +88,10 @@ func get_spawn_pos():
 func valid_spawn_pos(pos):
 	var valid_pos = false
 	
-	if abs(pos.x - $player.position.x) >= VALID_DIST_FROM_PLAYER and \
-		abs(pos.y - $player.position.y) >= VALID_DIST_FROM_PLAYER and \
-		get_cellv(world_to_map(pos)) != INVALID_CELL:
-			valid_pos = get_interactable_obj_at_pos(pos) == null
+	if ((abs(pos.x - $player.position.x) >= VALID_DIST_FROM_PLAYER or
+			abs(pos.y - $player.position.y) >= VALID_DIST_FROM_PLAYER) and
+			get_cellv(world_to_map(pos)) != INVALID_CELL):
+		valid_pos = get_interactable_obj_at_pos(pos) == null
 				
 	return valid_pos
 
