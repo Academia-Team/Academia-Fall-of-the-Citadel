@@ -7,9 +7,11 @@ func _ready():
 # Allow for skipping the animation.
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_advance"):
-		var remaining_anim_len = $AnimationPlayer.current_animation_length - \
-			$AnimationPlayer.current_animation_position
-		$AnimationPlayer.advance(remaining_anim_len)
+		var next_anim = $AnimationPlayer.animation_get_next($AnimationPlayer.current_animation)
+		
+		$AnimationPlayer.emit_signal("animation_finished", $AnimationPlayer.current_animation)
+		$AnimationPlayer.play(next_anim)
+
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Fade Out":
