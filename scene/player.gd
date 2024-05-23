@@ -70,7 +70,7 @@ func handle_movement():
 	$CharacterSprite.set_orient(desired_dir)
 
 func use_item():
-	match held_item:
+	match held_item.type:
 		"sword":
 			use_sword()
 		_:
@@ -87,6 +87,7 @@ func use_sword():
 				target_to_destroy.attack()
 		
 		emit_signal("used_item", "sword")
+		held_item.destroy()
 		held_item = null
 	else:
 		$Reject.play()
@@ -146,7 +147,7 @@ func handle_collision(obj):
 	if collisionCategory == "Item":
 		if not held_item:
 			held_item = obj.acquire()
-			emit_signal("pick_up_item", held_item)
+			emit_signal("pick_up_item", held_item.type)
 	elif collisionCategory == 'enemy':
 		hurt()
 		obj.attack()

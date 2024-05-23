@@ -17,5 +17,3 @@ position = Vector2( 16, 16 )
 [node name="AcquireSFX" type="AudioStreamPlayer" parent="."]
 
 [node name="ShoveSFX" type="AudioStreamPlayer" parent="."]
-
-[connection signal="finished" from="AcquireSFX" to="." method="_on_acquire_sfx_finished"]

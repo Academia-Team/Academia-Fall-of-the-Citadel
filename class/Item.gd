@@ -19,7 +19,7 @@ func acquire():
 	.hide()
 	$Collisionbox.set_deferred("disabled", true)
 	$AcquireSFX.play()
-	return type
+	return self
 
 func exists():
 	return visible
@@ -34,5 +34,6 @@ func shove_to(pos):
 func is_shovable():
 	return shovable
 
-func _on_acquire_sfx_finished():
+
+func destroy():
 	queue_free()
