@@ -94,23 +94,10 @@ func valid_spawn_pos(pos):
 	if ((abs(pos.x - $player.position.x) >= VALID_DIST_FROM_PLAYER or
 			abs(pos.y - $player.position.y) >= VALID_DIST_FROM_PLAYER) and
 			get_cellv(world_to_map(pos)) != INVALID_CELL):
-		valid_pos = get_interactable_obj_at_pos(pos) == null
+		valid_pos = Group.get_obj_at_pos(get_tree(), "interactable", pos) == null
 				
 	return valid_pos
 
-func get_interactable_obj_at_pos(pos):
-	var interactable_obj = null
-	
-	var node_array = get_tree().get_nodes_in_group("interactable")
-	var node_array_sz = node_array.size()
-	var idx = 0
-	
-	while interactable_obj == null and idx < node_array_sz:
-		if node_array[idx].position == pos and node_array[idx].exists():
-			interactable_obj = node_array[idx]
-		idx += 1
-	
-	return interactable_obj
 
 func spawn_enemy(scene, pos):
 	var instance = scene.instance()
@@ -137,7 +124,7 @@ func _on_enemy_move_request(ref):
 	for pos in desired_positions:
 		# Want to ensure that all the enemies aren't moving on top of each other. If that is happening,
 		# just have the enemy lose its turn.
-		var obj_at_pos = get_interactable_obj_at_pos(pos)
+		var obj_at_pos = Group.get_obj_at_pos(get_tree(), "interactable", pos)
 		
 		if obj_at_pos == null:
 			ref.move(pos)
@@ -151,8 +138,8 @@ func move_shovable_obj(ref, shove_dir):
 	var dest_pos = Direction.translate_pos(ref.position, shove_dir, 32)
 	var success = false
 	
-	if get_interactable_obj_at_pos(dest_pos) == null and \
-		get_cellv(world_to_map(dest_pos)) != INVALID_CELL:
+	if (Group.get_obj_at_pos(get_tree(), "interactable", dest_pos) == null and
+			get_cellv(world_to_map(dest_pos)) != INVALID_CELL):
 		ref.shove_to(dest_pos)
 		success = true
 		
