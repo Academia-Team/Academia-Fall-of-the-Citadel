@@ -5,7 +5,7 @@
 [ext_resource path="res://scene/menu.gd" type="Script" id=3]
 [ext_resource path="res://resource/tech_theme.tres" type="Theme" id=4]
 [ext_resource path="res://resource/black_style_box.tres" type="StyleBox" id=5]
-[ext_resource path="res://asset/womp.wav" type="AudioStream" id=6]
+[ext_resource path="res://scene/Reject.tscn" type="PackedScene" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -182,8 +182,7 @@ max_length = 80
 expand_to_text_length = true
 caret_blink = true
 
-[node name="Reject" type="AudioStreamPlayer" parent="SeedDialog"]
-stream = ExtResource( 6 )
+[node name="Reject" parent="SeedDialog" instance=ExtResource( 6 )]
 
 [node name="Version" type="Label" parent="."]
 anchor_left = 1.0

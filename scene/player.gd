@@ -74,7 +74,7 @@ func use_item():
 		"sword":
 			use_sword()
 		_:
-			$forbidden_sfx.play()
+			$Reject.play()
 
 func use_sword():
 	targets_to_destroy = targets[$CharacterSprite.orientation].duplicate(true)
@@ -89,7 +89,7 @@ func use_sword():
 		emit_signal("used_item", "sword")
 		held_item = null
 	else:
-		$forbidden_sfx.play()
+		$Reject.play()
 
 func _generate_sword_slash(num_pixels_away):
 	var slash_anim = null
@@ -177,7 +177,7 @@ func _on_move_timer_timeout():
 			position = future_pos
 			$walk_sfx.play()
 		else:
-			$forbidden_sfx.play()
+			$Reject.play()
 
 func _on_player_area_shape_entered(_area_rid, area, _area_shape_index, local_shape_index):
 	var triggered_collisionbox = shape_owner_get_owner(local_shape_index)
