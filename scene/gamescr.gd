@@ -31,7 +31,7 @@ func _on_gameover_leave():
 
 
 func _on_gamegrid_game_over():
-	call_deferred("remove_child", $gamegrid)
+	$gamegrid.call_deferred("queue_free")
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$gameover.start($infobar)
 
