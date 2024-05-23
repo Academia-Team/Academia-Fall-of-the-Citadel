@@ -72,16 +72,19 @@ func _on_zombie_spawn_timer_timeout():
 
 func get_spawn_pos():
 	var available_cells = get_used_cells()
-	var num_cells = available_cells.size()
-	var spawn_pos
-	var got_valid_pos = false
+	var num_available_cells = available_cells.size()
+	var spawn_pos = null
+	var proposed_spawn_pos
 	
-	while not got_valid_pos:
-		var rand_cell_idx = randi() % num_cells
-		spawn_pos = map_to_world(available_cells[rand_cell_idx])
+	while spawn_pos == null and num_available_cells > 0:
+		var rand_cell_idx = randi() % num_available_cells
+		proposed_spawn_pos = map_to_world(available_cells[rand_cell_idx])
 		
-		if valid_spawn_pos(spawn_pos):
-			got_valid_pos = true
+		if valid_spawn_pos(proposed_spawn_pos):
+			spawn_pos = proposed_spawn_pos
+		else:
+			available_cells.remove(rand_cell_idx)
+			num_available_cells -= 1
 			
 	return spawn_pos
 
