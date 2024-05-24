@@ -162,7 +162,8 @@ func move_shovable_obj(ref, shove_dir):
 	var success = false
 	
 	if (Group.get_obj_at_pos(get_tree(), "interactable", dest_pos) == null and
-			get_cellv(world_to_map(dest_pos)) != INVALID_CELL):
+			get_cellv(world_to_map(dest_pos)) != INVALID_CELL and
+			($player.held_item == null or $player.position != dest_pos)):
 		if ref.is_shovable():
 			ref.shove_to(dest_pos)
 			success = true
