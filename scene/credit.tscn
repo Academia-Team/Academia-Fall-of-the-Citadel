@@ -31,7 +31,7 @@ scroll_horizontal_enabled = false
 
 [node name="Body" type="Label" parent="ScrollContainer"]
 margin_right = 784.0
-margin_bottom = 64963.0
+margin_bottom = 65579.0
 rect_min_size = Vector2( 784, 0 )
 theme = ExtResource( 2 )
 custom_constants/line_spacing = 3
@@ -252,6 +252,34 @@ SPDX-License-Identifier: CC0-1.0
 
 	Follow on Twitter for updates:
 	http://twitter.com/KenneyNL
+
+
+Duck Image:
+https://opengameart.org/content/rubber-duck
+Shrunk to 32px by 32px and background coloured green.
+SPDX-License-Identifier: CC0-1.0
+
+
+Duck Move SFX:
+https://freesound.org/people/scottemoil/sounds/336800/
+Contains only the first warble (roughly up to 0:02:556).
+SPDX-License-Identifier: CC-BY-4.0
+
+Ducktoy Quackers by scottemoil -- https://freesound.org/s/336800/ -- License: Attribution 4.0
+
+
+Duck Pickup SFX:
+https://opengameart.org/content/squeak-toy-sounds
+squeak toy - squeak2.wav
+SPDX-License-Identifier: CC0-1.0
+
+
+Duck Use SFX:
+https://freesound.org/people/sqeeeek/sounds/380121/
+Sneeze has been cropped out.
+SPDX-License-Identifier: CC0-1.0
+
+DuckSneeze_sqeeeek.wav by sqeeeek -- https://freesound.org/s/380121/ -- License: Creative Commons 0
 
 
 This game uses Godot Engine, available under the following license:
