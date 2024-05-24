@@ -67,6 +67,11 @@ window/size/height=450
 mouse_cursor/custom_image="res://cursor.png"
 window/stretch/mode="viewport"
 
+[global]
+
+Version="v0.2.0"
+Dev=true
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
