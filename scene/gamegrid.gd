@@ -160,6 +160,10 @@ func _on_player_move_request(dir):
 		var future_pos = Direction.translate_pos($player.position, dir, 32)
 		
 		if get_cellv(world_to_map(future_pos)) != INVALID_CELL:
-			$player.move_to(future_pos)
+			var interactable_obj = Group.get_obj_at_pos(get_tree(), "interactable", future_pos)
+			if $player.held_item == null or interactable_obj == null:
+				$player.move_to(future_pos)
+			elif not move_shovable_obj(interactable_obj, dir):
+				$player.move_reject()
 		else:
 			$player.move_reject()
