@@ -36,6 +36,7 @@ autoplay = true
 stream = ExtResource( 1 )
 
 [connection signal="health_change" from="player" to="." method="_on_player_health_change"]
+[connection signal="move_request" from="player" to="." method="_on_player_move_request"]
 [connection signal="pick_up_item" from="player" to="." method="_on_player_pick_up_item"]
 [connection signal="used_item" from="player" to="." method="_on_player_used_item"]
 [connection signal="timeout" from="passive_timer" to="." method="_on_passive_timer_timeout"]

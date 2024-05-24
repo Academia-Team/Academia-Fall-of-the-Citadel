@@ -1,6 +1,8 @@
 extends Area2D
 class_name player
 
+signal move_request(dir)
+
 var bounds = {Direction.NORTH: 0, Direction.SOUTH: 0, Direction.WEST: 0, Direction.EAST: 0}
 var held_item
 var lives
@@ -175,17 +177,18 @@ func hurt():
 			$top_collisionbox.set_deferred("disabled", true)
 			$bottom_collisionbox.set_deferred("disabled", true)
 
+func move_to(pos):
+	position = pos
+	$walk_sfx.play()
+
+
+func move_reject():
+	$Reject.play()
+
 
 func _on_move_timer_timeout():
-	if future_dir != null and lives > 0:
-		var future_pos = Direction.translate_pos(position, future_dir, 32)
-		future_dir = null
-		
-		if pos_in_bounds(future_pos):
-			position = future_pos
-			$walk_sfx.play()
-		else:
-			$Reject.play()
+	emit_signal("move_request", future_dir)
+	future_dir = null
 
 func _on_player_area_shape_entered(_area_rid, area, _area_shape_index, local_shape_index):
 	var triggered_collisionbox = shape_owner_get_owner(local_shape_index)

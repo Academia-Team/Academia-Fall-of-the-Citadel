@@ -153,3 +153,13 @@ func move_shovable_obj(ref, shove_dir):
 
 func _on_gameover_sfx_finished():
 	emit_signal("game_over")
+
+
+func _on_player_move_request(dir):
+	if $player.lives > 0:
+		var future_pos = Direction.translate_pos($player.position, dir, 32)
+		
+		if get_cellv(world_to_map(future_pos)) != INVALID_CELL:
+			$player.move_to(future_pos)
+		else:
+			$player.move_reject()
