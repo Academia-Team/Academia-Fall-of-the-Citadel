@@ -185,6 +185,16 @@ caret_blink = true
 [node name="Reject" type="AudioStreamPlayer" parent="SeedDialog"]
 stream = ExtResource( 6 )
 
+[node name="Version" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -19.0
+grow_horizontal = 0
+text = "Version"
+
 [connection signal="gui_input" from="." to="." method="_on_Menu_gui_input"]
 [connection signal="gui_input" from="Buttons/Enter" to="." method="_on_Enter_gui_input"]
 [connection signal="mouse_entered" from="Buttons/Enter" to="." method="_on_Enter_mouse_entered"]

@@ -8,6 +8,15 @@ var seed_val = null
 
 func _ready():
 	$Buttons/Enter.grab_focus()
+	$Version.text = get_version_str()
+
+func get_version_str():
+	var version_str = ProjectSettings.get_setting("global/Version")
+	
+	if ProjectSettings.get_setting("global/Dev"):
+		version_str += "-dev"
+	
+	return version_str
 
 func _process(_delta):
 	if Input.is_action_just_pressed("quit"):
