@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://resource/emphasized_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scene/instructions.gd" type="Script" id=2]
@@ -23,7 +23,6 @@
 [ext_resource path="res://asset/kenney_input-prompts/Generic/generic_button_circle_outline.svg" type="Texture" id=22]
 [ext_resource path="res://asset/kenney_input-prompts/Generic/generic_button_circle_fill.svg" type="Texture" id=23]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_slash_back.svg" type="Texture" id=24]
-[ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_delete.svg" type="Texture" id=25]
 [ext_resource path="res://asset/Anonymous-Time-icon.svg" type="Texture" id=26]
 [ext_resource path="res://asset/sword.png" type="Texture" id=27]
 [ext_resource path="res://asset/Zombie_SOUTH.png" type="Texture" id=28]
@@ -36,6 +35,7 @@ color = Color( 0, 0, 0, 1 )
 script = ExtResource( 2 )
 
 [node name="Pg1" type="Control" parent="." groups=["Page"]]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -669,7 +669,6 @@ margin_bottom = 132.0
 texture = ExtResource( 22 )
 
 [node name="Pg5" type="Control" parent="." groups=["Page"]]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -757,6 +756,73 @@ margin_right = 200.0
 margin_bottom = 132.0
 texture = ExtResource( 22 )
 
+[node name="Quit" type="Label" parent="Pg5/Table"]
+margin_top = 192.0
+margin_right = 149.0
+margin_bottom = 211.0
+text = "Quit"
+
+[node name="QuitControls" type="GridContainer" parent="Pg5/Table"]
+margin_left = 349.0
+margin_top = 136.0
+margin_right = 677.0
+margin_bottom = 268.0
+custom_constants/hseparation = 64
+columns = 2
+
+[node name="QContainer" type="CenterContainer" parent="Pg5/Table/QuitControls"]
+margin_right = 64.0
+margin_bottom = 132.0
+
+[node name="QButton" type="TextureRect" parent="Pg5/Table/QuitControls/QContainer"]
+margin_top = 34.0
+margin_right = 64.0
+margin_bottom = 98.0
+texture = ExtResource( 15 )
+
+[node name="ArcadeButtons" type="GridContainer" parent="Pg5/Table/QuitControls"]
+margin_left = 128.0
+margin_right = 328.0
+margin_bottom = 132.0
+columns = 3
+
+[node name="Button" type="TextureRect" parent="Pg5/Table/QuitControls/ArcadeButtons"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 22 )
+
+[node name="Button2" type="TextureRect" parent="Pg5/Table/QuitControls/ArcadeButtons"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+texture = ExtResource( 22 )
+
+[node name="Button3" type="TextureRect" parent="Pg5/Table/QuitControls/ArcadeButtons"]
+margin_left = 136.0
+margin_right = 200.0
+margin_bottom = 64.0
+texture = ExtResource( 22 )
+
+[node name="Button4" type="TextureRect" parent="Pg5/Table/QuitControls/ArcadeButtons"]
+margin_top = 68.0
+margin_right = 64.0
+margin_bottom = 132.0
+texture = ExtResource( 22 )
+
+[node name="PressedButton" type="TextureRect" parent="Pg5/Table/QuitControls/ArcadeButtons"]
+margin_left = 68.0
+margin_top = 68.0
+margin_right = 132.0
+margin_bottom = 132.0
+texture = ExtResource( 23 )
+
+[node name="Button5" type="TextureRect" parent="Pg5/Table/QuitControls/ArcadeButtons"]
+margin_left = 136.0
+margin_top = 68.0
+margin_right = 200.0
+margin_bottom = 132.0
+texture = ExtResource( 22 )
+
 [node name="Pg6" type="Control" parent="." groups=["Page"]]
 visible = false
 anchor_right = 1.0
@@ -770,149 +836,17 @@ margin_top = 26.0
 margin_right = 75.0
 margin_bottom = 71.0
 theme = ExtResource( 1 )
-text = "Controls"
+text = "Gameplay"
 align = 1
 
-[node name="Table" type="GridContainer" parent="Pg6"]
+[node name="Body" type="Label" parent="Pg6"]
 margin_top = 82.0
 margin_right = 800.0
 margin_bottom = 447.0
-custom_constants/hseparation = 200
-columns = 2
+text = "The game is a grid-based survival horror game. It is not possible to survive; rather, the goal is to survive as long as possible.
 
-[node name="Suicide" type="Label" parent="Pg6/Table"]
-visible = false
-margin_top = 192.0
-margin_right = 149.0
-margin_bottom = 211.0
-text = "Suicide"
-
-[node name="SuicideControls" type="GridContainer" parent="Pg6/Table"]
-visible = false
-margin_top = 136.0
-margin_right = 328.0
-margin_bottom = 268.0
-custom_constants/hseparation = 64
-columns = 2
-
-[node name="DelContainer" type="CenterContainer" parent="Pg6/Table/SuicideControls"]
-margin_right = 64.0
-margin_bottom = 132.0
-
-[node name="DelButton" type="TextureRect" parent="Pg6/Table/SuicideControls/DelContainer"]
-margin_top = 34.0
-margin_right = 64.0
-margin_bottom = 98.0
-texture = ExtResource( 25 )
-
-[node name="ArcadeButtons" type="GridContainer" parent="Pg6/Table/SuicideControls"]
-margin_left = 128.0
-margin_right = 328.0
-margin_bottom = 132.0
-columns = 3
-
-[node name="Button" type="TextureRect" parent="Pg6/Table/SuicideControls/ArcadeButtons"]
-margin_right = 64.0
-margin_bottom = 64.0
-texture = ExtResource( 22 )
-
-[node name="Button2" type="TextureRect" parent="Pg6/Table/SuicideControls/ArcadeButtons"]
-margin_left = 68.0
-margin_right = 132.0
-margin_bottom = 64.0
-texture = ExtResource( 22 )
-
-[node name="Button3" type="TextureRect" parent="Pg6/Table/SuicideControls/ArcadeButtons"]
-margin_left = 136.0
-margin_right = 200.0
-margin_bottom = 64.0
-texture = ExtResource( 22 )
-
-[node name="Button4" type="TextureRect" parent="Pg6/Table/SuicideControls/ArcadeButtons"]
-margin_top = 68.0
-margin_right = 64.0
-margin_bottom = 132.0
-texture = ExtResource( 22 )
-
-[node name="Button5" type="TextureRect" parent="Pg6/Table/SuicideControls/ArcadeButtons"]
-margin_left = 68.0
-margin_top = 68.0
-margin_right = 132.0
-margin_bottom = 132.0
-texture = ExtResource( 22 )
-
-[node name="PressedButton" type="TextureRect" parent="Pg6/Table/SuicideControls/ArcadeButtons"]
-margin_left = 136.0
-margin_top = 68.0
-margin_right = 200.0
-margin_bottom = 132.0
-texture = ExtResource( 23 )
-
-[node name="Quit" type="Label" parent="Pg6/Table"]
-margin_top = 56.0
-margin_right = 41.0
-margin_bottom = 75.0
-text = "Quit"
-
-[node name="QuitControls" type="GridContainer" parent="Pg6/Table"]
-margin_left = 241.0
-margin_right = 569.0
-margin_bottom = 132.0
-custom_constants/hseparation = 64
-columns = 2
-
-[node name="QContainer" type="CenterContainer" parent="Pg6/Table/QuitControls"]
-margin_right = 64.0
-margin_bottom = 132.0
-
-[node name="QButton" type="TextureRect" parent="Pg6/Table/QuitControls/QContainer"]
-margin_top = 34.0
-margin_right = 64.0
-margin_bottom = 98.0
-texture = ExtResource( 15 )
-
-[node name="ArcadeButtons" type="GridContainer" parent="Pg6/Table/QuitControls"]
-margin_left = 128.0
-margin_right = 328.0
-margin_bottom = 132.0
-columns = 3
-
-[node name="Button" type="TextureRect" parent="Pg6/Table/QuitControls/ArcadeButtons"]
-margin_right = 64.0
-margin_bottom = 64.0
-texture = ExtResource( 22 )
-
-[node name="Button2" type="TextureRect" parent="Pg6/Table/QuitControls/ArcadeButtons"]
-margin_left = 68.0
-margin_right = 132.0
-margin_bottom = 64.0
-texture = ExtResource( 22 )
-
-[node name="Button3" type="TextureRect" parent="Pg6/Table/QuitControls/ArcadeButtons"]
-margin_left = 136.0
-margin_right = 200.0
-margin_bottom = 64.0
-texture = ExtResource( 22 )
-
-[node name="Button4" type="TextureRect" parent="Pg6/Table/QuitControls/ArcadeButtons"]
-margin_top = 68.0
-margin_right = 64.0
-margin_bottom = 132.0
-texture = ExtResource( 22 )
-
-[node name="PressedButton" type="TextureRect" parent="Pg6/Table/QuitControls/ArcadeButtons"]
-margin_left = 68.0
-margin_top = 68.0
-margin_right = 132.0
-margin_bottom = 132.0
-texture = ExtResource( 23 )
-
-[node name="Button5" type="TextureRect" parent="Pg6/Table/QuitControls/ArcadeButtons"]
-margin_left = 136.0
-margin_top = 68.0
-margin_right = 200.0
-margin_bottom = 132.0
-texture = ExtResource( 22 )
+The player is able to move horizontally, vertically, and diagonally in all directions. (No enemy is able to move diagonally, thus giving the player a chance to escape tricky situations.) Movement input must be held in order to get the player to move, as movement will only occur after half a second has passed. During that time, if a complementary movement request is provided without a gap between providing the original input (such as holding down the up arrow key while holding the left arrow key), then the player will move diagonally based on what inputs have been provided. If input ceases or if conflicting input is provided (such as left and right arrow keys pressed simultaneously) when time runs out, then the player won't move."
+autowrap = true
 
 [node name="Pg7" type="Control" parent="." groups=["Page"]]
 visible = false
@@ -934,9 +868,9 @@ align = 1
 margin_top = 82.0
 margin_right = 800.0
 margin_bottom = 447.0
-text = "The game is a grid-based survival horror game. It is not possible to survive; rather, the goal is to survive as long as possible.
+text = "Player movement is separate from player orientation. When movement is requested, the player orientation changes immediately. Orientation can never be diagonal. In the case of a request for diagonal movement, the orientation will become the horizontal component of that movement request. To only change orientation without moving, the stay button should be pressed before inputting a direction.
 
-The player is able to move horizontally, vertically, and diagonally in all directions. (No enemy is able to move diagonally, thus giving the player a chance to escape tricky situations.) Movement input must be held in order to get the player to move, as movement will only occur after half a second has passed. During that time, if a complementary movement request is provided without a gap between providing the original input (such as holding down the up arrow key while holding the left arrow key), then the player will move diagonally based on what inputs have been provided. If input ceases or if conflicting input is provided (such as left and right arrow keys pressed simultaneously) when time runs out, then the player won't move."
+Orientation is important when it comes to wielding weapons. A weapon will affect different cells depending on which way the player is facing. For instance, the sword will slay all enemies on whatever two cells the player is orientated towards."
 autowrap = true
 
 [node name="Pg8" type="Control" parent="." groups=["Page"]]
@@ -952,35 +886,10 @@ margin_top = 26.0
 margin_right = 75.0
 margin_bottom = 71.0
 theme = ExtResource( 1 )
-text = "Gameplay"
-align = 1
-
-[node name="Body" type="Label" parent="Pg8"]
-margin_top = 82.0
-margin_right = 800.0
-margin_bottom = 447.0
-text = "Player movement is separate from player orientation. When movement is requested, the player orientation changes immediately. Orientation can never be diagonal. In the case of a request for diagonal movement, the orientation will become the horizontal component of that movement request. To only change orientation without moving, the stay button should be pressed before inputting a direction.
-
-Orientation is important when it comes to wielding weapons. A weapon will affect different cells depending on which way the player is facing. For instance, the sword will slay all enemies on whatever two cells the player is orientated towards."
-autowrap = true
-
-[node name="Pg9" type="Control" parent="." groups=["Page"]]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="Title" type="Label" parent="Pg9"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -20.0
-margin_top = 26.0
-margin_right = 75.0
-margin_bottom = 71.0
-theme = ExtResource( 1 )
 text = "Scoring"
 align = 1
 
-[node name="Table" type="GridContainer" parent="Pg9"]
+[node name="Table" type="GridContainer" parent="Pg8"]
 margin_top = 82.0
 margin_right = 800.0
 margin_bottom = 447.0
@@ -988,7 +897,7 @@ custom_constants/vseparation = 32
 custom_constants/hseparation = 32
 columns = 2
 
-[node name="Time" type="TextureRect" parent="Pg9/Table"]
+[node name="Time" type="TextureRect" parent="Pg8/Table"]
 margin_right = 93.0
 margin_bottom = 93.0
 rect_min_size = Vector2( 32, 32 )
@@ -996,20 +905,20 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 26 )
 
-[node name="PassiveBonus" type="Label" parent="Pg9/Table"]
+[node name="PassiveBonus" type="Label" parent="Pg8/Table"]
 margin_left = 125.0
 margin_top = 37.0
 margin_right = 437.0
 margin_bottom = 56.0
 text = "1 pt for every minute survived."
 
-[node name="SwordBox" type="ColorRect" parent="Pg9/Table"]
+[node name="SwordBox" type="ColorRect" parent="Pg8/Table"]
 margin_top = 125.0
 margin_right = 93.0
 margin_bottom = 157.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Sword" type="TextureRect" parent="Pg9/Table/SwordBox"]
+[node name="Sword" type="TextureRect" parent="Pg8/Table/SwordBox"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -1020,20 +929,20 @@ margin_right = 20.0
 margin_bottom = 20.0
 texture = ExtResource( 27 )
 
-[node name="SwordBonus" type="Label" parent="Pg9/Table"]
+[node name="SwordBonus" type="Label" parent="Pg8/Table"]
 margin_left = 125.0
 margin_top = 131.0
 margin_right = 437.0
 margin_bottom = 150.0
 text = "5 pt for every sword collected."
 
-[node name="ZombieBox" type="ColorRect" parent="Pg9/Table"]
+[node name="ZombieBox" type="ColorRect" parent="Pg8/Table"]
 margin_top = 189.0
 margin_right = 93.0
 margin_bottom = 221.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Zombie" type="TextureRect" parent="Pg9/Table/ZombieBox"]
+[node name="Zombie" type="TextureRect" parent="Pg8/Table/ZombieBox"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -1044,7 +953,7 @@ margin_right = 20.0
 margin_bottom = 20.0
 texture = ExtResource( 28 )
 
-[node name="ZombieBonus" type="Label" parent="Pg9/Table"]
+[node name="ZombieBonus" type="Label" parent="Pg8/Table"]
 margin_left = 125.0
 margin_top = 195.0
 margin_right = 437.0
