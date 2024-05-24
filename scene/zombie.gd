@@ -4,8 +4,11 @@ class_name enemy
 signal enemy_destroyed(enemy_type)
 signal move_request(ref)
 
-var alive
-var to_destroy
+const MAX_ALLOWED_FAILED_MOVES = 10
+
+var alive = true
+var to_destroy = false
+var move_fail_counter = 0
 var type = "zombie"
 
 func get_class():
@@ -13,9 +16,6 @@ func get_class():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	alive = true
-	to_destroy = false
-	
 	hide()
 	$collisionbox.set_deferred("disabled", true)
 
@@ -53,12 +53,20 @@ func exists():
 func is_shovable():
 	return false
 
-func move(pos):
+func move_to(pos):
 	if alive:
+		move_fail_counter = 0
 		var diff_pos = pos - position
 		position = pos
 		$CharacterSprite.set_orient(Direction.rel_pos_to_dir(diff_pos))
 		$walk_sfx.play()
+
+func move_reject():
+	move_fail_counter += 1
+	
+	if move_fail_counter >= MAX_ALLOWED_FAILED_MOVES:
+		alive = false
+		queue_free()
 
 func spawn(pos, orient):
 	position = pos

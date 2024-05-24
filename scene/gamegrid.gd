@@ -137,6 +137,7 @@ func spawn_item(scene, pos):
 
 func _on_enemy_move_request(ref):
 	var desired_positions = ref.desired_positions($player.position)
+	var moved = false
 	
 	for pos in desired_positions:
 		# Want to ensure that all the enemies aren't moving on top of each other. If that is happening,
@@ -144,12 +145,17 @@ func _on_enemy_move_request(ref):
 		var obj_at_pos = Group.get_obj_at_pos(get_tree(), "interactable", pos)
 		
 		if obj_at_pos == null:
-			ref.move(pos)
+			ref.move_to(pos)
+			moved = true
 			break
 		elif obj_at_pos.is_shovable():
 			var dir_to_shove = Direction.get_cardinal_dir_facing(pos, ref.position)
 			if move_shovable_obj(obj_at_pos, dir_to_shove):
+				moved = true
 				break
+		
+		if not moved:
+			ref.move_reject()
 
 func move_shovable_obj(ref, shove_dir):
 	var dest_pos = Direction.translate_pos(ref.position, shove_dir, 32)
