@@ -6,6 +6,7 @@ signal move_request(ref)
 
 var alive
 var to_destroy
+var type = "zombie"
 
 func get_class():
 	return "enemy"
@@ -14,7 +15,6 @@ func get_class():
 func _ready():
 	alive = true
 	to_destroy = false
-	set_meta("type", "zombie")
 	
 	hide()
 	$collisionbox.set_deferred("disabled", true)
@@ -22,7 +22,7 @@ func _ready():
 func attack():
 	alive = false
 	$collisionbox.set_deferred("disabled", true)
-	emit_signal("enemy_destroyed", get_meta("type"))
+	emit_signal("enemy_destroyed", type)
 	$CharacterSprite.show_hurt()
 	$hurt_sfx.play()
 	$move_timer.stop()

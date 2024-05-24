@@ -22,14 +22,18 @@ func gen_seed():
 	return gen_seed_val
 
 func _on_gameover_retry():
-	SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.GAME)
+	$gameover.stop()
+	$infobar.reset()
+	$infobar.set_seed(gen_seed())
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	$gamegrid.restart()
 
 func _on_gameover_leave():
 	SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.MENU)
 
 
 func _on_gamegrid_game_over():
-	$gamegrid.call_deferred("queue_free")
+	$gamegrid.cleanup()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$gameover.start($infobar)
 

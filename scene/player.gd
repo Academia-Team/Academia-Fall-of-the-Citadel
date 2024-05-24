@@ -4,15 +4,16 @@ class_name player
 signal move_request(dir)
 
 var bounds = {Direction.NORTH: 0, Direction.SOUTH: 0, Direction.WEST: 0, Direction.EAST: 0}
-var held_item
-var lives
+var held_item = null
+var lives = 0
 var targets = [[], [], [], []]
 var targets_to_destroy = []
 
-var future_dir
+var future_dir = null
 
 const NUM_DIRS = 4
 const NUM_ORIENT = 4
+const START_LIVES = 3
 
 signal health_change(lives)
 signal pick_up_item(item_name)
@@ -122,11 +123,6 @@ func _process(_delta):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	held_item = null
-	lives = 3
-	future_dir = null
-	emit_signal("health_change", lives)
-	
 	hide()
 	$collisionbox.set_deferred("disabled", true)
 	$right_collisionbox.set_deferred("disabled", true)
@@ -140,6 +136,12 @@ func spawn(pos, topBound, bottomBound, leftBound, rightBound):
 	bounds.right = rightBound
 	bounds.top = topBound
 	bounds.bottom = bottomBound
+	
+	held_item = null
+	future_dir = null
+	
+	lives = START_LIVES
+	emit_signal("health_change", lives)
 	
 	assert(position.x >= bounds.left && position.x <= bounds.right)
 	assert(position.y >= bounds.top && position.y <= bounds.bottom)
@@ -187,8 +189,9 @@ func move_reject():
 
 
 func _on_move_timer_timeout():
-	emit_signal("move_request", future_dir)
-	future_dir = null
+	if future_dir != null:
+		emit_signal("move_request", future_dir)
+		future_dir = null
 
 func _on_player_area_shape_entered(_area_rid, area, _area_shape_index, local_shape_index):
 	var triggered_collisionbox = shape_owner_get_owner(local_shape_index)

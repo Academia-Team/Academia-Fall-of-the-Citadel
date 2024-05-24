@@ -32,6 +32,13 @@ func start(info_obj):
 	show()
 	$Buttons/Arise.grab_focus()
 
+func stop():
+	info_ref = null
+	ignore_mouse_warp = false
+	mouse_over = null
+	release_focus()
+	hide()
+
 func _set_seed_text(seed_val):
 	if seed_val != null:
 		$Seed.text = "Seed: %d" % seed_val
