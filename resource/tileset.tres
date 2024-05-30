@@ -1,13 +1,13 @@
 [gd_resource type="TileSet" load_steps=3 format=2]
 
-[ext_resource path="res://asset/ProjectUtumno_full.png" type="Texture" id=2]
+[ext_resource path="res://asset/tiles.png" type="Texture" id=2]
 
 [resource]
-6/name = "ProjectUtumno_full.png 6"
+6/name = "tiles.png 6"
 6/texture = ExtResource( 2 )
 6/tex_offset = Vector2( 0, 0 )
 6/modulate = Color( 1, 1, 1, 1 )
-6/region = Rect2( 480, 448, 32, 32 )
+6/region = Rect2( 0, 0, 32, 32 )
 6/tile_mode = 0
 6/occluder_offset = Vector2( 0, 0 )
 6/navigation_offset = Vector2( 0, 0 )
@@ -17,11 +17,11 @@
 6/shape_one_way_margin = 0.0
 6/shapes = [  ]
 6/z_index = 0
-10/name = "ProjectUtumno_full.png 10"
+10/name = "tiles.png 10"
 10/texture = ExtResource( 2 )
 10/tex_offset = Vector2( 0, 0 )
 10/modulate = Color( 1, 1, 1, 1 )
-10/region = Rect2( 736, 448, 32, 32 )
+10/region = Rect2( 32, 0, 32, 32 )
 10/tile_mode = 0
 10/occluder_offset = Vector2( 0, 0 )
 10/navigation_offset = Vector2( 0, 0 )
@@ -31,11 +31,11 @@
 10/shape_one_way_margin = 0.0
 10/shapes = [  ]
 10/z_index = 0
-15/name = "ProjectUtumno_full.png 15"
+15/name = "tiles.png 15"
 15/texture = ExtResource( 2 )
 15/tex_offset = Vector2( 0, 0 )
 15/modulate = Color( 1, 1, 1, 1 )
-15/region = Rect2( 896, 448, 32, 32 )
+15/region = Rect2( 64, 0, 32, 32 )
 15/tile_mode = 0
 15/occluder_offset = Vector2( 0, 0 )
 15/navigation_offset = Vector2( 0, 0 )
@@ -45,11 +45,11 @@
 15/shape_one_way_margin = 0.0
 15/shapes = [  ]
 15/z_index = 0
-16/name = "ProjectUtumno_full.png 16"
+16/name = "tiles.png 16"
 16/texture = ExtResource( 2 )
 16/tex_offset = Vector2( 0, 0 )
 16/modulate = Color( 1, 1, 1, 1 )
-16/region = Rect2( 928, 448, 32, 32 )
+16/region = Rect2( 0, 32, 32, 32 )
 16/tile_mode = 0
 16/occluder_offset = Vector2( 0, 0 )
 16/navigation_offset = Vector2( 0, 0 )
@@ -59,11 +59,11 @@
 16/shape_one_way_margin = 0.0
 16/shapes = [  ]
 16/z_index = 0
-25/name = "ProjectUtumno_full.png 25"
+25/name = "tiles.png 25"
 25/texture = ExtResource( 2 )
 25/tex_offset = Vector2( 0, 0 )
 25/modulate = Color( 1, 1, 1, 1 )
-25/region = Rect2( 864, 224, 32, 32 )
+25/region = Rect2( 32, 32, 32, 32 )
 25/tile_mode = 0
 25/occluder_offset = Vector2( 0, 0 )
 25/navigation_offset = Vector2( 0, 0 )
