@@ -143,6 +143,7 @@ By: skrjablin
 
 Tileset:
 https://opengameart.org/content/dungeon-crawl-32x32-tiles-supplemental
+Used select tiles from ProjectUtumno_full.png.
 SPDX-License-Identifier: CC0-1.0
 
 You can use these tilesets in your program freely. No attribution is required. As a courtesy, include a link to the OGA page: http://opengameart.org/content/dungeon-crawl-32x32-tiles-supplemental, or the crawl-tiles page: https://github.com/crawl/tiles
