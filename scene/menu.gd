@@ -143,3 +143,9 @@ func _on_Credit_mouse_entered():
 func _on_Credit_mouse_exited():
 	mouse_over = null
 	$Buttons/Credit.release_focus()
+
+
+func _on_ModeDialog_hide():
+	_enable_menu_buttons()
+	$Buttons/Enter.grab_focus()
+	$Buttons.show()
