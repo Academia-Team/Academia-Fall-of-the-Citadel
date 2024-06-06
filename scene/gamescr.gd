@@ -1,5 +1,6 @@
 extends Control
 
+var mode = "Regular"
 var seed_val = null
 
 func _ready():
@@ -10,6 +11,7 @@ func _ready():
 		print("Seed: %d" % seed_val)
 
 	$infobar.set_seed(seed_val)
+	$infobar.set_mode(mode)
 	$gamegrid.start($infobar)
 
 func _process(_delta):

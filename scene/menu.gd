@@ -49,13 +49,19 @@ func _on_Enter_pressed():
 	$Buttons.hide()
 	$ModeDialog.show_modal()
 	$ModeDialog/Buttons/Regular.grab_focus()
-	#var game_instance = SceneSwitcher.get_scene(SceneSwitcher.GAME).instance()
-	#game_instance.seed_val = seed_val
-	#self_modulate.a = 0
+
+func _activate_game(mode):
+	$ModeDialog.hide()
+	_disable_menu_buttons()
+
+	var game_instance = SceneSwitcher.get_scene(SceneSwitcher.GAME).instance()
+	game_instance.seed_val = seed_val
+	game_instance.mode = mode
+	self_modulate.a = 0
 	
-	#call_deferred("add_child", game_instance)
-	#set_process(false)
-	#$Buttons/Enter.release_focus()
+	call_deferred("add_child", game_instance)
+	set_process(false)
+	$Buttons/Enter.release_focus()
 
 func _on_Perish_pressed():
 	SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.QUIT)
@@ -149,3 +155,11 @@ func _on_ModeDialog_hide():
 	_enable_menu_buttons()
 	$Buttons/Enter.grab_focus()
 	$Buttons.show()
+
+
+func _on_Regular_pressed():
+	_activate_game("Regular")
+
+
+func _on_Duck_pressed():
+	_activate_game("Duck")

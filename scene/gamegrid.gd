@@ -126,7 +126,9 @@ func spawn_enemy(scene, pos):
 func _on_item_spawn_timer_timeout():
 	if ref_counter.get("sword", 0) < MAX_ITEMS:
 		spawn_item(sword_scene, get_spawn_pos())
-	spawn_item(load("res://scene/duck.tscn"), get_spawn_pos()) # DEBUG
+	
+	if info_ref.get_mode() == "Duck":
+		spawn_item(load("res://scene/duck.tscn"), get_spawn_pos())
 
 func spawn_item(scene, pos):
 	if scene != null and pos != null:

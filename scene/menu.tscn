@@ -269,3 +269,5 @@ flat = true
 [connection signal="text_change_rejected" from="SeedDialog/HBoxContainer/Line" to="." method="_on_SeedDialog_Line_text_change_rejected"]
 [connection signal="text_entered" from="SeedDialog/HBoxContainer/Line" to="." method="_on_SeedDialog_Line_text_entered"]
 [connection signal="hide" from="ModeDialog" to="." method="_on_ModeDialog_hide"]
+[connection signal="pressed" from="ModeDialog/Buttons/Regular" to="." method="_on_Regular_pressed"]
+[connection signal="pressed" from="ModeDialog/Buttons/Duck" to="." method="_on_Duck_pressed"]
