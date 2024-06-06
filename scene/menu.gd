@@ -34,13 +34,17 @@ func _process(_delta):
 
 func _on_Enter_pressed():
 	if is_processing():
-		var game_instance = SceneSwitcher.get_scene(SceneSwitcher.GAME).instance()
-		game_instance.seed_val = seed_val
-		self_modulate.a = 0
-		
-		call_deferred("add_child", game_instance)
+		$Buttons.hide()
+		$ModeDialog.show_modal()
+		$ModeDialog/Buttons/Regular.grab_focus()
 		set_process(false)
-		$Buttons/Enter.release_focus()
+		#var game_instance = SceneSwitcher.get_scene(SceneSwitcher.GAME).instance()
+		#game_instance.seed_val = seed_val
+		#self_modulate.a = 0
+		
+		#call_deferred("add_child", game_instance)
+		#set_process(false)
+		#$Buttons/Enter.release_focus()
 
 func _on_Perish_pressed():
 	if is_processing():
