@@ -16,9 +16,11 @@ func _ready():
 
 func reset():
 	$StatusTimer.stop()
+	_cheat_enabled = false
 	_lives = 0
 	_score = 0
 	_seed = null
+	_tainted = false
 	
 	_write_score_text()
 	_write_lives_text()
