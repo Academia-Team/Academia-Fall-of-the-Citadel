@@ -19,10 +19,10 @@ script = ExtResource( 2 )
 [node name="passive_timer" type="Timer" parent="."]
 wait_time = 60.0
 
-[node name="zombie_spawn_timer" type="Timer" parent="."]
+[node name="zombie_spawn_timer" type="Timer" parent="." groups=["enemy_spawner", "spawner"]]
 wait_time = 5.0
 
-[node name="item_spawn_timer" type="Timer" parent="."]
+[node name="item_spawn_timer" type="Timer" parent="." groups=["spawner"]]
 wait_time = 3.0
 
 [node name="music" type="AudioStreamPlayer" parent="."]

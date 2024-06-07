@@ -7,15 +7,20 @@ var _orig_status_text = ""
 var _score = 0
 var _seed = null
 
+var _cheat_enabled = false
+var _tainted = false
+
 func _ready():
 	_cur_status_text = $status.text
 	_orig_status_text = $status.text
 
 func reset():
 	$StatusTimer.stop()
+	_cheat_enabled = false
 	_lives = 0
 	_score = 0
 	_seed = null
+	_tainted = false
 	
 	_write_score_text()
 	_write_lives_text()
@@ -104,6 +109,16 @@ func reset_status():
 		$status.text = _orig_status_text
 
 	_cur_status_text = _orig_status_text
+
+func toggle_cheats():
+	_cheat_enabled = not _cheat_enabled
+	_tainted = true
+
+func is_cheat_enabled():
+	return _cheat_enabled
+
+func is_tainted():
+	return _tainted
 
 
 func _on_StatusTimer_timeout():

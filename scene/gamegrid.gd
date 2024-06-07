@@ -38,6 +38,41 @@ func restart():
 func cleanup():
 	for interactable in get_tree().get_nodes_in_group("interactable"):
 		interactable.queue_free()
+func _process(_delta):
+	if started and info_ref.is_cheat_enabled():
+		if Input.is_action_just_pressed("cheat_suicide"):
+			$player.kill()
+		elif Input.is_action_just_pressed("cheat_god"):
+			$player.toggle_immortality()
+			
+			if $player.is_immortal():
+				info_ref.set_timed_status("Feeling Powerful?")
+			else:
+				info_ref.set_timed_status("Death waits for you.")
+		elif Input.is_action_just_pressed("cheat_stop_spawn"):
+			yield(get_tree().create_timer(1), "timeout")
+			handle_stop_spawn_options()
+
+func handle_stop_spawn_options():
+	if Input.is_action_pressed("cheat_item"):
+		$item_spawn_timer.paused = not $item_spawn_timer.paused
+		info_ref.set_timed_status("Item spawn toggled.")
+	elif Input.is_action_pressed("cheat_enemy"):
+		for timer in get_tree().get_nodes_in_group("enemy_spawner"):
+			timer.paused = not timer.paused
+		
+		info_ref.set_timed_status("Enemy spawn toggled.")
+	elif Input.is_action_pressed("cheat_zombie"):
+		$zombie_spawn_timer.paused = not $zombie_spawn_timer.paused
+		info_ref.set_timed_status("Zombie spawn toggled.")
+	elif Input.is_action_pressed("cheat_stop_spawn"):
+		for timer in get_tree().get_nodes_in_group("spawner"):
+			timer.paused = not timer.paused
+			
+		info_ref.set_timed_status("All spawners toggled.")
+	else:
+		info_ref.set_timed_status("Nothing toggled.")
+
 func set_up_player():
 	var screen_size = get_viewport_rect().size
 

@@ -17,7 +17,11 @@ script = ExtResource( 4 )
 [node name="gameover" parent="." instance=ExtResource( 2 )]
 visible = false
 
+[node name="CheatInputTimeout" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="tree_exiting" from="." to="." method="_on_gamescr_tree_exiting"]
 [connection signal="game_over" from="gamegrid" to="." method="_on_gamegrid_game_over"]
 [connection signal="leave" from="gameover" to="." method="_on_gameover_leave"]
 [connection signal="retry" from="gameover" to="." method="_on_gameover_retry"]
+[connection signal="timeout" from="CheatInputTimeout" to="." method="_on_CheatInputTimeout_timeout"]
