@@ -2,6 +2,7 @@ extends ColorRect
 
 var _cur_status_text = ""
 var _lives = 0
+var _mode = null
 var _orig_status_text = ""
 var _score = 0
 var _seed = null
@@ -9,6 +10,16 @@ var _seed = null
 func _ready():
 	_cur_status_text = $status.text
 	_orig_status_text = $status.text
+
+func reset():
+	$StatusTimer.stop()
+	_lives = 0
+	_score = 0
+	_seed = null
+	
+	_write_score_text()
+	_write_lives_text()
+	reset_status()
 
 func incr_score(score_delta):
 	_score += score_delta
@@ -24,6 +35,12 @@ func decr_score(score_delta):
 
 func _write_score_text():
 	$score_counter.text = "Score: %d" % _score
+
+func set_mode(mode):
+	_mode = mode
+
+func get_mode():
+	return _mode
 
 func get_score():
 	return _score

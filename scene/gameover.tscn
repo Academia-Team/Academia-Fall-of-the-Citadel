@@ -58,6 +58,17 @@ margin_right = 45.0
 theme = ExtResource( 5 )
 text = "Seed: ?"
 
+[node name="Mode" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -52.0
+margin_top = -19.0
+grow_horizontal = 0
+theme = ExtResource( 5 )
+text = "Mode: ?"
+
 [node name="Buttons" type="MarginContainer" parent="."]
 margin_left = 36.0
 margin_top = 139.0

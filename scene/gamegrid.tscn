@@ -18,24 +18,21 @@ script = ExtResource( 2 )
 
 [node name="passive_timer" type="Timer" parent="."]
 wait_time = 60.0
-autostart = true
 
 [node name="zombie_spawn_timer" type="Timer" parent="."]
 wait_time = 5.0
-autostart = true
 
 [node name="item_spawn_timer" type="Timer" parent="."]
 wait_time = 3.0
-autostart = true
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-autoplay = true
 
 [node name="gameover_sfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
 
 [connection signal="health_change" from="player" to="." method="_on_player_health_change"]
+[connection signal="move_request" from="player" to="." method="_on_player_move_request"]
 [connection signal="pick_up_item" from="player" to="." method="_on_player_pick_up_item"]
 [connection signal="used_item" from="player" to="." method="_on_player_used_item"]
 [connection signal="timeout" from="passive_timer" to="." method="_on_passive_timer_timeout"]

@@ -29,12 +29,24 @@ func _process(_delta):
 func start(info_obj):
 	info_ref = info_obj
 	_set_seed_text(info_obj.get_seed())
+	_set_mode_text(info_obj.get_mode())
 	show()
 	$Buttons/Arise.grab_focus()
+
+func stop():
+	info_ref = null
+	ignore_mouse_warp = false
+	mouse_over = null
+	release_focus()
+	hide()
 
 func _set_seed_text(seed_val):
 	if seed_val != null:
 		$Seed.text = "Seed: %d" % seed_val
+
+func _set_mode_text(mode):
+	if mode != null:
+		$Mode.text = "Mode: %s" % mode
 
 func _on_gameover_draw():
 	if info_ref != null:
