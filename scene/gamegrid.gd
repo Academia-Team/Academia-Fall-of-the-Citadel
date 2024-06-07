@@ -47,6 +47,7 @@ func set_up_player():
 func _on_player_pick_up_item(item_name):
 	ref_counter[item_name] -= 1
 	info_ref.incr_score(ITEM_SCORE)
+	info_ref.set_timed_status("Press space or first button to use item")
 	info_ref.set_status(item_name)
 
 func _on_player_used_item(_item_name):
