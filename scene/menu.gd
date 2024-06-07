@@ -152,6 +152,9 @@ func _on_Credit_mouse_exited():
 
 
 func _on_ModeDialog_hide():
+	ignore_mouse_warp = false
+	mouse_over = null
+
 	_enable_menu_buttons()
 	$Buttons/Enter.grab_focus()
 	$Buttons.show()
@@ -163,3 +166,28 @@ func _on_Regular_pressed():
 
 func _on_Duck_pressed():
 	_activate_game("Duck")
+
+
+func _on_ModeDialog_about_to_show():
+	ignore_mouse_warp = false
+	mouse_over = null
+
+
+func _on_Regular_mouse_entered():
+	mouse_over = $ModeDialog/Buttons/Regular
+	$ModeDialog/Buttons/Regular.grab_focus()
+
+
+func _on_Regular_mouse_exited():
+	mouse_over = null
+	$ModeDialog/Buttons/Regular.release_focus()
+
+
+func _on_Duck_mouse_entered():
+	mouse_over = $ModeDialog/Buttons/Duck
+	$ModeDialog/Buttons/Duck.grab_focus()
+
+
+func _on_Duck_mouse_exited():
+	mouse_over = null
+	$ModeDialog/Buttons/Duck.release_focus()
