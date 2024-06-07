@@ -206,8 +206,8 @@ grow_horizontal = 0
 text = "Version"
 
 [node name="ModeDialog" type="PopupDialog" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 custom_styles/panel = SubResource( 18 )
 
 [node name="Buttons" type="VBoxContainer" parent="ModeDialog"]
@@ -240,7 +240,7 @@ flat = true
 [node name="Duck" type="Button" parent="ModeDialog/Buttons"]
 margin_top = 66.0
 margin_right = 798.0
-margin_bottom = 102.0
+margin_bottom = 109.0
 focus_neighbour_left = NodePath("../Regular")
 focus_neighbour_top = NodePath("../Regular")
 focus_neighbour_right = NodePath("../Regular")
