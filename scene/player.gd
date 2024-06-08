@@ -112,7 +112,9 @@ func _generate_sword_slash(num_pixels_away):
 	return slash_anim
 
 func use_duck():
-	$duck_sfx.play()
+	var duck_sfx = held_item.get_node("UseSFX")
+	duck_sfx.play()
+	yield(duck_sfx, "finished")
 	discard_item()
 
 func discard_item():
