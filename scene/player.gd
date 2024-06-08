@@ -75,13 +75,14 @@ func handle_movement():
 	$CharacterSprite.set_orient(desired_dir)
 
 func use_item():
-	match held_item.type:
-		"sword":
-			use_sword()
-		"duck":
-			use_duck()
-		_:
-			$Reject.play()
+	if held_item != null:
+		match held_item.type:
+			"sword":
+				use_sword()
+			"duck":
+				use_duck()
+	else:
+		$Reject.play()
 
 func use_sword():
 	targets_to_destroy = targets[$CharacterSprite.orientation].duplicate(true)
