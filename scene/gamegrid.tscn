@@ -25,6 +25,9 @@ wait_time = 5.0
 [node name="item_spawn_timer" type="Timer" parent="." groups=["spawner"]]
 wait_time = 3.0
 
+[node name="duck_timer" type="Timer" parent="."]
+wait_time = 2.0
+
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 
@@ -38,4 +41,5 @@ stream = ExtResource( 1 )
 [connection signal="timeout" from="passive_timer" to="." method="_on_passive_timer_timeout"]
 [connection signal="timeout" from="zombie_spawn_timer" to="." method="_on_zombie_spawn_timer_timeout"]
 [connection signal="timeout" from="item_spawn_timer" to="." method="_on_item_spawn_timer_timeout"]
+[connection signal="timeout" from="duck_timer" to="." method="_on_duck_timer_timeout"]
 [connection signal="finished" from="gameover_sfx" to="." method="_on_gameover_sfx_finished"]

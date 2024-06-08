@@ -28,6 +28,9 @@ func start(info_obj):
 	$passive_timer.start()
 	$zombie_spawn_timer.start()
 	$item_spawn_timer.start()
+
+	if info_obj.get_mode() == "Duck":
+		$duck_timer.start()
 	
 	seed(info_obj.get_seed())
 	set_up_player()
@@ -167,9 +170,7 @@ func _on_item_spawn_timer_timeout():
 			spawn_item(health_scene, get_spawn_pos())
 		else:
 			spawn_item(sword_scene, get_spawn_pos())
-	
-	if info_ref.get_mode() == "Duck":
-		spawn_item(load("res://scene/duck.tscn"), get_spawn_pos())
+
 
 func spawn_item(scene, pos):
 	if scene != null and pos != null:
@@ -232,3 +233,7 @@ func _on_player_move_request(dir):
 				$player.move_reject()
 		else:
 			$player.move_reject()
+
+
+func _on_duck_timer_timeout():
+	spawn_item(load("res://scene/duck.tscn"), get_spawn_pos())
