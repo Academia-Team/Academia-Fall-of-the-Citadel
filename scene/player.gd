@@ -81,6 +81,8 @@ func use_item():
 				use_sword()
 			"duck":
 				use_duck()
+			_:
+				discard_item()
 	else:
 		$Reject.play()
 
@@ -94,9 +96,7 @@ func use_sword():
 			if target_to_destroy != null:
 				target_to_destroy.attack()
 		
-		emit_signal("used_item", "sword")
-		held_item.destroy()
-		held_item = null
+		discard_item()
 	else:
 		$Reject.play()
 
@@ -113,7 +113,11 @@ func _generate_sword_slash(num_pixels_away):
 
 func use_duck():
 	$duck_sfx.play()
-	emit_signal("used_item", "duck")
+	discard_item()
+
+func discard_item():
+	emit_signal("used_item", held_item.type)
+	held_item.destroy()
 	held_item = null
 
 func _process(_delta):
