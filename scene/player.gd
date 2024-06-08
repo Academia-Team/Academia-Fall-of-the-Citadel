@@ -81,6 +81,8 @@ func use_item():
 				use_sword()
 			"duck":
 				use_duck()
+			"health":
+				use_health()
 			_:
 				discard_item()
 	else:
@@ -115,6 +117,13 @@ func use_duck():
 	var duck_sfx = held_item.get_node("UseSFX")
 	duck_sfx.play()
 	yield(duck_sfx, "finished")
+	discard_item()
+
+func use_health():
+	if lives < START_LIVES:
+		lives += 1
+		emit_signal("health_change", lives)
+	
 	discard_item()
 
 func discard_item():
