@@ -1,5 +1,6 @@
 extends TileMap
 
+var health_scene = preload("res://scene/health.tscn")
 var sword_scene = preload("res://scene/sword.tscn")
 var zombie_scene = preload("res://scene/zombie.tscn")
 var ref_counter = {}
@@ -14,7 +15,8 @@ const MAX_ZOMBIES = 5
 const VALID_DIST_FROM_PLAYER = 64
 const ZOMBIE_SPAWN_PROB = 0.5
 
-const MAX_ITEMS = 2
+const MAX_ITEMS = 3
+const HEALTH_SPAWN_PROB = 0.3
 
 signal game_over()
 signal started()
@@ -160,8 +162,11 @@ func spawn_enemy(scene, pos):
 	ref_counter[instance.type] = ref_counter.get(instance.type, 0) + 1
 
 func _on_item_spawn_timer_timeout():
-	if ref_counter.get("sword", 0) < MAX_ITEMS:
-		spawn_item(sword_scene, get_spawn_pos())
+	if ref_counter.get("sword", 0) + ref_counter.get("health", 0) < MAX_ITEMS:
+		if randf() <= HEALTH_SPAWN_PROB:
+			spawn_item(health_scene, get_spawn_pos())
+		else:
+			spawn_item(sword_scene, get_spawn_pos())
 	
 	if info_ref.get_mode() == "Duck":
 		spawn_item(load("res://scene/duck.tscn"), get_spawn_pos())
