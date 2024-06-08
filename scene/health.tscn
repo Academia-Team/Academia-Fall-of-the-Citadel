@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://class/Item.tscn" type="PackedScene" id=1]
+[ext_resource path="res://asset/health.png" type="Texture" id=2]
+
+[node name="Health" instance=ExtResource( 1 )]
+type = "health"
+sprite = ExtResource( 2 )
