@@ -122,8 +122,12 @@ func use_duck():
 func use_health():
 	if lives < START_LIVES:
 		lives += 1
+		var heal_sfx = held_item.get_node("UseSFX")
+
+		heal_sfx.play()
 		$CharacterSprite.show_heal()
 		emit_signal("health_change", lives)
+		yield(heal_sfx, "finished")
 	
 	discard_item()
 

@@ -10,7 +10,7 @@ enum valid_orientation {NORTH = Direction.NORTH, SOUTH = Direction.SOUTH,
 
 export(Color) var heal_color = Color.pink
 export(Color) var hurt_color = Color.tomato
-export(float) var heal_length = 0.3
+export(float) var heal_length = 1.0
 export(float) var hurt_length = 0.3
 export(valid_orientation) var orientation = Direction.SOUTH
 

@@ -31,7 +31,7 @@ scroll_horizontal_enabled = false
 
 [node name="Body" type="Label" parent="ScrollContainer"]
 margin_right = 784.0
-margin_bottom = 74731.0
+margin_bottom = 75039.0
 rect_min_size = Vector2( 784, 0 )
 theme = ExtResource( 2 )
 custom_constants/line_spacing = 3
@@ -226,6 +226,20 @@ Sword Move SFX:
 https://opengameart.org/content/scrapes
 scrape-7.wav, but modified using Audacity to be of shorter duration.
 SPDX-License-Identifier: CC0-1.0
+
+
+Health Potion Sprite:
+https://opengameart.org/content/potions-9
+Used sprite from 3rd row, 1st col.
+SPDX-License-Identifier: CC0-1.0
+
+
+Health Potion Use SFX:
+https://freesound.org/people/bone666138/sounds/274121/
+Modified using Audacity to be of shorter duration.
+SPDX-License-Identifier: CC0-1.0
+
+Choir of Voices - Single Chord by bone666138 -- https://freesound.org/s/274121/ -- License: Creative Commons 0
 
 
 Zombie Death SFX:
