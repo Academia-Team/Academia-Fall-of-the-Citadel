@@ -128,6 +128,10 @@ func use_health():
 		$CharacterSprite.show_heal()
 		emit_signal("health_change", lives)
 		yield(heal_sfx, "finished")
+	else:
+		var heal_fail_sfx = held_item.get_node("FailSFX")
+		heal_fail_sfx.play()
+		yield(heal_fail_sfx, "finished")
 	
 	discard_item()
 

@@ -31,7 +31,7 @@ scroll_horizontal_enabled = false
 
 [node name="Body" type="Label" parent="ScrollContainer"]
 margin_right = 784.0
-margin_bottom = 75039.0
+margin_bottom = 75193.0
 rect_min_size = Vector2( 784, 0 )
 theme = ExtResource( 2 )
 custom_constants/line_spacing = 3
@@ -240,6 +240,13 @@ Modified using Audacity to be of shorter duration.
 SPDX-License-Identifier: CC0-1.0
 
 Choir of Voices - Single Chord by bone666138 -- https://freesound.org/s/274121/ -- License: Creative Commons 0
+
+
+Health Potion Failed Use SFX:
+https://opengameart.org/content/breaking-bottle
+SPDX-License-Identifier: CC-BY 3.0
+
+Bottle Break.wav by spookymodem
 
 
 Zombie Death SFX:
