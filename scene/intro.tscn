@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scene/intro.gd" type="Script" id=1]
-[ext_resource path="res://asset/Gathering Darkness.mp3" type="AudioStream" id=2]
+[ext_resource path="res://asset/intro.mp3" type="AudioStream" id=2]
 [ext_resource path="res://asset/help_me/HelpMe.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=5]

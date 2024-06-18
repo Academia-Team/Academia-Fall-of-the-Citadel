@@ -31,7 +31,7 @@ scroll_horizontal_enabled = false
 
 [node name="Body" type="Label" parent="ScrollContainer"]
 margin_right = 784.0
-margin_bottom = 74731.0
+margin_bottom = 75567.0
 rect_min_size = Vector2( 784, 0 )
 theme = ExtResource( 2 )
 custom_constants/line_spacing = 3
@@ -125,6 +125,7 @@ SPDX-License-Identifier: CC0-1.0
 
 Music played during game intro:
 https://incompetech.com/music/royalty-free/music.html
+Original has been cropped to the first seven seconds and a fade out sfx was applied to the last second.
 SPDX-License-Identifier: CC-BY-4.0
 
 \"Gathering Darkness\" Kevin MacLeod (incompetech.com)
