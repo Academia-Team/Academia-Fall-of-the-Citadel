@@ -31,7 +31,7 @@ scroll_horizontal_enabled = false
 
 [node name="Body" type="Label" parent="ScrollContainer"]
 margin_right = 784.0
-margin_bottom = 75369.0
+margin_bottom = 75545.0
 rect_min_size = Vector2( 784, 0 )
 theme = ExtResource( 2 )
 custom_constants/line_spacing = 3
@@ -247,6 +247,14 @@ https://opengameart.org/content/breaking-bottle
 SPDX-License-Identifier: CC-BY 3.0
 
 Bottle Break.wav by spookymodem
+
+
+Health Potion Pickup SFX:
+https://opengameart.org/content/fantasy-accessory-sfx-library
+bottle-clay-uncork-02.wav from accessory.zip
+SPDX-License-Identifier: CC0-1.0
+
+CC0. https://creativecommons.org/publicdomain/zero/1.0/
 
 
 Health Potion Move SFX:
