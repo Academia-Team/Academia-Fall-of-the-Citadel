@@ -8,25 +8,27 @@ export(Texture) var side_texture
 enum valid_orientation {NORTH = Direction.NORTH, SOUTH = Direction.SOUTH,
 	EAST = Direction.EAST, WEST = Direction.WEST}
 
+export(Color) var heal_color = Color.pink
 export(Color) var hurt_color = Color.tomato
+export(float) var heal_length = 1.0
 export(float) var hurt_length = 0.3
 export(valid_orientation) var orientation = Direction.SOUTH
 
-var hurt_timer
+var effect_timer
 var initial_texture
 onready var orig_self_modulate = self_modulate
 
 signal orientation_changed(old_orient, new_orient)
-signal hurt_show()
-signal hurt_finish()
+signal effect_show()
+signal effect_finish()
 
 func _init():
 	._init()
 	
-	hurt_timer = Timer.new()
-	hurt_timer.one_shot = true
-	hurt_timer.connect("timeout", self, "_on_hurt_timeout")
-	add_child(hurt_timer)
+	effect_timer = Timer.new()
+	effect_timer.one_shot = true
+	effect_timer.connect("timeout", self, "_on_effect_timeout")
+	add_child(effect_timer)
 
 # A hack due to the fact that when a character_sprite is placed, its texture will
 # be overwritten. If _ready() is redefined, set_orient() will have to be manually
@@ -60,15 +62,26 @@ func set_orient(orient):
 		if orient != old_orient:
 			emit_signal("orientation_changed", old_orient, orient)
 
+func show_heal(length = heal_length):
+	_show_effect(length, heal_color)
+
 func show_hurt(length = hurt_length):
-	hurt_timer.wait_time = length
+	_show_effect(length, hurt_color)
+
+func _show_effect(length, color):
+	if not effect_timer.is_stopped():
+		effect_timer.stop()
+		effect_timer.signal("timeout")
+		effect_timer.yield("timeout")
+	
+	effect_timer.wait_time = length
 	
 	orig_self_modulate = self_modulate
-	self_modulate = hurt_color
+	self_modulate = color
 	
-	hurt_timer.start()
-	emit_signal("hurt_show")
+	effect_timer.start()
+	emit_signal("effect_show")
 
-func _on_hurt_timeout():
+func _on_effect_timeout():
 	self_modulate = orig_self_modulate
-	emit_signal("hurt_finish")
+	emit_signal("effect_finish")

@@ -31,7 +31,7 @@ scroll_horizontal_enabled = false
 
 [node name="Body" type="Label" parent="ScrollContainer"]
 margin_right = 784.0
-margin_bottom = 74731.0
+margin_bottom = 75545.0
 rect_min_size = Vector2( 784, 0 )
 theme = ExtResource( 2 )
 custom_constants/line_spacing = 3
@@ -226,6 +226,43 @@ Sword Move SFX:
 https://opengameart.org/content/scrapes
 scrape-7.wav, but modified using Audacity to be of shorter duration.
 SPDX-License-Identifier: CC0-1.0
+
+
+Health Potion Sprite:
+https://opengameart.org/content/potions-9
+Used sprite from 3rd row, 1st col.
+SPDX-License-Identifier: CC0-1.0
+
+
+Health Potion Use SFX:
+https://freesound.org/people/bone666138/sounds/274121/
+Modified using Audacity to be of shorter duration.
+SPDX-License-Identifier: CC0-1.0
+
+Choir of Voices - Single Chord by bone666138 -- https://freesound.org/s/274121/ -- License: Creative Commons 0
+
+
+Health Potion Failed Use SFX:
+https://opengameart.org/content/breaking-bottle
+SPDX-License-Identifier: CC-BY 3.0
+
+Bottle Break.wav by spookymodem
+
+
+Health Potion Pickup SFX:
+https://opengameart.org/content/fantasy-accessory-sfx-library
+bottle-clay-uncork-02.wav from accessory.zip
+SPDX-License-Identifier: CC0-1.0
+
+CC0. https://creativecommons.org/publicdomain/zero/1.0/
+
+
+Health Potion Move SFX:
+https://freesound.org/people/Fugeni/sounds/416288/
+Trimmed so only the first part of the clanking noise is used.
+SPDX-License-Identifier: CC0-1.0
+
+Empty Beer Bottles Clinking, Clanking.wav by Fugeni -- https://freesound.org/s/416288/ -- License: Creative Commons 0
 
 
 Zombie Death SFX:

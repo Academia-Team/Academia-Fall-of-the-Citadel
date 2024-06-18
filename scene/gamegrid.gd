@@ -1,5 +1,6 @@
 extends TileMap
 
+var health_scene = preload("res://scene/health.tscn")
 var sword_scene = preload("res://scene/sword.tscn")
 var zombie_scene = preload("res://scene/zombie.tscn")
 var ref_counter = {}
@@ -14,7 +15,8 @@ const MAX_ZOMBIES = 5
 const VALID_DIST_FROM_PLAYER = 64
 const ZOMBIE_SPAWN_PROB = 0.5
 
-const MAX_ITEMS = 2
+const MAX_ITEMS = 3
+const HEALTH_SPAWN_PROB = 0.3
 
 signal game_over()
 signal started()
@@ -26,6 +28,9 @@ func start(info_obj):
 	$passive_timer.start()
 	$zombie_spawn_timer.start()
 	$item_spawn_timer.start()
+
+	if info_obj.get_mode() == "Duck":
+		$duck_timer.start()
 	
 	seed(info_obj.get_seed())
 	set_up_player()
@@ -80,7 +85,11 @@ func set_up_player():
 		screen_size.y - cell_size.y * 2, 0, screen_size.x - cell_size.x)
 
 func _on_player_pick_up_item(item_name):
-	ref_counter[item_name] -= 1
+	if item_name != "duck":
+		ref_counter["item"] -= 1
+	else:
+		ref_counter["duck"] -= 1
+	
 	info_ref.incr_score(ITEM_SCORE)
 	info_ref.set_timed_status("Press space or first button to use item")
 	info_ref.set_status(item_name)
@@ -160,18 +169,19 @@ func spawn_enemy(scene, pos):
 	ref_counter[instance.type] = ref_counter.get(instance.type, 0) + 1
 
 func _on_item_spawn_timer_timeout():
-	if ref_counter.get("sword", 0) < MAX_ITEMS:
-		spawn_item(sword_scene, get_spawn_pos())
-	
-	if info_ref.get_mode() == "Duck":
-		spawn_item(load("res://scene/duck.tscn"), get_spawn_pos())
+	if ref_counter.get("item", 0) < MAX_ITEMS:
+		if randf() <= HEALTH_SPAWN_PROB:
+			spawn_item(health_scene, get_spawn_pos())
+		else:
+			spawn_item(sword_scene, get_spawn_pos())
 
-func spawn_item(scene, pos):
+
+func spawn_item(scene, pos, ref_name = "item"):
 	if scene != null and pos != null:
 		var instance = scene.instance()
 		add_child(instance)
 		instance.position = pos
-		ref_counter[instance.type] = ref_counter.get(instance.type, 0) + 1
+		ref_counter[ref_name] = ref_counter.get(ref_name, 0) + 1
 
 func _on_enemy_move_request(ref):
 	var desired_positions = ref.desired_positions($player.position)
@@ -227,3 +237,7 @@ func _on_player_move_request(dir):
 				$player.move_reject()
 		else:
 			$player.move_reject()
+
+
+func _on_duck_timer_timeout():
+	spawn_item(load("res://scene/duck.tscn"), get_spawn_pos(), "duck")

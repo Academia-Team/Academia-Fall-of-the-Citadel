@@ -75,13 +75,18 @@ func handle_movement():
 	$CharacterSprite.set_orient(desired_dir)
 
 func use_item():
-	match held_item.type:
-		"sword":
-			use_sword()
-		"duck":
-			use_duck()
-		_:
-			$Reject.play()
+	if held_item != null:
+		match held_item.type:
+			"sword":
+				use_sword()
+			"duck":
+				use_duck()
+			"health":
+				use_health()
+			_:
+				discard_item()
+	else:
+		$Reject.play()
 
 func use_sword():
 	targets_to_destroy = targets[$CharacterSprite.orientation].duplicate(true)
@@ -93,9 +98,7 @@ func use_sword():
 			if target_to_destroy != null:
 				target_to_destroy.attack()
 		
-		emit_signal("used_item", "sword")
-		held_item.destroy()
-		held_item = null
+		discard_item()
 	else:
 		$Reject.play()
 
@@ -111,8 +114,30 @@ func _generate_sword_slash(num_pixels_away):
 	return slash_anim
 
 func use_duck():
-	$duck_sfx.play()
-	emit_signal("used_item", "duck")
+	var duck_sfx = held_item.get_node("UseSFX")
+	duck_sfx.play()
+	yield(duck_sfx, "finished")
+	discard_item()
+
+func use_health():
+	if lives < START_LIVES:
+		lives += 1
+		var heal_sfx = held_item.get_node("UseSFX")
+
+		heal_sfx.play()
+		$CharacterSprite.show_heal()
+		emit_signal("health_change", lives)
+		yield(heal_sfx, "finished")
+	else:
+		var heal_fail_sfx = held_item.get_node("FailSFX")
+		heal_fail_sfx.play()
+		yield(heal_fail_sfx, "finished")
+	
+	discard_item()
+
+func discard_item():
+	emit_signal("used_item", held_item.type)
+	held_item.destroy()
 	held_item = null
 
 func _process(_delta):
