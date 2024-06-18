@@ -31,7 +31,7 @@ scroll_horizontal_enabled = false
 
 [node name="Body" type="Label" parent="ScrollContainer"]
 margin_right = 784.0
-margin_bottom = 75193.0
+margin_bottom = 75369.0
 rect_min_size = Vector2( 784, 0 )
 theme = ExtResource( 2 )
 custom_constants/line_spacing = 3
@@ -247,6 +247,14 @@ https://opengameart.org/content/breaking-bottle
 SPDX-License-Identifier: CC-BY 3.0
 
 Bottle Break.wav by spookymodem
+
+
+Health Potion Move SFX:
+https://freesound.org/people/Fugeni/sounds/416288/
+Trimmed so only the first part of the clanking noise is used.
+SPDX-License-Identifier: CC0-1.0
+
+Empty Beer Bottles Clinking, Clanking.wav by Fugeni -- https://freesound.org/s/416288/ -- License: Creative Commons 0
 
 
 Zombie Death SFX:
