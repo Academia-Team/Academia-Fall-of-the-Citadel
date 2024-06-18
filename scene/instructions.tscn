@@ -912,19 +912,19 @@ margin_right = 421.0
 margin_bottom = 56.0
 text = "1 pt for every minute survived."
 
-[node name="SwordBox" type="ColorRect" parent="Pg8/Table"]
+[node name="ItemBox" type="ColorRect" parent="Pg8/Table"]
 margin_top = 125.0
 margin_right = 93.0
 margin_bottom = 157.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Sword" type="TextureRect" parent="Pg8/Table/SwordBox"]
+[node name="Sword" type="TextureRect" parent="Pg8/Table/ItemBox"]
 margin_left = 26.5
 margin_right = 315.5
 margin_bottom = 32.0
 texture = ExtResource( 27 )
 
-[node name="SwordBonus" type="Label" parent="Pg8/Table"]
+[node name="ItemBonus" type="Label" parent="Pg8/Table"]
 margin_left = 125.0
 margin_top = 131.0
 margin_right = 421.0
