@@ -76,7 +76,7 @@ window/stretch/mode="viewport"
 [global]
 
 Version="v0.2.0"
-Dev=true
+Dev=false
 
 [gui]
 
