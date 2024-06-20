@@ -15,7 +15,7 @@ static func get_scene(scene_id):
 		CREDIT:
 			return load("res://scene/credit.tscn")
 		INTRO:
-			return load("res://scene/intro.tscn")
+			return load("res://scene/Intro.tscn")
 		QUIT:
 			return load("res://scene/end.tscn")
 		_:

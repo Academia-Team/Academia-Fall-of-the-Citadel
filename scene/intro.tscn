@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://scene/intro.gd" type="Script" id=1]
+[ext_resource path="res://scene/Intro.gd" type="Script" id=1]
 [ext_resource path="res://asset/intro.mp3" type="AudioStream" id=2]
 [ext_resource path="res://resource/large_theme.tres" type="Theme" id=3]
 
@@ -66,7 +66,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="intro" type="ColorRect"]
+[node name="Intro" type="ColorRect"]
 margin_right = 800.0
 margin_bottom = 450.0
 mouse_filter = 2
