@@ -18,8 +18,9 @@ const ZOMBIE_SPAWN_PROB = 0.5
 const MAX_ITEMS = 3
 const HEALTH_SPAWN_PROB = 0.3
 
-signal game_over()
-signal started()
+signal game_over
+signal started
+
 
 func start(info_obj):
 	info_ref = info_obj
@@ -31,25 +32,29 @@ func start(info_obj):
 
 	if info_obj.get_mode() == "Duck":
 		$duck_timer.start()
-	
+
 	seed(info_obj.get_seed())
 	set_up_player()
 	emit_signal("started")
 	started = true
 
+
 func restart():
 	start(info_ref)
+
 
 func cleanup():
 	for interactable in get_tree().get_nodes_in_group("interactable"):
 		interactable.queue_free()
+
+
 func _process(_delta):
 	if started and info_ref.is_cheat_enabled():
 		if Input.is_action_just_pressed("cheat_suicide"):
 			$player.kill()
 		elif Input.is_action_just_pressed("cheat_god"):
 			$player.toggle_immortality()
-			
+
 			if $player.is_immortal():
 				info_ref.set_timed_status("Feeling Powerful?")
 			else:
@@ -58,6 +63,7 @@ func _process(_delta):
 			yield(get_tree().create_timer(1), "timeout")
 			handle_stop_spawn_options()
 
+
 func handle_stop_spawn_options():
 	if Input.is_action_pressed("cheat_item"):
 		$item_spawn_timer.paused = not $item_spawn_timer.paused
@@ -65,7 +71,7 @@ func handle_stop_spawn_options():
 	elif Input.is_action_pressed("cheat_enemy"):
 		for timer in get_tree().get_nodes_in_group("enemy_spawner"):
 			timer.paused = not timer.paused
-		
+
 		info_ref.set_timed_status("Enemy spawn toggled.")
 	elif Input.is_action_pressed("cheat_zombie"):
 		$zombie_spawn_timer.paused = not $zombie_spawn_timer.paused
@@ -73,26 +79,28 @@ func handle_stop_spawn_options():
 	elif Input.is_action_pressed("cheat_stop_spawn"):
 		for timer in get_tree().get_nodes_in_group("spawner"):
 			timer.paused = not timer.paused
-			
+
 		info_ref.set_timed_status("All spawners toggled.")
 	else:
 		info_ref.set_timed_status("Nothing toggled.")
 
+
 func set_up_player():
 	var screen_size = get_viewport_rect().size
 
-	$player.spawn(Vector2(0, 0), 0,
-		screen_size.y - cell_size.y * 2, 0, screen_size.x - cell_size.x)
+	$player.spawn(Vector2(0, 0), 0, screen_size.y - cell_size.y * 2, 0, screen_size.x - cell_size.x)
+
 
 func _on_player_pick_up_item(item_name):
 	if item_name != "duck":
 		ref_counter["item"] -= 1
 	else:
 		ref_counter["duck"] -= 1
-	
+
 	info_ref.incr_score(ITEM_SCORE)
 	info_ref.set_timed_status("Press space or first button to use item")
 	info_ref.set_status(item_name)
+
 
 func _on_player_used_item(_item_name):
 	info_ref.reset_status()
@@ -101,20 +109,23 @@ func _on_player_used_item(_item_name):
 func _on_passive_timer_timeout():
 	info_ref.incr_score(PASSIVE_SCORE)
 
+
 func _on_enemy_destroyed(enemy_type):
 	match enemy_type:
 		"zombie":
 			info_ref.incr_score(ZOMBIE_SCORE)
 
+
 func _on_zombie_tree_exiting():
 	ref_counter["zombie"] -= 1
+
 
 func _on_player_health_change(lives):
 	if not started:
 		yield(self, "started")
-	
+
 	info_ref.set_lives(lives)
-	
+
 	if lives <= 0:
 		started = false
 		$music.stop()
@@ -122,6 +133,7 @@ func _on_player_health_change(lives):
 		$zombie_spawn_timer.stop()
 		$item_spawn_timer.stop()
 		$gameover_sfx.play()
+
 
 func _on_zombie_spawn_timer_timeout():
 	if ref_counter.get("zombie", 0) < MAX_ZOMBIES:
@@ -134,27 +146,32 @@ func get_spawn_pos():
 	var num_available_cells = available_cells.size()
 	var spawn_pos = null
 	var proposed_spawn_pos
-	
+
 	while spawn_pos == null and num_available_cells > 0:
 		var rand_cell_idx = randi() % num_available_cells
 		proposed_spawn_pos = map_to_world(available_cells[rand_cell_idx])
-		
+
 		if valid_spawn_pos(proposed_spawn_pos):
 			spawn_pos = proposed_spawn_pos
 		else:
 			available_cells.remove(rand_cell_idx)
 			num_available_cells -= 1
-			
+
 	return spawn_pos
+
 
 func valid_spawn_pos(pos):
 	var valid_pos = false
-	
-	if ((abs(pos.x - $player.position.x) >= VALID_DIST_FROM_PLAYER or
-			abs(pos.y - $player.position.y) >= VALID_DIST_FROM_PLAYER) and
-			get_cellv(world_to_map(pos)) != INVALID_CELL):
+
+	if (
+		(
+			abs(pos.x - $player.position.x) >= VALID_DIST_FROM_PLAYER
+			or abs(pos.y - $player.position.y) >= VALID_DIST_FROM_PLAYER
+		)
+		and get_cellv(world_to_map(pos)) != INVALID_CELL
+	):
 		valid_pos = Group.get_obj_at_pos(get_tree(), "interactable", pos) == null
-				
+
 	return valid_pos
 
 
@@ -167,6 +184,7 @@ func spawn_enemy(scene, pos):
 	var orient_facing_player = Direction.get_cardinal_dir_facing($player.position, pos)
 	instance.spawn(pos, orient_facing_player)
 	ref_counter[instance.type] = ref_counter.get(instance.type, 0) + 1
+
 
 func _on_item_spawn_timer_timeout():
 	if ref_counter.get("item", 0) < MAX_ITEMS:
@@ -183,15 +201,16 @@ func spawn_item(scene, pos, ref_name = "item"):
 		instance.position = pos
 		ref_counter[ref_name] = ref_counter.get(ref_name, 0) + 1
 
+
 func _on_enemy_move_request(ref):
 	var desired_positions = ref.desired_positions($player.position)
 	var moved = false
-	
+
 	for pos in desired_positions:
 		# Want to ensure that all the enemies aren't moving on top of each other. If that is happening,
 		# just have the enemy lose its turn.
 		var obj_at_pos = Group.get_obj_at_pos(get_tree(), "interactable", pos)
-		
+
 		if obj_at_pos == null:
 			ref.move_to(pos)
 			moved = true
@@ -201,21 +220,24 @@ func _on_enemy_move_request(ref):
 			if move_shovable_obj(obj_at_pos, dir_to_shove):
 				moved = true
 				break
-		
+
 		if not moved:
 			ref.move_reject()
+
 
 func move_shovable_obj(ref, shove_dir):
 	var dest_pos = Direction.translate_pos(ref.position, shove_dir, 32)
 	var success = false
-	
-	if (Group.get_obj_at_pos(get_tree(), "interactable", dest_pos) == null and
-			get_cellv(world_to_map(dest_pos)) != INVALID_CELL and
-			($player.held_item == null or $player.position != dest_pos)):
+
+	if (
+		Group.get_obj_at_pos(get_tree(), "interactable", dest_pos) == null
+		and get_cellv(world_to_map(dest_pos)) != INVALID_CELL
+		and ($player.held_item == null or $player.position != dest_pos)
+	):
 		if ref.is_shovable():
 			ref.shove_to(dest_pos)
 			success = true
-		
+
 	return success
 
 
@@ -226,12 +248,14 @@ func _on_gameover_sfx_finished():
 func _on_player_move_request(dir):
 	if $player.lives > 0:
 		var future_pos = Direction.translate_pos($player.position, dir, 32)
-		
+
 		if get_cellv(world_to_map(future_pos)) != INVALID_CELL:
 			var interactable_obj = Group.get_obj_at_pos(get_tree(), "interactable", future_pos)
-			if ($player.held_item == null or
-					interactable_obj == null or
-					interactable_obj.get_class() == "enemy"):
+			if (
+				$player.held_item == null
+				or interactable_obj == null
+				or interactable_obj.get_class() == "enemy"
+			):
 				$player.move_to(future_pos)
 			elif not move_shovable_obj(interactable_obj, dir):
 				$player.move_reject()
