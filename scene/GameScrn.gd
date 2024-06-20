@@ -65,7 +65,7 @@ func _on_gamegrid_game_over():
 	$gameover.start($infobar)
 
 
-func _on_gamescr_tree_exiting():
+func _on_GameScrn_tree_exiting():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 

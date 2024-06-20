@@ -9,7 +9,7 @@ static func get_scene(scene_id):
 		MENU:
 			return load("res://scene/menu.tscn")
 		GAME:
-			return load("res://scene/gamescr.tscn")
+			return load("res://scene/GameScrn.tscn")
 		HELP:
 			return load("res://scene/instructions.tscn")
 		CREDIT:
