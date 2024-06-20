@@ -1,7 +1,8 @@
 extends Reference
 class_name Direction
 
-enum {NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST}
+enum { NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST }
+
 
 static func get_opposing_dirs(dir):
 	match dir:
@@ -24,6 +25,7 @@ static func get_opposing_dirs(dir):
 		_:
 			return []
 
+
 static func dir_to_rel_pos(dir, step):
 	match dir:
 		NORTH:
@@ -43,6 +45,7 @@ static func dir_to_rel_pos(dir, step):
 		SOUTHWEST:
 			return Vector2(-step, step)
 
+
 static func get_horz_component(dir):
 	if dir == NORTHEAST or dir == SOUTHEAST:
 		return EAST
@@ -51,6 +54,7 @@ static func get_horz_component(dir):
 	else:
 		return dir
 
+
 static func get_vert_component(dir):
 	if dir == NORTHEAST or dir == NORTHWEST:
 		return NORTH
@@ -58,6 +62,7 @@ static func get_vert_component(dir):
 		return SOUTH
 	else:
 		return dir
+
 
 static func combine_dir(dir1, dir2):
 	if dir1 == null:
@@ -82,11 +87,13 @@ static func combine_dir(dir1, dir2):
 	else:
 		return dir1
 
+
 static func dir_opposites(dir1, dir2):
 	for dir_opposite in get_opposing_dirs(dir1):
 		if dir2 == dir_opposite:
 			return true
 	return false
+
 
 static func get_dir_components(dir):
 	match dir:
@@ -101,6 +108,7 @@ static func get_dir_components(dir):
 		_:
 			return [dir]
 
+
 static func translate_pos(pos, dir, step):
 	for dir_component in get_dir_components(dir):
 		match dir_component:
@@ -113,6 +121,7 @@ static func translate_pos(pos, dir, step):
 			EAST:
 				pos.x += step
 	return pos
+
 
 static func get_cardinal_dir_facing(pos_to_face, pos):
 	if (pos - pos_to_face) != Vector2(0, 0):
@@ -129,11 +138,14 @@ static func get_cardinal_dir_facing(pos_to_face, pos):
 	else:
 		return null
 
+
 static func get_dir_facing(pos_to_face, pos):
 	return rel_pos_to_dir(pos_to_face - pos)
 
+
 static func rel_pos_to_dir(pos):
 	return combine_dir(_get_horz_dir_from_pos(pos), _get_vert_dir_from_pos(pos))
+
 
 static func _get_horz_dir_from_pos(pos):
 	if pos.x > 0:
@@ -143,6 +155,7 @@ static func _get_horz_dir_from_pos(pos):
 	else:
 		return null
 
+
 static func _get_vert_dir_from_pos(pos):
 	if pos.y > 0:
 		return SOUTH
@@ -151,11 +164,14 @@ static func _get_vert_dir_from_pos(pos):
 	else:
 		return null
 
+
 static func is_cardinal_dir(dir):
 	return dir == NORTH or dir == SOUTH or dir == EAST or dir == WEST
-	
+
+
 static func is_horz(dir):
 	return dir == EAST or dir == WEST
+
 
 static func is_vert(dir):
 	return dir == NORTH or dir == SOUTH
