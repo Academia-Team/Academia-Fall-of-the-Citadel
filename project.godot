@@ -32,7 +32,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "SceneSwitcher",
 "language": "GDScript",
-"path": "res://class/scene_switcher.gd"
+"path": "res://class/SceneSwitcher.gd"
 }, {
 "base": "Area2D",
 "class": "enemy",
