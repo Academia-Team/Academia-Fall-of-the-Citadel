@@ -57,7 +57,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Academia: Fall of the Citadel"
-run/main_scene="res://scene/start.tscn"
+run/main_scene="res://scene/Start.tscn"
 boot_splash/image="res://Splash.png"
 boot_splash/fullsize=false
 boot_splash/use_filter=false
