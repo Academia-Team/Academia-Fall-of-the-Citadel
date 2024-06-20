@@ -12,8 +12,8 @@ var _tainted = false
 
 
 func _ready():
-	_cur_status_text = $status.text
-	_orig_status_text = $status.text
+	_cur_status_text = $Status.text
+	_orig_status_text = $Status.text
 
 
 func reset():
@@ -44,7 +44,7 @@ func decr_score(score_delta):
 
 
 func _write_score_text():
-	$score_counter.text = "Score: %d" % _score
+	$ScoreCounter.text = "Score: %d" % _score
 
 
 func set_mode(mode):
@@ -60,7 +60,7 @@ func get_score():
 
 
 func get_score_text():
-	return $score_counter.text
+	return $ScoreCounter.text
 
 
 func set_lives(life_count):
@@ -85,11 +85,11 @@ func get_lives():
 
 
 func _write_lives_text():
-	$lives_counter.text = "Lives: %d" % _lives
+	$LivesCounter.text = "Lives: %d" % _lives
 
 
 func get_lives_text():
-	return $lives_counter
+	return $LivesCounter
 
 
 func set_seed(seed_val):
@@ -101,7 +101,7 @@ func get_seed():
 
 
 func set_timed_status(status_str, sec = 3):
-	$status.text = status_str
+	$Status.text = status_str
 
 	# Ensure all other timed status messages are replaced.
 	if not $StatusTimer.is_stopped():
@@ -114,20 +114,20 @@ func set_timed_status(status_str, sec = 3):
 func set_status(status_str):
 	if $StatusTimer.is_stopped():
 		_orig_status_text = $status.text
-		$status.text = status_str
+		$Status.text = status_str
 
 	_cur_status_text = status_str
 
 
 func get_status():
-	return $status.text
+	return $Status.text
 
 
 # Has no effect on temporary (timed) status messages.
 # Those will be reset when the timer times out.
 func reset_status():
 	if $StatusTimer.is_stopped():
-		$status.text = _orig_status_text
+		$Status.text = _orig_status_text
 
 	_cur_status_text = _orig_status_text
 
@@ -146,4 +146,4 @@ func is_tainted():
 
 
 func _on_StatusTimer_timeout():
-	$status.text = _cur_status_text
+	$Status.text = _cur_status_text
