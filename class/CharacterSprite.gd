@@ -1,30 +1,31 @@
-extends Sprite
 class_name CharacterSprite
+extends Sprite
 
-export(Texture) var north_texture
-export(Texture) var south_texture
-export(Texture) var side_texture
+signal orientation_changed(old_orient, new_orient)
+signal effect_show
+signal effect_finish
 
-enum valid_orientation {
+enum ValidOrientation {
 	NORTH = Direction.NORTH,
 	SOUTH = Direction.SOUTH,
 	EAST = Direction.EAST,
 	WEST = Direction.WEST
 }
 
+export(Texture) var north_texture
+export(Texture) var south_texture
+export(Texture) var side_texture
+
+
 export(Color) var heal_color = Color.pink
 export(Color) var hurt_color = Color.tomato
 export(float) var heal_length = 1.0
 export(float) var hurt_length = 0.3
-export(valid_orientation) var orientation = Direction.SOUTH
+export(ValidOrientation) var orientation = Direction.SOUTH
 
 var effect_timer
 var initial_texture
 onready var orig_self_modulate = self_modulate
-
-signal orientation_changed(old_orient, new_orient)
-signal effect_show
-signal effect_finish
 
 
 func _init():
