@@ -16,7 +16,6 @@ export(Texture) var north_texture
 export(Texture) var south_texture
 export(Texture) var side_texture
 
-
 export(Color) var heal_color = Color.pink
 export(Color) var hurt_color = Color.tomato
 export(float) var heal_length = 1.0
