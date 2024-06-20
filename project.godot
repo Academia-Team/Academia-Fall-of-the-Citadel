@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "Direction",
 "language": "GDScript",
-"path": "res://class/direction.gd"
+"path": "res://class/Direction.gd"
 }, {
 "base": "Reference",
 "class": "Group",
