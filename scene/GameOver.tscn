@@ -1,10 +1,10 @@
 [gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://resource/title_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scene/GameOver.gd" type="Script" id=1]
 [ext_resource path="res://resource/emphasized_theme.tres" type="Theme" id=2]
-[ext_resource path="res://resource/button_theme.tres" type="Theme" id=3]
-[ext_resource path="res://scene/gameover.gd" type="Script" id=4]
-[ext_resource path="res://resource/tech_theme.tres" type="Theme" id=5]
+[ext_resource path="res://resource/title_theme.tres" type="Theme" id=3]
+[ext_resource path="res://resource/tech_theme.tres" type="Theme" id=4]
+[ext_resource path="res://resource/button_theme.tres" type="Theme" id=5]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -30,14 +30,14 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
-script = ExtResource( 4 )
+script = ExtResource( 1 )
 
 [node name="Header" type="Label" parent="."]
 anchor_right = 1.0
 margin_top = 26.0
 margin_bottom = 91.0
 grow_horizontal = 2
-theme = ExtResource( 1 )
+theme = ExtResource( 3 )
 text = "Game Over"
 align = 1
 
@@ -55,7 +55,7 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -19.0
 margin_right = 45.0
-theme = ExtResource( 5 )
+theme = ExtResource( 4 )
 text = "Seed: ?"
 
 [node name="Mode" type="Label" parent="."]
@@ -66,7 +66,7 @@ anchor_bottom = 1.0
 margin_left = -52.0
 margin_top = -19.0
 grow_horizontal = 0
-theme = ExtResource( 5 )
+theme = ExtResource( 4 )
 text = "Mode: ?"
 
 [node name="Buttons" type="MarginContainer" parent="."]
@@ -87,7 +87,7 @@ focus_next = NodePath("../GiveUp")
 focus_previous = NodePath("../GiveUp")
 size_flags_horizontal = 0
 size_flags_vertical = 4
-theme = ExtResource( 3 )
+theme = ExtResource( 5 )
 custom_colors/font_color_focus = Color( 0.921569, 0.0156863, 0.0156863, 1 )
 custom_colors/font_color_hover = Color( 0.921569, 0.0156863, 0.0156863, 1 )
 custom_colors/font_color_pressed = Color( 0.921569, 0.0156863, 0.0156863, 1 )
@@ -113,7 +113,7 @@ focus_next = NodePath("../Arise")
 focus_previous = NodePath("../Arise")
 size_flags_horizontal = 8
 size_flags_vertical = 4
-theme = ExtResource( 3 )
+theme = ExtResource( 5 )
 custom_colors/font_color_focus = Color( 0.921569, 0.0156863, 0.0156863, 1 )
 custom_colors/font_color_hover = Color( 0.921569, 0.0156863, 0.0156863, 1 )
 custom_colors/font_color_pressed = Color( 0.921569, 0.0156863, 0.0156863, 1 )
@@ -139,7 +139,7 @@ theme = ExtResource( 2 )
 custom_colors/font_color = Color( 0.992157, 0.027451, 0.027451, 1 )
 text = "Cheater"
 
-[connection signal="draw" from="." to="." method="_on_gameover_draw"]
+[connection signal="draw" from="." to="." method="_on_GameOver_draw"]
 [connection signal="gui_input" from="." to="." method="_on_GameOver_gui_input"]
 [connection signal="mouse_entered" from="Buttons/Arise" to="." method="_on_Arise_mouse_entered"]
 [connection signal="mouse_exited" from="Buttons/Arise" to="." method="_on_Arise_mouse_exited"]

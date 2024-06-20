@@ -47,7 +47,7 @@ func gen_seed():
 	return gen_seed_val
 
 
-func _on_gameover_retry():
+func _on_GameOver_retry():
 	$gameover.stop()
 	$infobar.reset()
 	$infobar.set_seed(gen_seed())
@@ -55,7 +55,7 @@ func _on_gameover_retry():
 	$gamegrid.restart()
 
 
-func _on_gameover_leave():
+func _on_GameOver_leave():
 	SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.MENU)
 
 

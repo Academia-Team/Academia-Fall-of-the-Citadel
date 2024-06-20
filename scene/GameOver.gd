@@ -58,7 +58,7 @@ func _set_mode_text(mode):
 		$Mode.text = "Mode: %s" % mode
 
 
-func _on_gameover_draw():
+func _on_GameOver_draw():
 	if info_ref != null:
 		$Score.text = info_ref.get_score_text()
 
