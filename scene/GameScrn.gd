@@ -14,9 +14,9 @@ func _ready():
 		seed_val = gen_seed()
 		print("Seed: %d" % seed_val)
 
-	$infobar.set_seed(seed_val)
-	$infobar.set_mode(mode)
-	$gamegrid.start($infobar)
+	$InfoBar.set_seed(seed_val)
+	$InfoBar.set_mode(mode)
+	$GameGrid.start($infobar)
 
 
 func _process(_delta):
@@ -33,12 +33,12 @@ func handle_cheat_toggling():
 
 	if cheat_key_counter == CHEAT_COUNT_REQ:
 		cheat_key_counter = 0
-		$infobar.toggle_cheats()
+		$InfoBar.toggle_cheats()
 
-		if $infobar.is_cheat_enabled():
-			$infobar.set_timed_status("You are a CHEATER!!!")
+		if $InfoBar.is_cheat_enabled():
+			$InfoBar.set_timed_status("You are a CHEATER!!!")
 		else:
-			$infobar.set_timed_status("Cheats disabled--for now.")
+			$InfoBar.set_timed_status("Cheats disabled--for now.")
 
 
 func gen_seed():
@@ -48,11 +48,11 @@ func gen_seed():
 
 
 func _on_GameOver_retry():
-	$gameover.stop()
-	$infobar.reset()
-	$infobar.set_seed(gen_seed())
+	$GameOver.stop()
+	$InfoBar.reset()
+	$InfoBar.set_seed(gen_seed())
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	$gamegrid.restart()
+	$GameGrid.restart()
 
 
 func _on_GameOver_leave():
@@ -60,9 +60,9 @@ func _on_GameOver_leave():
 
 
 func _on_gamegrid_game_over():
-	$gamegrid.cleanup()
+	$GameGrid.cleanup()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	$gameover.start($infobar)
+	$GameOver.start($infobar)
 
 
 func _on_GameScrn_tree_exiting():
