@@ -74,11 +74,14 @@ static func combine_dir(dir1, dir2):
 			if dir2 == EAST:
 				return NORTHEAST
 			return NORTHWEST
+		
 		if dir1 == SOUTH:
 			if dir2 == EAST:
 				return SOUTHEAST
 			return SOUTHWEST
+		
 		return combine_dir(dir2, dir1)
+	
 	return dir1
 
 
@@ -123,10 +126,11 @@ static func get_cardinal_dir_facing(pos_to_face, pos):
 			if (pos.x - pos_to_face.x) >= 0:
 				return WEST
 			return EAST
-		else:
-			if (pos.y - pos_to_face.y) >= 0:
-				return NORTH
-			return SOUTH
+
+		if (pos.y - pos_to_face.y) >= 0:
+			return NORTH
+		return SOUTH
+
 	return null
 
 
