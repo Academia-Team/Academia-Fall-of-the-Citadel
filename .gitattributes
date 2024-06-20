@@ -7,5 +7,8 @@
 *.import text eol=lf
 * text=auto
 
+# Ensure files for Windows remain CRLF.
+*.bat text eol=crlf
+
 # Force linguist to recognize Godot files.
 *.gd linguist-language=gdscript
