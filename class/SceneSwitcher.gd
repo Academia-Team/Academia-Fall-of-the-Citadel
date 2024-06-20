@@ -4,8 +4,8 @@ class_name SceneSwitcher
 enum { MENU, GAME, HELP, CREDIT, INTRO, QUIT }
 
 
-static func get_scene(sceneID):
-	match sceneID:
+static func get_scene(sceneId):
+	match sceneId:
 		MENU:
 			return load("res://scene/menu.tscn")
 		GAME:
@@ -22,13 +22,13 @@ static func get_scene(sceneID):
 			return null
 
 
-static func change_scene_tree_to(tree, sceneID):
-	if tree.change_scene_to(get_scene(sceneID)) != OK:
-		printerr("Failed to switch to %s" % scene_to_str(sceneID))
+static func change_scene_tree_to(tree, sceneId):
+	if tree.change_scene_to(get_scene(sceneId)) != OK:
+		printerr("Failed to switch to %s" % scene_to_str(sceneId))
 
 
-static func scene_to_str(sceneID):
-	match sceneID:
+static func scene_to_str(sceneId):
+	match sceneId:
 		MENU:
 			return "menu"
 		GAME:
