@@ -36,7 +36,7 @@ func _init():
 	add_child(effect_timer)
 
 
-# A hack due to the fact that when a character_sprite is placed, its texture will
+# A hack due to the fact that when a CharacterSprite is placed, its texture will
 # be overwritten. If _ready() is redefined, set_orient() will have to be manually
 # called.
 func _ready():

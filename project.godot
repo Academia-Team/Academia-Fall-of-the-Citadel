@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Sprite",
 "class": "CharacterSprite",
 "language": "GDScript",
-"path": "res://class/character_sprite.gd"
+"path": "res://class/CharacterSprite.gd"
 }, {
 "base": "Reference",
 "class": "Direction",
