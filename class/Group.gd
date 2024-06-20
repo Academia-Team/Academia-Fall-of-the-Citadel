@@ -1,5 +1,5 @@
-extends Reference
 class_name Group
+extends Reference
 
 
 # Returns the first object that exists at the given position or null if no object exists.
