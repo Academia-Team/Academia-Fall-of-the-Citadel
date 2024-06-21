@@ -118,7 +118,7 @@ func _on_Enemy_destroyed(enemy_type):
 
 
 func _on_Zombie_tree_exiting():
-	ref_counter["zombie"] -= 1
+	ref_counter["Zombie"] -= 1
 
 
 func _on_Player_health_change(lives):
@@ -137,7 +137,7 @@ func _on_Player_health_change(lives):
 
 
 func _on_Zombie_spawn_timer_timeout():
-	if ref_counter.get("zombie", 0) < MAX_ZOMBIES:
+	if ref_counter.get("Zombie", 0) < MAX_ZOMBIES:
 		if randf() <= ZOMBIE_SPAWN_PROB:
 			spawn_enemy(ZOMBIE_SCENE, get_spawn_pos())
 
