@@ -7,7 +7,7 @@ enum { MENU, GAME, HELP, CREDIT, INTRO, QUIT }
 static func get_scene(scene_id):
 	match scene_id:
 		MENU:
-			return load("res://scene/menu.tscn")
+			return load("res://scene/Menu.tscn")
 		GAME:
 			return load("res://scene/GameScrn.tscn")
 		HELP:
