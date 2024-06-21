@@ -1,11 +1,12 @@
 extends ColorRect
 
-const NUM_PAGES = 8
-var curr_page = null
-var page_counter = 0
-
 signal finished
 signal switched_to_page(page_num)
+
+const NUM_PAGES = 8
+
+var curr_page = null
+var page_counter = 0
 
 
 func _ready():
