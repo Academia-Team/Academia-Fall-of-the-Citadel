@@ -42,7 +42,6 @@ anims/RESET = SubResource( 2 )
 script = ExtResource( 3 )
 
 [node name="Bell" type="TextureRect" parent="."]
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 texture = ExtResource( 2 )
