@@ -12,12 +12,17 @@ _global_script_classes=[ {
 "base": "Sprite",
 "class": "CharacterSprite",
 "language": "GDScript",
-"path": "res://class/character_sprite.gd"
+"path": "res://class/CharacterSprite.gd"
 }, {
 "base": "Reference",
 "class": "Direction",
 "language": "GDScript",
-"path": "res://class/direction.gd"
+"path": "res://class/Direction.gd"
+}, {
+"base": "Area2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://scene/Zombie.gd"
 }, {
 "base": "Reference",
 "class": "Group",
@@ -29,35 +34,30 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://class/Item.gd"
 }, {
+"base": "Area2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://scene/Player.gd"
+}, {
 "base": "Reference",
 "class": "SceneSwitcher",
 "language": "GDScript",
-"path": "res://class/scene_switcher.gd"
-}, {
-"base": "Area2D",
-"class": "enemy",
-"language": "GDScript",
-"path": "res://scene/zombie.gd"
-}, {
-"base": "Area2D",
-"class": "player",
-"language": "GDScript",
-"path": "res://scene/player.gd"
+"path": "res://class/SceneSwitcher.gd"
 } ]
 _global_script_class_icons={
 "CharacterSprite": "",
 "Direction": "",
+"Enemy": "",
 "Group": "",
 "Item": "",
-"SceneSwitcher": "",
-"enemy": "",
-"player": ""
+"Player": "",
+"SceneSwitcher": ""
 }
 
 [application]
 
 config/name="Academia: Fall of the Citadel"
-run/main_scene="res://scene/start.tscn"
+run/main_scene="res://scene/Start.tscn"
 boot_splash/image="res://Splash.png"
 boot_splash/fullsize=false
 boot_splash/use_filter=false

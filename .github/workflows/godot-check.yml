@@ -1,0 +1,21 @@
+name: Static checks
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  static-checks:
+    name: 'Static checks'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: Academia-Team/checkout@v4
+    - uses: Academia-Team/godot-gdscript-toolkit@master
+      with:
+        version: "3.*"
+    - run: gdformat --check class/
+    - run: gdlint class/
+    - run: gdformat --check scene/
+    - run: gdlint scene/

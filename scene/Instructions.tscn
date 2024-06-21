@@ -1,0 +1,956 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://asset/kenney_input-prompts/Generic/generic_button_circle_outline.svg" type="Texture" id=1]
+[ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_u.svg" type="Texture" id=2]
+[ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_slash_back.svg" type="Texture" id=3]
+[ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_n.svg" type="Texture" id=4]
+[ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_space.svg" type="Texture" id=5]
+[ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_l.svg" type="Texture" id=6]
+[ext_resource path="res://asset/Anonymous-Time-icon.svg" type="Texture" id=7]
+[ext_resource path="res://asset/sword.png" type="Texture" id=8]
+[ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_h.svg" type="Texture" id=9]
+[ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_arrow_left.svg" type="Texture" id=10]
+[ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_y.svg" type="Texture" id=11]
+[ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_k.svg" type="Texture" id=12]
+[ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_q.svg" type="Texture" id=13]
+[ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_j.svg" type="Texture" id=14]
+[ext_resource path="res://resource/tech_theme.tres" type="Theme" id=15]
+[ext_resource path="res://resource/emphasized_theme.tres" type="Theme" id=16]
+[ext_resource path="res://asset/Zombie_SOUTH.png" type="Texture" id=17]
+[ext_resource path="res://asset/kenney_input-prompts/Generic/generic_stick_right.svg" type="Texture" id=18]
+[ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_b.svg" type="Texture" id=19]
+[ext_resource path="res://asset/kenney_input-prompts/Generic/generic_stick_left.svg" type="Texture" id=20]
+[ext_resource path="res://scene/Instructions.gd" type="Script" id=21]
+[ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_arrow_up.svg" type="Texture" id=22]
+[ext_resource path="res://asset/kenney_input-prompts/Generic/generic_stick_up.svg" type="Texture" id=23]
+[ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_ctrl.svg" type="Texture" id=24]
+[ext_resource path="res://asset/kenney_input-prompts/Generic/generic_stick_down.svg" type="Texture" id=25]
+[ext_resource path="res://asset/kenney_input-prompts/Generic/generic_button_circle_fill.svg" type="Texture" id=26]
+
+[node name="Instructions" type="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+script = ExtResource( 21 )
+
+[node name="Pg1" type="Control" parent="." groups=["Page"]]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Title" type="Label" parent="Pg1"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_top = 26.0
+margin_right = 75.0
+margin_bottom = 71.0
+theme = ExtResource( 16 )
+text = "Story"
+align = 1
+
+[node name="Body" type="Label" parent="Pg1"]
+margin_top = 82.0
+margin_right = 800.0
+margin_bottom = 447.0
+text = "\"This can't be happening\", you cry to yourself, as your tears uselessly hit the ground with a dying clunk.
+
+A few days ago, your friends and colleagues were alive, united by a common dream--to push back the darkness sweeping across the land. Now that dream is dead along with them. You would have joined them if not for the injuries you sustained during the initial defence of the city of Caditan.
+
+Now that the city has fallen, the corrupted army marches towards you and the citadel in which you live. All other fortresses in the North have been destroyed. As well, communication with the South has been lost. You are the only one who remains.
+
+\"I will defend what I have sworn to defend\", you scream, as you watch the walls surrounding you slowly crack. The nightmare has arrived."
+autowrap = true
+
+[node name="Pg2" type="Control" parent="." groups=["Page"]]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Title" type="Label" parent="Pg2"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_top = 26.0
+margin_right = 75.0
+margin_bottom = 71.0
+theme = ExtResource( 16 )
+text = "Controls"
+align = 1
+
+[node name="Table" type="GridContainer" parent="Pg2"]
+margin_top = 82.0
+margin_right = 800.0
+margin_bottom = 447.0
+custom_constants/hseparation = 200
+columns = 2
+
+[node name="MoveUp" type="Label" parent="Pg2/Table"]
+margin_top = 22.0
+margin_right = 107.0
+margin_bottom = 41.0
+text = "Move Up"
+
+[node name="MoveUpControls" type="GridContainer" parent="Pg2/Table"]
+margin_left = 307.0
+margin_right = 627.0
+margin_bottom = 64.0
+custom_constants/hseparation = 64
+columns = 3
+
+[node name="UpArrow" type="TextureRect" parent="Pg2/Table/MoveUpControls"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 22 )
+
+[node name="KButton" type="TextureRect" parent="Pg2/Table/MoveUpControls"]
+margin_left = 128.0
+margin_right = 192.0
+margin_bottom = 64.0
+texture = ExtResource( 12 )
+
+[node name="UpJoy" type="TextureRect" parent="Pg2/Table/MoveUpControls"]
+margin_left = 256.0
+margin_right = 320.0
+margin_bottom = 64.0
+texture = ExtResource( 23 )
+
+[node name="MoveDown" type="Label" parent="Pg2/Table"]
+margin_top = 90.0
+margin_right = 107.0
+margin_bottom = 109.0
+text = "Move Down"
+
+[node name="MoveDownControls" type="GridContainer" parent="Pg2/Table"]
+margin_left = 307.0
+margin_top = 68.0
+margin_right = 627.0
+margin_bottom = 132.0
+custom_constants/hseparation = 64
+columns = 3
+
+[node name="DownArrow" type="TextureRect" parent="Pg2/Table/MoveDownControls"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 22 )
+flip_v = true
+
+[node name="JButton" type="TextureRect" parent="Pg2/Table/MoveDownControls"]
+margin_left = 128.0
+margin_right = 192.0
+margin_bottom = 64.0
+texture = ExtResource( 14 )
+
+[node name="DownJoy" type="TextureRect" parent="Pg2/Table/MoveDownControls"]
+margin_left = 256.0
+margin_right = 320.0
+margin_bottom = 64.0
+texture = ExtResource( 25 )
+
+[node name="MoveLeft" type="Label" parent="Pg2/Table"]
+margin_top = 158.0
+margin_right = 107.0
+margin_bottom = 177.0
+text = "Move Left"
+
+[node name="MoveLeftControls" type="GridContainer" parent="Pg2/Table"]
+margin_left = 307.0
+margin_top = 136.0
+margin_right = 627.0
+margin_bottom = 200.0
+custom_constants/hseparation = 64
+columns = 3
+
+[node name="LeftArrow" type="TextureRect" parent="Pg2/Table/MoveLeftControls"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 10 )
+
+[node name="HButton" type="TextureRect" parent="Pg2/Table/MoveLeftControls"]
+margin_left = 128.0
+margin_right = 192.0
+margin_bottom = 64.0
+texture = ExtResource( 9 )
+
+[node name="LeftJoy" type="TextureRect" parent="Pg2/Table/MoveLeftControls"]
+margin_left = 256.0
+margin_right = 320.0
+margin_bottom = 64.0
+texture = ExtResource( 20 )
+
+[node name="MoveRight" type="Label" parent="Pg2/Table"]
+margin_top = 226.0
+margin_right = 107.0
+margin_bottom = 245.0
+text = "Move Right"
+
+[node name="MoveRightControls" type="GridContainer" parent="Pg2/Table"]
+margin_left = 307.0
+margin_top = 204.0
+margin_right = 627.0
+margin_bottom = 268.0
+custom_constants/hseparation = 64
+columns = 3
+
+[node name="RightArrow" type="TextureRect" parent="Pg2/Table/MoveRightControls"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 10 )
+flip_h = true
+
+[node name="LButton" type="TextureRect" parent="Pg2/Table/MoveRightControls"]
+margin_left = 128.0
+margin_right = 192.0
+margin_bottom = 64.0
+texture = ExtResource( 6 )
+
+[node name="RightJoy" type="TextureRect" parent="Pg2/Table/MoveRightControls"]
+margin_left = 256.0
+margin_right = 320.0
+margin_bottom = 64.0
+texture = ExtResource( 18 )
+
+[node name="Pg3" type="Control" parent="." groups=["Page"]]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Title" type="Label" parent="Pg3"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_top = 26.0
+margin_right = 75.0
+margin_bottom = 71.0
+theme = ExtResource( 16 )
+text = "Controls"
+align = 1
+
+[node name="Table" type="GridContainer" parent="Pg3"]
+margin_top = 82.0
+margin_right = 800.0
+margin_bottom = 447.0
+columns = 2
+
+[node name="MoveTopLeft" type="Label" parent="Pg3/Table"]
+margin_top = 22.0
+margin_right = 182.0
+margin_bottom = 41.0
+text = "Move Top-Left"
+
+[node name="MoveTopLeftControls" type="GridContainer" parent="Pg3/Table"]
+margin_left = 186.0
+margin_right = 668.0
+margin_bottom = 64.0
+custom_constants/hseparation = 64
+columns = 3
+
+[node name="TopLeftArrows" type="GridContainer" parent="Pg3/Table/MoveTopLeftControls"]
+margin_right = 145.0
+margin_bottom = 64.0
+columns = 3
+
+[node name="UpArrow" type="TextureRect" parent="Pg3/Table/MoveTopLeftControls/TopLeftArrows"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 22 )
+
+[node name="Plus" type="Label" parent="Pg3/Table/MoveTopLeftControls/TopLeftArrows"]
+margin_left = 68.0
+margin_top = 22.0
+margin_right = 77.0
+margin_bottom = 41.0
+theme = ExtResource( 15 )
+text = "+"
+
+[node name="LeftArrow" type="TextureRect" parent="Pg3/Table/MoveTopLeftControls/TopLeftArrows"]
+margin_left = 81.0
+margin_right = 145.0
+margin_bottom = 64.0
+texture = ExtResource( 10 )
+
+[node name="YButton" type="TextureRect" parent="Pg3/Table/MoveTopLeftControls"]
+margin_left = 209.0
+margin_right = 273.0
+margin_bottom = 64.0
+texture = ExtResource( 11 )
+
+[node name="TopLeftJoy" type="GridContainer" parent="Pg3/Table/MoveTopLeftControls"]
+margin_left = 337.0
+margin_right = 482.0
+margin_bottom = 64.0
+columns = 3
+
+[node name="UpJoy" type="TextureRect" parent="Pg3/Table/MoveTopLeftControls/TopLeftJoy"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 23 )
+
+[node name="Plus" type="Label" parent="Pg3/Table/MoveTopLeftControls/TopLeftJoy"]
+margin_left = 68.0
+margin_top = 22.0
+margin_right = 77.0
+margin_bottom = 41.0
+theme = ExtResource( 15 )
+text = "+"
+
+[node name="LeftJoy" type="TextureRect" parent="Pg3/Table/MoveTopLeftControls/TopLeftJoy"]
+margin_left = 81.0
+margin_right = 145.0
+margin_bottom = 64.0
+texture = ExtResource( 20 )
+
+[node name="MoveTopRight" type="Label" parent="Pg3/Table"]
+margin_top = 90.0
+margin_right = 182.0
+margin_bottom = 109.0
+text = "Move Top-Right"
+
+[node name="MoveTopRightControls" type="GridContainer" parent="Pg3/Table"]
+margin_left = 186.0
+margin_top = 68.0
+margin_right = 668.0
+margin_bottom = 132.0
+custom_constants/hseparation = 64
+columns = 3
+
+[node name="TopRightArrows" type="GridContainer" parent="Pg3/Table/MoveTopRightControls"]
+margin_right = 145.0
+margin_bottom = 64.0
+columns = 3
+
+[node name="UpArrow" type="TextureRect" parent="Pg3/Table/MoveTopRightControls/TopRightArrows"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 22 )
+
+[node name="Plus" type="Label" parent="Pg3/Table/MoveTopRightControls/TopRightArrows"]
+margin_left = 68.0
+margin_top = 22.0
+margin_right = 77.0
+margin_bottom = 41.0
+theme = ExtResource( 15 )
+text = "+"
+
+[node name="RightArrow" type="TextureRect" parent="Pg3/Table/MoveTopRightControls/TopRightArrows"]
+margin_left = 81.0
+margin_right = 145.0
+margin_bottom = 64.0
+texture = ExtResource( 10 )
+flip_h = true
+
+[node name="UButton" type="TextureRect" parent="Pg3/Table/MoveTopRightControls"]
+margin_left = 209.0
+margin_right = 273.0
+margin_bottom = 64.0
+texture = ExtResource( 2 )
+
+[node name="TopRightJoy" type="GridContainer" parent="Pg3/Table/MoveTopRightControls"]
+margin_left = 337.0
+margin_right = 482.0
+margin_bottom = 64.0
+columns = 3
+
+[node name="UpJoy" type="TextureRect" parent="Pg3/Table/MoveTopRightControls/TopRightJoy"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 23 )
+
+[node name="Plus" type="Label" parent="Pg3/Table/MoveTopRightControls/TopRightJoy"]
+margin_left = 68.0
+margin_top = 22.0
+margin_right = 77.0
+margin_bottom = 41.0
+theme = ExtResource( 15 )
+text = "+"
+
+[node name="RightJoy" type="TextureRect" parent="Pg3/Table/MoveTopRightControls/TopRightJoy"]
+margin_left = 81.0
+margin_right = 145.0
+margin_bottom = 64.0
+texture = ExtResource( 18 )
+
+[node name="MoveBottomLeft" type="Label" parent="Pg3/Table"]
+margin_top = 158.0
+margin_right = 182.0
+margin_bottom = 177.0
+text = "Move Bottom-Left"
+
+[node name="MoveBottomLeftControls" type="GridContainer" parent="Pg3/Table"]
+margin_left = 186.0
+margin_top = 136.0
+margin_right = 668.0
+margin_bottom = 200.0
+custom_constants/hseparation = 64
+columns = 3
+
+[node name="BottomLeftArrows" type="GridContainer" parent="Pg3/Table/MoveBottomLeftControls"]
+margin_right = 145.0
+margin_bottom = 64.0
+columns = 3
+
+[node name="DownArrow" type="TextureRect" parent="Pg3/Table/MoveBottomLeftControls/BottomLeftArrows"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 22 )
+flip_v = true
+
+[node name="Plus" type="Label" parent="Pg3/Table/MoveBottomLeftControls/BottomLeftArrows"]
+margin_left = 68.0
+margin_top = 22.0
+margin_right = 77.0
+margin_bottom = 41.0
+theme = ExtResource( 15 )
+text = "+"
+
+[node name="LeftArrow" type="TextureRect" parent="Pg3/Table/MoveBottomLeftControls/BottomLeftArrows"]
+margin_left = 81.0
+margin_right = 145.0
+margin_bottom = 64.0
+texture = ExtResource( 10 )
+
+[node name="BButton" type="TextureRect" parent="Pg3/Table/MoveBottomLeftControls"]
+margin_left = 209.0
+margin_right = 273.0
+margin_bottom = 64.0
+texture = ExtResource( 19 )
+
+[node name="BottomLeftJoy" type="GridContainer" parent="Pg3/Table/MoveBottomLeftControls"]
+margin_left = 337.0
+margin_right = 482.0
+margin_bottom = 64.0
+columns = 3
+
+[node name="DownJoy" type="TextureRect" parent="Pg3/Table/MoveBottomLeftControls/BottomLeftJoy"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 25 )
+
+[node name="Plus" type="Label" parent="Pg3/Table/MoveBottomLeftControls/BottomLeftJoy"]
+margin_left = 68.0
+margin_top = 22.0
+margin_right = 77.0
+margin_bottom = 41.0
+theme = ExtResource( 15 )
+text = "+"
+
+[node name="LeftJoy" type="TextureRect" parent="Pg3/Table/MoveBottomLeftControls/BottomLeftJoy"]
+margin_left = 81.0
+margin_right = 145.0
+margin_bottom = 64.0
+texture = ExtResource( 20 )
+
+[node name="MoveBottomRight" type="Label" parent="Pg3/Table"]
+margin_top = 226.0
+margin_right = 182.0
+margin_bottom = 245.0
+text = "Move Bottom-Right"
+
+[node name="MoveBottomRightControls" type="GridContainer" parent="Pg3/Table"]
+margin_left = 186.0
+margin_top = 204.0
+margin_right = 668.0
+margin_bottom = 268.0
+custom_constants/hseparation = 64
+columns = 3
+
+[node name="BottomRightArrows" type="GridContainer" parent="Pg3/Table/MoveBottomRightControls"]
+margin_right = 145.0
+margin_bottom = 64.0
+columns = 3
+
+[node name="DownArrow" type="TextureRect" parent="Pg3/Table/MoveBottomRightControls/BottomRightArrows"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 22 )
+flip_v = true
+
+[node name="Plus" type="Label" parent="Pg3/Table/MoveBottomRightControls/BottomRightArrows"]
+margin_left = 68.0
+margin_top = 22.0
+margin_right = 77.0
+margin_bottom = 41.0
+theme = ExtResource( 15 )
+text = "+"
+
+[node name="RightArrow" type="TextureRect" parent="Pg3/Table/MoveBottomRightControls/BottomRightArrows"]
+margin_left = 81.0
+margin_right = 145.0
+margin_bottom = 64.0
+texture = ExtResource( 10 )
+flip_h = true
+
+[node name="NButton" type="TextureRect" parent="Pg3/Table/MoveBottomRightControls"]
+margin_left = 209.0
+margin_right = 273.0
+margin_bottom = 64.0
+texture = ExtResource( 4 )
+
+[node name="BottomRightJoy" type="GridContainer" parent="Pg3/Table/MoveBottomRightControls"]
+margin_left = 337.0
+margin_right = 482.0
+margin_bottom = 64.0
+columns = 3
+
+[node name="DownJoy" type="TextureRect" parent="Pg3/Table/MoveBottomRightControls/BottomRightJoy"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 25 )
+
+[node name="Plus" type="Label" parent="Pg3/Table/MoveBottomRightControls/BottomRightJoy"]
+margin_left = 68.0
+margin_top = 22.0
+margin_right = 77.0
+margin_bottom = 41.0
+theme = ExtResource( 15 )
+text = "+"
+
+[node name="RightJoy" type="TextureRect" parent="Pg3/Table/MoveBottomRightControls/BottomRightJoy"]
+margin_left = 81.0
+margin_right = 145.0
+margin_bottom = 64.0
+texture = ExtResource( 18 )
+
+[node name="Pg4" type="Control" parent="." groups=["Page"]]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Title" type="Label" parent="Pg4"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_top = 26.0
+margin_right = 75.0
+margin_bottom = 71.0
+theme = ExtResource( 16 )
+text = "Controls"
+align = 1
+
+[node name="Table" type="GridContainer" parent="Pg4"]
+margin_top = 82.0
+margin_right = 800.0
+margin_bottom = 447.0
+custom_constants/hseparation = 200
+columns = 2
+
+[node name="UseItem" type="Label" parent="Pg4/Table"]
+margin_top = 56.0
+margin_right = 79.0
+margin_bottom = 75.0
+text = "Use Item"
+
+[node name="UseItemControls" type="GridContainer" parent="Pg4/Table"]
+margin_left = 279.0
+margin_right = 607.0
+margin_bottom = 132.0
+custom_constants/hseparation = 64
+columns = 2
+
+[node name="SpaceContainer" type="CenterContainer" parent="Pg4/Table/UseItemControls"]
+margin_right = 64.0
+margin_bottom = 132.0
+
+[node name="SpaceButton" type="TextureRect" parent="Pg4/Table/UseItemControls/SpaceContainer"]
+margin_top = 34.0
+margin_right = 64.0
+margin_bottom = 98.0
+texture = ExtResource( 5 )
+
+[node name="ArcadeButtons" type="GridContainer" parent="Pg4/Table/UseItemControls"]
+margin_left = 128.0
+margin_right = 328.0
+margin_bottom = 132.0
+columns = 3
+
+[node name="PressedButton" type="TextureRect" parent="Pg4/Table/UseItemControls/ArcadeButtons"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 26 )
+
+[node name="Button" type="TextureRect" parent="Pg4/Table/UseItemControls/ArcadeButtons"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+texture = ExtResource( 1 )
+
+[node name="Button2" type="TextureRect" parent="Pg4/Table/UseItemControls/ArcadeButtons"]
+margin_left = 136.0
+margin_right = 200.0
+margin_bottom = 64.0
+texture = ExtResource( 1 )
+
+[node name="Button3" type="TextureRect" parent="Pg4/Table/UseItemControls/ArcadeButtons"]
+margin_top = 68.0
+margin_right = 64.0
+margin_bottom = 132.0
+texture = ExtResource( 1 )
+
+[node name="Button4" type="TextureRect" parent="Pg4/Table/UseItemControls/ArcadeButtons"]
+margin_left = 68.0
+margin_top = 68.0
+margin_right = 132.0
+margin_bottom = 132.0
+texture = ExtResource( 1 )
+
+[node name="Button5" type="TextureRect" parent="Pg4/Table/UseItemControls/ArcadeButtons"]
+margin_left = 136.0
+margin_top = 68.0
+margin_right = 200.0
+margin_bottom = 132.0
+texture = ExtResource( 1 )
+
+[node name="Stay" type="Label" parent="Pg4/Table"]
+margin_top = 192.0
+margin_right = 79.0
+margin_bottom = 211.0
+text = "Stay"
+
+[node name="StayControls" type="GridContainer" parent="Pg4/Table"]
+margin_left = 279.0
+margin_top = 136.0
+margin_right = 607.0
+margin_bottom = 268.0
+custom_constants/hseparation = 64
+columns = 2
+
+[node name="CtrlContainer" type="CenterContainer" parent="Pg4/Table/StayControls"]
+margin_right = 64.0
+margin_bottom = 132.0
+
+[node name="CtrlButton" type="TextureRect" parent="Pg4/Table/StayControls/CtrlContainer"]
+margin_top = 34.0
+margin_right = 64.0
+margin_bottom = 98.0
+texture = ExtResource( 24 )
+
+[node name="ArcadeButtons" type="GridContainer" parent="Pg4/Table/StayControls"]
+margin_left = 128.0
+margin_right = 328.0
+margin_bottom = 132.0
+columns = 3
+
+[node name="Button" type="TextureRect" parent="Pg4/Table/StayControls/ArcadeButtons"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 1 )
+
+[node name="PressedButton" type="TextureRect" parent="Pg4/Table/StayControls/ArcadeButtons"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+texture = ExtResource( 26 )
+
+[node name="Button2" type="TextureRect" parent="Pg4/Table/StayControls/ArcadeButtons"]
+margin_left = 136.0
+margin_right = 200.0
+margin_bottom = 64.0
+texture = ExtResource( 1 )
+
+[node name="Button3" type="TextureRect" parent="Pg4/Table/StayControls/ArcadeButtons"]
+margin_top = 68.0
+margin_right = 64.0
+margin_bottom = 132.0
+texture = ExtResource( 1 )
+
+[node name="Button4" type="TextureRect" parent="Pg4/Table/StayControls/ArcadeButtons"]
+margin_left = 68.0
+margin_top = 68.0
+margin_right = 132.0
+margin_bottom = 132.0
+texture = ExtResource( 1 )
+
+[node name="Button5" type="TextureRect" parent="Pg4/Table/StayControls/ArcadeButtons"]
+margin_left = 136.0
+margin_top = 68.0
+margin_right = 200.0
+margin_bottom = 132.0
+texture = ExtResource( 1 )
+
+[node name="Pg5" type="Control" parent="." groups=["Page"]]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Title" type="Label" parent="Pg5"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_top = 26.0
+margin_right = 75.0
+margin_bottom = 71.0
+theme = ExtResource( 16 )
+text = "Controls"
+align = 1
+
+[node name="Table" type="GridContainer" parent="Pg5"]
+margin_top = 82.0
+margin_right = 800.0
+margin_bottom = 447.0
+custom_constants/hseparation = 200
+columns = 2
+
+[node name="ButtonOptions" type="Label" parent="Pg5/Table"]
+margin_top = 56.0
+margin_right = 149.0
+margin_bottom = 75.0
+text = "Button Options"
+
+[node name="ButtonOptionsControls" type="GridContainer" parent="Pg5/Table"]
+margin_left = 349.0
+margin_right = 677.0
+margin_bottom = 132.0
+custom_constants/hseparation = 64
+columns = 2
+
+[node name="BslashContainer" type="CenterContainer" parent="Pg5/Table/ButtonOptionsControls"]
+margin_right = 64.0
+margin_bottom = 132.0
+
+[node name="BslashButton" type="TextureRect" parent="Pg5/Table/ButtonOptionsControls/BslashContainer"]
+margin_top = 34.0
+margin_right = 64.0
+margin_bottom = 98.0
+texture = ExtResource( 3 )
+
+[node name="ArcadeButtons" type="GridContainer" parent="Pg5/Table/ButtonOptionsControls"]
+margin_left = 128.0
+margin_right = 328.0
+margin_bottom = 132.0
+columns = 3
+
+[node name="Button" type="TextureRect" parent="Pg5/Table/ButtonOptionsControls/ArcadeButtons"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 1 )
+
+[node name="Button2" type="TextureRect" parent="Pg5/Table/ButtonOptionsControls/ArcadeButtons"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+texture = ExtResource( 1 )
+
+[node name="PressedButton" type="TextureRect" parent="Pg5/Table/ButtonOptionsControls/ArcadeButtons"]
+margin_left = 136.0
+margin_right = 200.0
+margin_bottom = 64.0
+texture = ExtResource( 26 )
+
+[node name="Button3" type="TextureRect" parent="Pg5/Table/ButtonOptionsControls/ArcadeButtons"]
+margin_top = 68.0
+margin_right = 64.0
+margin_bottom = 132.0
+texture = ExtResource( 1 )
+
+[node name="Button4" type="TextureRect" parent="Pg5/Table/ButtonOptionsControls/ArcadeButtons"]
+margin_left = 68.0
+margin_top = 68.0
+margin_right = 132.0
+margin_bottom = 132.0
+texture = ExtResource( 1 )
+
+[node name="Button5" type="TextureRect" parent="Pg5/Table/ButtonOptionsControls/ArcadeButtons"]
+margin_left = 136.0
+margin_top = 68.0
+margin_right = 200.0
+margin_bottom = 132.0
+texture = ExtResource( 1 )
+
+[node name="Quit" type="Label" parent="Pg5/Table"]
+margin_top = 192.0
+margin_right = 149.0
+margin_bottom = 211.0
+text = "Quit"
+
+[node name="QuitControls" type="GridContainer" parent="Pg5/Table"]
+margin_left = 349.0
+margin_top = 136.0
+margin_right = 677.0
+margin_bottom = 268.0
+custom_constants/hseparation = 64
+columns = 2
+
+[node name="QContainer" type="CenterContainer" parent="Pg5/Table/QuitControls"]
+margin_right = 64.0
+margin_bottom = 132.0
+
+[node name="QButton" type="TextureRect" parent="Pg5/Table/QuitControls/QContainer"]
+margin_top = 34.0
+margin_right = 64.0
+margin_bottom = 98.0
+texture = ExtResource( 13 )
+
+[node name="ArcadeButtons" type="GridContainer" parent="Pg5/Table/QuitControls"]
+margin_left = 128.0
+margin_right = 328.0
+margin_bottom = 132.0
+columns = 3
+
+[node name="Button" type="TextureRect" parent="Pg5/Table/QuitControls/ArcadeButtons"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 1 )
+
+[node name="Button2" type="TextureRect" parent="Pg5/Table/QuitControls/ArcadeButtons"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+texture = ExtResource( 1 )
+
+[node name="Button3" type="TextureRect" parent="Pg5/Table/QuitControls/ArcadeButtons"]
+margin_left = 136.0
+margin_right = 200.0
+margin_bottom = 64.0
+texture = ExtResource( 1 )
+
+[node name="Button4" type="TextureRect" parent="Pg5/Table/QuitControls/ArcadeButtons"]
+margin_top = 68.0
+margin_right = 64.0
+margin_bottom = 132.0
+texture = ExtResource( 1 )
+
+[node name="PressedButton" type="TextureRect" parent="Pg5/Table/QuitControls/ArcadeButtons"]
+margin_left = 68.0
+margin_top = 68.0
+margin_right = 132.0
+margin_bottom = 132.0
+texture = ExtResource( 26 )
+
+[node name="Button5" type="TextureRect" parent="Pg5/Table/QuitControls/ArcadeButtons"]
+margin_left = 136.0
+margin_top = 68.0
+margin_right = 200.0
+margin_bottom = 132.0
+texture = ExtResource( 1 )
+
+[node name="Pg6" type="Control" parent="." groups=["Page"]]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Title" type="Label" parent="Pg6"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_top = 26.0
+margin_right = 75.0
+margin_bottom = 71.0
+theme = ExtResource( 16 )
+text = "Gameplay"
+align = 1
+
+[node name="Body" type="Label" parent="Pg6"]
+margin_top = 82.0
+margin_right = 800.0
+margin_bottom = 447.0
+text = "The game is a grid-based survival horror game. It is not possible to survive; rather, the goal is to survive as long as possible.
+
+The player is able to move horizontally, vertically, and diagonally in all directions. (No enemy is able to move diagonally, thus giving the player a chance to escape tricky situations.) Movement input must be held in order to get the player to move, as movement will only occur after half a second has passed. During that time, if a complementary movement request is provided without a gap between providing the original input (such as holding down the up arrow key while holding the left arrow key), then the player will move diagonally based on what inputs have been provided. If input ceases or if conflicting input is provided (such as left and right arrow keys pressed simultaneously) when time runs out, then the player won't move."
+autowrap = true
+
+[node name="Pg7" type="Control" parent="." groups=["Page"]]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Title" type="Label" parent="Pg7"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_top = 26.0
+margin_right = 75.0
+margin_bottom = 71.0
+theme = ExtResource( 16 )
+text = "Gameplay"
+align = 1
+
+[node name="Body" type="Label" parent="Pg7"]
+margin_top = 82.0
+margin_right = 800.0
+margin_bottom = 447.0
+text = "Player movement is separate from player orientation. When movement is requested, the player orientation changes immediately. Orientation can never be diagonal. In the case of a request for diagonal movement, the orientation will become the horizontal component of that movement request. To only change orientation without moving, the stay button should be pressed before inputting a direction.
+
+Orientation is important when it comes to wielding weapons. A weapon will affect different cells depending on which way the player is facing. For instance, the sword will slay all enemies on whatever two cells the player is orientated towards."
+autowrap = true
+
+[node name="Pg8" type="Control" parent="." groups=["Page"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Title" type="Label" parent="Pg8"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_top = 26.0
+margin_right = 75.0
+margin_bottom = 71.0
+theme = ExtResource( 16 )
+text = "Scoring"
+align = 1
+
+[node name="Table" type="GridContainer" parent="Pg8"]
+margin_top = 82.0
+margin_right = 800.0
+margin_bottom = 447.0
+custom_constants/vseparation = 32
+custom_constants/hseparation = 32
+columns = 2
+
+[node name="Time" type="TextureRect" parent="Pg8/Table"]
+margin_right = 93.0
+margin_bottom = 93.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 7 )
+
+[node name="PassiveBonus" type="Label" parent="Pg8/Table"]
+margin_left = 125.0
+margin_top = 37.0
+margin_right = 421.0
+margin_bottom = 56.0
+text = "1 pt for every minute survived."
+
+[node name="ItemBox" type="ColorRect" parent="Pg8/Table"]
+margin_top = 125.0
+margin_right = 93.0
+margin_bottom = 157.0
+rect_min_size = Vector2( 32, 32 )
+
+[node name="Sword" type="TextureRect" parent="Pg8/Table/ItemBox"]
+margin_left = 26.5
+margin_right = 315.5
+margin_bottom = 32.0
+texture = ExtResource( 8 )
+
+[node name="ItemBonus" type="Label" parent="Pg8/Table"]
+margin_left = 125.0
+margin_top = 131.0
+margin_right = 421.0
+margin_bottom = 150.0
+text = "5 pt for every item collected."
+
+[node name="ZombieBox" type="ColorRect" parent="Pg8/Table"]
+margin_top = 189.0
+margin_right = 93.0
+margin_bottom = 221.0
+rect_min_size = Vector2( 32, 32 )
+
+[node name="Zombie" type="TextureRect" parent="Pg8/Table/ZombieBox"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+texture = ExtResource( 17 )
+
+[node name="ZombieBonus" type="Label" parent="Pg8/Table"]
+margin_left = 125.0
+margin_top = 195.0
+margin_right = 421.0
+margin_bottom = 214.0
+text = "10 pt for every zombie killed."
