@@ -16,7 +16,7 @@ func _ready():
 
 	$InfoBar.set_seed(seed_val)
 	$InfoBar.set_mode(mode)
-	$GameGrid.start($infobar)
+	$GameGrid.start($InfoBar)
 
 
 func _process(_delta):
