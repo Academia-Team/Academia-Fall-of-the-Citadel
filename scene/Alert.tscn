@@ -6,6 +6,7 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "Flash"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
@@ -41,6 +42,7 @@ anims/RESET = SubResource( 2 )
 script = ExtResource( 3 )
 
 [node name="Bell" type="TextureRect" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 texture = ExtResource( 2 )
