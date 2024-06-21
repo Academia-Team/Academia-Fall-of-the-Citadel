@@ -9,7 +9,7 @@ const MAX_ALLOWED_FAILED_MOVES = 10
 var alive = true
 var to_destroy = false
 var move_fail_counter = 0
-var type = "zombie"
+var type = "Zombie"
 
 
 func get_class():
@@ -19,16 +19,16 @@ func get_class():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	hide()
-	$collisionbox.set_deferred("disabled", true)
+	$CollisionBox.set_deferred("disabled", true)
 
 
 func attack():
 	alive = false
-	$collisionbox.set_deferred("disabled", true)
+	$CollisionBox.set_deferred("disabled", true)
 	emit_signal("enemy_destroyed", type)
 	$CharacterSprite.show_hurt()
-	$hurt_sfx.play()
-	$move_timer.stop()
+	$HurtSFX.play()
+	$MoveTimer.stop()
 
 
 func desired_positions(target_pos):
@@ -49,7 +49,7 @@ func destroy():
 	hide()
 	to_destroy = true
 
-	if not $hurt_sfx.playing:
+	if not $HurtSFX.playing:
 		queue_free()
 
 
@@ -67,7 +67,7 @@ func move_to(pos):
 		var diff_pos = pos - position
 		position = pos
 		$CharacterSprite.set_orient(Direction.rel_pos_to_dir(diff_pos))
-		$walk_sfx.play()
+		$WalkSFX.play()
 
 
 func move_reject():
@@ -83,9 +83,9 @@ func spawn(pos, orient):
 	$CharacterSprite.set_orient(orient)
 
 	show()
-	$collisionbox.set_deferred("disabled", false)
-	$spawn_sfx.play()
-	$move_timer.start()
+	$CollisionBox.set_deferred("disabled", false)
+	$SpawnSFX.play()
+	$MoveTimer.start()
 
 
 func _on_move_timer_timeout():

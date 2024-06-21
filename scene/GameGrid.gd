@@ -2,7 +2,7 @@ extends TileMap
 
 var health_scene = preload("res://scene/health.tscn")
 var sword_scene = preload("res://scene/sword.tscn")
-var zombie_scene = preload("res://scene/zombie.tscn")
+var zombie_scene = preload("res://scene/Zombie.tscn")
 var ref_counter = {}
 var info_ref = null
 var started = false
@@ -74,7 +74,7 @@ func handle_stop_spawn_options():
 
 		info_ref.set_timed_status("Enemy spawn toggled.")
 	elif Input.is_action_pressed("cheat_zombie"):
-		$zombie_spawn_timer.paused = not $zombie_spawn_timer.paused
+		$ZombieSpawnTimer.paused = not $ZombieSpawnTimer.paused
 		info_ref.set_timed_status("Zombie spawn toggled.")
 	elif Input.is_action_pressed("cheat_stop_spawn"):
 		for timer in get_tree().get_nodes_in_group("spawner"):
@@ -112,11 +112,11 @@ func _on_passive_timer_timeout():
 
 func _on_Enemy_destroyed(enemy_type):
 	match enemy_type:
-		"zombie":
+		"Zombie":
 			info_ref.incr_score(ZOMBIE_SCORE)
 
 
-func _on_zombie_tree_exiting():
+func _on_Zombie_tree_exiting():
 	ref_counter["zombie"] -= 1
 
 
@@ -135,7 +135,7 @@ func _on_Player_health_change(lives):
 		$GameOverSFX.play()
 
 
-func _on_zombie_spawn_timer_timeout():
+func _on_Zombie_spawn_timer_timeout():
 	if ref_counter.get("zombie", 0) < MAX_ZOMBIES:
 		if randf() <= ZOMBIE_SPAWN_PROB:
 			spawn_enemy(zombie_scene, get_spawn_pos())

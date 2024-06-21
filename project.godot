@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "Enemy",
 "language": "GDScript",
-"path": "res://scene/zombie.gd"
+"path": "res://scene/Zombie.gd"
 }, {
 "base": "Reference",
 "class": "Group",
