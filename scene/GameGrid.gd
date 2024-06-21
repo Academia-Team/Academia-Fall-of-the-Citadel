@@ -1,11 +1,7 @@
 extends TileMap
 
-var health_scene = preload("res://scene/Health.tscn")
-var sword_scene = preload("res://scene/Sword.tscn")
-var zombie_scene = preload("res://scene/Zombie.tscn")
-var ref_counter = {}
-var info_ref = null
-var started = false
+signal game_over
+signal started
 
 const ITEM_SCORE = 5
 const PASSIVE_SCORE = 1
@@ -18,8 +14,13 @@ const ZOMBIE_SPAWN_PROB = 0.5
 const MAX_ITEMS = 3
 const HEALTH_SPAWN_PROB = 0.3
 
-signal game_over
-signal started
+const HEALTH_SCENE = preload("res://scene/Health.tscn")
+const SWORD_SCENE = preload("res://scene/Sword.tscn")
+const ZOMBIE_SCENE = preload("res://scene/Zombie.tscn")
+
+var ref_counter = {}
+var info_ref = null
+var started = false
 
 
 func start(info_obj):
@@ -138,7 +139,7 @@ func _on_Player_health_change(lives):
 func _on_Zombie_spawn_timer_timeout():
 	if ref_counter.get("zombie", 0) < MAX_ZOMBIES:
 		if randf() <= ZOMBIE_SPAWN_PROB:
-			spawn_enemy(zombie_scene, get_spawn_pos())
+			spawn_enemy(ZOMBIE_SCENE, get_spawn_pos())
 
 
 func get_spawn_pos():
@@ -189,9 +190,9 @@ func spawn_enemy(scene, pos):
 func _on_item_spawn_timer_timeout():
 	if ref_counter.get("item", 0) < MAX_ITEMS:
 		if randf() <= HEALTH_SPAWN_PROB:
-			spawn_item(health_scene, get_spawn_pos())
+			spawn_item(HEALTH_SCENE, get_spawn_pos())
 		else:
-			spawn_item(sword_scene, get_spawn_pos())
+			spawn_item(SWORD_SCENE, get_spawn_pos())
 
 
 func spawn_item(scene, pos, ref_name = "item"):
