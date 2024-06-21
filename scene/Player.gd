@@ -246,7 +246,7 @@ func _on_MoveTimer_timeout():
 func _on_Player_area_shape_entered(_area_rid, area, _area_shape_index, local_shape_index):
 	var triggered_collisionbox = shape_owner_get_owner(local_shape_index)
 
-	if triggered_collisionbox.name == "collisionbox":
+	if triggered_collisionbox.name == "CollisionBox":
 		handle_collision(area)
 	elif area.get_class() == "Enemy":
 		var target_orient = orient_from_collision_box(triggered_collisionbox)
@@ -257,7 +257,7 @@ func _on_Player_area_shape_entered(_area_rid, area, _area_shape_index, local_sha
 func _on_Player_area_shape_exited(_area_rid, area, _area_shape_index, local_shape_index):
 	if area != null:
 		var triggered_collisionbox = shape_owner_get_owner(local_shape_index)
-		if triggered_collisionbox.name != "collisionbox" and area.get_class() == "Enemy":
+		if triggered_collisionbox.name != "CollisionBox" and area.get_class() == "Enemy":
 			var target_orient = orient_from_collision_box(triggered_collisionbox)
 			targets[target_orient].erase(area)
 
