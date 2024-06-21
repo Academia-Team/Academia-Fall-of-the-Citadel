@@ -101,6 +101,15 @@ func _on_SeedDialog_line_text_change_rejected(_rejected_substring):
 	text_changed = true
 
 
+func _on_SeedDialog_line_text_changed(_new_text):
+	text_changed = true
+
+
+func _on_SeedDialog_line_gui_input(_event):
+	if Input.is_action_just_pressed("ui_cntrl"):
+		$SeedDialog/Reject.play()
+
+
 func _on_SeedDialog_hide():
 	$SeedDialog/HBoxContainer/Line.text = ""
 	$Buttons/Enter.grab_focus()
@@ -203,12 +212,3 @@ func _on_Duck_mouse_entered():
 func _on_Duck_mouse_exited():
 	mouse_over = null
 	$ModeDialog/Buttons/Duck.release_focus()
-
-
-func _on_SeedDialog_line_text_changed(_new_text):
-	text_changed = true
-
-
-func _on_SeedDialog_line_gui_input(_event):
-	if Input.is_action_just_pressed("ui_cntrl"):
-		$SeedDialog/Reject.play()
