@@ -51,11 +51,11 @@ func cleanup():
 func _process(_delta):
 	if started and info_ref.is_cheat_enabled():
 		if Input.is_action_just_pressed("cheat_suicide"):
-			$player.kill()
+			$Player.kill()
 		elif Input.is_action_just_pressed("cheat_god"):
-			$player.toggle_immortality()
+			$Player.toggle_immortality()
 
-			if $player.is_immortal():
+			if $Player.is_immortal():
 				info_ref.set_timed_status("Feeling Powerful?")
 			else:
 				info_ref.set_timed_status("Death waits for you.")
@@ -91,7 +91,7 @@ func set_up_player():
 	$Player.spawn(Vector2(0, 0), 0, screen_size.y - cell_size.y * 2, 0, screen_size.x - cell_size.x)
 
 
-func _on_player_pick_up_item(item_name):
+func _on_Player_pick_up_item(item_name):
 	if item_name != "duck":
 		ref_counter["item"] -= 1
 	else:
@@ -102,7 +102,7 @@ func _on_player_pick_up_item(item_name):
 	info_ref.set_status(item_name)
 
 
-func _on_player_used_item(_item_name):
+func _on_Player_used_item(_item_name):
 	info_ref.reset_status()
 
 
@@ -120,7 +120,7 @@ func _on_zombie_tree_exiting():
 	ref_counter["zombie"] -= 1
 
 
-func _on_player_health_change(lives):
+func _on_Player_health_change(lives):
 	if not started:
 		yield(self, "started")
 
@@ -165,8 +165,8 @@ func valid_spawn_pos(pos):
 
 	if (
 		(
-			abs(pos.x - $player.position.x) >= VALID_DIST_FROM_PLAYER
-			or abs(pos.y - $player.position.y) >= VALID_DIST_FROM_PLAYER
+			abs(pos.x - $Player.position.x) >= VALID_DIST_FROM_PLAYER
+			or abs(pos.y - $Player.position.y) >= VALID_DIST_FROM_PLAYER
 		)
 		and get_cellv(world_to_map(pos)) != INVALID_CELL
 	):
@@ -181,7 +181,7 @@ func spawn_enemy(scene, pos):
 	instance.connect("tree_exiting", self, "_on_%s_tree_exiting" % instance.type)
 	instance.connect("move_request", self, "_on_enemy_move_request")
 	add_child(instance)
-	var orient_facing_player = Direction.get_cardinal_dir_facing($player.position, pos)
+	var orient_facing_player = Direction.get_cardinal_dir_facing($Player.position, pos)
 	instance.spawn(pos, orient_facing_player)
 	ref_counter[instance.type] = ref_counter.get(instance.type, 0) + 1
 
@@ -203,7 +203,7 @@ func spawn_item(scene, pos, ref_name = "item"):
 
 
 func _on_enemy_move_request(ref):
-	var desired_positions = ref.desired_positions($player.position)
+	var desired_positions = ref.desired_positions($Player.position)
 	var moved = false
 
 	for pos in desired_positions:
@@ -245,8 +245,8 @@ func _on_gameover_sfx_finished():
 	emit_signal("game_over")
 
 
-func _on_player_move_request(dir):
-	if $player.lives > 0:
+func _on_Player_move_request(dir):
+	if $Player.lives > 0:
 		var future_pos = Direction.translate_pos($Player.position, dir, 32)
 
 		if get_cellv(world_to_map(future_pos)) != INVALID_CELL:

@@ -4,7 +4,7 @@
 [ext_resource path="res://scene/GameGrid.gd" type="Script" id=2]
 [ext_resource path="res://asset/slow_melancholic_theme_c64_style.ogg" type="AudioStream" id=3]
 [ext_resource path="res://resource/tileset.tres" type="TileSet" id=4]
-[ext_resource path="res://scene/player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scene/Player.tscn" type="PackedScene" id=5]
 
 [node name="GameGrid" type="TileMap"]
 position = Vector2( 0, 33 )
@@ -34,10 +34,10 @@ stream = ExtResource( 3 )
 [node name="GameOverSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
 
-[connection signal="health_change" from="Player" to="." method="_on_player_health_change"]
-[connection signal="move_request" from="Player" to="." method="_on_player_move_request"]
-[connection signal="pick_up_item" from="Player" to="." method="_on_player_pick_up_item"]
-[connection signal="used_item" from="Player" to="." method="_on_player_used_item"]
+[connection signal="health_change" from="Player" to="." method="_on_Player_health_change"]
+[connection signal="move_request" from="Player" to="." method="_on_Player_move_request"]
+[connection signal="pick_up_item" from="Player" to="." method="_on_Player_pick_up_item"]
+[connection signal="used_item" from="Player" to="." method="_on_Player_used_item"]
 [connection signal="timeout" from="PassiveTimer" to="." method="_on_passive_timer_timeout"]
 [connection signal="timeout" from="ZombieSpawnTimer" to="." method="_on_zombie_spawn_timer_timeout"]
 [connection signal="timeout" from="ItemSpawnTimer" to="." method="_on_item_spawn_timer_timeout"]

@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://class/Item.gd"
 }, {
+"base": "Area2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://scene/Player.gd"
+}, {
 "base": "Reference",
 "class": "SceneSwitcher",
 "language": "GDScript",
@@ -38,20 +43,15 @@ _global_script_classes=[ {
 "class": "enemy",
 "language": "GDScript",
 "path": "res://scene/zombie.gd"
-}, {
-"base": "Area2D",
-"class": "player",
-"language": "GDScript",
-"path": "res://scene/player.gd"
 } ]
 _global_script_class_icons={
 "CharacterSprite": "",
 "Direction": "",
 "Group": "",
 "Item": "",
+"Player": "",
 "SceneSwitcher": "",
-"enemy": "",
-"player": ""
+"enemy": ""
 }
 
 [application]

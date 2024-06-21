@@ -1,5 +1,5 @@
 extends Area2D
-class_name player
+class_name Player
 
 signal move_request(dir)
 
@@ -24,7 +24,7 @@ const SPEED = 200
 
 
 func get_class():
-	return "player"
+	return "Player"
 
 
 func exists():
@@ -32,9 +32,9 @@ func exists():
 
 
 func set_dir(dir):
-	$move_timer.set_paused(true)
+	$MoveTimer.set_paused(true)
 	future_dir = dir
-	$move_timer.set_paused(false)
+	$MoveTimer.set_paused(false)
 
 
 func kill():
@@ -43,7 +43,7 @@ func kill():
 			toggle_immortality()
 
 		hurt()
-		yield($immunity_timer, "timeout")
+		yield($ImmunityTimer, "timeout")
 
 
 func pos_in_bounds(pos):
@@ -164,8 +164,8 @@ func discard_item():
 
 func _process(_delta):
 	if lives > 0:
-		if future_dir != null and $move_timer.is_stopped():
-			$move_timer.start()
+		if future_dir != null and $MoveTimer.is_stopped():
+			$MoveTimer.start()
 
 		handle_action()
 
@@ -173,11 +173,11 @@ func _process(_delta):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	hide()
-	$collisionbox.set_deferred("disabled", true)
-	$right_collisionbox.set_deferred("disabled", true)
-	$left_collisionbox.set_deferred("disabled", true)
-	$top_collisionbox.set_deferred("disabled", true)
-	$bottom_collisionbox.set_deferred("disabled", true)
+	$CollisionBox.set_deferred("disabled", true)
+	$RightCollisionBox.set_deferred("disabled", true)
+	$Left_CollisionBox.set_deferred("disabled", true)
+	$Top_CollisionBox.set_deferred("disabled", true)
+	$Bottom_CollisionBox.set_deferred("disabled", true)
 
 
 func spawn(pos, topBound, bottomBound, leftBound, rightBound):
@@ -197,11 +197,11 @@ func spawn(pos, topBound, bottomBound, leftBound, rightBound):
 	assert(position.y >= bounds.top && position.y <= bounds.bottom)
 	show()
 
-	$collisionbox.set_deferred("disabled", false)
-	$right_collisionbox.set_deferred("disabled", false)
-	$left_collisionbox.set_deferred("disabled", false)
-	$top_collisionbox.set_deferred("disabled", false)
-	$bottom_collisionbox.set_deferred("disabled", false)
+	$CollisionBox.set_deferred("disabled", false)
+	$RightCollisionBox.set_deferred("disabled", false)
+	$LeftCollisionBox.set_deferred("disabled", false)
+	$TopCollisionBox.set_deferred("disabled", false)
+	$BottomCollisionBox.set_deferred("disabled", false)
 
 
 func handle_collision(obj):
@@ -217,25 +217,25 @@ func handle_collision(obj):
 
 
 func hurt():
-	if $immunity_timer.is_stopped() and not is_immortal():
+	if $ImmunityTimer.is_stopped() and not is_immortal():
 		if lives > 0:
 			lives -= 1
 		emit_signal("health_change", lives)
 		$CharacterSprite.show_hurt()
-		$hurt_sfx.play()
-		$immunity_timer.start()
+		$HurtSFX.play()
+		$ImmunityTimer.start()
 
 		if lives <= 0:
-			$collisionbox.set_deferred("disabled", true)
-			$right_collisionbox.set_deferred("disabled", true)
-			$left_collisionbox.set_deferred("disabled", true)
-			$top_collisionbox.set_deferred("disabled", true)
-			$bottom_collisionbox.set_deferred("disabled", true)
+			$CollisionBox.set_deferred("disabled", true)
+			$RightCollisionBox.set_deferred("disabled", true)
+			$LeftCollisionBox.set_deferred("disabled", true)
+			$TopCollisionBox.set_deferred("disabled", true)
+			$BottomCollisionBox.set_deferred("disabled", true)
 
 
 func move_to(pos):
 	position = pos
-	$walk_sfx.play()
+	$WalkSFX.play()
 
 
 func move_reject():
@@ -248,7 +248,7 @@ func _on_move_timer_timeout():
 		future_dir = null
 
 
-func _on_player_area_shape_entered(_area_rid, area, _area_shape_index, local_shape_index):
+func _on_Player_area_shape_entered(_area_rid, area, _area_shape_index, local_shape_index):
 	var triggered_collisionbox = shape_owner_get_owner(local_shape_index)
 
 	if triggered_collisionbox.name == "collisionbox":
@@ -259,7 +259,7 @@ func _on_player_area_shape_entered(_area_rid, area, _area_shape_index, local_sha
 		targets[target_orient].append(area)
 
 
-func _on_player_area_shape_exited(_area_rid, area, _area_shape_index, local_shape_index):
+func _on_Player_area_shape_exited(_area_rid, area, _area_shape_index, local_shape_index):
 	if area != null:
 		var triggered_collisionbox = shape_owner_get_owner(local_shape_index)
 		if triggered_collisionbox.name != "collisionbox" and area.get_class() == "enemy":
@@ -271,13 +271,13 @@ func orient_from_collision_box(collisionbox):
 	var orient
 
 	match collisionbox.name:
-		"right_collisionbox":
+		"RightCollisionBox":
 			orient = Direction.EAST
-		"left_collisionbox":
+		"LeftCollisionBox":
 			orient = Direction.WEST
-		"top_collisionbox":
+		"TopCollisionBox":
 			orient = Direction.NORTH
-		"bottom_collisionbox":
+		"BottomCollisionBox":
 			orient = Direction.SOUTH
 		_:
 			orient = -1
