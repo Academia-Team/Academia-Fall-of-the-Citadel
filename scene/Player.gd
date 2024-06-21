@@ -1,7 +1,12 @@
-extends Area2D
 class_name Player
+extends Area2D
 
+signal health_change(lives)
 signal move_request(dir)
+signal pick_up_item(item_name)
+signal used_item(item_name)
+
+const START_LIVES = 3
 
 var bounds = {Direction.NORTH: 0, Direction.SOUTH: 0, Direction.WEST: 0, Direction.EAST: 0}
 var held_item = null
@@ -12,15 +17,6 @@ var targets_to_destroy = []
 var future_dir = null
 var immortal = false
 
-const NUM_DIRS = 4
-const NUM_ORIENT = 4
-const START_LIVES = 3
-
-signal health_change(lives)
-signal pick_up_item(item_name)
-signal used_item(item_name)
-
-const SPEED = 200
 
 
 func get_class():
@@ -180,12 +176,12 @@ func _ready():
 	$Bottom_CollisionBox.set_deferred("disabled", true)
 
 
-func spawn(pos, topBound, bottomBound, leftBound, rightBound):
+func spawn(pos, top_bound, bottom_bound, left_bound, right_bound):
 	position = pos
-	bounds.left = leftBound
-	bounds.right = rightBound
-	bounds.top = topBound
-	bounds.bottom = bottomBound
+	bounds.left = left_bound
+	bounds.right = right_bound
+	bounds.top = top_bound
+	bounds.bottom = bottom_bound
 
 	held_item = null
 	future_dir = null
@@ -205,12 +201,12 @@ func spawn(pos, topBound, bottomBound, leftBound, rightBound):
 
 
 func handle_collision(obj):
-	var collisionCategory = obj.get_class()
-	if collisionCategory == "Item":
+	var collision_category = obj.get_class()
+	if collision_category == "Item":
 		if not held_item:
 			held_item = obj.acquire()
 			emit_signal("pick_up_item", held_item.type)
-	elif collisionCategory == "Enemy":
+	elif collision_category == "Enemy":
 		hurt()
 		obj.attack()
 		obj.destroy()
