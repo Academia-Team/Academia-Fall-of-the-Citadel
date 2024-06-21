@@ -88,10 +88,6 @@ func _write_lives_text():
 	$LivesCounter.text = "Lives: %d" % _lives
 
 
-func get_lives_text():
-	return $LivesCounter
-
-
 func set_seed(seed_val):
 	_seed = seed_val
 
