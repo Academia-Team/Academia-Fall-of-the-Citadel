@@ -18,7 +18,6 @@ var future_dir = null
 var immortal = false
 
 
-
 func get_class():
 	return "Player"
 
