@@ -60,17 +60,6 @@ func set_lives(life_count):
 		_write_lives_text()
 
 
-func decr_lives():
-	if _lives > 0:
-		_lives -= 1
-		_write_lives_text()
-
-
-func incr_lives():
-	_lives += 1
-	_write_lives_text()
-
-
 func get_lives():
 	return _lives
 
