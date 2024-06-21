@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scene/InfoBar.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scene/gamegrid.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scene/GameGrid.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scene/GameOver.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scene/GameScrn.gd" type="Script" id=4]
 
@@ -21,7 +21,7 @@ visible = false
 one_shot = true
 
 [connection signal="tree_exiting" from="." to="." method="_on_GameScrn_tree_exiting"]
-[connection signal="game_over" from="GameGrid" to="." method="_on_gamegrid_game_over"]
+[connection signal="game_over" from="GameGrid" to="." method="_on_GameGrid_game_over"]
 [connection signal="leave" from="GameOver" to="." method="_on_GameOver_leave"]
 [connection signal="retry" from="GameOver" to="." method="_on_GameOver_retry"]
 [connection signal="timeout" from="CheatInputTimeout" to="." method="_on_CheatInputTimeout_timeout"]

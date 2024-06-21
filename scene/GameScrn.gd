@@ -59,7 +59,7 @@ func _on_GameOver_leave():
 	SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.MENU)
 
 
-func _on_gamegrid_game_over():
+func _on_GameGrid_game_over():
 	$GameGrid.cleanup()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$GameOver.start($infobar)
