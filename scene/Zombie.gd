@@ -1,5 +1,5 @@
-extends Area2D
 class_name Enemy
+extends Area2D
 
 signal enemy_destroyed(enemy_type)
 signal move_request(ref)
