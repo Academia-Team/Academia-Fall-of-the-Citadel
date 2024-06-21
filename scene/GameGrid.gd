@@ -94,7 +94,7 @@ func set_up_player():
 
 func _on_Player_pick_up_item(item_name):
 	if item_name != "Duck":
-		ref_counter["item"] -= 1
+		ref_counter["Item"] -= 1
 	else:
 		ref_counter["Duck"] -= 1
 
@@ -188,14 +188,14 @@ func spawn_enemy(scene, pos):
 
 
 func _on_item_spawn_timer_timeout():
-	if ref_counter.get("item", 0) < MAX_ITEMS:
+	if ref_counter.get("Item", 0) < MAX_ITEMS:
 		if randf() <= HEALTH_SPAWN_PROB:
 			spawn_item(HEALTH_SCENE, get_spawn_pos())
 		else:
 			spawn_item(SWORD_SCENE, get_spawn_pos())
 
 
-func spawn_item(scene, pos, ref_name = "item"):
+func spawn_item(scene, pos, ref_name = "Item"):
 	if scene != null and pos != null:
 		var instance = scene.instance()
 		add_child(instance)
@@ -265,4 +265,4 @@ func _on_Player_move_request(dir):
 
 
 func _on_DuckTimer_timeout():
-	spawn_item(load("res://scene/Duck.tscn"), get_spawn_pos(), "duck")
+	spawn_item(load("res://scene/Duck.tscn"), get_spawn_pos(), "Duck")
