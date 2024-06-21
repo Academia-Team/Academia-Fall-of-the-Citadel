@@ -108,7 +108,7 @@ func _on_SeedDialog_line_text_changed(_new_text):
 func _on_SeedDialog_line_gui_input(_event):
 	if Input.is_action_just_pressed("ui_cntrl") and not text_changed:
 		$SeedDialog/Reject.play()
-	
+
 	text_changed = false
 
 
