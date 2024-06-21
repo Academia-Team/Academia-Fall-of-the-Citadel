@@ -210,7 +210,7 @@ func handle_collision(obj):
 		if not held_item:
 			held_item = obj.acquire()
 			emit_signal("pick_up_item", held_item.type)
-	elif collisionCategory == "enemy":
+	elif collisionCategory == "Enemy":
 		hurt()
 		obj.attack()
 		obj.destroy()
@@ -253,7 +253,7 @@ func _on_Player_area_shape_entered(_area_rid, area, _area_shape_index, local_sha
 
 	if triggered_collisionbox.name == "collisionbox":
 		handle_collision(area)
-	elif area.get_class() == "enemy":
+	elif area.get_class() == "Enemy":
 		var target_orient = orient_from_collision_box(triggered_collisionbox)
 
 		targets[target_orient].append(area)
@@ -262,7 +262,7 @@ func _on_Player_area_shape_entered(_area_rid, area, _area_shape_index, local_sha
 func _on_Player_area_shape_exited(_area_rid, area, _area_shape_index, local_shape_index):
 	if area != null:
 		var triggered_collisionbox = shape_owner_get_owner(local_shape_index)
-		if triggered_collisionbox.name != "collisionbox" and area.get_class() == "enemy":
+		if triggered_collisionbox.name != "collisionbox" and area.get_class() == "Enemy":
 			var target_orient = orient_from_collision_box(triggered_collisionbox)
 			targets[target_orient].erase(area)
 
