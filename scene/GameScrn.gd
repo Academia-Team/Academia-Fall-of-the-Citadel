@@ -62,7 +62,7 @@ func _on_GameOver_leave():
 func _on_GameGrid_game_over():
 	$GameGrid.cleanup()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	$GameOver.start($infobar)
+	$GameOver.start($InfoBar)
 
 
 func _on_GameScrn_tree_exiting():
