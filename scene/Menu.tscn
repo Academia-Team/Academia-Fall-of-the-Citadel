@@ -4,7 +4,7 @@
 [ext_resource path="res://resource/button_theme.tres" type="Theme" id=2]
 [ext_resource path="res://resource/title_theme.tres" type="Theme" id=3]
 [ext_resource path="res://scene/Menu.gd" type="Script" id=4]
-[ext_resource path="res://scene/Reject.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scene/Alert.tscn" type="PackedScene" id=5]
 [ext_resource path="res://resource/tech_theme.tres" type="Theme" id=6]
 [ext_resource path="res://resource/black_style_box.tres" type="StyleBox" id=7]
 

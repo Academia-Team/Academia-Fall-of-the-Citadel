@@ -2,5 +2,5 @@
 
 [ext_resource path="res://asset/womp.wav" type="AudioStream" id=1]
 
-[node name="Reject" type="AudioStreamPlayer"]
+[node name="Alert" type="AudioStreamPlayer"]
 stream = ExtResource( 1 )
