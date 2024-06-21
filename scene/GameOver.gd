@@ -60,7 +60,7 @@ func _set_mode_text(mode):
 
 func _on_GameOver_draw():
 	if info_ref != null:
-		$Score.text = info_ref.get_score_text()
+		$Score.text = "Score: %d" % info_ref.get_score()
 
 
 func _on_GiveUp_pressed():

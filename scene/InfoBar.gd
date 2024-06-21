@@ -50,10 +50,6 @@ func get_score():
 	return _score
 
 
-func get_score_text():
-	return $ScoreCounter.text
-
-
 func set_lives(life_count):
 	if life_count >= 0:
 		_lives = life_count
