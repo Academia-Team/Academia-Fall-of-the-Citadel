@@ -170,9 +170,9 @@ func _ready():
 	hide()
 	$CollisionBox.set_deferred("disabled", true)
 	$RightCollisionBox.set_deferred("disabled", true)
-	$Left_CollisionBox.set_deferred("disabled", true)
-	$Top_CollisionBox.set_deferred("disabled", true)
-	$Bottom_CollisionBox.set_deferred("disabled", true)
+	$LeftCollisionBox.set_deferred("disabled", true)
+	$TopCollisionBox.set_deferred("disabled", true)
+	$BottomCollisionBox.set_deferred("disabled", true)
 
 
 func spawn(pos, top_bound, bottom_bound, left_bound, right_bound):
