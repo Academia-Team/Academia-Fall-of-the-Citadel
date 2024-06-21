@@ -242,7 +242,7 @@ func move_reject():
 	$Reject.play()
 
 
-func _on_move_timer_timeout():
+func _on_MoveTimer_timeout():
 	if future_dir != null:
 		emit_signal("move_request", future_dir)
 		future_dir = null

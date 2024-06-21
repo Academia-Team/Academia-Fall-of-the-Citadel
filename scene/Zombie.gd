@@ -88,11 +88,11 @@ func spawn(pos, orient):
 	$MoveTimer.start()
 
 
-func _on_move_timer_timeout():
+func _on_MoveTimer_timeout():
 	if alive:
 		emit_signal("move_request", self)
 
 
-func _on_hurt_sfx_finished():
+func _on_HurtSFX_finished():
 	if to_destroy:
 		destroy()

@@ -14,7 +14,7 @@ func _on_AnimationPlayer_animation_finished(_anim_name):
 		queue_free()
 
 
-func _on_sfx_finished():
+func _on_SFX_finished():
 	if not $AnimationPlayer.is_playing():
 		emit_signal("animation_finished")
 		queue_free()

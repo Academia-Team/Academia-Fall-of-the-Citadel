@@ -36,5 +36,5 @@ stream = ExtResource( 8 )
 [node name="WalkSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 
-[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
-[connection signal="finished" from="HurtSFX" to="." method="_on_hurt_sfx_finished"]
+[connection signal="timeout" from="MoveTimer" to="." method="_on_MoveTimer_timeout"]
+[connection signal="finished" from="HurtSFX" to="." method="_on_HurtSFX_finished"]
