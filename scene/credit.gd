@@ -2,6 +2,7 @@ extends ColorRect
 
 const SCROLL_SPEED = 16
 
+
 func _ready():
 	$ScrollContainer.grab_focus()
 
