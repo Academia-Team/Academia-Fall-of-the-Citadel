@@ -82,7 +82,7 @@ func _on_Enter_gui_input(event):
 		set_process(false)
 
 
-func _on_SeedDialog_Line_text_entered(new_text):
+func _on_SeedDialog_line_text_entered(new_text):
 	seed_val = 0
 
 	if new_text.is_valid_integer() and new_text.length() <= MAX_INT_LEN + int(new_text[0] == "-"):
@@ -94,7 +94,7 @@ func _on_SeedDialog_Line_text_entered(new_text):
 	$SeedDialog.emit_signal("popup_hide")
 
 
-func _on_SeedDialog_Line_text_change_rejected(_rejected_substring):
+func _on_SeedDialog_line_text_change_rejected(_rejected_substring):
 	$SeedDialog/Reject.play()
 
 
