@@ -1,12 +1,12 @@
 extends ColorRect
 
+signal leave
+signal retry
+
 var info_ref = null
 
 var ignore_mouse_warp = false
 var mouse_over = null
-
-signal leave
-signal retry
 
 
 func _ready():
