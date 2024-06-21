@@ -91,7 +91,7 @@ func use_item():
 		match held_item.type:
 			"Sword":
 				use_sword()
-			"duck":
+			"Duck":
 				use_duck()
 			"Health":
 				use_health()

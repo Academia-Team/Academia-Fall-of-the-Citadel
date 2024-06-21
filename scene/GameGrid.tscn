@@ -41,5 +41,5 @@ stream = ExtResource( 1 )
 [connection signal="timeout" from="PassiveTimer" to="." method="_on_passive_timer_timeout"]
 [connection signal="timeout" from="ZombieSpawnTimer" to="." method="_on_Zombie_spawn_timer_timeout"]
 [connection signal="timeout" from="ItemSpawnTimer" to="." method="_on_item_spawn_timer_timeout"]
-[connection signal="timeout" from="DuckTimer" to="." method="_on_duck_timer_timeout"]
+[connection signal="timeout" from="DuckTimer" to="." method="_on_DuckTimer_timeout"]
 [connection signal="finished" from="GameOverSFX" to="." method="_on_gameover_sfx_finished"]

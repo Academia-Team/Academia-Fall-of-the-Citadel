@@ -1,0 +1,16 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://asset/squeak toy - squeak2.wav" type="AudioStream" id=1]
+[ext_resource path="res://class/Item.tscn" type="PackedScene" id=2]
+[ext_resource path="res://asset/duck_move.wav" type="AudioStream" id=3]
+[ext_resource path="res://asset/duck_use.wav" type="AudioStream" id=4]
+[ext_resource path="res://asset/RubberDucky.png" type="Texture" id=5]
+
+[node name="Item" instance=ExtResource( 2 )]
+type = "Duck"
+sprite = ExtResource( 5 )
+acquire_sfx = ExtResource( 1 )
+shove_sfx = ExtResource( 3 )
+
+[node name="UseSFX" type="AudioStreamPlayer" parent="." index="4"]
+stream = ExtResource( 4 )

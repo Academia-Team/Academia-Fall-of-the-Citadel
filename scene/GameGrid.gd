@@ -92,10 +92,10 @@ func set_up_player():
 
 
 func _on_Player_pick_up_item(item_name):
-	if item_name != "duck":
+	if item_name != "Duck":
 		ref_counter["item"] -= 1
 	else:
-		ref_counter["duck"] -= 1
+		ref_counter["Duck"] -= 1
 
 	info_ref.incr_score(ITEM_SCORE)
 	info_ref.set_timed_status("Press space or first button to use item")
@@ -263,5 +263,5 @@ func _on_Player_move_request(dir):
 			$Player.move_reject()
 
 
-func _on_duck_timer_timeout():
-	spawn_item(load("res://scene/duck.tscn"), get_spawn_pos(), "duck")
+func _on_DuckTimer_timeout():
+	spawn_item(load("res://scene/Duck.tscn"), get_spawn_pos(), "duck")
