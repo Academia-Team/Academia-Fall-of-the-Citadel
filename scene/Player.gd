@@ -89,12 +89,12 @@ func handle_movement():
 func use_item():
 	if held_item != null:
 		match held_item.type:
-			"Sword":
-				use_sword()
 			"Duck":
 				use_duck()
 			"Health":
 				use_health()
+			"Sword":
+				use_sword()
 			_:
 				discard_item()
 	else:
