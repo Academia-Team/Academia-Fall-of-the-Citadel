@@ -89,7 +89,7 @@ func handle_movement():
 func use_item():
 	if held_item != null:
 		match held_item.type:
-			"sword":
+			"Sword":
 				use_sword()
 			"duck":
 				use_duck()
