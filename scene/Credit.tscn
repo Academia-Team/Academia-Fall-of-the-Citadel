@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://resource/emphasized_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scene/Credit.gd" type="Script" id=1]
 [ext_resource path="res://resource/tech_theme.tres" type="Theme" id=2]
-[ext_resource path="res://scene/credit.gd" type="Script" id=3]
+[ext_resource path="res://resource/emphasized_theme.tres" type="Theme" id=3]
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
@@ -10,7 +10,7 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
-script = ExtResource( 3 )
+script = ExtResource( 1 )
 
 [node name="Title" type="Label" parent="."]
 anchor_left = 0.5
@@ -19,7 +19,7 @@ margin_left = -20.0
 margin_top = 26.0
 margin_right = 75.0
 margin_bottom = 71.0
-theme = ExtResource( 1 )
+theme = ExtResource( 3 )
 text = "Credits"
 align = 1
 
