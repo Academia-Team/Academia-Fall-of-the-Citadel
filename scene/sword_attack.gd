@@ -2,6 +2,7 @@ extends Line2D
 
 signal animation_finished
 
+
 func _init():
 	yield(self, "ready")
 	$AnimationPlayer.play("Slash")
