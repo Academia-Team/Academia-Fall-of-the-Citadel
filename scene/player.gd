@@ -106,7 +106,7 @@ func _generate_sword_slash(num_pixels_away):
 	var slash_anim = null
 	
 	if pos_in_bounds(Direction.translate_pos(position, $CharacterSprite.orientation, num_pixels_away)):
-		slash_anim = load("res://scene/sword_attack.tscn").instance()
+		slash_anim = load("res://scene/SwordAttack.tscn").instance()
 		slash_anim.position = Direction.dir_to_rel_pos($CharacterSprite.orientation, num_pixels_away)
 		slash_anim.connect("animation_finished", self, "_slash_anim_finished")
 		add_child(slash_anim)
