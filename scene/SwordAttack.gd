@@ -9,7 +9,7 @@ func _init():
 
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
-	if not $sfx.is_playing():
+	if not $SFX.is_playing():
 		emit_signal("animation_finished")
 		queue_free()
 
