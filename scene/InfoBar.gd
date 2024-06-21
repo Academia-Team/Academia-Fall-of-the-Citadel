@@ -34,15 +34,6 @@ func incr_score(score_delta):
 	_write_score_text()
 
 
-func decr_score(score_delta):
-	if score_delta > _score:
-		_score = 0
-	else:
-		_score -= score_delta
-
-	_write_score_text()
-
-
 func _write_score_text():
 	$ScoreCounter.text = "Score: %d" % _score
 
