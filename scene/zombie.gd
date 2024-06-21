@@ -1,5 +1,5 @@
 extends Area2D
-class_name enemy
+class_name Enemy
 
 signal enemy_destroyed(enemy_type)
 signal move_request(ref)
@@ -13,7 +13,7 @@ var type = "zombie"
 
 
 func get_class():
-	return "enemy"
+	return "Enemy"
 
 
 # Called when the node enters the scene tree for the first time.

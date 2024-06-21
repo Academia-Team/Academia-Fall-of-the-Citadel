@@ -110,7 +110,7 @@ func _on_passive_timer_timeout():
 	info_ref.incr_score(PASSIVE_SCORE)
 
 
-func _on_enemy_destroyed(enemy_type):
+func _on_Enemy_destroyed(enemy_type):
 	match enemy_type:
 		"zombie":
 			info_ref.incr_score(ZOMBIE_SCORE)
@@ -177,9 +177,9 @@ func valid_spawn_pos(pos):
 
 func spawn_enemy(scene, pos):
 	var instance = scene.instance()
-	instance.connect("enemy_destroyed", self, "_on_enemy_destroyed")
+	instance.connect("enemy_destroyed", self, "_on_Enemy_destroyed")
 	instance.connect("tree_exiting", self, "_on_%s_tree_exiting" % instance.type)
-	instance.connect("move_request", self, "_on_enemy_move_request")
+	instance.connect("move_request", self, "_on_Enemy_move_request")
 	add_child(instance)
 	var orient_facing_player = Direction.get_cardinal_dir_facing($Player.position, pos)
 	instance.spawn(pos, orient_facing_player)
@@ -202,7 +202,7 @@ func spawn_item(scene, pos, ref_name = "item"):
 		ref_counter[ref_name] = ref_counter.get(ref_name, 0) + 1
 
 
-func _on_enemy_move_request(ref):
+func _on_Enemy_move_request(ref):
 	var desired_positions = ref.desired_positions($Player.position)
 	var moved = false
 
