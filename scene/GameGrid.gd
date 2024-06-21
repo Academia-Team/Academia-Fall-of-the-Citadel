@@ -1,6 +1,6 @@
 extends TileMap
 
-var health_scene = preload("res://scene/health.tscn")
+var health_scene = preload("res://scene/Health.tscn")
 var sword_scene = preload("res://scene/Sword.tscn")
 var zombie_scene = preload("res://scene/Zombie.tscn")
 var ref_counter = {}

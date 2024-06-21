@@ -93,7 +93,7 @@ func use_item():
 				use_sword()
 			"duck":
 				use_duck()
-			"health":
+			"Health":
 				use_health()
 			_:
 				discard_item()
