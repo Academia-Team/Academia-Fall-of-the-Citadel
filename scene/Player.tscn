@@ -7,7 +7,7 @@
 [ext_resource path="res://scene/Player.gd" type="Script" id=5]
 [ext_resource path="res://asset/kenney_impact-sounds/Audio/footstep_concrete_004.ogg" type="AudioStream" id=6]
 [ext_resource path="res://asset/Player_hurt.wav" type="AudioStream" id=7]
-[ext_resource path="res://scene/Reject.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scene/Alert.tscn" type="PackedScene" id=8]
 [ext_resource path="res://asset/Player_SOUTH.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=2]
