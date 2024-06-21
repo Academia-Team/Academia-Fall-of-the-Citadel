@@ -6,17 +6,20 @@ var ignore_mouse_warp = false
 var mouse_over = null
 var seed_val = null
 
+
 func _ready():
 	$Buttons/Enter.grab_focus()
 	$Version.text = get_version_str()
 
+
 func get_version_str():
 	var version_str = ProjectSettings.get_setting("global/Version")
-	
+
 	if ProjectSettings.get_setting("global/Dev"):
 		version_str += "-dev"
-	
+
 	return version_str
+
 
 func _process(_delta):
 	if Input.is_action_just_pressed("quit"):
@@ -24,13 +27,14 @@ func _process(_delta):
 	elif Input.is_action_just_pressed("ui_focus_next"):
 		if get_focus_owner() == null:
 			$Buttons/Enter.grab_focus()
-		
+
 		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-			
+
 			if mouse_over != null:
 				warp_mouse(get_global_mouse_position() - Vector2(0, mouse_over.rect_size.y))
 				ignore_mouse_warp = true
+
 
 func _disable_menu_buttons():
 	$Buttons/Enter.disabled = true
@@ -38,17 +42,20 @@ func _disable_menu_buttons():
 	$Buttons/Credit.disabled = true
 	$Buttons/Perish.disabled = true
 
+
 func _enable_menu_buttons():
 	$Buttons/Enter.disabled = false
 	$Buttons/HelpMe.disabled = false
 	$Buttons/Credit.disabled = false
 	$Buttons/Perish.disabled = false
 
+
 func _on_Enter_pressed():
 	_disable_menu_buttons()
 	$Buttons.hide()
 	$ModeDialog.show_modal()
 	$ModeDialog/Buttons/Regular.grab_focus()
+
 
 func _activate_game(mode):
 	$ModeDialog.hide()
@@ -58,10 +65,11 @@ func _activate_game(mode):
 	game_instance.seed_val = seed_val
 	game_instance.mode = mode
 	self_modulate.a = 0
-	
+
 	call_deferred("add_child", game_instance)
 	set_process(false)
 	$Buttons/Enter.release_focus()
+
 
 func _on_Perish_pressed():
 	SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.QUIT)
@@ -76,12 +84,12 @@ func _on_Enter_gui_input(event):
 
 func _on_SeedDialog_Line_text_entered(new_text):
 	seed_val = 0
-	
-	if new_text.is_valid_integer() and new_text.length() <= MAX_INT_LEN + int(new_text[0] == '-'):
+
+	if new_text.is_valid_integer() and new_text.length() <= MAX_INT_LEN + int(new_text[0] == "-"):
 		seed_val = new_text.to_int()
 	else:
 		seed_val = hash(new_text)
-	
+
 	$SeedDialog.hide()
 	$SeedDialog.emit_signal("popup_hide")
 
@@ -115,6 +123,7 @@ func _on_Perish_mouse_entered():
 func _on_Perish_mouse_exited():
 	mouse_over = null
 	$Buttons/Perish.release_focus()
+
 
 func _on_HelpMe_mouse_entered():
 	mouse_over = $Buttons/HelpMe
