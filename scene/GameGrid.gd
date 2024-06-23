@@ -11,8 +11,9 @@ const MAX_ZOMBIES = 5
 const VALID_DIST_FROM_PLAYER = 64
 const ZOMBIE_SPAWN_PROB = 0.5
 
-const MAX_ITEMS = 3
-const HEALTH_SPAWN_PROB = 0.3
+const MAX_HEALTH_POTIONS = 1
+const MAX_SWORDS = 2
+const HEALTH_SPAWN_PROB = 0.1
 
 const HEALTH_SCENE = preload("res://scene/Health.tscn")
 const SWORD_SCENE = preload("res://scene/Sword.tscn")
@@ -191,19 +192,20 @@ func spawn_enemy(scene, pos):
 
 
 func _on_item_spawn_timer_timeout():
-	if ref_counter.get("Item", 0) < MAX_ITEMS:
-		if randf() <= HEALTH_SPAWN_PROB:
+	if randf() <= HEALTH_SPAWN_PROB:
+		if ref_counter.get("Health", 0) < MAX_HEALTH_POTIONS:
 			spawn_item(HEALTH_SCENE, get_spawn_pos())
-		else:
+	else:
+		if ref_counter.get("Sword", 0) < MAX_SWORDS:
 			spawn_item(SWORD_SCENE, get_spawn_pos())
 
 
-func spawn_item(scene, pos, ref_name = "Item"):
+func spawn_item(scene, pos):
 	if scene != null and pos != null:
 		var instance = scene.instance()
 		add_child(instance)
 		instance.position = pos
-		ref_counter[ref_name] = ref_counter.get(ref_name, 0) + 1
+		ref_counter[instance.type] = ref_counter.get(instance.type, 0) + 1
 
 
 func _on_Enemy_move_request(ref):
@@ -268,4 +270,4 @@ func _on_Player_move_request(dir):
 
 
 func _on_DuckTimer_timeout():
-	spawn_item(load("res://scene/Duck.tscn"), get_spawn_pos(), "Duck")
+	spawn_item(load("res://scene/Duck.tscn"), get_spawn_pos())
