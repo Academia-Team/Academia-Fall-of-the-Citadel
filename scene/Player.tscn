@@ -60,7 +60,7 @@ shape = SubResource( 3 )
 stream = ExtResource( 7 )
 
 [node name="ImmunityTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 0.8
 one_shot = true
 
 [node name="Reject" parent="." instance=ExtResource( 8 )]
