@@ -294,3 +294,8 @@ func is_immortal():
 
 func toggle_immortality():
 	immortal = not immortal
+
+
+func _on_CharacterSprite_effect_finish():
+	if lives <= 0:
+		$CharacterSprite.texture = load("res://asset/pixelart_skull.png")
