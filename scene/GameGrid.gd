@@ -23,6 +23,9 @@ var ref_counter = {}
 var info_ref = null
 var started = false
 
+var enemy_rng = null
+var item_rng = null
+
 
 func start(info_obj):
 	info_ref = info_obj
@@ -34,11 +37,19 @@ func start(info_obj):
 
 	if info_obj.get_mode() == "Duck":
 		$DuckTimer.start()
-
-	seed(info_obj.get_seed())
+	
+	set_up_rng()
 	set_up_player()
 	emit_signal("started")
 	started = true
+
+func set_up_rng():
+	enemy_rng = RandomNumberGenerator.new()
+	item_rng = RandomNumberGenerator.new()
+
+	enemy_rng.seed(info_ref.get_seed())
+	item_rng.seed(info_ref.get_seed())
+	seed(info_ref.get_seed())
 
 
 func restart():
@@ -142,7 +153,7 @@ func _on_Player_health_change(lives):
 
 func _on_Zombie_spawn_timer_timeout():
 	if ref_counter.get("Zombie", 0) < MAX_ZOMBIES:
-		if randf() <= ZOMBIE_SPAWN_PROB:
+		if enemy_rng.randf() <= ZOMBIE_SPAWN_PROB:
 			spawn_enemy(ZOMBIE_SCENE, get_spawn_pos())
 
 
@@ -192,7 +203,7 @@ func spawn_enemy(scene, pos):
 
 
 func _on_item_spawn_timer_timeout():
-	if randf() <= HEALTH_SPAWN_PROB:
+	if item_rng.randf() <= HEALTH_SPAWN_PROB:
 		if ref_counter.get("Health", 0) < MAX_HEALTH_POTIONS:
 			spawn_item(HEALTH_SCENE, get_spawn_pos())
 	else:
