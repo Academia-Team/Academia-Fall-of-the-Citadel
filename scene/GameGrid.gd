@@ -39,7 +39,7 @@ func start(info_obj):
 
 	if info_obj.get_mode() == "Duck":
 		$DuckTimer.start()
-	
+
 	set_up_rng()
 	set_up_player()
 	spawn_initial_env()
