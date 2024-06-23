@@ -70,7 +70,7 @@ func spawn_initial_items():
 func spawn_initial_enemies():
 	for _counter in range(MAX_ZOMBIES):
 		if enemy_rng.randf() <= INITIAL_SPAWN_PROB:
-			spawn_item(ZOMBIE_SCENE, get_spawn_pos())
+			spawn_enemy(ZOMBIE_SCENE, get_spawn_pos())
 
 
 func restart():
