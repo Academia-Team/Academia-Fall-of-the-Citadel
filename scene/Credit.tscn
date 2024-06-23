@@ -31,7 +31,7 @@ scroll_horizontal_enabled = false
 
 [node name="Body" type="Label" parent="ScrollContainer"]
 margin_right = 784.0
-margin_bottom = 75919.0
+margin_bottom = 76117.0
 rect_min_size = Vector2( 784, 0 )
 theme = ExtResource( 2 )
 custom_constants/line_spacing = 3
@@ -159,6 +159,15 @@ Used select tiles from ProjectUtumno_full.png.
 SPDX-License-Identifier: CC0-1.0
 
 You can use these tilesets in your program freely. No attribution is required. As a courtesy, include a link to the OGA page: http://opengameart.org/content/dungeon-crawl-32x32-tiles-supplemental, or the crawl-tiles page: https://github.com/crawl/tiles
+
+
+Player Death Sprite:
+https://opengameart.org/content/pixel-art-skull
+Scaled to 32px by 32px.
+SPDX-License-Identifier: CC0-1.0
+
+Made in Adobe Photoshop 2023
+by FancySnacks (2022)
 
 
 Zombie Spawn SFX:
