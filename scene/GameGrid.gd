@@ -129,6 +129,9 @@ func _on_Player_health_change(lives):
 
 	if lives <= 0:
 		started = false
+		info_ref.cancel_timed_status()
+		info_ref.set_status("Goodbye Forever!")
+
 		$Music.stop()
 		$PassiveTimer.stop()
 		$ZombieSpawnTimer.stop()
