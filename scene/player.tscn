@@ -71,4 +71,5 @@ stream = ExtResource( 9 )
 
 [connection signal="area_shape_entered" from="." to="." method="_on_player_area_shape_entered"]
 [connection signal="area_shape_exited" from="." to="." method="_on_player_area_shape_exited"]
+[connection signal="effect_finish" from="CharacterSprite" to="." method="_on_CharacterSprite_effect_finish"]
 [connection signal="timeout" from="move_timer" to="." method="_on_move_timer_timeout"]
