@@ -15,6 +15,8 @@ const MAX_HEALTH_POTIONS = 1
 const MAX_SWORDS = 2
 const HEALTH_SPAWN_PROB = 0.1
 
+const INITIAL_SPAWN_PROB = 0.3
+
 const HEALTH_SCENE = preload("res://scene/Health.tscn")
 const SWORD_SCENE = preload("res://scene/Sword.tscn")
 const ZOMBIE_SCENE = preload("res://scene/Zombie.tscn")
@@ -40,6 +42,7 @@ func start(info_obj):
 	
 	set_up_rng()
 	set_up_player()
+	spawn_initial_env()
 	emit_signal("started")
 	started = true
 
@@ -50,6 +53,23 @@ func set_up_rng():
 	enemy_rng.seed(info_ref.get_seed())
 	item_rng.seed(info_ref.get_seed())
 	seed(info_ref.get_seed())
+
+
+func spawn_initial_env():
+	spawn_initial_items()
+	spawn_initial_enemies()
+
+
+func spawn_initial_items():
+	for _counter in range(MAX_SWORDS):
+		if item_rng.randf() <= INITIAL_SPAWN_PROB:
+			spawn_item(SWORD_SCENE, get_spawn_pos())
+
+
+func spawn_initial_enemies():
+	for _counter in range(MAX_ZOMBIES):
+		if enemy_rng.randf() <= INITIAL_SPAWN_PROB:
+			spawn_item(ZOMBIE_SCENE, get_spawn_pos())
 
 
 func restart():
