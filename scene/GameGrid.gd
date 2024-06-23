@@ -126,10 +126,10 @@ func set_up_player():
 
 
 func _on_Player_pick_up_item(item_name):
-	if item_name != "Duck":
-		ref_counter["Item"] -= 1
+	if ref_counter.has(item_name):
+		ref_counter[item_name] -= 1
 	else:
-		ref_counter["Duck"] -= 1
+		print("Item %s is not tracked." % item_name)
 
 	info_ref.incr_score(ITEM_SCORE)
 	info_ref.set_timed_status("Press space or first button to use item")
