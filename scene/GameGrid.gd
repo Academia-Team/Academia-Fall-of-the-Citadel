@@ -46,12 +46,13 @@ func start(info_obj):
 	emit_signal("started")
 	started = true
 
+
 func set_up_rng():
 	enemy_rng = RandomNumberGenerator.new()
 	item_rng = RandomNumberGenerator.new()
 
-	enemy_rng.seed(info_ref.get_seed())
-	item_rng.seed(info_ref.get_seed())
+	enemy_rng.set_seed(info_ref.get_seed())
+	item_rng.set_seed(info_ref.get_seed())
 	seed(info_ref.get_seed())
 
 
