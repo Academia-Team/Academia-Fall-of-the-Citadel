@@ -85,7 +85,7 @@ func set_timed_status(status_str, sec = 3):
 # All timed status messages have priority above non-timed status messages.
 func set_status(status_str):
 	if $StatusTimer.is_stopped():
-		_orig_status_text = $status.text
+		_orig_status_text = $Status.text
 		$Status.text = status_str
 
 	_cur_status_text = status_str
@@ -102,6 +102,12 @@ func reset_status():
 		$Status.text = _orig_status_text
 
 	_cur_status_text = _orig_status_text
+
+
+func cancel_timed_status():
+	if not $StatusTimer.is_stopped():
+		$StatusTimer.stop()
+		$Status.text = _cur_status_text
 
 
 func toggle_cheats():
