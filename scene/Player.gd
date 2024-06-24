@@ -146,7 +146,7 @@ func use_health():
 	else:
 		var heal_fail_sfx = held_item.get_node("Fail")
 		heal_fail_sfx.play()
-		yield(heal_fail_sfx, "finished")
+		yield(heal_fail_sfx, "animation_finished")
 
 	discard_item()
 
