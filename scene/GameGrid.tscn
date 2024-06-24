@@ -20,10 +20,10 @@ script = ExtResource( 2 )
 wait_time = 60.0
 
 [node name="ZombieSpawnTimer" type="Timer" parent="." groups=["enemy_spawner", "spawner"]]
-wait_time = 5.0
+wait_time = 3.0
 
 [node name="ItemSpawnTimer" type="Timer" parent="." groups=["spawner"]]
-wait_time = 3.0
+wait_time = 6.0
 
 [node name="DuckTimer" type="Timer" parent="."]
 wait_time = 2.0

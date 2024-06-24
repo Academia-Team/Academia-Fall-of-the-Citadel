@@ -9,10 +9,13 @@ const ZOMBIE_SCORE = 10
 
 const MAX_ZOMBIES = 5
 const VALID_DIST_FROM_PLAYER = 64
-const ZOMBIE_SPAWN_PROB = 0.5
+const ZOMBIE_SPAWN_PROB = 0.6
 
-const MAX_ITEMS = 3
-const HEALTH_SPAWN_PROB = 0.3
+const MAX_HEALTH_POTIONS = 1
+const MAX_SWORDS = 2
+const HEALTH_SPAWN_PROB = 0.1
+
+const INITIAL_SPAWN_PROB = 0.3
 
 const HEALTH_SCENE = preload("res://scene/Health.tscn")
 const SWORD_SCENE = preload("res://scene/Sword.tscn")
@@ -21,6 +24,9 @@ const ZOMBIE_SCENE = preload("res://scene/Zombie.tscn")
 var ref_counter = {}
 var info_ref = null
 var started = false
+
+var enemy_rng = null
+var item_rng = null
 
 
 func start(info_obj):
@@ -34,10 +40,37 @@ func start(info_obj):
 	if info_obj.get_mode() == "Duck":
 		$DuckTimer.start()
 
-	seed(info_obj.get_seed())
+	set_up_rng()
 	set_up_player()
+	spawn_initial_env()
 	emit_signal("started")
 	started = true
+
+
+func set_up_rng():
+	enemy_rng = RandomNumberGenerator.new()
+	item_rng = RandomNumberGenerator.new()
+
+	enemy_rng.set_seed(info_ref.get_seed())
+	item_rng.set_seed(info_ref.get_seed())
+	seed(info_ref.get_seed())
+
+
+func spawn_initial_env():
+	spawn_initial_items()
+	spawn_initial_enemies()
+
+
+func spawn_initial_items():
+	for _counter in range(MAX_SWORDS):
+		if item_rng.randf() <= INITIAL_SPAWN_PROB:
+			spawn_item(SWORD_SCENE, get_spawn_pos())
+
+
+func spawn_initial_enemies():
+	for _counter in range(MAX_ZOMBIES):
+		if enemy_rng.randf() <= INITIAL_SPAWN_PROB:
+			spawn_enemy(ZOMBIE_SCENE, get_spawn_pos())
 
 
 func restart():
@@ -93,10 +126,10 @@ func set_up_player():
 
 
 func _on_Player_pick_up_item(item_name):
-	if item_name != "Duck":
-		ref_counter["Item"] -= 1
+	if ref_counter.has(item_name):
+		ref_counter[item_name] -= 1
 	else:
-		ref_counter["Duck"] -= 1
+		print("Item %s is not tracked." % item_name)
 
 	info_ref.incr_score(ITEM_SCORE)
 	info_ref.set_timed_status("Press space or first button to use item")
@@ -141,7 +174,7 @@ func _on_Player_health_change(lives):
 
 func _on_Zombie_spawn_timer_timeout():
 	if ref_counter.get("Zombie", 0) < MAX_ZOMBIES:
-		if randf() <= ZOMBIE_SPAWN_PROB:
+		if enemy_rng.randf() <= ZOMBIE_SPAWN_PROB:
 			spawn_enemy(ZOMBIE_SCENE, get_spawn_pos())
 
 
@@ -191,19 +224,20 @@ func spawn_enemy(scene, pos):
 
 
 func _on_item_spawn_timer_timeout():
-	if ref_counter.get("Item", 0) < MAX_ITEMS:
-		if randf() <= HEALTH_SPAWN_PROB:
+	if item_rng.randf() <= HEALTH_SPAWN_PROB:
+		if ref_counter.get("Health", 0) < MAX_HEALTH_POTIONS:
 			spawn_item(HEALTH_SCENE, get_spawn_pos())
-		else:
+	else:
+		if ref_counter.get("Sword", 0) < MAX_SWORDS:
 			spawn_item(SWORD_SCENE, get_spawn_pos())
 
 
-func spawn_item(scene, pos, ref_name = "Item"):
+func spawn_item(scene, pos):
 	if scene != null and pos != null:
 		var instance = scene.instance()
 		add_child(instance)
 		instance.position = pos
-		ref_counter[ref_name] = ref_counter.get(ref_name, 0) + 1
+		ref_counter[instance.type] = ref_counter.get(instance.type, 0) + 1
 
 
 func _on_Enemy_move_request(ref):
@@ -268,4 +302,4 @@ func _on_Player_move_request(dir):
 
 
 func _on_DuckTimer_timeout():
-	spawn_item(load("res://scene/Duck.tscn"), get_spawn_pos(), "Duck")
+	spawn_item(load("res://scene/Duck.tscn"), get_spawn_pos())
