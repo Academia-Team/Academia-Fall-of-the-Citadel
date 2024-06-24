@@ -176,6 +176,7 @@ func _ready():
 
 
 func spawn(pos, top_bound, bottom_bound, left_bound, right_bound):
+	$CharacterSprite.set_orient(Direction.SOUTH)
 	position = pos
 	bounds.left = left_bound
 	bounds.right = right_bound
