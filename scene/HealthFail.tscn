@@ -1,10 +1,44 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://asset/health.png" type="Texture" id=1]
 [ext_resource path="res://scene/HealthFail.gd" type="Script" id=2]
+[ext_resource path="res://asset/Bottle Break.wav" type="AudioStream" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Flash"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
 
 [node name="HealthFail" type="AnimationPlayer"]
 root_node = NodePath("Health")
+anims/Flash = SubResource( 1 )
+anims/RESET = SubResource( 2 )
 script = ExtResource( 2 )
 
 [node name="Health" type="TextureRect" parent="."]
@@ -21,3 +55,8 @@ default_color = Color( 1, 0, 0, 1 )
 points = PoolVector2Array( 31, 0, 0, 31 )
 width = 3.0
 default_color = Color( 1, 0, 0, 1 )
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[connection signal="animation_started" from="." to="." method="_on_HealthFail_animation_started"]
