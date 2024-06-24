@@ -125,6 +125,7 @@ func _ready():
 	$bottom_collisionbox.set_deferred("disabled", true)
 	
 func spawn(pos, topBound, bottomBound, leftBound, rightBound):
+	$CharacterSprite.set_orient(Direction.SOUTH)
 	position = pos
 	bounds.left = leftBound
 	bounds.right = rightBound
