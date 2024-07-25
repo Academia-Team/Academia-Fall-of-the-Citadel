@@ -2,6 +2,7 @@ extends ColorRect
 
 var _cur_status_text = ""
 var _lives = 0
+var _initial_lives = 0
 var _mode = null
 var _orig_status_text = ""
 var _score = 0
@@ -53,6 +54,10 @@ func get_score():
 func set_lives(life_count):
 	if life_count >= 0:
 		_lives = life_count
+
+		if _initial_lives == 0:
+			_initial_lives = life_count
+
 		_write_lives_text()
 
 
@@ -61,7 +66,7 @@ func get_lives():
 
 
 func _write_lives_text():
-	$LivesCounter.text = "Lives: %d" % _lives
+	$LivesCounter.text = "Lives: %d / %d" % [_lives, _initial_lives]
 
 
 func set_seed(seed_val):
