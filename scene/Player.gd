@@ -16,6 +16,7 @@ var targets_to_destroy = []
 
 var future_dir = null
 var immortal = false
+var mid_use = false
 
 
 func get_class():
@@ -82,7 +83,7 @@ func handle_movement():
 
 
 func use_item():
-	if held_item != null:
+	if held_item != null and not mid_use:
 		match held_item.type:
 			"Duck":
 				use_duck()
@@ -128,6 +129,8 @@ func _generate_sword_slash(num_pixels_away):
 
 
 func use_duck():
+	mid_use = true
+
 	var duck_sfx = held_item.get_node("UseSFX")
 	duck_sfx.play()
 	yield(duck_sfx, "finished")
@@ -135,6 +138,8 @@ func use_duck():
 
 
 func use_health():
+	mid_use = true
+
 	if lives < START_LIVES:
 		lives += 1
 		var heal_sfx = held_item.get_node("UseSFX")
@@ -155,6 +160,7 @@ func discard_item():
 	emit_signal("used_item", held_item.type)
 	held_item.destroy()
 	held_item = null
+	mid_use = false
 
 
 func _process(_delta):
@@ -185,6 +191,7 @@ func spawn(pos, top_bound, bottom_bound, left_bound, right_bound):
 
 	held_item = null
 	future_dir = null
+	mid_use = false
 
 	lives = START_LIVES
 	emit_signal("health_change", lives)
