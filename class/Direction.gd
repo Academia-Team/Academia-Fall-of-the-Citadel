@@ -64,10 +64,10 @@ static func get_vert_component(dir: int) -> int:
 	return dir
 
 
-static func combine_dir(dir1: int, dir2: int) -> int:	
+static func combine_dir(dir1: int, dir2: int) -> int:
 	if dir_opposites(dir1, dir2):
 		return NONE
-	
+
 	if dir1 == NORTH or dir2 == NORTH:
 		if dir2 == EAST or dir1 == EAST:
 			return NORTHEAST
@@ -79,13 +79,13 @@ static func combine_dir(dir1: int, dir2: int) -> int:
 			return SOUTHEAST
 		elif dir2 == WEST or dir1 == WEST:
 			return SOUTHWEST
-	
+
 	if is_valid_dir(dir1):
 		return dir1
-	
+
 	if is_valid_dir(dir2):
 		return dir2
-	
+
 	return NONE
 
 
