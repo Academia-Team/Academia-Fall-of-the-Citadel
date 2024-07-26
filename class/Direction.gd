@@ -71,13 +71,13 @@ static func combine_dir(dir1: int, dir2: int) -> int:
 	if dir1 == NORTH or dir2 == NORTH:
 		if dir2 == EAST or dir1 == EAST:
 			return NORTHEAST
-		elif dir2 == WEST or dir1 == WEST:
+		if dir2 == WEST or dir1 == WEST:
 			return NORTHWEST
 
 	if dir1 == SOUTH or dir2 == SOUTH:
 		if dir2 == EAST or dir1 == EAST:
 			return SOUTHEAST
-		elif dir2 == WEST or dir1 == WEST:
+		if dir2 == WEST or dir1 == WEST:
 			return SOUTHWEST
 
 	if is_valid_dir(dir1):
