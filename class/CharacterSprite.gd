@@ -62,7 +62,7 @@ func get_orient_texture(orient: int) -> Texture:
 
 
 func set_orient(orient: int) -> void:
-	if orient != null:
+	if orient in ValidOrientation:
 		var old_orient: int = orientation
 		var new_texture: Texture = get_orient_texture(orient)
 
