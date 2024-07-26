@@ -62,7 +62,12 @@ func get_orient_texture(orient: int) -> Texture:
 
 
 func _is_valid_orient(orient: int) -> bool:
-	return orient == ValidOrientation.NORTH or orient == ValidOrientation.SOUTH or orient == ValidOrientation.EAST or orient == ValidOrientation.WEST
+	return (
+		orient == ValidOrientation.NORTH
+		or orient == ValidOrientation.SOUTH
+		or orient == ValidOrientation.EAST
+		or orient == ValidOrientation.WEST
+	)
 
 
 func set_orient(orient: int) -> void:
