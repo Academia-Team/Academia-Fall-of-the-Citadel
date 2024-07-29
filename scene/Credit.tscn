@@ -78,7 +78,7 @@ time_between_scrolls = 0.05
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 margin_right = 784.0
-margin_bottom = 77185.0
+margin_bottom = 77735.0
 alignment = 1
 
 [node name="Padding" type="ColorRect" parent="ScrollContainer/VBoxContainer"]
@@ -90,7 +90,7 @@ color = Color( 0, 0, 0, 1 )
 [node name="Body" type="Label" parent="ScrollContainer/VBoxContainer"]
 margin_top = 404.0
 margin_right = 784.0
-margin_bottom = 76521.0
+margin_bottom = 77071.0
 rect_min_size = Vector2( 784, 0 )
 theme = ExtResource( 2 )
 custom_constants/line_spacing = 3
@@ -210,6 +210,31 @@ SPDX-License-Identifier: CC-BY-3.0 OR CC0-1.0
 Slow Melancholic Theme C64 Style
 slow_melancholic_theme_c64_style.ogg
 By: skrjablin
+
+
+Music played during credits:
+https://incompetech.com/music/royalty-free/music.html
+SPDX-License-Identifier: CC-BY-4.0
+
+\"Broken Reality\" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+
+Music played during credits:
+https://opengameart.org/content/calamity-epic-orchestral-metal
+SPDX-License-Identifier: CC-BY-4.0
+
+Esilir - Calamity.mp3
+
+
+Music played during credits:
+https://incompetech.com/music/royalty-free/music.html
+SPDX-License-Identifier: CC-BY-4.0
+
+\"Final Count\" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
 
 
 Tileset:
@@ -3172,15 +3197,15 @@ align = 1
 autowrap = true
 
 [node name="Logo" type="TextureRect" parent="ScrollContainer/VBoxContainer"]
-margin_top = 76525.0
+margin_top = 77075.0
 margin_right = 784.0
-margin_bottom = 76781.0
+margin_bottom = 77331.0
 texture = ExtResource( 10 )
 
 [node name="Padding2" type="ColorRect" parent="ScrollContainer/VBoxContainer"]
-margin_top = 76785.0
+margin_top = 77335.0
 margin_right = 784.0
-margin_bottom = 77185.0
+margin_bottom = 77735.0
 rect_min_size = Vector2( 0, 400 )
 color = Color( 0, 0, 0, 1 )
 
