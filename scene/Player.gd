@@ -30,10 +30,7 @@ func exists():
 
 
 func set_dir(dir):
-	if dir != Direction.NONE:
-		$MoveTimer.set_paused(true)
-		future_dir = dir
-		$MoveTimer.set_paused(false)
+	future_dir = dir
 
 
 func kill():
