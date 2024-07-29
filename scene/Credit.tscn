@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scene/Credit.gd" type="Script" id=1]
 [ext_resource path="res://resource/tech_theme.tres" type="Theme" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://asset/Credits/Esiltir - Calamity.mp3" type="AudioStream" id=7]
 [ext_resource path="res://class/Jukebox.gd" type="Script" id=8]
 [ext_resource path="res://asset/Credits/Final Count.mp3" type="AudioStream" id=9]
+[ext_resource path="res://Splash.png" type="Texture" id=10]
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
@@ -41,7 +42,7 @@ time_between_scrolls = 0.05
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 margin_right = 784.0
-margin_bottom = 76521.0
+margin_bottom = 77185.0
 alignment = 1
 
 [node name="Padding" type="ColorRect" parent="ScrollContainer/VBoxContainer"]
@@ -3132,6 +3133,19 @@ Legal Terms
 
 --- end of FTL.TXT ---"
 autowrap = true
+
+[node name="Logo" type="TextureRect" parent="ScrollContainer/VBoxContainer"]
+margin_top = 76525.0
+margin_right = 784.0
+margin_bottom = 76781.0
+texture = ExtResource( 10 )
+
+[node name="Padding2" type="ColorRect" parent="ScrollContainer/VBoxContainer"]
+margin_top = 76785.0
+margin_right = 784.0
+margin_bottom = 77185.0
+rect_min_size = Vector2( 0, 400 )
+color = Color( 0, 0, 0, 1 )
 
 [node name="Alert" parent="." instance=ExtResource( 5 )]
 
