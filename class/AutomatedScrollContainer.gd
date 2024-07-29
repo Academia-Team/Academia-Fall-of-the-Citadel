@@ -1,6 +1,9 @@
 class_name AutomatedScrollContainer
 extends ScrollContainer
 
+signal begin_reached(automated)
+signal end_reached(automated)
+
 enum ScrollType {SCROLL_UP, SCROLL_DOWN}
 
 export var vert_scroll_amount: int = 16
@@ -12,16 +15,13 @@ var curr_scroll_dir: int
 var is_automated: bool
 var scroll_fail: bool = false
 
-var scrollTimer: Timer
-
-signal begin_reached(automated)
-signal end_reached(automated)
+var scroll_timer: Timer
 
 
 func _ready() -> void:
-	scrollTimer = Timer.new()
-	add_child(scrollTimer)
-	var connect_status: int = scrollTimer.connect("timeout", self, "_on_ScrollTimer_timeout")
+	scroll_timer = Timer.new()
+	add_child(scroll_timer)
+	var connect_status: int = scroll_timer.connect("timeout", self, "_on_ScrollTimer_timeout")
 
 	if connect_status != OK:
 		printerr("Timer connect failure: Automated scrolling will be disabled.")
@@ -31,19 +31,19 @@ func _ready() -> void:
 		play()
 
 
-func play(scrollType: int = scroll_direction, scrollTime: float = time_between_scrolls) -> void:
+func play(scroll_type: int = scroll_direction, scroll_time: float = time_between_scrolls) -> void:
 	if not scroll_fail:
 		is_automated = true
-		curr_scroll_dir = scrollType
+		curr_scroll_dir = scroll_type
 
-		scrollTimer.stop()
-		scrollTimer.wait_time = scrollTime
-		scrollTimer.start()
+		scroll_timer.stop()
+		scroll_timer.wait_time = scroll_time
+		scroll_timer.start()
 
 
 func stop() -> void:
 	is_automated = false
-	scrollTimer.stop()
+	scroll_timer.stop()
 
 
 func _on_ScrollTimer_timeout():
