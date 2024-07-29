@@ -7,6 +7,7 @@ export(Array, AudioStream) var music: Array
 var _index: int = 0
 var _pos: float = 0
 
+
 func _ready() -> void:
 	var connect_status: int = connect("finished", self, "_on_finished")
 
