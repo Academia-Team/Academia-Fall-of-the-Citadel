@@ -1,10 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scene/Credit.gd" type="Script" id=1]
 [ext_resource path="res://resource/tech_theme.tres" type="Theme" id=2]
 [ext_resource path="res://resource/emphasized_theme.tres" type="Theme" id=3]
 [ext_resource path="res://class/AutomatedScrollContainer.gd" type="Script" id=4]
 [ext_resource path="res://scene/Alert.tscn" type="PackedScene" id=5]
+[ext_resource path="res://asset/Credits/Broken Reality.mp3" type="AudioStream" id=6]
+[ext_resource path="res://asset/Credits/Esiltir - Calamity.mp3" type="AudioStream" id=7]
+[ext_resource path="res://class/Jukebox.gd" type="Script" id=8]
+[ext_resource path="res://asset/Credits/Final Count.mp3" type="AudioStream" id=9]
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
@@ -31,7 +35,9 @@ margin_bottom = 445.0
 focus_mode = 2
 scroll_horizontal_enabled = false
 script = ExtResource( 4 )
+vert_scroll_amount = 2
 autostart = true
+time_between_scrolls = 0.05
 
 [node name="Body" type="Label" parent="ScrollContainer"]
 margin_right = 784.0
@@ -3116,6 +3122,11 @@ Legal Terms
 autowrap = true
 
 [node name="Alert" parent="." instance=ExtResource( 5 )]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+autoplay = true
+script = ExtResource( 8 )
+music = [ ExtResource( 6 ), ExtResource( 9 ), ExtResource( 7 ) ]
 
 [connection signal="begin_reached" from="ScrollContainer" to="." method="_on_ScrollContainer_begin_reached"]
 [connection signal="end_reached" from="ScrollContainer" to="." method="_on_ScrollContainer_end_reached"]

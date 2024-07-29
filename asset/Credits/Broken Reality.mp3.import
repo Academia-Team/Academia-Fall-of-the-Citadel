@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Broken Reality.mp3-f56e77c7370b3fe7181c4a5f4d70c74d.mp3str"
+
+[deps]
+
+source_file="res://asset/Credits/Broken Reality.mp3"
+dest_files=[ "res://.import/Broken Reality.mp3-f56e77c7370b3fe7181c4a5f4d70c74d.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

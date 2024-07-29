@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://class/Item.gd"
 }, {
+"base": "AudioStreamPlayer",
+"class": "Jukebox",
+"language": "GDScript",
+"path": "res://class/Jukebox.gd"
+}, {
 "base": "Area2D",
 "class": "Player",
 "language": "GDScript",
@@ -56,6 +61,7 @@ _global_script_class_icons={
 "Enemy": "",
 "Group": "",
 "Item": "",
+"Jukebox": "",
 "Player": "",
 "SceneSwitcher": ""
 }
