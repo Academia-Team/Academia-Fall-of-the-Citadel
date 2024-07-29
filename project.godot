@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "ScrollContainer",
+"class": "AutomatedScrollContainer",
+"language": "GDScript",
+"path": "res://class/AutomatedScrollContainer.gd"
+}, {
 "base": "Sprite",
 "class": "CharacterSprite",
 "language": "GDScript",
@@ -45,6 +50,7 @@ _global_script_classes=[ {
 "path": "res://class/SceneSwitcher.gd"
 } ]
 _global_script_class_icons={
+"AutomatedScrollContainer": "",
 "CharacterSprite": "",
 "Direction": "",
 "Enemy": "",
