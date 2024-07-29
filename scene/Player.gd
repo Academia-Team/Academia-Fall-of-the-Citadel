@@ -13,7 +13,7 @@ const SWORD_SLASH: PackedScene = preload("res://scene/SwordAttack.tscn")
 var bounds = {Direction.NORTH: 0, Direction.SOUTH: 0, Direction.WEST: 0, Direction.EAST: 0}
 var held_item = null
 var lives = 0
-var targets = [[], [], [], []]
+var targets = {Direction.NORTH: [], Direction.SOUTH: [], Direction.WEST: [], Direction.EAST: []}
 var targets_to_destroy = []
 
 var future_dir: int = Direction.NONE
@@ -283,7 +283,7 @@ func orient_from_collision_box(collisionbox):
 		"BottomCollisionBox":
 			orient = Direction.SOUTH
 		_:
-			orient = -1
+			orient = Direction.NONE
 
 	return orient
 
