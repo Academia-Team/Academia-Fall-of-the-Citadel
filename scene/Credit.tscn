@@ -110,6 +110,7 @@ margin_left = 5.0
 margin_right = 5.0
 margin_top = 5.0
 margin_bottom = 5.0
+modulate_color = Color( 0.964706, 0.933333, 0.184314, 1 )
 
 [sub_resource type="StyleBoxTexture" id=17]
 content_margin_left = 0.0
@@ -122,6 +123,7 @@ margin_left = 5.0
 margin_right = 5.0
 margin_top = 5.0
 margin_bottom = 5.0
+modulate_color = Color( 0.184314, 0.270588, 0.964706, 1 )
 
 [sub_resource type="Theme" id=18]
 VScrollBar/icons/decrement = SubResource( 6 )
