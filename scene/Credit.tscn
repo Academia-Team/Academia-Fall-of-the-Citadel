@@ -3211,6 +3211,7 @@ margin_top = 77273.0
 margin_right = 784.0
 margin_bottom = 77529.0
 texture = ExtResource( 10 )
+stretch_mode = 4
 
 [node name="Padding2" type="ColorRect" parent="ScrollContainer/VBoxContainer"]
 margin_top = 77533.0
