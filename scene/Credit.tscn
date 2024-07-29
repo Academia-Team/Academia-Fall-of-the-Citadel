@@ -3132,6 +3132,7 @@ Legal Terms
 
 
 --- end of FTL.TXT ---"
+align = 1
 autowrap = true
 
 [node name="Logo" type="TextureRect" parent="ScrollContainer/VBoxContainer"]
