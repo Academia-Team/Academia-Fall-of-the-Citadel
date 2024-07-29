@@ -3,6 +3,7 @@ extends ColorRect
 
 func _ready() -> void:
 	$ScrollContainer.grab_focus()
+	$TitleAnimation.play("Fade Out")
 
 
 func _process(_delta: float) -> void:
