@@ -4,7 +4,7 @@ extends ScrollContainer
 signal begin_reached(automated)
 signal end_reached(automated)
 
-enum ScrollType {SCROLL_UP, SCROLL_DOWN}
+enum ScrollType { SCROLL_UP, SCROLL_DOWN }
 
 export var vert_scroll_amount: int = 16
 export var autostart: bool = false
