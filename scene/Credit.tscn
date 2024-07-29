@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scene/Credit.gd" type="Script" id=1]
 [ext_resource path="res://resource/tech_theme.tres" type="Theme" id=2]
@@ -11,6 +11,9 @@
 [ext_resource path="res://asset/Credits/Final Count.mp3" type="AudioStream" id=9]
 [ext_resource path="res://Splash.png" type="Texture" id=10]
 [ext_resource path="res://asset/Credits/Dark Fog.mp3" type="AudioStream" id=11]
+[ext_resource path="res://asset/Credits/Scrollbar Focus.PNG" type="Texture" id=12]
+[ext_resource path="res://asset/Credits/Scrollbar Highlight.PNG" type="Texture" id=13]
+[ext_resource path="res://asset/Credits/Scrollbar Pressed.PNG" type="Texture" id=14]
 
 [sub_resource type="Animation" id=4]
 resource_name = "Fade Out"
@@ -43,6 +46,96 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
+[sub_resource type="ImageTexture" id=6]
+
+[sub_resource type="StyleBoxTexture" id=7]
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+texture = ExtResource( 12 )
+region_rect = Rect2( 0, 0, 16, 16 )
+margin_left = 5.0
+margin_right = 5.0
+margin_top = 5.0
+margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id=10]
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+texture = ExtResource( 13 )
+region_rect = Rect2( 0, 0, 16, 16 )
+margin_left = 5.0
+margin_right = 5.0
+margin_top = 5.0
+margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id=13]
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+texture = ExtResource( 14 )
+region_rect = Rect2( 0, 0, 16, 16 )
+margin_left = 5.0
+margin_right = 5.0
+margin_top = 5.0
+margin_bottom = 5.0
+
+[sub_resource type="Image" id=19]
+data = {
+"data": PoolByteArray( 0, 0, 0, 0, 77, 75, 89, 4, 77, 75, 89, 25, 77, 75, 89, 64, 77, 75, 89, 93, 77, 75, 89, 102, 77, 75, 89, 102, 77, 75, 89, 93, 77, 75, 89, 64, 77, 75, 89, 25, 77, 75, 89, 4, 0, 0, 0, 0, 77, 75, 89, 4, 77, 75, 89, 40, 64, 62, 74, 147, 42, 41, 47, 240, 32, 32, 36, 252, 30, 30, 35, 255, 30, 30, 35, 255, 32, 32, 36, 252, 42, 41, 47, 240, 64, 62, 74, 147, 77, 75, 89, 40, 77, 75, 89, 4, 77, 75, 89, 25, 63, 62, 73, 148, 31, 31, 36, 252, 32, 32, 37, 255, 34, 34, 39, 255, 35, 35, 39, 255, 35, 35, 39, 255, 34, 34, 39, 255, 32, 32, 37, 255, 31, 31, 36, 252, 63, 62, 73, 148, 77, 75, 89, 25, 77, 75, 89, 64, 42, 41, 47, 240, 32, 32, 37, 255, 35, 35, 40, 255, 37, 37, 42, 255, 37, 37, 42, 255, 37, 37, 42, 255, 37, 37, 42, 255, 35, 35, 40, 255, 32, 32, 37, 255, 42, 41, 47, 240, 77, 75, 89, 64, 77, 75, 89, 93, 32, 32, 36, 253, 34, 34, 39, 255, 37, 37, 42, 255, 37, 37, 42, 255, 37, 37, 42, 255, 37, 37, 42, 255, 37, 37, 42, 255, 37, 37, 42, 255, 34, 34, 39, 255, 32, 32, 36, 253, 77, 75, 89, 93, 77, 75, 89, 103, 30, 30, 35, 255, 35, 35, 39, 255, 37, 37, 42, 255, 37, 37, 42, 255, 37, 37, 42, 255, 37, 37, 42, 255, 37, 37, 42, 255, 37, 37, 42, 255, 35, 35, 39, 255, 30, 30, 35, 255, 77, 75, 89, 103, 77, 75, 89, 103, 30, 30, 35, 255, 35, 35, 39, 255, 37, 37, 42, 255, 37, 37, 42, 255, 37, 37, 42, 255, 37, 37, 42, 255, 37, 37, 42, 255, 37, 37, 42, 255, 35, 35, 39, 255, 30, 30, 35, 255, 77, 75, 89, 103, 77, 75, 89, 93, 32, 32, 36, 253, 34, 34, 39, 255, 37, 37, 42, 255, 37, 37, 42, 255, 37, 37, 42, 255, 37, 37, 42, 255, 37, 37, 42, 255, 37, 37, 42, 255, 34, 34, 39, 255, 32, 32, 36, 253, 77, 75, 89, 93, 77, 75, 89, 64, 42, 41, 47, 240, 32, 32, 37, 255, 35, 35, 40, 255, 37, 37, 42, 255, 37, 37, 42, 255, 37, 37, 42, 255, 37, 37, 42, 255, 35, 35, 40, 255, 32, 32, 37, 255, 42, 41, 47, 240, 77, 75, 89, 64, 77, 75, 89, 26, 63, 62, 73, 150, 31, 31, 36, 252, 32, 32, 37, 255, 34, 34, 39, 255, 35, 35, 39, 255, 35, 35, 39, 255, 34, 34, 39, 255, 32, 32, 37, 255, 31, 31, 36, 252, 63, 62, 73, 150, 77, 75, 89, 26, 77, 75, 89, 4, 77, 75, 89, 40, 63, 62, 73, 149, 42, 41, 47, 240, 32, 32, 36, 253, 30, 30, 35, 255, 30, 30, 35, 255, 32, 32, 36, 253, 42, 41, 47, 240, 63, 62, 73, 149, 77, 75, 89, 40, 77, 75, 89, 4, 0, 0, 0, 0, 77, 75, 89, 4, 77, 75, 89, 25, 77, 75, 89, 64, 77, 75, 89, 93, 77, 75, 89, 102, 77, 75, 89, 102, 77, 75, 89, 93, 77, 75, 89, 64, 77, 75, 89, 25, 77, 75, 89, 4, 0, 0, 0, 0 ),
+"format": "RGBA8",
+"height": 12,
+"mipmaps": false,
+"width": 12
+}
+
+[sub_resource type="ImageTexture" id=15]
+flags = 4
+flags = 4
+image = SubResource( 19 )
+size = Vector2( 12, 12 )
+
+[sub_resource type="StyleBoxTexture" id=16]
+content_margin_left = 0.0
+content_margin_right = 0.0
+content_margin_top = 0.0
+content_margin_bottom = 0.0
+texture = SubResource( 15 )
+region_rect = Rect2( 0, 0, 12, 12 )
+margin_left = 5.0
+margin_right = 5.0
+margin_top = 5.0
+margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id=17]
+content_margin_left = 0.0
+content_margin_right = 0.0
+content_margin_top = 0.0
+content_margin_bottom = 0.0
+texture = SubResource( 15 )
+region_rect = Rect2( 0, 0, 12, 12 )
+margin_left = 5.0
+margin_right = 5.0
+margin_top = 5.0
+margin_bottom = 5.0
+
+[sub_resource type="Theme" id=18]
+VScrollBar/icons/decrement = SubResource( 6 )
+VScrollBar/icons/decrement_highlight = SubResource( 6 )
+VScrollBar/icons/decrement_pressed = SubResource( 6 )
+VScrollBar/icons/increment = SubResource( 6 )
+VScrollBar/icons/increment_highlight = SubResource( 6 )
+VScrollBar/icons/increment_pressed = SubResource( 6 )
+VScrollBar/styles/grabber = SubResource( 7 )
+VScrollBar/styles/grabber_highlight = SubResource( 10 )
+VScrollBar/styles/grabber_pressed = SubResource( 13 )
+VScrollBar/styles/scroll = SubResource( 16 )
+VScrollBar/styles/scroll_focus = SubResource( 17 )
+
 [sub_resource type="StyleBoxEmpty" id=3]
 
 [node name="Credit" type="ColorRect"]
@@ -71,6 +164,7 @@ align = 1
 margin_top = 69.0
 margin_bottom = 445.0
 focus_mode = 2
+theme = SubResource( 18 )
 scroll_horizontal_enabled = false
 script = ExtResource( 4 )
 vert_scroll_amount = 2
