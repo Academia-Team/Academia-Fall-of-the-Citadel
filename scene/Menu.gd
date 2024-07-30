@@ -24,9 +24,7 @@ func get_version_str():
 
 
 func _process(_delta):
-	if Input.is_action_just_pressed("quit"):
-		$Buttons/Perish.emit_signal("pressed")
-	elif Input.is_action_just_pressed("ui_focus_next"):
+	if Input.is_action_just_pressed("ui_focus_next"):
 		if get_focus_owner() == null:
 			$Buttons/Enter.grab_focus()
 

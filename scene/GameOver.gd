@@ -14,9 +14,7 @@ func _ready():
 
 
 func _process(_delta):
-	if Input.is_action_just_pressed("quit"):
-		$Buttons/GiveUp.emit_signal("pressed")
-	elif Input.is_action_just_pressed("ui_focus_next"):
+	if Input.is_action_just_pressed("ui_focus_next"):
 		if get_focus_owner() == null:
 			$Buttons/Arise.grab_focus()
 

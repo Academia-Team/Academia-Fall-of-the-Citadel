@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scene/GameOver.gd" type="Script" id=1]
 [ext_resource path="res://resource/emphasized_theme.tres" type="Theme" id=2]
 [ext_resource path="res://resource/title_theme.tres" type="Theme" id=3]
 [ext_resource path="res://resource/tech_theme.tres" type="Theme" id=4]
 [ext_resource path="res://resource/button_theme.tres" type="Theme" id=5]
+[ext_resource path="res://resource/quit_shortcut.tres" type="ShortCut" id=6]
 
 [node name="GameOver" type="ColorRect"]
 anchor_right = 1.0
@@ -68,6 +69,7 @@ focus_previous = NodePath("../GiveUp")
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme = ExtResource( 5 )
+action_mode = 0
 text = "Arise"
 flat = true
 align = 0
@@ -86,6 +88,9 @@ focus_previous = NodePath("../Arise")
 size_flags_horizontal = 8
 size_flags_vertical = 4
 theme = ExtResource( 5 )
+shortcut_in_tooltip = false
+action_mode = 0
+shortcut = ExtResource( 6 )
 text = "Give Up"
 flat = true
 align = 2
