@@ -1,20 +1,36 @@
 extends ColorRect
 
-const SCROLL_SPEED = 16
+
+func _ready() -> void:
+	($ScrollContainer as Control).grab_focus()
+	($TitleAnimation as AnimationPlayer).play("Fade Out")
 
 
-func _ready():
-	$ScrollContainer.grab_focus()
-
-
-func _process(_delta):
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("quit"):
 		SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.MENU)
 
 
-func _on_ScrollContainer_gui_input(event):
-	var curr_vscroll_val = $ScrollContainer.get_v_scroll()
+func _on_ScrollContainer_gui_input(event: InputEvent) -> void:
+	var scroll_container = $ScrollContainer as AutomatedScrollContainer
+
 	if event.is_action("ui_scroll_down", true):
-		$ScrollContainer.set_v_scroll(curr_vscroll_val + SCROLL_SPEED)
+		scroll_container.stop()
+		scroll_container.scroll_down()
 	if event.is_action("ui_scroll_up", true):
-		$ScrollContainer.set_v_scroll(curr_vscroll_val - SCROLL_SPEED)
+		scroll_container.stop()
+		scroll_container.scroll_up()
+
+
+func _on_ScrollContainer_begin_reached(automated: bool) -> void:
+	if automated:
+		SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.MENU)
+	else:
+		($Alert as AnimationPlayer).play()
+
+
+func _on_ScrollContainer_end_reached(automated: bool) -> void:
+	if automated:
+		SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.MENU)
+	else:
+		($Alert as AnimationPlayer).play()

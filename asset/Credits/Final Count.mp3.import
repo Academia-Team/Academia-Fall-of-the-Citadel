@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Final Count.mp3-7a2643cbc049a4b43b4759d72b48b143.mp3str"
+
+[deps]
+
+source_file="res://asset/Credits/Final Count.mp3"
+dest_files=[ "res://.import/Final Count.mp3-7a2643cbc049a4b43b4759d72b48b143.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

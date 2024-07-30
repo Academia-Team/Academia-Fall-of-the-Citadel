@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Esiltir - Calamity.mp3-6ee1d9e6f33a599d8b31836ba9328f0f.mp3str"
+
+[deps]
+
+source_file="res://asset/Credits/Esiltir - Calamity.mp3"
+dest_files=[ "res://.import/Esiltir - Calamity.mp3-6ee1d9e6f33a599d8b31836ba9328f0f.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

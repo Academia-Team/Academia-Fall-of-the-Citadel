@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Dark Fog.mp3-0874826f06186a292bd9449e176770bb.mp3str"
+
+[deps]
+
+source_file="res://asset/Credits/Dark Fog.mp3"
+dest_files=[ "res://.import/Dark Fog.mp3-0874826f06186a292bd9449e176770bb.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
