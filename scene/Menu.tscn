@@ -57,7 +57,8 @@ margin_bottom = 447.0
 custom_constants/separation = 30
 
 [node name="Enter" type="Button" parent="Buttons"]
-margin_right = 798.0
+margin_left = 352.0
+margin_right = 445.0
 margin_bottom = 36.0
 focus_neighbour_left = NodePath("../Perish")
 focus_neighbour_top = NodePath("../Perish")
@@ -65,13 +66,16 @@ focus_neighbour_right = NodePath("../HelpMe")
 focus_neighbour_bottom = NodePath("../HelpMe")
 focus_next = NodePath("../HelpMe")
 focus_previous = NodePath("../Perish")
+size_flags_horizontal = 4
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 text = "Enter"
 flat = true
 
 [node name="HelpMe" type="Button" parent="Buttons"]
+margin_left = 333.0
 margin_top = 66.0
-margin_right = 798.0
+margin_right = 464.0
 margin_bottom = 102.0
 focus_neighbour_left = NodePath("../Enter")
 focus_neighbour_top = NodePath("../Enter")
@@ -79,13 +83,16 @@ focus_neighbour_right = NodePath("../Credit")
 focus_neighbour_bottom = NodePath("../Credit")
 focus_next = NodePath("../Credit")
 focus_previous = NodePath("../Enter")
+size_flags_horizontal = 4
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 text = "Help Me"
 flat = true
 
 [node name="Credit" type="Button" parent="Buttons"]
+margin_left = 332.0
 margin_top = 132.0
-margin_right = 798.0
+margin_right = 465.0
 margin_bottom = 168.0
 focus_neighbour_left = NodePath("../HelpMe")
 focus_neighbour_top = NodePath("../HelpMe")
@@ -93,13 +100,16 @@ focus_neighbour_right = NodePath("../Perish")
 focus_neighbour_bottom = NodePath("../Perish")
 focus_next = NodePath("../Perish")
 focus_previous = NodePath("../HelpMe")
+size_flags_horizontal = 4
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 text = "Eulogia"
 flat = true
 
 [node name="Perish" type="Button" parent="Buttons"]
+margin_left = 346.0
 margin_top = 198.0
-margin_right = 798.0
+margin_right = 451.0
 margin_bottom = 234.0
 focus_neighbour_left = NodePath("../Credit")
 focus_neighbour_top = NodePath("../Credit")
@@ -107,6 +117,8 @@ focus_neighbour_right = NodePath("../Enter")
 focus_neighbour_bottom = NodePath("../Enter")
 focus_next = NodePath("../Enter")
 focus_previous = NodePath("../Credit")
+size_flags_horizontal = 4
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 text = "Perish"
 flat = true
