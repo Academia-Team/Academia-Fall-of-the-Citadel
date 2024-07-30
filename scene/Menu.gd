@@ -8,7 +8,7 @@ var text_changed = false
 
 
 func _ready():
-	$Buttons/Enter.grab_focus()
+	$Buttons/Enter.grab_silent_focus()
 	$Version.text = get_version_str()
 
 
@@ -39,7 +39,7 @@ func _on_Enter_button_effects_finished():
 	_disable_menu_buttons()
 	$Buttons.hide()
 	$ModeDialog.show_modal()
-	$ModeDialog/Buttons/Regular.grab_focus()
+	$ModeDialog/Buttons/Regular.grab_silent_focus()
 
 
 func _activate_game(mode):
@@ -97,7 +97,7 @@ func _on_SeedDialog_line_gui_input(_event):
 
 func _on_SeedDialog_hide():
 	$SeedDialog/HBoxContainer/Line.text = ""
-	$Buttons/Enter.grab_focus()
+	$Buttons/Enter.grab_silent_focus()
 	set_process(true)
 	_enable_menu_buttons()
 
@@ -112,7 +112,7 @@ func _on_Credit_button_effects_finished():
 
 func _on_ModeDialog_hide():
 	_enable_menu_buttons()
-	$Buttons/Enter.grab_focus()
+	$Buttons/Enter.grab_silent_focus()
 	$Buttons.show()
 
 
