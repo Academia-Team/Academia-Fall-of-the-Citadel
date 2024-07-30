@@ -22,6 +22,9 @@ func _ready() -> void:
 	select_audio_player = AudioStreamPlayer.new()
 	activate_audio_player = AudioStreamPlayer.new()
 
+	add_child(select_audio_player)
+	add_child(activate_audio_player)
+
 	var audio_player_status: int = activate_audio_player.connect("finished", self, "_on_audio_finished")
 
 	if audio_player_status != OK:
@@ -45,6 +48,8 @@ func _on_focus_entered() -> void:
 
 
 func _on_button_down():
+	activate_audio_player.stream = activate_sfx
+	
 	if activate_audio_player.stream != null:
 		activate_audio_player.play()
 	else:

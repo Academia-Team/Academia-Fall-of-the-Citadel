@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://asset/copyduck/Copyduck.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://resource/button_theme.tres" type="Theme" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://resource/black_style_box.tres" type="StyleBox" id=7]
 [ext_resource path="res://resource/quit_shortcut.tres" type="ShortCut" id=8]
 [ext_resource path="res://class/FocusedButton.gd" type="Script" id=9]
+[ext_resource path="res://asset/duck_move.wav" type="AudioStream" id=10]
+[ext_resource path="res://asset/duck_use.wav" type="AudioStream" id=11]
 
 [sub_resource type="StyleBoxEmpty" id=16]
 
@@ -190,6 +192,8 @@ action_mode = 0
 text = "Duck"
 flat = true
 script = ExtResource( 9 )
+select_sfx = ExtResource( 10 )
+activate_sfx = ExtResource( 11 )
 
 [node name="Perish" type="Button" parent="ModeDialog/Buttons"]
 margin_left = 346.0
