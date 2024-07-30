@@ -61,3 +61,4 @@ func _on_button_down():
 
 func _on_audio_finished():
 	emit_signal("button_effects_finished")
+	button_activated = false
