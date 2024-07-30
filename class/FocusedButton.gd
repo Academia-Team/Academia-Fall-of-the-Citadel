@@ -17,16 +17,23 @@ func _ready() -> void:
 	var f_exited_status: int = connect("focus_entered", self, "_on_focus_entered")
 	var b_down_status: int = connect("button_down", self, "_on_button_down")
 
-	if not (m_entered_status == OK or m_exited_status == OK or f_exited_status == OK or b_down_status == OK):
+	if not (
+		m_entered_status == OK
+		or m_exited_status == OK
+		or f_exited_status == OK
+		or b_down_status == OK
+	):
 		printerr("Internal FocusedButton Failure.")
-	
+
 	select_audio_player = AudioStreamPlayer.new()
 	activate_audio_player = AudioStreamPlayer.new()
 
 	add_child(select_audio_player)
 	add_child(activate_audio_player)
 
-	var audio_player_status: int = activate_audio_player.connect("finished", self, "_on_audio_finished")
+	var audio_player_status: int = activate_audio_player.connect(
+		"finished", self, "_on_audio_finished"
+	)
 
 	if audio_player_status != OK:
 		printerr("FocusedButton: Cannot connect to AudioStreamPlayer.")
