@@ -102,5 +102,5 @@ custom_colors/font_color = Color( 0.992157, 0.027451, 0.027451, 1 )
 text = "Cheater"
 
 [connection signal="draw" from="." to="." method="_on_GameOver_draw"]
-[connection signal="pressed" from="Buttons/Arise" to="." method="_on_Arise_pressed"]
-[connection signal="pressed" from="Buttons/GiveUp" to="." method="_on_GiveUp_pressed"]
+[connection signal="button_effects_finished" from="Buttons/Arise" to="." method="_on_Arise_button_effects_finished"]
+[connection signal="button_effects_finished" from="Buttons/GiveUp" to="." method="_on_GiveUp_button_effects_finished"]

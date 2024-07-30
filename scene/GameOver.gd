@@ -43,9 +43,9 @@ func _on_GameOver_draw():
 		$Score.text = "Score: %d" % info_ref.get_score()
 
 
-func _on_GiveUp_pressed():
+func _on_GiveUp_button_effects_finished():
 	emit_signal("leave")
 
 
-func _on_Arise_pressed():
+func _on_Arise_button_effects_finished():
 	emit_signal("retry")

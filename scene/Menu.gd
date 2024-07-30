@@ -35,7 +35,7 @@ func _enable_menu_buttons():
 	$Buttons/Perish.disabled = false
 
 
-func _on_Enter_pressed():
+func _on_Enter_button_effects_finished():
 	_disable_menu_buttons()
 	$Buttons.hide()
 	$ModeDialog.show_modal()
@@ -56,7 +56,7 @@ func _activate_game(mode):
 	$Buttons/Enter.release_focus()
 
 
-func _on_Perish_pressed():
+func _on_Perish_button_effects_finished():
 	SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.QUIT)
 
 
@@ -102,11 +102,11 @@ func _on_SeedDialog_hide():
 	_enable_menu_buttons()
 
 
-func _on_HelpMe_pressed():
+func _on_HelpMe_button_effects_finished():
 	SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.HELP)
 
 
-func _on_Credit_pressed():
+func _on_Credit_button_effects_finished():
 	SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.CREDIT)
 
 
@@ -116,9 +116,9 @@ func _on_ModeDialog_hide():
 	$Buttons.show()
 
 
-func _on_Regular_pressed():
+func _on_Regular_button_effects_finished():
 	_activate_game("Regular")
 
 
-func _on_Duck_pressed():
+func _on_Duck_button_effects_finished():
 	_activate_game("Duck")
