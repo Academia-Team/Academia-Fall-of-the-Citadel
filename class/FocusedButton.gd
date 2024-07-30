@@ -59,7 +59,7 @@ func _on_focus_entered() -> void:
 	if play_audio:
 		select_audio_player.stream = select_sfx
 		select_audio_player.play()
-	
+
 	play_audio = true
 
 
