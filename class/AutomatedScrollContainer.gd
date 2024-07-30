@@ -46,7 +46,7 @@ func stop() -> void:
 	scroll_timer.stop()
 
 
-func _on_ScrollTimer_timeout():
+func _on_ScrollTimer_timeout() -> void:
 	match curr_scroll_dir:
 		ScrollType.SCROLL_UP:
 			scroll_up()
