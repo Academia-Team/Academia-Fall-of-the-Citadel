@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://asset/copyduck/Copyduck.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://resource/button_theme.tres" type="Theme" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://asset/duck_move.wav" type="AudioStream" id=10]
 [ext_resource path="res://asset/duck_use.wav" type="AudioStream" id=11]
 [ext_resource path="res://asset/growl2.wav" type="AudioStream" id=12]
+[ext_resource path="res://asset/sword_draw.wav" type="AudioStream" id=13]
+[ext_resource path="res://asset/Socapex - Swordsmall.wav" type="AudioStream" id=14]
 
 [sub_resource type="StyleBoxEmpty" id=16]
 
@@ -72,6 +74,8 @@ action_mode = 0
 text = "Enter"
 flat = true
 script = ExtResource( 9 )
+select_sfx = ExtResource( 13 )
+activate_sfx = ExtResource( 14 )
 
 [node name="HelpMe" type="Button" parent="Buttons"]
 margin_left = 333.0
@@ -85,6 +89,8 @@ action_mode = 0
 text = "Help Me"
 flat = true
 script = ExtResource( 9 )
+select_sfx = ExtResource( 13 )
+activate_sfx = ExtResource( 14 )
 
 [node name="Credit" type="Button" parent="Buttons"]
 margin_left = 332.0
@@ -98,6 +104,8 @@ action_mode = 0
 text = "Eulogia"
 flat = true
 script = ExtResource( 9 )
+select_sfx = ExtResource( 13 )
+activate_sfx = ExtResource( 14 )
 
 [node name="Perish" type="Button" parent="Buttons"]
 margin_left = 346.0
@@ -113,6 +121,7 @@ shortcut = ExtResource( 8 )
 text = "Perish"
 flat = true
 script = ExtResource( 9 )
+select_sfx = ExtResource( 13 )
 activate_sfx = ExtResource( 12 )
 
 [node name="SeedDialog" type="PopupPanel" parent="."]
@@ -176,6 +185,8 @@ action_mode = 0
 text = "Regular"
 flat = true
 script = ExtResource( 9 )
+select_sfx = ExtResource( 13 )
+activate_sfx = ExtResource( 14 )
 
 [node name="Duck" type="Button" parent="ModeDialog/Buttons"]
 margin_top = 66.0
@@ -211,6 +222,7 @@ shortcut = ExtResource( 8 )
 text = "Perish"
 flat = true
 script = ExtResource( 9 )
+select_sfx = ExtResource( 13 )
 activate_sfx = ExtResource( 12 )
 
 [connection signal="button_effects_finished" from="Buttons/Enter" to="." method="_on_Enter_button_effects_finished"]
