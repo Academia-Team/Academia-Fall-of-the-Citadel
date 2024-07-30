@@ -41,8 +41,6 @@ func _ready() -> void:
 
 func _on_mouse_entered() -> void:
 	grab_focus()
-	select_audio_player.stream = select_sfx
-	select_audio_player.play()
 
 
 func _on_mouse_exited() -> void:
