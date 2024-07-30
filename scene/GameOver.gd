@@ -19,7 +19,7 @@ func start(info_obj):
 		$Tainted.hide()
 	show()
 
-	$Buttons/Arise.grab_focus()
+	$Buttons/Arise.grab_silent_focus()
 
 
 func stop():
