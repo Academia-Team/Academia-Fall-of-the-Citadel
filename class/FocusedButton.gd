@@ -8,6 +8,7 @@ export var activate_sfx: AudioStream
 
 var select_audio_player: AudioStreamPlayer
 var activate_audio_player: AudioStreamPlayer
+var button_activated: bool = false
 
 
 func _ready() -> void:
@@ -48,12 +49,14 @@ func _on_focus_entered() -> void:
 
 
 func _on_button_down():
-	activate_audio_player.stream = activate_sfx
-	
-	if activate_audio_player.stream != null:
-		activate_audio_player.play()
-	else:
-		emit_signal("button_effects_finished")
+	if not button_activated:
+		activate_audio_player.stream = activate_sfx
+		button_activated = true
+
+		if activate_audio_player.stream != null:
+			activate_audio_player.play()
+		else:
+			emit_signal("button_effects_finished")
 
 
 func _on_audio_finished():
