@@ -52,7 +52,6 @@ func _activate_game(mode):
 	self_modulate.a = 0
 
 	call_deferred("add_child", game_instance)
-	set_process(false)
 	$Buttons/Enter.release_focus()
 
 
@@ -64,7 +63,6 @@ func _on_Enter_gui_input(event):
 	if not $Buttons/Enter.disabled and event.is_action("button_options", true):
 		$SeedDialog.show_modal()
 		$SeedDialog/HBoxContainer/Line.grab_focus()
-		set_process(false)
 
 
 func _on_SeedDialog_line_text_entered(new_text):
@@ -98,7 +96,6 @@ func _on_SeedDialog_line_gui_input(_event):
 func _on_SeedDialog_hide():
 	$SeedDialog/HBoxContainer/Line.text = ""
 	$Buttons/Enter.grab_silent_focus()
-	set_process(true)
 	_enable_menu_buttons()
 
 
