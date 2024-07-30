@@ -55,7 +55,7 @@ func _on_focus_entered() -> void:
 	select_audio_player.play()
 
 
-func _on_button_down():
+func _on_button_down() -> void:
 	if not button_activated:
 		activate_audio_player.stream = activate_sfx
 		button_activated = true
@@ -66,6 +66,6 @@ func _on_button_down():
 			emit_signal("button_effects_finished")
 
 
-func _on_audio_finished():
+func _on_audio_finished() -> void:
 	emit_signal("button_effects_finished")
 	button_activated = false
