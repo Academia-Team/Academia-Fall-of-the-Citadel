@@ -1,3 +1,4 @@
+class_name InfoBar
 extends ColorRect
 
 var _cur_status_text = ""
