@@ -35,7 +35,6 @@ func _activate_game(mode: String) -> void:
 	self_modulate.a = 0
 
 	call_deferred("add_child", game_instance)
-	($Buttons/Enter as FocusedButton).release_focus()
 
 
 func _on_Perish_button_effects_finished() -> void:

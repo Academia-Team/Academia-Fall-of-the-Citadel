@@ -59,7 +59,7 @@ func _on_mouse_exited() -> void:
 func _on_focus_entered() -> void:
 	warp_mouse(Vector2.ZERO)
 
-	if play_select_audio:
+	if play_select_audio and not disabled:
 		select_audio_player.stream = select_sfx
 		select_audio_player.play()
 
