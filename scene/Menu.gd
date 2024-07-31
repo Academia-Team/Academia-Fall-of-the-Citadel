@@ -79,4 +79,4 @@ func _on_SeedDialog_integer_prompt_finished(text_entered: bool, value: int) -> v
 		seed_val_set = true
 
 	# Delay the re-enabling of buttons to ensure that they don't accidently activate.
-	call_deferred("_enable_menu_buttons")
+	($Buttons as ButtonGridContainer).call_deferred("enable_buttons")
