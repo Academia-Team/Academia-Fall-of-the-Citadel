@@ -48,7 +48,8 @@ func _on_Enter_gui_input(event: InputEvent) -> void:
 
 
 func _on_HelpMe_button_effects_finished() -> void:
-	SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.HELP)
+	($Buttons as ButtonGridContainer).disable_buttons()
+	($Instructions as Book).start()
 
 
 func _on_Credit_button_effects_finished() -> void:
@@ -79,3 +80,8 @@ func _on_SeedDialog_integer_prompt_finished(text_entered: bool, value: int) -> v
 
 	# Delay the re-enabling of buttons to ensure that they don't accidently activate.
 	($Buttons as ButtonGridContainer).call_deferred("enable_buttons")
+
+
+func _on_Instructions_finished() -> void:
+	($Instructions as Book).stop()
+	($Buttons as ButtonGridContainer).enable_buttons()
