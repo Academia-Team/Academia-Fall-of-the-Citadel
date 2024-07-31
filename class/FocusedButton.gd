@@ -17,12 +17,14 @@ func _ready() -> void:
 	var m_exited_status: int = connect("mouse_exited", self, "_on_mouse_exited")
 	var f_exited_status: int = connect("focus_entered", self, "_on_focus_entered")
 	var b_down_status: int = connect("button_down", self, "_on_button_down")
+	var b_eff_status: int = connect("button_effects_finished", self, "_on_button_effects")
 
 	if not (
 		m_entered_status == OK
 		or m_exited_status == OK
 		or f_exited_status == OK
 		or b_down_status == OK
+		or b_eff_status == OK
 	):
 		printerr("Internal FocusedButton Failure.")
 
@@ -76,4 +78,7 @@ func _on_button_down() -> void:
 
 func _on_audio_finished() -> void:
 	emit_signal("button_effects_finished")
+
+
+func _on_button_effects() -> void:
 	button_activated = false
