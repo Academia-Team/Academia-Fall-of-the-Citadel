@@ -18,7 +18,7 @@ func start(info_obj: InfoBar) -> void:
 
 	if not info_obj.is_tainted():
 		$Tainted.hide()
-	
+
 	($Buttons as ButtonGridContainer).enable_buttons()
 	show()
 
