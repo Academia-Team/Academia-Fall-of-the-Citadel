@@ -46,7 +46,7 @@ func _activate_game(mode: String) -> void:
 	var game_instance: Control = SceneSwitcher.get_scene(SceneSwitcher.GAME).instance()
 	if seed_val_set:
 		game_instance.seed_val = seed_val
-	
+
 	game_instance.mode = mode
 	self_modulate.a = 0
 
@@ -94,6 +94,6 @@ func _on_SeedDialog_integer_prompt_finished(text_entered: bool, value: int) -> v
 	if text_entered:
 		seed_val = value
 		seed_val_set = true
-	
+
 	# Delay the re-enabling of buttons to ensure that they don't accidently activate.
 	call_deferred("_enable_menu_buttons")
