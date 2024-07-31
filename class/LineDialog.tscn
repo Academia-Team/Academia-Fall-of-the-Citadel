@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://resource/black_style_box.tres" type="StyleBox" id=1]
+[ext_resource path="res://resource/tech_theme.tres" type="Theme" id=2]
+[ext_resource path="res://class/LineDialog.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=16]
+
+[node name="LineDialog" type="PopupPanel"]
+anchor_right = 1.0
+margin_bottom = 19.0
+custom_styles/panel = SubResource( 16 )
+script = ExtResource( 4 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 800.0
+margin_bottom = 19.0
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 19.0
+theme = ExtResource( 2 )
+text = "Label:"
+
+[node name="Line" type="LineEdit" parent="HBoxContainer"]
+margin_left = 44.0
+margin_right = 92.0
+margin_bottom = 19.0
+theme = ExtResource( 2 )
+custom_styles/focus = ExtResource( 1 )
+custom_styles/normal = ExtResource( 1 )
+max_length = 80
+expand_to_text_length = true
+caret_blink = true
+
+[connection signal="about_to_show" from="." to="." method="_on_LineDialog_about_to_show"]
+[connection signal="gui_input" from="HBoxContainer/Line" to="." method="_on_Line_gui_input"]
+[connection signal="text_change_rejected" from="HBoxContainer/Line" to="." method="_on_Line_text_change_rejected"]
+[connection signal="text_changed" from="HBoxContainer/Line" to="." method="_on_Line_text_changed"]
+[connection signal="text_entered" from="HBoxContainer/Line" to="." method="_on_Line_text_entered"]

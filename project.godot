@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://class/Jukebox.gd"
 }, {
+"base": "PopupPanel",
+"class": "LineDialog",
+"language": "GDScript",
+"path": "res://class/LineDialog.gd"
+}, {
 "base": "Area2D",
 "class": "Player",
 "language": "GDScript",
@@ -68,6 +73,7 @@ _global_script_class_icons={
 "Group": "",
 "Item": "",
 "Jukebox": "",
+"LineDialog": "",
 "Player": "",
 "SceneSwitcher": ""
 }
