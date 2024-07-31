@@ -1,10 +1,6 @@
 extends ColorRect
 
-const MAX_INT_LEN = 19
-
 var seed_val = null
-
-var text_changed = false
 
 
 func _ready():
@@ -61,42 +57,7 @@ func _on_Perish_button_effects_finished():
 
 func _on_Enter_gui_input(event):
 	if not $Buttons/Enter.disabled and event.is_action("button_options", true):
-		$SeedDialog.show_modal()
-		$SeedDialog/HBoxContainer/Line.grab_focus()
-
-
-func _on_SeedDialog_line_text_entered(new_text):
-	seed_val = 0
-
-	if new_text.is_valid_integer() and new_text.length() <= MAX_INT_LEN + int(new_text[0] == "-"):
-		seed_val = new_text.to_int()
-	else:
-		seed_val = hash(new_text)
-
-	$SeedDialog.hide()
-	$SeedDialog.emit_signal("popup_hide")
-
-
-func _on_SeedDialog_line_text_change_rejected(_rejected_substring):
-	$SeedDialog/Reject.play()
-	text_changed = true
-
-
-func _on_SeedDialog_line_text_changed(_new_text):
-	text_changed = true
-
-
-func _on_SeedDialog_line_gui_input(_event):
-	if Input.is_action_just_pressed("ui_cntrl") and not text_changed:
-		$SeedDialog/Reject.play()
-
-	text_changed = false
-
-
-func _on_SeedDialog_hide():
-	$SeedDialog/HBoxContainer/Line.text = ""
-	$Buttons/Enter.grab_silent_focus()
-	_enable_menu_buttons()
+		($SeedDialog as LineDialog).prompt_integer("Seed:")
 
 
 func _on_HelpMe_button_effects_finished():
@@ -119,3 +80,13 @@ func _on_Regular_button_effects_finished():
 
 func _on_Duck_button_effects_finished():
 	_activate_game("Duck")
+
+
+func _on_SeedDialog_text_rejected():
+	($Alert as AnimationPlayer).play()
+
+
+func _on_SeedDialog_integer_prompt_finished(text_entered: bool, value: int):
+	if text_entered:
+		seed_val = value
+	$Buttons/Enter.grab_silent_focus()

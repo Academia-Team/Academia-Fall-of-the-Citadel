@@ -1,12 +1,11 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://asset/copyduck/Copyduck.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://resource/button_theme.tres" type="Theme" id=2]
 [ext_resource path="res://resource/title_theme.tres" type="Theme" id=3]
 [ext_resource path="res://scene/Menu.gd" type="Script" id=4]
 [ext_resource path="res://scene/Alert.tscn" type="PackedScene" id=5]
-[ext_resource path="res://resource/tech_theme.tres" type="Theme" id=6]
-[ext_resource path="res://resource/black_style_box.tres" type="StyleBox" id=7]
+[ext_resource path="res://class/LineDialog.tscn" type="PackedScene" id=6]
 [ext_resource path="res://resource/quit_shortcut.tres" type="ShortCut" id=8]
 [ext_resource path="res://class/FocusedButton.gd" type="Script" id=9]
 [ext_resource path="res://asset/duck_move.wav" type="AudioStream" id=10]
@@ -14,14 +13,6 @@
 [ext_resource path="res://asset/growl2.wav" type="AudioStream" id=12]
 [ext_resource path="res://asset/sword_draw.wav" type="AudioStream" id=13]
 [ext_resource path="res://asset/Socapex - Swordsmall.wav" type="AudioStream" id=14]
-
-[sub_resource type="StyleBoxEmpty" id=16]
-
-[sub_resource type="GDScript" id=17]
-script/source = "extends PopupPanel
-
-class_name HorzDialog
-"
 
 [sub_resource type="StyleBoxEmpty" id=18]
 
@@ -124,37 +115,12 @@ script = ExtResource( 9 )
 select_sfx = ExtResource( 13 )
 activate_sfx = ExtResource( 12 )
 
-[node name="SeedDialog" type="PopupPanel" parent="."]
+[node name="SeedDialog" parent="." instance=ExtResource( 6 )]
 anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -27.0
-custom_styles/panel = SubResource( 16 )
-script = SubResource( 17 )
-
-[node name="HBoxContainer" type="HBoxContainer" parent="SeedDialog"]
-margin_right = 800.0
-margin_bottom = 27.0
-
-[node name="Label" type="Label" parent="SeedDialog/HBoxContainer"]
-margin_top = 4.0
-margin_right = 35.0
-margin_bottom = 23.0
-theme = ExtResource( 6 )
-text = "Seed:"
-
-[node name="Line" type="LineEdit" parent="SeedDialog/HBoxContainer"]
-margin_left = 39.0
-margin_right = 87.0
-margin_bottom = 27.0
-theme = ExtResource( 6 )
-custom_styles/focus = ExtResource( 7 )
-custom_styles/normal = ExtResource( 7 )
-max_length = 80
-expand_to_text_length = true
-caret_blink = true
-
-[node name="Reject" parent="SeedDialog" instance=ExtResource( 5 )]
+margin_top = -19.0
+margin_bottom = 0.0
+line_length = 80
 
 [node name="Version" type="Label" parent="."]
 anchor_left = 1.0
@@ -225,16 +191,15 @@ script = ExtResource( 9 )
 select_sfx = ExtResource( 13 )
 activate_sfx = ExtResource( 12 )
 
+[node name="Alert" parent="." instance=ExtResource( 5 )]
+
 [connection signal="button_effects_finished" from="Buttons/Enter" to="." method="_on_Enter_button_effects_finished"]
 [connection signal="gui_input" from="Buttons/Enter" to="." method="_on_Enter_gui_input"]
 [connection signal="button_effects_finished" from="Buttons/HelpMe" to="." method="_on_HelpMe_button_effects_finished"]
 [connection signal="button_effects_finished" from="Buttons/Credit" to="." method="_on_Credit_button_effects_finished"]
 [connection signal="button_effects_finished" from="Buttons/Perish" to="." method="_on_Perish_button_effects_finished"]
-[connection signal="hide" from="SeedDialog" to="." method="_on_SeedDialog_hide"]
-[connection signal="gui_input" from="SeedDialog/HBoxContainer/Line" to="." method="_on_SeedDialog_line_gui_input"]
-[connection signal="text_change_rejected" from="SeedDialog/HBoxContainer/Line" to="." method="_on_SeedDialog_line_text_change_rejected"]
-[connection signal="text_changed" from="SeedDialog/HBoxContainer/Line" to="." method="_on_SeedDialog_line_text_changed"]
-[connection signal="text_entered" from="SeedDialog/HBoxContainer/Line" to="." method="_on_SeedDialog_line_text_entered"]
+[connection signal="integer_prompt_finished" from="SeedDialog" to="." method="_on_SeedDialog_integer_prompt_finished"]
+[connection signal="text_rejected" from="SeedDialog" to="." method="_on_SeedDialog_text_rejected"]
 [connection signal="hide" from="ModeDialog" to="." method="_on_ModeDialog_hide"]
 [connection signal="button_effects_finished" from="ModeDialog/Buttons/Regular" to="." method="_on_Regular_button_effects_finished"]
 [connection signal="button_effects_finished" from="ModeDialog/Buttons/Duck" to="." method="_on_Duck_button_effects_finished"]
