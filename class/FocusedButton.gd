@@ -43,8 +43,9 @@ func _ready() -> void:
 
 
 func grab_silent_focus() -> void:
-	play_select_audio = false
-	grab_focus()
+	if get_focus_owner() != self:
+		play_select_audio = false
+		grab_focus()
 
 
 func _on_mouse_entered() -> void:
