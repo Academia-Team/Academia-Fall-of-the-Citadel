@@ -57,6 +57,7 @@ func _on_Perish_button_effects_finished():
 
 func _on_Enter_gui_input(event):
 	if not $Buttons/Enter.disabled and event.is_action("button_options", true):
+		_disable_menu_buttons()
 		($SeedDialog as LineDialog).prompt_integer("Seed:")
 
 
@@ -89,4 +90,6 @@ func _on_SeedDialog_text_rejected():
 func _on_SeedDialog_integer_prompt_finished(text_entered: bool, value: int):
 	if text_entered:
 		seed_val = value
-	$Buttons/Enter.grab_silent_focus()
+	
+	# Delay the re-enabling of buttons to ensure that they don't accidently activate.
+	call_deferred("_enable_menu_buttons")

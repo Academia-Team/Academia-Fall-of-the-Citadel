@@ -176,9 +176,9 @@ activate_sfx = ExtResource( 11 )
 
 [node name="Perish" type="Button" parent="ModeDialog/Buttons"]
 margin_left = 346.0
-margin_top = 198.0
+margin_top = 139.0
 margin_right = 451.0
-margin_bottom = 234.0
+margin_bottom = 175.0
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource( 2 )
