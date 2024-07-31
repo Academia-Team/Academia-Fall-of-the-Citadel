@@ -1,19 +1,19 @@
 [gd_scene load_steps=27 format=2]
 
-[ext_resource path="res://scene/Credit.gd" type="Script" id=1]
-[ext_resource path="res://resource/tech_theme.tres" type="Theme" id=2]
-[ext_resource path="res://resource/emphasized_theme.tres" type="Theme" id=3]
-[ext_resource path="res://class/AutomatedScrollContainer.gd" type="Script" id=4]
-[ext_resource path="res://scene/Alert.tscn" type="PackedScene" id=5]
-[ext_resource path="res://asset/Credits/Broken Reality.mp3" type="AudioStream" id=6]
-[ext_resource path="res://asset/Credits/Esiltir - Calamity.mp3" type="AudioStream" id=7]
-[ext_resource path="res://class/Jukebox.gd" type="Script" id=8]
-[ext_resource path="res://asset/Credits/Final Count.mp3" type="AudioStream" id=9]
-[ext_resource path="res://Splash.png" type="Texture" id=10]
-[ext_resource path="res://asset/Credits/Dark Fog.mp3" type="AudioStream" id=11]
-[ext_resource path="res://asset/Credits/Scrollbar Focus.PNG" type="Texture" id=12]
-[ext_resource path="res://asset/Credits/Scrollbar Highlight.PNG" type="Texture" id=13]
-[ext_resource path="res://asset/Credits/Scrollbar Pressed.PNG" type="Texture" id=14]
+[ext_resource path="res://class/Jukebox.gd" type="Script" id=1]
+[ext_resource path="res://asset/Credits/Scrollbar Pressed.PNG" type="Texture" id=2]
+[ext_resource path="res://asset/Credits/Scrollbar Focus.PNG" type="Texture" id=3]
+[ext_resource path="res://Splash.png" type="Texture" id=4]
+[ext_resource path="res://asset/Credits/Broken Reality.mp3" type="AudioStream" id=5]
+[ext_resource path="res://asset/Credits/Scrollbar Highlight.PNG" type="Texture" id=6]
+[ext_resource path="res://asset/Credits/Dark Fog.mp3" type="AudioStream" id=7]
+[ext_resource path="res://asset/Credits/Final Count.mp3" type="AudioStream" id=8]
+[ext_resource path="res://asset/Credits/Esiltir - Calamity.mp3" type="AudioStream" id=9]
+[ext_resource path="res://resource/emphasized_theme.tres" type="Theme" id=10]
+[ext_resource path="res://resource/tech_theme.tres" type="Theme" id=11]
+[ext_resource path="res://class/AutomatedScrollContainer.gd" type="Script" id=12]
+[ext_resource path="res://scene/Alert.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scene/Credits.gd" type="Script" id=14]
 
 [sub_resource type="Animation" id=4]
 resource_name = "Fade Out"
@@ -53,7 +53,7 @@ content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 2.0
 content_margin_bottom = 2.0
-texture = ExtResource( 12 )
+texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 16, 16 )
 margin_left = 5.0
 margin_right = 5.0
@@ -65,7 +65,7 @@ content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 2.0
 content_margin_bottom = 2.0
-texture = ExtResource( 13 )
+texture = ExtResource( 6 )
 region_rect = Rect2( 0, 0, 16, 16 )
 margin_left = 5.0
 margin_right = 5.0
@@ -77,7 +77,7 @@ content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 2.0
 content_margin_bottom = 2.0
-texture = ExtResource( 14 )
+texture = ExtResource( 2 )
 region_rect = Rect2( 0, 0, 16, 16 )
 margin_left = 5.0
 margin_right = 5.0
@@ -140,11 +140,11 @@ VScrollBar/styles/scroll_focus = SubResource( 17 )
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
-[node name="Credit" type="ColorRect"]
+[node name="Credits" type="ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
-script = ExtResource( 1 )
+script = ExtResource( 14 )
 
 [node name="TitleAnimation" type="AnimationPlayer" parent="."]
 "anims/Fade Out" = SubResource( 4 )
@@ -157,7 +157,7 @@ margin_left = -60.5
 margin_top = 26.0
 margin_right = 60.5
 margin_bottom = 71.0
-theme = ExtResource( 3 )
+theme = ExtResource( 10 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Credits"
 align = 1
@@ -168,7 +168,7 @@ margin_bottom = 445.0
 focus_mode = 2
 theme = SubResource( 18 )
 scroll_horizontal_enabled = false
-script = ExtResource( 4 )
+script = ExtResource( 12 )
 vert_scroll_amount = 2
 autostart = true
 time_between_scrolls = 0.05
@@ -189,7 +189,7 @@ margin_top = 404.0
 margin_right = 784.0
 margin_bottom = 77467.0
 rect_min_size = Vector2( 784, 0 )
-theme = ExtResource( 2 )
+theme = ExtResource( 11 )
 custom_constants/line_spacing = 3
 custom_styles/normal = SubResource( 3 )
 text = "Cursor:
@@ -3314,7 +3314,7 @@ autowrap = true
 margin_top = 77471.0
 margin_right = 784.0
 margin_bottom = 77727.0
-texture = ExtResource( 10 )
+texture = ExtResource( 4 )
 stretch_mode = 4
 
 [node name="Padding2" type="ColorRect" parent="ScrollContainer/VBoxContainer"]
@@ -3324,12 +3324,12 @@ margin_bottom = 78131.0
 rect_min_size = Vector2( 0, 400 )
 color = Color( 0, 0, 0, 1 )
 
-[node name="Alert" parent="." instance=ExtResource( 5 )]
+[node name="Alert" parent="." instance=ExtResource( 13 )]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 autoplay = true
-script = ExtResource( 8 )
-music = [ ExtResource( 6 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 11 ) ]
+script = ExtResource( 1 )
+music = [ ExtResource( 5 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 7 ) ]
 
 [connection signal="begin_reached" from="ScrollContainer" to="." method="_on_ScrollContainer_begin_reached"]
 [connection signal="end_reached" from="ScrollContainer" to="." method="_on_ScrollContainer_end_reached"]
