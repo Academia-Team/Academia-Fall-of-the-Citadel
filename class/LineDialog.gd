@@ -1,12 +1,12 @@
 class_name LineDialog
 extends PopupPanel
 
+signal integer_prompt_finished(text_entered, value)
+signal text_rejected
+
 const MAX_INT_LEN = 19
 
 export var line_length: int = 0
-
-signal integer_prompt_finished(text_entered, value)
-signal text_rejected
 
 var _int_value: int = 0
 var _int_entered: bool = false
@@ -40,7 +40,7 @@ func _on_Line_text_entered(new_text: String) -> void:
 		_int_value = new_text.to_int()
 	else:
 		_int_value = hash(new_text)
-	
+
 	_int_entered = true
 
 	hide()
@@ -60,6 +60,7 @@ func _on_Line_gui_input(_event: InputEvent) -> void:
 		emit_signal("text_rejected")
 
 	_text_handled = false
+
 
 func _on_LineDialog_about_to_show() -> void:
 	($HBoxContainer/Line as Control).grab_focus()
