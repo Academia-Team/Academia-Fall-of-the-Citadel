@@ -21,7 +21,6 @@ func _on_Enter_button_effects_finished() -> void:
 	($Buttons as ButtonGridContainer).disable_buttons()
 	($Buttons as CanvasItem).hide()
 	($ModeDialog as Control).show_modal()
-	($ModeDialog/Buttons/Regular as FocusedButton).grab_silent_focus()
 
 
 func _activate_game(mode: String) -> void:
