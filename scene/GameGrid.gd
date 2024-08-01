@@ -78,8 +78,7 @@ func restart():
 
 
 func cleanup():
-	for interactable in get_tree().get_nodes_in_group("interactable"):
-		interactable.queue_free()
+	get_tree().call_group("interactable", "queue_free")
 
 
 func _process(_delta):
