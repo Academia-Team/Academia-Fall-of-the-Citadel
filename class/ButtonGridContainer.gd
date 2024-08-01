@@ -20,8 +20,12 @@ func disable_buttons() -> void:
 			child.disabled = true
 
 
-func hide_and_disable(button_name: String) -> void:
-	var target_button: BaseButton = get_node(button_name)
-	target_button.disabled = true
-	target_button.hide()
-	_disabled_buttons.append(button_name)
+func hide_and_disable(button_name: String) -> bool:
+	var target_button: BaseButton = get_node_or_null(button_name)
+
+	if target_button != null:
+		target_button.disabled = true
+		target_button.hide()
+		_disabled_buttons.append(button_name)
+
+	return target_button != null
