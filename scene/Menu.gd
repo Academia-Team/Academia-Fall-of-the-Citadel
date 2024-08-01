@@ -97,3 +97,4 @@ func _on_Credits_done() -> void:
 	($Credits as Credits).stop()
 	($Credits as CanvasItem).hide()
 	($Buttons as ButtonGridContainer).enable_buttons()
+	($Buttons as FocusedGridContainer).force_focus()
