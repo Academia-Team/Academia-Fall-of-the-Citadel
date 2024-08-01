@@ -7,6 +7,10 @@ var seed_val_set: bool = false
 func _ready() -> void:
 	($Version as Label).text = get_version_str()
 
+	if OS.get_name() == "HTML5":
+		($Buttons as ButtonGridContainer).hide_and_disable("Perish")
+		($ModeDialog/Buttons as ButtonGridContainer).hide_and_disable("Perish")
+
 
 func get_version_str() -> String:
 	var version_str = ProjectSettings.get_setting("global/Version")
