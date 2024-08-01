@@ -2,6 +2,7 @@ class_name FocusedButton
 extends Button
 
 signal button_effects_finished
+signal button_input(event)
 
 export var select_sfx: AudioStream
 export var activate_sfx: AudioStream
@@ -18,6 +19,7 @@ func _ready() -> void:
 	var f_exited_status: int = connect("focus_entered", self, "_on_focus_entered")
 	var b_down_status: int = connect("button_down", self, "_on_button_down")
 	var b_eff_status: int = connect("button_effects_finished", self, "_on_button_effects")
+	var gui_input_status: int = connect("gui_input", self, "_on_gui_input")
 
 	if not (
 		m_entered_status == OK
@@ -25,6 +27,7 @@ func _ready() -> void:
 		or f_exited_status == OK
 		or b_down_status == OK
 		or b_eff_status == OK
+		or gui_input_status == OK
 	):
 		printerr("Internal FocusedButton Failure.")
 
@@ -83,3 +86,8 @@ func _on_audio_finished() -> void:
 
 func _on_button_effects() -> void:
 	button_activated = false
+
+
+func _on_gui_input(event: InputEvent) -> void:
+	if not disabled:
+		emit_signal("button_input", event)
