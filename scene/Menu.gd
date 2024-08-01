@@ -47,13 +47,10 @@ func _get_button_grid() -> ButtonGridContainer:
 func _activate_game(mode: String) -> void:
 	_get_button_grid().disable_buttons()
 
-	var game_instance: Control = SceneSwitcher.get_scene(SceneSwitcher.GAME).instance()
 	if seed_val_set:
-		game_instance.seed_val = seed_val
-
-	game_instance.mode = mode
-
-	call_deferred("add_child", game_instance)
+		($Game as Game).play(mode, seed_val)
+	else:
+		($Game as Game).play(mode)
 
 
 func _on_Perish_button_effects_finished() -> void:
