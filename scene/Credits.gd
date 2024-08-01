@@ -1,9 +1,21 @@
+class_name Credits
 extends ColorRect
 
+signal done
 
-func _ready() -> void:
+
+func start() -> void:
 	($ScrollContainer as Control).grab_focus()
+	($ScrollContainer as AutomatedScrollContainer).play()
 	($TitleAnimation as AnimationPlayer).play("Fade Out")
+	($Music as Jukebox).start()
+
+
+func stop() -> void:
+	($TitleAnimation as AnimationPlayer).play("RESET")
+	($ScrollContainer as AutomatedScrollContainer).stop()
+	($ScrollContainer as ScrollContainer).set_deferred("scroll_vertical", 0)
+	($Music as Jukebox).end()
 
 
 func _process(_delta: float) -> void:
@@ -24,13 +36,13 @@ func _on_ScrollContainer_gui_input(event: InputEvent) -> void:
 
 func _on_ScrollContainer_begin_reached(automated: bool) -> void:
 	if automated:
-		SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.MENU)
+		emit_signal("done")
 	else:
 		($Alert as AnimationPlayer).play()
 
 
 func _on_ScrollContainer_end_reached(automated: bool) -> void:
 	if automated:
-		SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.MENU)
+		emit_signal("done")
 	else:
 		($Alert as AnimationPlayer).play()
