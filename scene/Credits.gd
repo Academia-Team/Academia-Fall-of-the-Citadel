@@ -4,15 +4,21 @@ extends ColorRect
 signal done
 
 
+func _ready() -> void:
+	stop()
+
+
 func start() -> void:
 	($ScrollContainer as Control).grab_focus()
 	($ScrollContainer as AutomatedScrollContainer).play()
+	($TitleAnimation/Label as CanvasItem).visible = true
 	($TitleAnimation as AnimationPlayer).play("Fade Out")
 	($Music as Jukebox).start()
 
 
 func stop() -> void:
 	($TitleAnimation as AnimationPlayer).play("RESET")
+	($TitleAnimation/Label as CanvasItem).visible = false
 	($ScrollContainer as AutomatedScrollContainer).stop()
 	($ScrollContainer as ScrollContainer).set_deferred("scroll_vertical", 0)
 	($Music as Jukebox).end()
