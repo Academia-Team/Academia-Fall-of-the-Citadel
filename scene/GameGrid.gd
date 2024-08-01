@@ -17,6 +17,7 @@ const HEALTH_SPAWN_PROB = 0.1
 
 const INITIAL_SPAWN_PROB = 0.3
 
+const DUCK_SCENE = preload("res://scene/Duck.tscn")
 const HEALTH_SCENE = preload("res://scene/Health.tscn")
 const SWORD_SCENE = preload("res://scene/Sword.tscn")
 const ZOMBIE_SCENE = preload("res://scene/Zombie.tscn")
@@ -301,7 +302,7 @@ func _on_Player_move_request(dir):
 
 
 func _on_DuckTimer_timeout():
-	spawn_item(load("res://scene/Duck.tscn"), get_spawn_pos())
+	spawn_item(DUCK_SCENE, get_spawn_pos())
 
 
 # Returns the first object that exists at the given position or null if no object exists.
