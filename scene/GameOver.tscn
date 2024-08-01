@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scene/GameOver.gd" type="Script" id=1]
 [ext_resource path="res://resource/emphasized_theme.tres" type="Theme" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://class/ButtonGridContainer.gd" type="Script" id=8]
 [ext_resource path="res://class/LineDialog.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scene/Alert.tscn" type="PackedScene" id=10]
+[ext_resource path="res://asset/heal_use.wav" type="AudioStream" id=11]
+[ext_resource path="res://asset/Bottle Break.wav" type="AudioStream" id=12]
 
 [node name="GameOver" type="ColorRect"]
 anchor_right = 1.0
@@ -80,6 +82,7 @@ text = "Arise"
 flat = true
 align = 0
 script = ExtResource( 7 )
+activate_sfx = ExtResource( 11 )
 
 [node name="GiveUp" type="Button" parent="Buttons"]
 margin_left = 604.0
@@ -102,6 +105,7 @@ text = "Give Up"
 flat = true
 align = 2
 script = ExtResource( 7 )
+activate_sfx = ExtResource( 12 )
 
 [node name="Tainted" type="Label" parent="."]
 anchor_left = 0.5
