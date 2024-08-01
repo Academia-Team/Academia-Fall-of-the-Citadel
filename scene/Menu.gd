@@ -8,8 +8,22 @@ func _ready() -> void:
 	($Version as Label).text = get_version_str()
 
 	if OS.get_name() == "HTML5":
-		($Buttons as ButtonGridContainer).hide_and_disable("Perish")
-		($ModeDialog/Buttons as ButtonGridContainer).hide_and_disable("Perish")
+		var options_container: TabContainer = $Options
+		for index in options_container.get_tab_count:
+			var buttons: ButtonGridContainer = options_container.get_tab_control(index)
+			if not buttons.hide_and_disable("Perish"):
+				print("Button 'Perish' not found in tab %d" % index)
+
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("ui_cancel"):
+		var options_container: TabContainer = $Options
+
+		if not _get_button_grid().are_buttons_disabled():
+			var previous_tab: int = options_container.get_current_tab() - 1
+
+			if previous_tab >= 0:
+				options_container.set_current_tab(previous_tab)
 
 
 func get_version_str() -> String:
@@ -22,21 +36,22 @@ func get_version_str() -> String:
 
 
 func _on_Enter_button_effects_finished() -> void:
-	($Buttons as ButtonGridContainer).disable_buttons()
-	($Buttons as CanvasItem).hide()
-	($ModeDialog as Control).show_modal()
+	_get_button_grid().disable_buttons()
+	($Options as TabContainer).set_current_tab(($Options/ModeButtons as Node).get_index())
+
+
+func _get_button_grid() -> ButtonGridContainer:
+	return ($Options as TabContainer).get_current_tab_control() as ButtonGridContainer
 
 
 func _activate_game(mode: String) -> void:
-	($ModeDialog as CanvasItem).hide()
-	($Buttons as ButtonGridContainer).disable_buttons()
+	_get_button_grid().disable_buttons()
 
 	var game_instance: Control = SceneSwitcher.get_scene(SceneSwitcher.GAME).instance()
 	if seed_val_set:
 		game_instance.seed_val = seed_val
 
 	game_instance.mode = mode
-	self_modulate.a = 0
 
 	call_deferred("add_child", game_instance)
 
@@ -45,26 +60,21 @@ func _on_Perish_button_effects_finished() -> void:
 	get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)
 
 
-func _on_Enter_gui_input(event: InputEvent) -> void:
-	if not ($Buttons/Enter as BaseButton).disabled and event.is_action("button_options", true):
-		($Buttons as ButtonGridContainer).disable_buttons()
+func _on_Enter_button_input(event: InputEvent) -> void:
+	if event.is_action("button_options", true):
+		_get_button_grid().disable_buttons()
 		($SeedDialog as LineDialog).prompt_integer("Seed:")
 
 
 func _on_HelpMe_button_effects_finished() -> void:
-	($Buttons as ButtonGridContainer).disable_buttons()
+	_get_button_grid().disable_buttons()
 	($Instructions as Book).start()
 
 
 func _on_Credit_button_effects_finished() -> void:
-	($Buttons as ButtonGridContainer).disable_buttons()
+	_get_button_grid().disable_buttons()
 	($Credits as CanvasItem).visible = true
 	($Credits as Credits).start()
-
-
-func _on_ModeDialog_hide() -> void:
-	($Buttons as ButtonGridContainer).enable_buttons()
-	($Buttons as CanvasItem).show()
 
 
 func _on_Regular_button_effects_finished() -> void:
@@ -85,16 +95,22 @@ func _on_SeedDialog_integer_prompt_finished(text_entered: bool, value: int) -> v
 		seed_val_set = true
 
 	# Delay the re-enabling of buttons to ensure that they don't accidently activate.
-	($Buttons as ButtonGridContainer).call_deferred("enable_buttons")
+	_get_button_grid().call_deferred("enable_buttons")
 
 
 func _on_Instructions_finished() -> void:
 	($Instructions as Book).stop()
-	($Buttons as ButtonGridContainer).enable_buttons()
+	_get_button_grid().enable_buttons()
 
 
 func _on_Credits_done() -> void:
 	($Credits as Credits).stop()
 	($Credits as CanvasItem).hide()
-	($Buttons as ButtonGridContainer).enable_buttons()
-	($Buttons as FocusedGridContainer).force_focus()
+
+	var buttons: ButtonGridContainer = _get_button_grid()
+	buttons.enable_buttons()
+	(buttons as FocusedGridContainer).force_focus()
+
+
+func _on_Options_tab_changed(_tab: int) -> void:
+	_get_button_grid().enable_buttons()

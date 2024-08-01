@@ -17,7 +17,7 @@
 [ext_resource path="res://scene/Instructions.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scene/Credits.tscn" type="PackedScene" id=16]
 
-[sub_resource type="StyleBoxEmpty" id=18]
+[sub_resource type="StyleBoxEmpty" id=21]
 
 [sub_resource type="DynamicFont" id=19]
 size = 40
@@ -51,15 +51,21 @@ theme = ExtResource( 3 )
 text = "Academia: Fall of the Citadel"
 align = 1
 
-[node name="Buttons" type="GridContainer" parent="."]
+[node name="Options" type="TabContainer" parent="."]
 margin_top = 114.0
 margin_right = 798.0
 margin_bottom = 447.0
+custom_styles/panel = SubResource( 21 )
+tabs_visible = false
+
+[node name="MainButtons" type="GridContainer" parent="Options"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource( 7 )
 
-[node name="Enter" type="Button" parent="Buttons"]
+[node name="Enter" type="Button" parent="Options/MainButtons"]
 margin_left = 352.0
 margin_right = 445.0
 margin_bottom = 36.0
@@ -73,7 +79,7 @@ script = ExtResource( 9 )
 select_sfx = ExtResource( 13 )
 activate_sfx = ExtResource( 14 )
 
-[node name="HelpMe" type="Button" parent="Buttons"]
+[node name="HelpMe" type="Button" parent="Options/MainButtons"]
 margin_left = 333.0
 margin_top = 85.0
 margin_right = 464.0
@@ -88,7 +94,7 @@ script = ExtResource( 9 )
 select_sfx = ExtResource( 13 )
 activate_sfx = ExtResource( 14 )
 
-[node name="Credit" type="Button" parent="Buttons"]
+[node name="Credit" type="Button" parent="Options/MainButtons"]
 margin_left = 332.0
 margin_top = 169.0
 margin_right = 465.0
@@ -103,11 +109,71 @@ script = ExtResource( 9 )
 select_sfx = ExtResource( 13 )
 activate_sfx = ExtResource( 14 )
 
-[node name="Perish" type="Button" parent="Buttons"]
+[node name="Perish" type="Button" parent="Options/MainButtons"]
 margin_left = 346.0
 margin_top = 253.0
 margin_right = 451.0
 margin_bottom = 289.0
+size_flags_horizontal = 6
+size_flags_vertical = 2
+theme = ExtResource( 2 )
+shortcut_in_tooltip = false
+action_mode = 0
+shortcut = ExtResource( 8 )
+text = "Perish"
+flat = true
+script = ExtResource( 9 )
+select_sfx = ExtResource( 13 )
+activate_sfx = ExtResource( 12 )
+
+[node name="ModeButtons" type="GridContainer" parent="Options"]
+visible = false
+margin_right = 798.0
+margin_bottom = 333.0
+script = ExtResource( 7 )
+
+[node name="Regular" type="Button" parent="Options/ModeButtons"]
+margin_left = 330.0
+margin_right = 467.0
+margin_bottom = 36.0
+size_flags_horizontal = 6
+size_flags_vertical = 2
+theme = ExtResource( 2 )
+action_mode = 0
+text = "Regular"
+flat = true
+script = ExtResource( 9 )
+select_sfx = ExtResource( 13 )
+activate_sfx = ExtResource( 14 )
+
+[node name="Duck" type="Button" parent="Options/ModeButtons"]
+margin_left = 346.0
+margin_top = 113.0
+margin_right = 452.0
+margin_bottom = 156.0
+size_flags_horizontal = 6
+size_flags_vertical = 2
+theme = SubResource( 20 )
+custom_colors/font_color_focus = Color( 1, 1, 0, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 0, 1 )
+custom_colors/font_color_pressed = Color( 0.921569, 0.482353, 0.0156863, 1 )
+custom_styles/hover = SubResource( 11 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/focus = SubResource( 13 )
+custom_styles/disabled = SubResource( 14 )
+custom_styles/normal = SubResource( 15 )
+action_mode = 0
+text = "Duck"
+flat = true
+script = ExtResource( 9 )
+select_sfx = ExtResource( 10 )
+activate_sfx = ExtResource( 11 )
+
+[node name="Perish" type="Button" parent="Options/ModeButtons"]
+margin_left = 346.0
+margin_top = 225.0
+margin_right = 451.0
+margin_bottom = 261.0
 size_flags_horizontal = 6
 size_flags_vertical = 2
 theme = ExtResource( 2 )
@@ -137,69 +203,6 @@ margin_top = -19.0
 grow_horizontal = 0
 text = "Version"
 
-[node name="ModeDialog" type="PopupDialog" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_styles/panel = SubResource( 18 )
-
-[node name="Buttons" type="GridContainer" parent="ModeDialog"]
-margin_top = 114.0
-margin_right = 798.0
-margin_bottom = 447.0
-script = ExtResource( 7 )
-
-[node name="Regular" type="Button" parent="ModeDialog/Buttons"]
-margin_right = 798.0
-margin_bottom = 36.0
-size_flags_horizontal = 6
-size_flags_vertical = 2
-theme = ExtResource( 2 )
-action_mode = 0
-text = "Regular"
-flat = true
-script = ExtResource( 9 )
-select_sfx = ExtResource( 13 )
-activate_sfx = ExtResource( 14 )
-
-[node name="Duck" type="Button" parent="ModeDialog/Buttons"]
-margin_top = 66.0
-margin_right = 798.0
-margin_bottom = 109.0
-size_flags_horizontal = 6
-size_flags_vertical = 2
-theme = SubResource( 20 )
-custom_colors/font_color_focus = Color( 1, 1, 0, 1 )
-custom_colors/font_color_hover = Color( 1, 1, 0, 1 )
-custom_colors/font_color_pressed = Color( 0.921569, 0.482353, 0.0156863, 1 )
-custom_styles/hover = SubResource( 11 )
-custom_styles/pressed = SubResource( 12 )
-custom_styles/focus = SubResource( 13 )
-custom_styles/disabled = SubResource( 14 )
-custom_styles/normal = SubResource( 15 )
-action_mode = 0
-text = "Duck"
-flat = true
-script = ExtResource( 9 )
-select_sfx = ExtResource( 10 )
-activate_sfx = ExtResource( 11 )
-
-[node name="Perish" type="Button" parent="ModeDialog/Buttons"]
-margin_left = 346.0
-margin_top = 139.0
-margin_right = 451.0
-margin_bottom = 175.0
-size_flags_horizontal = 6
-size_flags_vertical = 2
-theme = ExtResource( 2 )
-shortcut_in_tooltip = false
-action_mode = 0
-shortcut = ExtResource( 8 )
-text = "Perish"
-flat = true
-script = ExtResource( 9 )
-select_sfx = ExtResource( 13 )
-activate_sfx = ExtResource( 12 )
-
 [node name="Alert" parent="." instance=ExtResource( 5 )]
 
 [node name="Instructions" parent="." instance=ExtResource( 15 )]
@@ -207,16 +210,16 @@ activate_sfx = ExtResource( 12 )
 [node name="Credits" parent="." instance=ExtResource( 16 )]
 visible = false
 
-[connection signal="button_effects_finished" from="Buttons/Enter" to="." method="_on_Enter_button_effects_finished"]
-[connection signal="gui_input" from="Buttons/Enter" to="." method="_on_Enter_gui_input"]
-[connection signal="button_effects_finished" from="Buttons/HelpMe" to="." method="_on_HelpMe_button_effects_finished"]
-[connection signal="button_effects_finished" from="Buttons/Credit" to="." method="_on_Credit_button_effects_finished"]
-[connection signal="button_effects_finished" from="Buttons/Perish" to="." method="_on_Perish_button_effects_finished"]
+[connection signal="tab_changed" from="Options" to="." method="_on_Options_tab_changed"]
+[connection signal="button_effects_finished" from="Options/MainButtons/Enter" to="." method="_on_Enter_button_effects_finished"]
+[connection signal="button_input" from="Options/MainButtons/Enter" to="." method="_on_Enter_button_input"]
+[connection signal="button_effects_finished" from="Options/MainButtons/HelpMe" to="." method="_on_HelpMe_button_effects_finished"]
+[connection signal="button_effects_finished" from="Options/MainButtons/Credit" to="." method="_on_Credit_button_effects_finished"]
+[connection signal="button_effects_finished" from="Options/MainButtons/Perish" to="." method="_on_Perish_button_effects_finished"]
+[connection signal="button_effects_finished" from="Options/ModeButtons/Regular" to="." method="_on_Regular_button_effects_finished"]
+[connection signal="button_effects_finished" from="Options/ModeButtons/Duck" to="." method="_on_Duck_button_effects_finished"]
+[connection signal="button_effects_finished" from="Options/ModeButtons/Perish" to="." method="_on_Perish_button_effects_finished"]
 [connection signal="integer_prompt_finished" from="SeedDialog" to="." method="_on_SeedDialog_integer_prompt_finished"]
 [connection signal="text_rejected" from="SeedDialog" to="." method="_on_SeedDialog_text_rejected"]
-[connection signal="hide" from="ModeDialog" to="." method="_on_ModeDialog_hide"]
-[connection signal="button_effects_finished" from="ModeDialog/Buttons/Regular" to="." method="_on_Regular_button_effects_finished"]
-[connection signal="button_effects_finished" from="ModeDialog/Buttons/Duck" to="." method="_on_Duck_button_effects_finished"]
-[connection signal="button_effects_finished" from="ModeDialog/Buttons/Perish" to="." method="_on_Perish_button_effects_finished"]
 [connection signal="finished" from="Instructions" to="." method="_on_Instructions_finished"]
 [connection signal="done" from="Credits" to="." method="_on_Credits_done"]
