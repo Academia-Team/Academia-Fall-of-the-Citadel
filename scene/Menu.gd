@@ -1,3 +1,4 @@
+class_name Menu
 extends ColorRect
 
 var seed_val: int = 0
