@@ -45,10 +45,10 @@ func gen_seed() -> int:
 	return hash(Time.get_datetime_dict_from_system())
 
 
-func _on_GameOver_retry() -> void:
+func _on_GameOver_retry(seed_val: int = gen_seed()) -> void:
 	$GameOver.stop()
 	$InfoBar.reset()
-	$InfoBar.set_seed(gen_seed())
+	$InfoBar.set_seed(seed_val)
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	$GameGrid.restart()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scene/GameOver.gd" type="Script" id=1]
 [ext_resource path="res://resource/emphasized_theme.tres" type="Theme" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://resource/quit_shortcut.tres" type="ShortCut" id=6]
 [ext_resource path="res://class/FocusedButton.gd" type="Script" id=7]
 [ext_resource path="res://class/ButtonGridContainer.gd" type="Script" id=8]
+[ext_resource path="res://class/LineDialog.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scene/Alert.tscn" type="PackedScene" id=10]
 
 [node name="GameOver" type="ColorRect"]
 anchor_right = 1.0
@@ -104,6 +106,13 @@ theme = ExtResource( 2 )
 custom_colors/font_color = Color( 0.992157, 0.027451, 0.027451, 1 )
 text = "Cheater"
 
+[node name="SeedDialog" parent="." instance=ExtResource( 9 )]
+
+[node name="Alert" parent="." instance=ExtResource( 10 )]
+
 [connection signal="draw" from="." to="." method="_on_GameOver_draw"]
 [connection signal="button_effects_finished" from="Buttons/Arise" to="." method="_on_Arise_button_effects_finished"]
+[connection signal="button_input" from="Buttons/Arise" to="." method="_on_Arise_button_input"]
 [connection signal="button_effects_finished" from="Buttons/GiveUp" to="." method="_on_GiveUp_button_effects_finished"]
+[connection signal="integer_prompt_finished" from="SeedDialog" to="." method="_on_SeedDialog_integer_prompt_finished"]
+[connection signal="text_rejected" from="SeedDialog" to="." method="_on_SeedDialog_text_rejected"]
