@@ -6,6 +6,7 @@ signal move_request(dir)
 signal pick_up_item(item_name)
 signal used_item(item_name)
 
+const PLAYER_DEATH: Texture = preload("res://asset/pixelart_skull.png")
 const START_LIVES = 3
 const SWORD_SLASH: PackedScene = preload("res://scene/SwordAttack.tscn")
 
@@ -307,4 +308,4 @@ func toggle_immortality():
 
 func _on_CharacterSprite_effect_finish():
 	if lives <= 0:
-		$CharacterSprite.texture = load("res://asset/pixelart_skull.png")
+		$CharacterSprite.texture = PLAYER_DEATH
