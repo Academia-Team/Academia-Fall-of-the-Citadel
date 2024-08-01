@@ -1,7 +1,7 @@
 class_name SceneSwitcher
 extends Reference
 
-enum { MENU, GAME, INTRO, QUIT }
+enum { MENU, GAME, QUIT }
 
 
 static func get_scene(scene_id):
@@ -10,8 +10,6 @@ static func get_scene(scene_id):
 			return load("res://scene/Menu.tscn")
 		GAME:
 			return load("res://scene/GameScrn.tscn")
-		INTRO:
-			return load("res://scene/Intro.tscn")
 		QUIT:
 			return load("res://scene/End.tscn")
 		_:
@@ -29,8 +27,6 @@ static func scene_to_str(scene_id):
 			return "menu"
 		GAME:
 			return "game"
-		INTRO:
-			return "intro"
 		QUIT:
 			return "quit"
 		_:
