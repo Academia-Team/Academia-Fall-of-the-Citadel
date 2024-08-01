@@ -1,4 +1,4 @@
 .import/
 *.translation
 .mono/
-build/**/
+build/**
