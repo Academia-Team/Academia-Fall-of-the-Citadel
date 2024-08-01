@@ -308,7 +308,7 @@ func _on_DuckTimer_timeout():
 # Returns the first object that exists at the given position or null if no object exists.
 func get_interactable_obj_at_pos(pos: Vector2) -> Area2D:
 	for obj in get_tree().get_nodes_in_group("interactable"):
-		if obj.position == pos:
+		if obj.position == pos and obj.exists():
 			return obj
 
 	return null
