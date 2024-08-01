@@ -1,32 +1,32 @@
+class_name Game
 extends Control
 
-const CHEAT_COUNT_REQ = 3
+const CHEAT_COUNT_REQ: int = 3
 
-var cheat_key_counter = 0
-var mode = "Regular"
-var seed_val = null
+var cheat_key_counter: int = 0
 
 
-func _ready():
+func _ready() -> void:
+	hide()
+
+
+func play(mode: String, seed_val: int = gen_seed()) -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-
-	if seed_val == null:
-		seed_val = gen_seed()
-		print("Seed: %d" % seed_val)
+	show()
 
 	$InfoBar.set_seed(seed_val)
 	$InfoBar.set_mode(mode)
 	$GameGrid.start($InfoBar)
 
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("quit"):
 		SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.MENU)
 	elif Input.is_action_just_pressed("cheat_mode"):
 		handle_cheat_toggling()
 
 
-func handle_cheat_toggling():
+func handle_cheat_toggling() -> void:
 	if $CheatInputTimeout.is_stopped():
 		$CheatInputTimeout.start()
 	cheat_key_counter += 1
@@ -41,13 +41,11 @@ func handle_cheat_toggling():
 			$InfoBar.set_timed_status("Cheats disabled--for now.")
 
 
-func gen_seed():
-	var gen_seed_val = hash(Time.get_datetime_dict_from_system())
-
-	return gen_seed_val
+func gen_seed() -> int:
+	return hash(Time.get_datetime_dict_from_system())
 
 
-func _on_GameOver_retry():
+func _on_GameOver_retry() -> void:
 	$GameOver.stop()
 	$InfoBar.reset()
 	$InfoBar.set_seed(gen_seed())
@@ -55,19 +53,19 @@ func _on_GameOver_retry():
 	$GameGrid.restart()
 
 
-func _on_GameOver_leave():
+func _on_GameOver_leave() -> void:
 	SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.MENU)
 
 
-func _on_GameGrid_game_over():
+func _on_GameGrid_game_over() -> void:
 	$GameGrid.cleanup()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$GameOver.start($InfoBar)
 
 
-func _on_GameScrn_tree_exiting():
+func _on_GameScrn_tree_exiting() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
-func _on_CheatInputTimeout_timeout():
+func _on_CheatInputTimeout_timeout() -> void:
 	cheat_key_counter = 0

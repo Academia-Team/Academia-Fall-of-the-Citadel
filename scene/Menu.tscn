@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://asset/copyduck/Copyduck.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://resource/button_theme.tres" type="Theme" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://asset/Socapex - Swordsmall.wav" type="AudioStream" id=14]
 [ext_resource path="res://scene/Instructions.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scene/Credits.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scene/GameScrn.tscn" type="PackedScene" id=17]
 
 [sub_resource type="StyleBoxEmpty" id=21]
 
@@ -208,6 +209,9 @@ text = "Version"
 [node name="Instructions" parent="." instance=ExtResource( 15 )]
 
 [node name="Credits" parent="." instance=ExtResource( 16 )]
+visible = false
+
+[node name="Game" parent="." instance=ExtResource( 17 )]
 visible = false
 
 [connection signal="tab_changed" from="Options" to="." method="_on_Options_tab_changed"]
