@@ -42,7 +42,7 @@ func _activate_game(mode: String) -> void:
 
 
 func _on_Perish_button_effects_finished() -> void:
-	SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.QUIT)
+	get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)
 
 
 func _on_Enter_gui_input(event: InputEvent) -> void:
