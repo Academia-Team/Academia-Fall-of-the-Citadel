@@ -3,11 +3,12 @@ extends GridContainer
 
 
 func _ready() -> void:
-	var sort_connect_status: int = connect("sort_children", self, "force_focus")
-	var vis_change_status: int = connect("visibility_changed", self, "force_focus")
+	var vis_change_status: int = connect("visibility_changed", self, "_on_visibility_changed")
 
-	if not (sort_connect_status == OK or vis_change_status == OK):
+	if vis_change_status != OK:
 		printerr("Internal FocusedGridContainer Failure.")
+
+	force_focus()
 
 
 func force_focus() -> void:
@@ -20,3 +21,7 @@ func force_focus() -> void:
 			else:
 				child.grab_focus()
 			break
+
+
+func _on_visibility_changed() -> void:
+	force_focus()
