@@ -26,7 +26,7 @@ func stop() -> void:
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("quit"):
-		SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.MENU)
+		emit_signal("done")
 
 
 func _on_ScrollContainer_gui_input(event: InputEvent) -> void:
