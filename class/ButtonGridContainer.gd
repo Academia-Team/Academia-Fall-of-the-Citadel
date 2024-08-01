@@ -29,3 +29,15 @@ func hide_and_disable(button_name: String) -> bool:
 		_disabled_buttons.append(button_name)
 
 	return target_button != null
+
+
+func are_buttons_disabled() -> bool:
+	var children: Array = get_children()
+	var all_disabled: bool = true
+
+	for child in children:
+		if child is BaseButton and not child.disabled:
+			all_disabled = false
+			break
+
+	return all_disabled
