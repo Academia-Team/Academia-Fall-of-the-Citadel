@@ -7,6 +7,7 @@ signal pick_up_item(item_name)
 signal used_item(item_name)
 
 const START_LIVES = 3
+const SWORD_SLASH: PackedScene = preload("res://scene/SwordAttack.tscn")
 
 var bounds = {Direction.NORTH: 0, Direction.SOUTH: 0, Direction.WEST: 0, Direction.EAST: 0}
 var held_item = null
@@ -118,7 +119,7 @@ func _generate_sword_slash(num_pixels_away):
 	if pos_in_bounds(
 		Direction.translate_pos(position, $CharacterSprite.orientation, num_pixels_away)
 	):
-		slash_anim = load("res://scene/SwordAttack.tscn").instance()
+		slash_anim = SWORD_SLASH.instance()
 		slash_anim.position = Direction.dir_to_rel_pos(
 			$CharacterSprite.orientation, num_pixels_away
 		)
