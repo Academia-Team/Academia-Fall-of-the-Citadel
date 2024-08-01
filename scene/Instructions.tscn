@@ -878,6 +878,7 @@ Orientation is important when it comes to wielding weapons. A weapon will affect
 autowrap = true
 
 [node name="Scoring" type="ColorRect" parent="." groups=["Page"]]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
