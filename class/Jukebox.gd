@@ -4,6 +4,7 @@ extends AudioStreamPlayer
 signal next_song(song_index)
 
 export(Array, AudioStream) var music: Array
+var _stopped: bool = false
 var _index: int = 0
 var _pos: float = 0
 
@@ -18,7 +19,7 @@ func _ready() -> void:
 		start()
 
 
-func start(start_index: int = _index, position: float = 0) -> void:
+func start(start_index: int = _index, position: float = _pos) -> void:
 	if start_index >= music.size():
 		printerr("Error starting Jukebox: Index %d is out of range." % start_index)
 	else:
@@ -30,10 +31,12 @@ func end() -> void:
 	stop()
 	_index = 0
 	_pos = 0
+	_stopped = true
 
 
 func pause() -> void:
 	_pos = get_playback_position()
+	_stopped = true
 	stop()
 
 
@@ -43,7 +46,10 @@ func resume() -> void:
 
 
 func _on_finished() -> void:
-	var next_index = (_index + 1) % music.size()
-	start(next_index)
-	emit_signal("next_song", next_index)
-	_index = next_index
+	if not _stopped:
+		var next_index = (_index + 1) % music.size()
+		start(next_index)
+		emit_signal("next_song", next_index)
+		_index = next_index
+
+	_stopped = false
