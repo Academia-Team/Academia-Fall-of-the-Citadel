@@ -7,7 +7,7 @@ signal pick_up_item(item_name)
 signal used_item(item_name)
 
 const PLAYER_DEATH: Texture = preload("res://asset/pixelart_skull.png")
-const START_LIVES = 3
+const START_LIVES: int = 3
 const SWORD_SLASH: PackedScene = preload("res://scene/SwordAttack.tscn")
 
 var bounds = {Direction.NORTH: 0, Direction.SOUTH: 0, Direction.WEST: 0, Direction.EAST: 0}
