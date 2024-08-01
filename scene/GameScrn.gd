@@ -20,10 +20,11 @@ func play(mode: String, seed_val: int = gen_seed()) -> void:
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("quit"):
-		SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.MENU)
-	elif Input.is_action_just_pressed("cheat_mode"):
-		handle_cheat_toggling()
+	if visible:
+		if Input.is_action_just_pressed("quit"):
+			SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.MENU)
+		elif Input.is_action_just_pressed("cheat_mode"):
+			handle_cheat_toggling()
 
 
 func handle_cheat_toggling() -> void:
