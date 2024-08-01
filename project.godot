@@ -54,11 +54,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://class/FocusedGridContainer.gd"
 }, {
-"base": "Reference",
-"class": "Group",
-"language": "GDScript",
-"path": "res://class/Group.gd"
-}, {
 "base": "ColorRect",
 "class": "InfoBar",
 "language": "GDScript",
@@ -99,7 +94,6 @@ _global_script_class_icons={
 "Enemy": "",
 "FocusedButton": "",
 "FocusedGridContainer": "",
-"Group": "",
 "InfoBar": "",
 "Item": "",
 "Jukebox": "",
