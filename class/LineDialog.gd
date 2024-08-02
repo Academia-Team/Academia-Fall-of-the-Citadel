@@ -4,7 +4,7 @@ extends PopupPanel
 signal integer_prompt_finished(text_entered, value)
 signal text_rejected
 
-const MAX_INT_LEN = 19
+const MAX_INT_LEN: int = 19
 
 export var line_length: int = 0
 

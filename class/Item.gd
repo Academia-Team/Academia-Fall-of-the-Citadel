@@ -32,7 +32,7 @@ func exists() -> bool:
 func shove_to(pos: Vector2) -> void:
 	if shovable:
 		position = pos
-		$ShoveSFX.play()
+		($ShoveSFX as AudioStreamPlayer).play()
 	else:
 		print("Attempted to shove unshovable object.")
 
