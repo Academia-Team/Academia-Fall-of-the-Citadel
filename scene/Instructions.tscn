@@ -49,8 +49,9 @@ text = "Story"
 align = 1
 
 [node name="Body" type="Label" parent="Story"]
+margin_left = 3.0
 margin_top = 82.0
-margin_right = 800.0
+margin_right = 803.0
 margin_bottom = 447.0
 theme = ExtResource( 21 )
 text = "\"This can't be happening\", you cry to yourself, as your tears uselessly hit the ground with a dying clunk.
@@ -80,8 +81,9 @@ text = "Controls"
 align = 1
 
 [node name="Table" type="GridContainer" parent="CardinalMovementControls"]
+margin_left = 3.0
 margin_top = 82.0
-margin_right = 800.0
+margin_right = 803.0
 margin_bottom = 447.0
 custom_constants/hseparation = 200
 columns = 2
@@ -233,8 +235,9 @@ text = "Controls"
 align = 1
 
 [node name="Table" type="GridContainer" parent="OrdinalMovementControls"]
+margin_left = 3.0
 margin_top = 82.0
-margin_right = 800.0
+margin_right = 803.0
 margin_bottom = 447.0
 columns = 2
 
@@ -539,8 +542,9 @@ text = "Controls"
 align = 1
 
 [node name="Table" type="GridContainer" parent="ActionControls"]
+margin_left = 3.0
 margin_top = 82.0
-margin_right = 800.0
+margin_right = 803.0
 margin_bottom = 447.0
 custom_constants/hseparation = 200
 columns = 2
@@ -698,8 +702,9 @@ text = "Controls"
 align = 1
 
 [node name="Table" type="GridContainer" parent="FunctionalControls"]
+margin_left = 3.0
 margin_top = 82.0
-margin_right = 800.0
+margin_right = 803.0
 margin_bottom = 447.0
 custom_constants/hseparation = 200
 columns = 2
@@ -857,8 +862,9 @@ text = "Gameplay"
 align = 1
 
 [node name="Body" type="Label" parent="Gameplay1"]
+margin_left = 3.0
 margin_top = 82.0
-margin_right = 800.0
+margin_right = 803.0
 margin_bottom = 447.0
 theme = ExtResource( 21 )
 text = "The game is a grid-based survival horror game. It is not possible to survive; rather, the goal is to survive as long as possible.
@@ -884,8 +890,9 @@ text = "Gameplay"
 align = 1
 
 [node name="Body" type="Label" parent="Gameplay2"]
+margin_left = 3.0
 margin_top = 82.0
-margin_right = 800.0
+margin_right = 803.0
 margin_bottom = 447.0
 theme = ExtResource( 21 )
 text = "Player movement is separate from player orientation. When movement is requested, the player orientation changes immediately. Orientation can never be diagonal. In the case of a request for diagonal movement, the orientation will become the horizontal component of that movement request. To only change orientation without moving, the stay button should be pressed before inputting a direction.
@@ -911,8 +918,9 @@ text = "Scoring"
 align = 1
 
 [node name="Table" type="GridContainer" parent="Scoring"]
+margin_left = 3.0
 margin_top = 82.0
-margin_right = 800.0
+margin_right = 803.0
 margin_bottom = 447.0
 custom_constants/vseparation = 32
 custom_constants/hseparation = 32
