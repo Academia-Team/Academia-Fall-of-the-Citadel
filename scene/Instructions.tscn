@@ -970,6 +970,7 @@ margin_top = -20.0
 margin_right = 20.0
 margin_bottom = 20.0
 texture = ExtResource( 17 )
+expand = true
 
 [node name="ZombieBonus" type="Label" parent="Scoring/Table"]
 margin_left = 125.0
