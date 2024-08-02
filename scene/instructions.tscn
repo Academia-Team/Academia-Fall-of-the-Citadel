@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://resource/emphasized_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scene/instructions.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://asset/kenney_input-prompts/Generic/generic_stick_right.svg" type="Texture" id=14]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_q.svg" type="Texture" id=15]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_u.svg" type="Texture" id=16]
+[ext_resource path="res://resource/instruction_theme.tres" type="Theme" id=17]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_b.svg" type="Texture" id=18]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_n.svg" type="Texture" id=19]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_space.svg" type="Texture" id=20]
@@ -51,9 +52,11 @@ text = "Story"
 align = 1
 
 [node name="Body" type="Label" parent="Pg1"]
+margin_left = 3.0
 margin_top = 82.0
-margin_right = 800.0
+margin_right = 803.0
 margin_bottom = 447.0
+theme = ExtResource( 17 )
 text = "\"This can't be happening\", you cry to yourself, as your tears uselessly hit the ground with a dying clunk.
 
 A few days ago, your friends and colleagues were alive, united by a common dream--to push back the darkness sweeping across the land. Now that dream is dead along with them. You would have joined them if not for the injuries you sustained during the initial defence of the city of Caditan.
@@ -80,21 +83,23 @@ text = "Controls"
 align = 1
 
 [node name="Table" type="GridContainer" parent="Pg2"]
+margin_left = 3.0
 margin_top = 82.0
-margin_right = 800.0
+margin_right = 803.0
 margin_bottom = 447.0
 custom_constants/hseparation = 200
 columns = 2
 
 [node name="MoveUp" type="Label" parent="Pg2/Table"]
 margin_top = 22.0
-margin_right = 107.0
-margin_bottom = 41.0
+margin_right = 100.0
+margin_bottom = 42.0
+theme = ExtResource( 17 )
 text = "Move Up"
 
 [node name="MoveUpControls" type="GridContainer" parent="Pg2/Table"]
-margin_left = 307.0
-margin_right = 627.0
+margin_left = 300.0
+margin_right = 620.0
 margin_bottom = 64.0
 custom_constants/hseparation = 64
 columns = 3
@@ -118,14 +123,15 @@ texture = ExtResource( 5 )
 
 [node name="MoveDown" type="Label" parent="Pg2/Table"]
 margin_top = 90.0
-margin_right = 107.0
-margin_bottom = 109.0
+margin_right = 100.0
+margin_bottom = 110.0
+theme = ExtResource( 17 )
 text = "Move Down"
 
 [node name="MoveDownControls" type="GridContainer" parent="Pg2/Table"]
-margin_left = 307.0
+margin_left = 300.0
 margin_top = 68.0
-margin_right = 627.0
+margin_right = 620.0
 margin_bottom = 132.0
 custom_constants/hseparation = 64
 columns = 3
@@ -150,14 +156,15 @@ texture = ExtResource( 8 )
 
 [node name="MoveLeft" type="Label" parent="Pg2/Table"]
 margin_top = 158.0
-margin_right = 107.0
-margin_bottom = 177.0
+margin_right = 100.0
+margin_bottom = 178.0
+theme = ExtResource( 17 )
 text = "Move Left"
 
 [node name="MoveLeftControls" type="GridContainer" parent="Pg2/Table"]
-margin_left = 307.0
+margin_left = 300.0
 margin_top = 136.0
-margin_right = 627.0
+margin_right = 620.0
 margin_bottom = 200.0
 custom_constants/hseparation = 64
 columns = 3
@@ -181,14 +188,15 @@ texture = ExtResource( 11 )
 
 [node name="MoveRight" type="Label" parent="Pg2/Table"]
 margin_top = 226.0
-margin_right = 107.0
-margin_bottom = 245.0
+margin_right = 100.0
+margin_bottom = 246.0
+theme = ExtResource( 17 )
 text = "Move Right"
 
 [node name="MoveRightControls" type="GridContainer" parent="Pg2/Table"]
-margin_left = 307.0
+margin_left = 300.0
 margin_top = 204.0
-margin_right = 627.0
+margin_right = 620.0
 margin_bottom = 268.0
 custom_constants/hseparation = 64
 columns = 3
@@ -228,20 +236,22 @@ text = "Controls"
 align = 1
 
 [node name="Table" type="GridContainer" parent="Pg3"]
+margin_left = 3.0
 margin_top = 82.0
-margin_right = 800.0
+margin_right = 803.0
 margin_bottom = 447.0
 columns = 2
 
 [node name="MoveTopLeft" type="Label" parent="Pg3/Table"]
 margin_top = 22.0
-margin_right = 182.0
-margin_bottom = 41.0
+margin_right = 177.0
+margin_bottom = 42.0
+theme = ExtResource( 17 )
 text = "Move Top-Left"
 
 [node name="MoveTopLeftControls" type="GridContainer" parent="Pg3/Table"]
-margin_left = 186.0
-margin_right = 668.0
+margin_left = 181.0
+margin_right = 663.0
 margin_bottom = 64.0
 custom_constants/hseparation = 64
 columns = 3
@@ -303,14 +313,15 @@ texture = ExtResource( 11 )
 
 [node name="MoveTopRight" type="Label" parent="Pg3/Table"]
 margin_top = 90.0
-margin_right = 182.0
-margin_bottom = 109.0
+margin_right = 177.0
+margin_bottom = 110.0
+theme = ExtResource( 17 )
 text = "Move Top-Right"
 
 [node name="MoveTopRightControls" type="GridContainer" parent="Pg3/Table"]
-margin_left = 186.0
+margin_left = 181.0
 margin_top = 68.0
-margin_right = 668.0
+margin_right = 663.0
 margin_bottom = 132.0
 custom_constants/hseparation = 64
 columns = 3
@@ -373,14 +384,15 @@ texture = ExtResource( 14 )
 
 [node name="MoveBottomLeft" type="Label" parent="Pg3/Table"]
 margin_top = 158.0
-margin_right = 182.0
-margin_bottom = 177.0
+margin_right = 177.0
+margin_bottom = 178.0
+theme = ExtResource( 17 )
 text = "Move Bottom-Left"
 
 [node name="MoveBottomLeftControls" type="GridContainer" parent="Pg3/Table"]
-margin_left = 186.0
+margin_left = 181.0
 margin_top = 136.0
-margin_right = 668.0
+margin_right = 663.0
 margin_bottom = 200.0
 custom_constants/hseparation = 64
 columns = 3
@@ -443,14 +455,15 @@ texture = ExtResource( 11 )
 
 [node name="MoveBottomRight" type="Label" parent="Pg3/Table"]
 margin_top = 226.0
-margin_right = 182.0
-margin_bottom = 245.0
+margin_right = 177.0
+margin_bottom = 246.0
+theme = ExtResource( 17 )
 text = "Move Bottom-Right"
 
 [node name="MoveBottomRightControls" type="GridContainer" parent="Pg3/Table"]
-margin_left = 186.0
+margin_left = 181.0
 margin_top = 204.0
-margin_right = 668.0
+margin_right = 663.0
 margin_bottom = 268.0
 custom_constants/hseparation = 64
 columns = 3
@@ -529,21 +542,23 @@ text = "Controls"
 align = 1
 
 [node name="Table" type="GridContainer" parent="Pg4"]
+margin_left = 3.0
 margin_top = 82.0
-margin_right = 800.0
+margin_right = 803.0
 margin_bottom = 447.0
 custom_constants/hseparation = 200
 columns = 2
 
 [node name="UseItem" type="Label" parent="Pg4/Table"]
 margin_top = 56.0
-margin_right = 79.0
-margin_bottom = 75.0
+margin_right = 81.0
+margin_bottom = 76.0
+theme = ExtResource( 17 )
 text = "Use Item"
 
 [node name="UseItemControls" type="GridContainer" parent="Pg4/Table"]
-margin_left = 279.0
-margin_right = 607.0
+margin_left = 281.0
+margin_right = 609.0
 margin_bottom = 132.0
 custom_constants/hseparation = 64
 columns = 2
@@ -603,14 +618,15 @@ texture = ExtResource( 22 )
 
 [node name="Stay" type="Label" parent="Pg4/Table"]
 margin_top = 192.0
-margin_right = 79.0
-margin_bottom = 211.0
+margin_right = 81.0
+margin_bottom = 212.0
+theme = ExtResource( 17 )
 text = "Stay"
 
 [node name="StayControls" type="GridContainer" parent="Pg4/Table"]
-margin_left = 279.0
+margin_left = 281.0
 margin_top = 136.0
-margin_right = 607.0
+margin_right = 609.0
 margin_bottom = 268.0
 custom_constants/hseparation = 64
 columns = 2
@@ -685,21 +701,23 @@ text = "Controls"
 align = 1
 
 [node name="Table" type="GridContainer" parent="Pg5"]
+margin_left = 3.0
 margin_top = 82.0
-margin_right = 800.0
+margin_right = 803.0
 margin_bottom = 447.0
 custom_constants/hseparation = 200
 columns = 2
 
 [node name="ButtonOptions" type="Label" parent="Pg5/Table"]
 margin_top = 56.0
-margin_right = 149.0
-margin_bottom = 75.0
+margin_right = 140.0
+margin_bottom = 76.0
+theme = ExtResource( 17 )
 text = "Button Options"
 
 [node name="ButtonOptionsControls" type="GridContainer" parent="Pg5/Table"]
-margin_left = 349.0
-margin_right = 677.0
+margin_left = 340.0
+margin_right = 668.0
 margin_bottom = 132.0
 custom_constants/hseparation = 64
 columns = 2
@@ -774,8 +792,9 @@ text = "Controls"
 align = 1
 
 [node name="Table" type="GridContainer" parent="Pg6"]
+margin_left = 3.0
 margin_top = 82.0
-margin_right = 800.0
+margin_right = 803.0
 margin_bottom = 447.0
 custom_constants/hseparation = 200
 columns = 2
@@ -785,6 +804,7 @@ visible = false
 margin_top = 192.0
 margin_right = 149.0
 margin_bottom = 211.0
+theme = ExtResource( 17 )
 text = "Suicide"
 
 [node name="SuicideControls" type="GridContainer" parent="Pg6/Table"]
@@ -850,13 +870,14 @@ texture = ExtResource( 23 )
 
 [node name="Quit" type="Label" parent="Pg6/Table"]
 margin_top = 56.0
-margin_right = 41.0
-margin_bottom = 75.0
+margin_right = 42.0
+margin_bottom = 76.0
+theme = ExtResource( 17 )
 text = "Quit"
 
 [node name="QuitControls" type="GridContainer" parent="Pg6/Table"]
-margin_left = 241.0
-margin_right = 569.0
+margin_left = 242.0
+margin_right = 570.0
 margin_bottom = 132.0
 custom_constants/hseparation = 64
 columns = 2
@@ -931,9 +952,11 @@ text = "Gameplay"
 align = 1
 
 [node name="Body" type="Label" parent="Pg7"]
+margin_left = 3.0
 margin_top = 82.0
-margin_right = 800.0
+margin_right = 803.0
 margin_bottom = 447.0
+theme = ExtResource( 17 )
 text = "The game is a grid-based survival horror game. It is not possible to survive; rather, the goal is to survive as long as possible.
 
 The player is able to move horizontally, vertically, and diagonally in all directions. (No enemy is able to move diagonally, thus giving the player a chance to escape tricky situations.) Movement input must be held in order to get the player to move, as movement will only occur after half a second has passed. During that time, if a complementary movement request is provided without a gap between providing the original input (such as holding down the up arrow key while holding the left arrow key), then the player will move diagonally based on what inputs have been provided. If input ceases or if conflicting input is provided (such as left and right arrow keys pressed simultaneously) when time runs out, then the player won't move."
@@ -956,9 +979,11 @@ text = "Gameplay"
 align = 1
 
 [node name="Body" type="Label" parent="Pg8"]
+margin_left = 3.0
 margin_top = 82.0
-margin_right = 800.0
+margin_right = 803.0
 margin_bottom = 447.0
+theme = ExtResource( 17 )
 text = "Player movement is separate from player orientation. When movement is requested, the player orientation changes immediately. Orientation can never be diagonal. In the case of a request for diagonal movement, the orientation will become the horizontal component of that movement request. To only change orientation without moving, the stay button should be pressed before inputting a direction.
 
 Orientation is important when it comes to wielding weapons. A weapon will affect different cells depending on which way the player is facing. For instance, the sword will slay all enemies on whatever two cells the player is orientated towards."
@@ -981,8 +1006,9 @@ text = "Scoring"
 align = 1
 
 [node name="Table" type="GridContainer" parent="Pg9"]
+margin_left = 3.0
 margin_top = 82.0
-margin_right = 800.0
+margin_right = 803.0
 margin_bottom = 447.0
 custom_constants/vseparation = 32
 custom_constants/hseparation = 32
@@ -998,9 +1024,10 @@ texture = ExtResource( 26 )
 
 [node name="PassiveBonus" type="Label" parent="Pg9/Table"]
 margin_left = 125.0
-margin_top = 37.0
-margin_right = 437.0
+margin_top = 36.0
+margin_right = 414.0
 margin_bottom = 56.0
+theme = ExtResource( 17 )
 text = "1 pt for every minute survived."
 
 [node name="SwordBox" type="ColorRect" parent="Pg9/Table"]
@@ -1023,8 +1050,9 @@ texture = ExtResource( 27 )
 [node name="SwordBonus" type="Label" parent="Pg9/Table"]
 margin_left = 125.0
 margin_top = 131.0
-margin_right = 437.0
-margin_bottom = 150.0
+margin_right = 414.0
+margin_bottom = 151.0
+theme = ExtResource( 17 )
 text = "5 pt for every sword collected."
 
 [node name="ZombieBox" type="ColorRect" parent="Pg9/Table"]
@@ -1047,6 +1075,7 @@ texture = ExtResource( 28 )
 [node name="ZombieBonus" type="Label" parent="Pg9/Table"]
 margin_left = 125.0
 margin_top = 195.0
-margin_right = 437.0
-margin_bottom = 214.0
+margin_right = 414.0
+margin_bottom = 215.0
+theme = ExtResource( 17 )
 text = "10 pt for every zombie killed."
