@@ -928,9 +928,10 @@ texture = ExtResource( 7 )
 
 [node name="PassiveBonus" type="Label" parent="Scoring/Table"]
 margin_left = 125.0
-margin_top = 37.0
-margin_right = 421.0
+margin_top = 36.0
+margin_right = 414.0
 margin_bottom = 56.0
+theme = ExtResource( 21 )
 text = "1 pt for every minute survived."
 
 [node name="ItemBox" type="ColorRect" parent="Scoring/Table"]
@@ -948,8 +949,9 @@ texture = ExtResource( 8 )
 [node name="ItemBonus" type="Label" parent="Scoring/Table"]
 margin_left = 125.0
 margin_top = 131.0
-margin_right = 421.0
-margin_bottom = 150.0
+margin_right = 414.0
+margin_bottom = 151.0
+theme = ExtResource( 21 )
 text = "5 pt for every item collected."
 
 [node name="ZombieBox" type="ColorRect" parent="Scoring/Table"]
@@ -972,6 +974,7 @@ texture = ExtResource( 17 )
 [node name="ZombieBonus" type="Label" parent="Scoring/Table"]
 margin_left = 125.0
 margin_top = 195.0
-margin_right = 421.0
-margin_bottom = 214.0
+margin_right = 414.0
+margin_bottom = 215.0
+theme = ExtResource( 21 )
 text = "10 pt for every zombie killed."
