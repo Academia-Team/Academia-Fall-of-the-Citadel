@@ -20,7 +20,6 @@ visible = false
 [node name="CheatInputTimeout" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="tree_exiting" from="." to="." method="_on_GameScrn_tree_exiting"]
 [connection signal="game_over" from="GameGrid" to="." method="_on_GameGrid_game_over"]
 [connection signal="leave" from="GameOver" to="." method="_on_GameOver_leave"]
 [connection signal="retry" from="GameOver" to="." method="_on_GameOver_retry"]
