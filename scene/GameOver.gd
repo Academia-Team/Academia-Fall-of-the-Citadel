@@ -2,7 +2,7 @@ class_name GameOver
 extends ColorRect
 
 signal leave
-signal retry(seed_val)
+signal retry(mode, seed_val)
 
 var info_ref: InfoBar = null
 var new_seed_val: int = 0
@@ -52,7 +52,7 @@ func _on_GiveUp_button_effects_finished() -> void:
 
 func _on_Arise_button_effects_finished() -> void:
 	if new_seed_val_set:
-		emit_signal("retry", new_seed_val)
+		emit_signal("retry", info_ref.get_mode(), new_seed_val)
 	else:
 		emit_signal("retry")
 
