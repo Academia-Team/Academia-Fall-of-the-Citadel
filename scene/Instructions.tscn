@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://asset/kenney_input-prompts/Generic/generic_button_circle_outline.svg" type="Texture" id=1]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_u.svg" type="Texture" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://asset/kenney_input-prompts/Generic/generic_stick_right.svg" type="Texture" id=18]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_b.svg" type="Texture" id=19]
 [ext_resource path="res://asset/kenney_input-prompts/Generic/generic_stick_left.svg" type="Texture" id=20]
+[ext_resource path="res://resource/instruction_theme.tres" type="Theme" id=21]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_arrow_up.svg" type="Texture" id=22]
 [ext_resource path="res://asset/kenney_input-prompts/Generic/generic_stick_up.svg" type="Texture" id=23]
 [ext_resource path="res://asset/kenney_input-prompts/Keyboard & Mouse/keyboard_ctrl.svg" type="Texture" id=24]
@@ -51,6 +52,7 @@ align = 1
 margin_top = 82.0
 margin_right = 800.0
 margin_bottom = 447.0
+theme = ExtResource( 21 )
 text = "\"This can't be happening\", you cry to yourself, as your tears uselessly hit the ground with a dying clunk.
 
 A few days ago, your friends and colleagues were alive, united by a common dream--to push back the darkness sweeping across the land. Now that dream is dead along with them. You would have joined them if not for the injuries you sustained during the initial defence of the city of Caditan.
