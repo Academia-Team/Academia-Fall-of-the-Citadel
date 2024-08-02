@@ -13,10 +13,10 @@ const SWORD_SLASH: PackedScene = preload("res://scene/SwordAttack.tscn")
 var bounds = {Direction.NORTH: 0, Direction.SOUTH: 0, Direction.WEST: 0, Direction.EAST: 0}
 var held_item = null
 var lives = 0
-var targets = [[], [], [], []]
+var targets = {Direction.NORTH: [], Direction.SOUTH: [], Direction.WEST: [], Direction.EAST: []}
 var targets_to_destroy = []
 
-var future_dir = null
+var future_dir: int = Direction.NONE
 var immortal = false
 var mid_use = false
 
@@ -30,9 +30,7 @@ func exists():
 
 
 func set_dir(dir):
-	$MoveTimer.set_paused(true)
 	future_dir = dir
-	$MoveTimer.set_paused(false)
 
 
 func kill():
@@ -60,7 +58,7 @@ func handle_action():
 
 
 func handle_movement():
-	var desired_dir = null
+	var desired_dir: int = Direction.NONE
 
 	if Input.is_action_pressed("move_up"):
 		desired_dir = Direction.combine_dir(Direction.NORTH, desired_dir)
@@ -167,7 +165,7 @@ func discard_item():
 
 func _process(_delta):
 	if lives > 0:
-		if future_dir != null and $MoveTimer.is_stopped():
+		if future_dir != Direction.NONE and $MoveTimer.is_stopped():
 			$MoveTimer.start()
 
 		handle_action()
@@ -192,7 +190,7 @@ func spawn(pos, top_bound, bottom_bound, left_bound, right_bound):
 	bounds.bottom = bottom_bound
 
 	held_item = null
-	future_dir = null
+	future_dir = Direction.NONE
 	mid_use = false
 
 	lives = START_LIVES
@@ -248,9 +246,9 @@ func move_reject():
 
 
 func _on_MoveTimer_timeout():
-	if future_dir != null:
+	if future_dir != Direction.NONE:
 		emit_signal("move_request", future_dir)
-		future_dir = null
+		future_dir = Direction.NONE
 
 
 func _on_Player_area_shape_entered(_area_rid, area, _area_shape_index, local_shape_index):
@@ -285,7 +283,7 @@ func orient_from_collision_box(collisionbox):
 		"BottomCollisionBox":
 			orient = Direction.SOUTH
 		_:
-			orient = -1
+			orient = Direction.NONE
 
 	return orient
 

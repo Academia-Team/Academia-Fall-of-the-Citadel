@@ -12,40 +12,44 @@ enum ValidOrientation {
 	WEST = Direction.WEST
 }
 
-export(Texture) var north_texture
-export(Texture) var south_texture
-export(Texture) var side_texture
+export var north_texture: Texture
+export var south_texture: Texture
+export var side_texture: Texture
 
-export(Color) var heal_color = Color.pink
-export(Color) var hurt_color = Color.tomato
-export(float) var heal_length = 1.0
-export(float) var hurt_length = 0.3
-export(ValidOrientation) var orientation = Direction.SOUTH
+export var heal_color: Color = Color.pink
+export var hurt_color: Color = Color.tomato
+export var heal_length: float = 1.0
+export var hurt_length: float = 0.3
+export(ValidOrientation) var orientation: int = Direction.SOUTH
 
-var effect_timer
-var initial_texture
-onready var orig_self_modulate = self_modulate
+var effect_timer: Timer
+var initial_texture: Texture
+onready var orig_self_modulate: Color = self_modulate
 
 
-func _init():
+func _init() -> void:
 	._init()
 
 	effect_timer = Timer.new()
 	effect_timer.one_shot = true
-	effect_timer.connect("timeout", self, "_on_effect_timeout")
+	var connect_status: int = effect_timer.connect("timeout", self, "_on_effect_timeout")
+
+	if connect_status != OK:
+		printerr("Timer connect failure: Status effects will be displayed indefinitely.")
+
 	add_child(effect_timer)
 
 
 # A hack due to the fact that when a CharacterSprite is placed, its texture will
 # be overwritten. If _ready() is redefined, set_orient() will have to be manually
 # called.
-func _ready():
+func _ready() -> void:
 	set_orient(orientation)
 
 
-func get_orient_texture(orient):
+func get_orient_texture(orient: int) -> Texture:
 	orient = Direction.get_horz_component(orient)
-	var target_texture
+	var target_texture: Texture
 	match orient:
 		Direction.NORTH:
 			target_texture = north_texture
@@ -57,10 +61,19 @@ func get_orient_texture(orient):
 	return target_texture
 
 
-func set_orient(orient):
-	if orient != null:
-		var old_orient = orientation
-		var new_texture = get_orient_texture(orient)
+func _is_valid_orient(orient: int) -> bool:
+	return (
+		orient == ValidOrientation.NORTH
+		or orient == ValidOrientation.SOUTH
+		or orient == ValidOrientation.EAST
+		or orient == ValidOrientation.WEST
+	)
+
+
+func set_orient(orient: int) -> void:
+	if _is_valid_orient(orient):
+		var old_orient: int = orientation
+		var new_texture: Texture = get_orient_texture(orient)
 
 		orient = Direction.get_horz_component(orient)
 		flip_h = (orient == Direction.EAST)
@@ -71,15 +84,15 @@ func set_orient(orient):
 			emit_signal("orientation_changed", old_orient, orient)
 
 
-func show_heal(length = heal_length):
+func show_heal(length: float = heal_length) -> void:
 	_show_effect(length, heal_color)
 
 
-func show_hurt(length = hurt_length):
+func show_hurt(length: float = hurt_length) -> void:
 	_show_effect(length, hurt_color)
 
 
-func _show_effect(length, color):
+func _show_effect(length: float, color: Color) -> void:
 	if not effect_timer.is_stopped():
 		effect_timer.stop()
 		effect_timer.signal("timeout")
@@ -94,6 +107,6 @@ func _show_effect(length, color):
 	emit_signal("effect_show")
 
 
-func _on_effect_timeout():
+func _on_effect_timeout() -> void:
 	self_modulate = orig_self_modulate
 	emit_signal("effect_finish")

@@ -1,45 +1,45 @@
 class_name Item
 extends Area2D
 
-export(bool) var shovable = true
-export(String) var type
-export(Texture) var sprite
-export(AudioStream) var acquire_sfx
-export(AudioStream) var shove_sfx
+export var shovable: bool = true
+export var type: String
+export var sprite: Texture
+export var acquire_sfx: AudioStream
+export var shove_sfx: AudioStream
 
 
-func _ready():
-	$Sprite.texture = sprite
-	$AcquireSFX.stream = acquire_sfx
-	$ShoveSFX.stream = shove_sfx
+func _ready() -> void:
+	($Sprite as Sprite).texture = sprite
+	($AcquireSFX as AudioStreamPlayer).stream = acquire_sfx
+	($ShoveSFX as AudioStreamPlayer).stream = shove_sfx
 
 
-func get_class():
+func get_class() -> String:
 	return "Item"
 
 
-func acquire():
+func acquire() -> Item:
 	.hide()
-	$Collisionbox.set_deferred("disabled", true)
-	$AcquireSFX.play()
+	($Collisionbox as CollisionShape2D).set_deferred("disabled", true)
+	($AcquireSFX as AudioStreamPlayer).play()
 	return self
 
 
-func exists():
+func exists() -> bool:
 	return visible
 
 
-func shove_to(pos):
+func shove_to(pos: Vector2) -> void:
 	if shovable:
 		position = pos
-		$ShoveSFX.play()
+		($ShoveSFX as AudioStreamPlayer).play()
 	else:
 		print("Attempted to shove unshovable object.")
 
 
-func is_shovable():
+func is_shovable() -> bool:
 	return shovable
 
 
-func destroy():
+func destroy() -> void:
 	queue_free()
