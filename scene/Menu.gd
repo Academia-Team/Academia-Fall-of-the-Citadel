@@ -6,6 +6,7 @@ var seed_val_set: bool = false
 
 
 func _ready() -> void:
+	hide()
 	($Version as Label).text = get_version_str()
 
 	if OS.get_name() == "HTML5":
@@ -16,8 +17,15 @@ func _ready() -> void:
 				print("Button 'Perish' not found in tab %d" % index)
 
 
+func enable() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	($Options as TabContainer).set_current_tab(0)
+	show()
+	seed_val_set = false
+
+
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("ui_cancel"):
+	if visible and Input.is_action_just_pressed("ui_cancel"):
 		var options_container: TabContainer = $Options
 
 		if not _get_button_grid().are_buttons_disabled():
