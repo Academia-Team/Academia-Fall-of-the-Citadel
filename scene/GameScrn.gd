@@ -59,8 +59,8 @@ func gen_seed() -> int:
 	return hash(Time.get_datetime_dict_from_system())
 
 
-func _on_GameOver_retry(seed_val: int = gen_seed()) -> void:
-	play($InfoBar.get_mode(), seed_val)
+func _on_GameOver_retry(mode, seed_val: int = gen_seed()) -> void:
+	play(mode, seed_val)
 
 
 func _on_GameOver_leave() -> void:
