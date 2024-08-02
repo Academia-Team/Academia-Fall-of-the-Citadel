@@ -1,3 +1,4 @@
+class_name GameGrid
 extends TileMap
 
 signal game_over
@@ -157,15 +158,18 @@ func _on_Player_health_change(lives):
 	info_ref.set_lives(lives)
 
 	if lives <= 0:
-		started = false
+		stop()
 		info_ref.cancel_timed_status()
 		info_ref.set_status("Goodbye Forever!")
-
-		$Music.stop()
-		$PassiveTimer.stop()
-		$ZombieSpawnTimer.stop()
-		$ItemSpawnTimer.stop()
 		$GameOverSFX.play()
+
+
+func stop() -> void:
+	started = false
+	$Music.stop()
+	$PassiveTimer.stop()
+	$ZombieSpawnTimer.stop()
+	$ItemSpawnTimer.stop()
 
 
 func _on_Zombie_spawn_timer_timeout():

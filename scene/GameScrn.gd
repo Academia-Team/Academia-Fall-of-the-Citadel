@@ -23,6 +23,7 @@ func play(mode: String, seed_val: int = gen_seed()) -> void:
 func _stop() -> void:
 	$GameGrid.cleanup()
 	$GameOver.stop()
+	$GameGrid.stop()
 	$InfoBar.reset()
 	hide()
 
