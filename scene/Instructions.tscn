@@ -860,6 +860,7 @@ align = 1
 margin_top = 82.0
 margin_right = 800.0
 margin_bottom = 447.0
+theme = ExtResource( 21 )
 text = "The game is a grid-based survival horror game. It is not possible to survive; rather, the goal is to survive as long as possible.
 
 The player is able to move horizontally, vertically, and diagonally in all directions. (No enemy is able to move diagonally, thus giving the player a chance to escape tricky situations.) Movement input must be held in order to get the player to move, as movement will only occur after half a second has passed. During that time, if a complementary movement request is provided without a gap between providing the original input (such as holding down the up arrow key while holding the left arrow key), then the player will move diagonally based on what inputs have been provided. If input ceases or if conflicting input is provided (such as left and right arrow keys pressed simultaneously) when time runs out, then the player won't move."
