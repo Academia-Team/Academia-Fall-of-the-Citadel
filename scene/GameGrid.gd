@@ -74,10 +74,6 @@ func spawn_initial_enemies():
 			spawn_enemy(ZOMBIE_SCENE, get_spawn_pos())
 
 
-func restart():
-	start(info_ref)
-
-
 func cleanup():
 	get_tree().call_group("interactable", "queue_free")
 

@@ -11,6 +11,7 @@ func _ready() -> void:
 
 
 func play(mode: String, seed_val: int = gen_seed()) -> void:
+	_stop()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	show()
 
@@ -19,10 +20,22 @@ func play(mode: String, seed_val: int = gen_seed()) -> void:
 	$GameGrid.start($InfoBar)
 
 
+func _stop() -> void:
+	$GameGrid.cleanup()
+	$GameOver.stop()
+	$InfoBar.reset()
+	hide()
+
+
+func _quit() -> void:
+	_stop()
+	get_parent().call_deferred("enable")
+
+
 func _process(_delta: float) -> void:
 	if visible:
 		if Input.is_action_just_pressed("quit"):
-			SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.MENU)
+			_quit()
 		elif Input.is_action_just_pressed("cheat_mode"):
 			handle_cheat_toggling()
 
@@ -47,25 +60,17 @@ func gen_seed() -> int:
 
 
 func _on_GameOver_retry(seed_val: int = gen_seed()) -> void:
-	$GameOver.stop()
-	$InfoBar.reset()
-	$InfoBar.set_seed(seed_val)
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	$GameGrid.restart()
+	play($InfoBar.get_mode(), seed_val)
 
 
 func _on_GameOver_leave() -> void:
-	SceneSwitcher.change_scene_tree_to(get_tree(), SceneSwitcher.MENU)
+	_quit()
 
 
 func _on_GameGrid_game_over() -> void:
 	$GameGrid.cleanup()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$GameOver.start($InfoBar)
-
-
-func _on_GameScrn_tree_exiting() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 func _on_CheatInputTimeout_timeout() -> void:
