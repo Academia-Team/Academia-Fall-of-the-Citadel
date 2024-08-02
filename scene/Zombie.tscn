@@ -25,7 +25,7 @@ south_texture = ExtResource( 6 )
 side_texture = ExtResource( 5 )
 
 [node name="MoveTimer" type="Timer" parent="."]
-wait_time = 0.8
+wait_time = 0.66
 
 [node name="HurtSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
