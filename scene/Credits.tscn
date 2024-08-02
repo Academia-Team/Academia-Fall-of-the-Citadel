@@ -174,7 +174,7 @@ time_between_scrolls = 0.05
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 margin_right = 784.0
-margin_bottom = 78131.0
+margin_bottom = 78395.0
 alignment = 1
 
 [node name="Padding" type="ColorRect" parent="ScrollContainer/VBoxContainer"]
@@ -186,7 +186,7 @@ color = Color( 0, 0, 0, 1 )
 [node name="Body" type="Label" parent="ScrollContainer/VBoxContainer"]
 margin_top = 404.0
 margin_right = 784.0
-margin_bottom = 77467.0
+margin_bottom = 77731.0
 rect_min_size = Vector2( 784, 0 )
 theme = ExtResource( 11 )
 custom_constants/line_spacing = 3
@@ -223,6 +223,18 @@ SPDX-License-Identifier: OFL-1.1-RFN
 
 Copyright (c) 2020, Walter E Stewart,
 with Reserved Font Name Brazier Flame.
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+http://scripts.sil.org/OFL
+
+
+Font used in Instructions:
+https://www.dafont.com/casuwalt.font
+SPDX-License-Identifier: OFL-1.1-RFN
+
+Copyright (c) 2019, Walter E Stewart,
+with Reserved Font Name Casuwalt.
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:
@@ -3310,16 +3322,16 @@ align = 1
 autowrap = true
 
 [node name="Logo" type="TextureRect" parent="ScrollContainer/VBoxContainer"]
-margin_top = 77471.0
+margin_top = 77735.0
 margin_right = 784.0
-margin_bottom = 77727.0
+margin_bottom = 77991.0
 texture = ExtResource( 4 )
 stretch_mode = 4
 
 [node name="Padding2" type="ColorRect" parent="ScrollContainer/VBoxContainer"]
-margin_top = 77731.0
+margin_top = 77995.0
 margin_right = 784.0
-margin_bottom = 78131.0
+margin_bottom = 78395.0
 rect_min_size = Vector2( 0, 400 )
 color = Color( 0, 0, 0, 1 )
 
