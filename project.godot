@@ -93,11 +93,6 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://scene/Player.gd"
-}, {
-"base": "Reference",
-"class": "SceneSwitcher",
-"language": "GDScript",
-"path": "res://class/SceneSwitcher.gd"
 } ]
 _global_script_class_icons={
 "AutomatedScrollContainer": "",
@@ -116,8 +111,7 @@ _global_script_class_icons={
 "Jukebox": "",
 "LineDialog": "",
 "Menu": "",
-"Player": "",
-"SceneSwitcher": ""
+"Player": ""
 }
 
 [application]
