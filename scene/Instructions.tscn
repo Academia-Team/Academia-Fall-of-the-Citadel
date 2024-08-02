@@ -88,13 +88,14 @@ columns = 2
 
 [node name="MoveUp" type="Label" parent="CardinalMovementControls/Table"]
 margin_top = 22.0
-margin_right = 107.0
-margin_bottom = 41.0
+margin_right = 100.0
+margin_bottom = 42.0
+theme = ExtResource( 21 )
 text = "Move Up"
 
 [node name="MoveUpControls" type="GridContainer" parent="CardinalMovementControls/Table"]
-margin_left = 307.0
-margin_right = 627.0
+margin_left = 300.0
+margin_right = 620.0
 margin_bottom = 64.0
 custom_constants/hseparation = 64
 columns = 3
@@ -118,14 +119,15 @@ texture = ExtResource( 23 )
 
 [node name="MoveDown" type="Label" parent="CardinalMovementControls/Table"]
 margin_top = 90.0
-margin_right = 107.0
-margin_bottom = 109.0
+margin_right = 100.0
+margin_bottom = 110.0
+theme = ExtResource( 21 )
 text = "Move Down"
 
 [node name="MoveDownControls" type="GridContainer" parent="CardinalMovementControls/Table"]
-margin_left = 307.0
+margin_left = 300.0
 margin_top = 68.0
-margin_right = 627.0
+margin_right = 620.0
 margin_bottom = 132.0
 custom_constants/hseparation = 64
 columns = 3
@@ -150,14 +152,15 @@ texture = ExtResource( 25 )
 
 [node name="MoveLeft" type="Label" parent="CardinalMovementControls/Table"]
 margin_top = 158.0
-margin_right = 107.0
-margin_bottom = 177.0
+margin_right = 100.0
+margin_bottom = 178.0
+theme = ExtResource( 21 )
 text = "Move Left"
 
 [node name="MoveLeftControls" type="GridContainer" parent="CardinalMovementControls/Table"]
-margin_left = 307.0
+margin_left = 300.0
 margin_top = 136.0
-margin_right = 627.0
+margin_right = 620.0
 margin_bottom = 200.0
 custom_constants/hseparation = 64
 columns = 3
@@ -181,14 +184,15 @@ texture = ExtResource( 20 )
 
 [node name="MoveRight" type="Label" parent="CardinalMovementControls/Table"]
 margin_top = 226.0
-margin_right = 107.0
-margin_bottom = 245.0
+margin_right = 100.0
+margin_bottom = 246.0
+theme = ExtResource( 21 )
 text = "Move Right"
 
 [node name="MoveRightControls" type="GridContainer" parent="CardinalMovementControls/Table"]
-margin_left = 307.0
+margin_left = 300.0
 margin_top = 204.0
-margin_right = 627.0
+margin_right = 620.0
 margin_bottom = 268.0
 custom_constants/hseparation = 64
 columns = 3
