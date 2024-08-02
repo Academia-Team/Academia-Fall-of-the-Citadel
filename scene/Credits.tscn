@@ -2,7 +2,7 @@
 
 [ext_resource path="res://class/Jukebox.gd" type="Script" id=1]
 [ext_resource path="res://asset/Credits/Scrollbar Pressed.PNG" type="Texture" id=2]
-[ext_resource path="res://asset/Credits/Scrollbar Focus.PNG" type="Texture" id=3]
+[ext_resource path="res://asset/Credits/Scrollbar Grabber.PNG" type="Texture" id=3]
 [ext_resource path="res://Splash.png" type="Texture" id=4]
 [ext_resource path="res://asset/Credits/Broken Reality.mp3" type="AudioStream" id=5]
 [ext_resource path="res://asset/Credits/Scrollbar Highlight.PNG" type="Texture" id=6]
@@ -54,7 +54,7 @@ content_margin_right = 2.0
 content_margin_top = 2.0
 content_margin_bottom = 2.0
 texture = ExtResource( 3 )
-region_rect = Rect2( 0, 0, 16, 16 )
+region_rect = Rect2( 0, 0, 32, 32 )
 margin_left = 5.0
 margin_right = 5.0
 margin_top = 5.0
