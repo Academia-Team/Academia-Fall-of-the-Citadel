@@ -223,6 +223,6 @@ func _slash_anim_finished():
 	targets_to_destroy.clear()
 
 
-func _on_CharacterSprite_effect_finish():
+func _on_CharacterSprite_hurt_finish():
 	if lives <= 0:
 		$CharacterSprite.texture = load("res://asset/pixelart_skull.png")
