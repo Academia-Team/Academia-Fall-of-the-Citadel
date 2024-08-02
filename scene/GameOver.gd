@@ -54,7 +54,7 @@ func _on_Arise_button_effects_finished() -> void:
 	if new_seed_val_set:
 		emit_signal("retry", info_ref.get_mode(), new_seed_val)
 	else:
-		emit_signal("retry")
+		emit_signal("retry", info_ref.get_mode())
 
 
 func _on_Arise_button_input(event: InputEvent) -> void:
