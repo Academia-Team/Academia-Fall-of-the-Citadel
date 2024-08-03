@@ -65,13 +65,13 @@ func spawn_initial_env():
 
 func spawn_initial_items():
 	for _counter in range(MAX_SWORDS):
-		if item_rng.randf() <= INITIAL_SPAWN_PROB:
+		if item_rng.randf() < INITIAL_SPAWN_PROB:
 			spawn_item(SWORD_SCENE, get_spawn_pos())
 
 
 func spawn_initial_enemies():
 	for _counter in range(MAX_ZOMBIES):
-		if enemy_rng.randf() <= INITIAL_SPAWN_PROB:
+		if enemy_rng.randf() < INITIAL_SPAWN_PROB:
 			spawn_enemy(ZOMBIE_SCENE, get_spawn_pos())
 
 
@@ -174,7 +174,7 @@ func stop() -> void:
 
 func _on_Zombie_spawn_timer_timeout():
 	if ref_counter.get("Zombie", 0) < MAX_ZOMBIES:
-		if enemy_rng.randf() <= ZOMBIE_SPAWN_PROB:
+		if enemy_rng.randf() < ZOMBIE_SPAWN_PROB:
 			spawn_enemy(ZOMBIE_SCENE, get_spawn_pos())
 
 
@@ -224,7 +224,7 @@ func spawn_enemy(scene, pos):
 
 
 func _on_item_spawn_timer_timeout():
-	if item_rng.randf() <= HEALTH_SPAWN_PROB:
+	if item_rng.randf() < HEALTH_SPAWN_PROB:
 		if ref_counter.get("Health", 0) < MAX_HEALTH_POTIONS:
 			spawn_item(HEALTH_SCENE, get_spawn_pos())
 	else:
