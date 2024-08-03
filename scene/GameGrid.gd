@@ -291,11 +291,7 @@ func _on_Player_move_request(dir):
 
 		if get_cellv(world_to_map(future_pos)) != INVALID_CELL:
 			var interactable_obj = get_interactable_obj_at_pos(future_pos)
-			if (
-				$Player.held_item == null
-				or interactable_obj == null
-				or interactable_obj.get_class() == "enemy"
-			):
+			if $Player.held_item == null or interactable_obj == null or interactable_obj is Enemy:
 				$Player.move_to(future_pos)
 			elif not move_shovable_obj(interactable_obj, dir):
 				$Player.move_reject()
