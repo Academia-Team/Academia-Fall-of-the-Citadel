@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://class/CharacterSprite.gd" type="Script" id=1]
 [ext_resource path="res://resource/collision_rect.tres" type="Shape2D" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scene/Alert.tscn" type="PackedScene" id=8]
 [ext_resource path="res://asset/Player_SOUTH.png" type="Texture" id=9]
 [ext_resource path="res://class/Detector.gd" type="Script" id=10]
+[ext_resource path="res://class/TargetTracker.gd" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 31, 15 )
@@ -41,24 +42,27 @@ side_texture = ExtResource( 3 )
 wait_time = 0.5
 one_shot = true
 
-[node name="RightCollisionBox" type="CollisionShape2D" parent="."]
+[node name="TargetTracker" type="Area2D" parent="."]
+script = ExtResource( 11 )
+
+[node name="RightCollisionBox" type="CollisionShape2D" parent="TargetTracker"]
 position = Vector2( 62, 15 )
 shape = SubResource( 2 )
 script = ExtResource( 10 )
 orientation = 3
 
-[node name="LeftCollisionBox" type="CollisionShape2D" parent="."]
+[node name="LeftCollisionBox" type="CollisionShape2D" parent="TargetTracker"]
 position = Vector2( -32, 15 )
 shape = SubResource( 1 )
 script = ExtResource( 10 )
 orientation = 4
 
-[node name="TopCollisionBox" type="CollisionShape2D" parent="."]
+[node name="TopCollisionBox" type="CollisionShape2D" parent="TargetTracker"]
 position = Vector2( 15, -32 )
 shape = SubResource( 4 )
 script = ExtResource( 10 )
 
-[node name="BottomCollisionBox" type="CollisionShape2D" parent="."]
+[node name="BottomCollisionBox" type="CollisionShape2D" parent="TargetTracker"]
 position = Vector2( 15, 62 )
 shape = SubResource( 3 )
 script = ExtResource( 10 )
@@ -76,7 +80,6 @@ one_shot = true
 [node name="WalkSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 
-[connection signal="area_shape_entered" from="." to="." method="_on_Player_area_shape_entered"]
-[connection signal="area_shape_exited" from="." to="." method="_on_Player_area_shape_exited"]
+[connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]
 [connection signal="effect_finish" from="CharacterSprite" to="." method="_on_CharacterSprite_effect_finish"]
 [connection signal="timeout" from="MoveTimer" to="." method="_on_MoveTimer_timeout"]
