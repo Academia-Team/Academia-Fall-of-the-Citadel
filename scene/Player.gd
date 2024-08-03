@@ -273,40 +273,20 @@ func _on_Player_area_shape_entered(
 ) -> void:
 	var triggered_collisionbox: CollisionShape2D = shape_owner_get_owner(local_shape_index)
 
-	if triggered_collisionbox.name == "CollisionBox":
+	if triggered_collisionbox is Detector:
+		if area is Enemy:
+			_targets[triggered_collisionbox.orientation].append(area)
+	else:
 		_handle_collision(area)
-	elif area is Enemy:
-		var target_orient = _orient_from_collision_box(triggered_collisionbox)
-
-		_targets[target_orient].append(area)
 
 
 func _on_Player_area_shape_exited(
 	_area_rid: RID, area: Area2D, _area_shape_index: int, local_shape_index: int
 ) -> void:
-	if area != null:
-		var triggered_collisionbox: CollisionShape2D = shape_owner_get_owner(local_shape_index)
-		if triggered_collisionbox.name != "CollisionBox" and area is Enemy:
-			var target_orient: int = _orient_from_collision_box(triggered_collisionbox)
-			_targets[target_orient].erase(area)
+	var triggered_collisionbox: CollisionShape2D = shape_owner_get_owner(local_shape_index)
 
-
-func _orient_from_collision_box(collisionbox: CollisionShape2D) -> int:
-	var orient: int
-
-	match collisionbox.name:
-		"RightCollisionBox":
-			orient = Direction.EAST
-		"LeftCollisionBox":
-			orient = Direction.WEST
-		"TopCollisionBox":
-			orient = Direction.NORTH
-		"BottomCollisionBox":
-			orient = Direction.SOUTH
-		_:
-			orient = Direction.NONE
-
-	return orient
+	if triggered_collisionbox is Detector and area is Enemy:
+		_targets[triggered_collisionbox.orientation].erase(area)
 
 
 func _slash_anim_finished() -> void:
