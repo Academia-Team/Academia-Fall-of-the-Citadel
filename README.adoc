@@ -15,7 +15,7 @@ the game.
 remaining soldier in the north. Defend the last citadel against the darkness for
 as long as possible. For it will eventually fall.
 
-image::Screenshot.png[]
+image::screenshot/Regular Gameplay.png[]
 
 
 Before attempting to export the game in Godot, please change into the directory
