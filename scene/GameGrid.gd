@@ -284,7 +284,7 @@ func _on_gameover_sfx_finished():
 
 
 func _on_Player_move_request(dir):
-	if $Player.lives > 0:
+	if $Player.get_lives() > 0:
 		var future_pos = Direction.translate_pos($Player.position, dir, 32)
 
 		if get_cellv(world_to_map(future_pos)) != INVALID_CELL:

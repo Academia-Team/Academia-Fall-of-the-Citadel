@@ -10,54 +10,65 @@ const PLAYER_DEATH: Texture = preload("res://asset/pixelart_skull.png")
 const START_LIVES: int = 3
 const SWORD_SLASH: PackedScene = preload("res://scene/SwordAttack.tscn")
 
-var bounds = {Direction.NORTH: 0, Direction.SOUTH: 0, Direction.WEST: 0, Direction.EAST: 0}
-var held_item = null
-var lives = 0
-var targets = {Direction.NORTH: [], Direction.SOUTH: [], Direction.WEST: [], Direction.EAST: []}
-var targets_to_destroy = []
+var held_item: Item = null
 
-var future_dir: int = Direction.NONE
-var immortal = false
-var mid_use = false
+var _bounds: Dictionary = {
+	Direction.NORTH: 0, Direction.SOUTH: 0, Direction.WEST: 0, Direction.EAST: 0
+}
+var _lives: int = 0
+var _targets: Dictionary = {
+	Direction.NORTH: [], Direction.SOUTH: [], Direction.WEST: [], Direction.EAST: []
+}
+var _targets_to_destroy: Array = []
+
+var _future_dir: int = Direction.NONE
+var _immortal: bool = false
+var _mid_use: bool = false
 
 
-func get_class():
-	return "Player"
+func get_lives() -> int:
+	return _lives
 
 
-func exists():
+func lives_lost() -> int:
+	if _lives <= 0:
+		return START_LIVES
+	return START_LIVES - _lives
+
+
+func exists() -> bool:
 	return visible
 
 
-func set_dir(dir):
-	future_dir = dir
+func _set_dir(dir) -> void:
+	_future_dir = dir
 
 
-func kill():
-	while lives > 0:
+func kill() -> void:
+	while _lives > 0:
 		if is_immortal():
 			toggle_immortality()
 
-		hurt()
+		_hurt()
 		yield($ImmunityTimer, "timeout")
 
 
-func pos_in_bounds(pos):
+func _pos_in_bounds(pos: Vector2) -> bool:
 	return (
-		pos.x >= bounds.left
-		&& pos.x <= bounds.right
-		&& pos.y >= bounds.top
-		&& pos.y <= bounds.bottom
+		pos.x >= _bounds.left
+		&& pos.x <= _bounds.right
+		&& pos.y >= _bounds.top
+		&& pos.y <= _bounds.bottom
 	)
 
 
-func handle_action():
-	handle_movement()
+func _handle_action() -> void:
+	_handle_movement()
 	if Input.is_action_just_pressed("action"):
-		use_item()
+		_use_item()
 
 
-func handle_movement():
+func _handle_movement() -> void:
 	var desired_dir: int = Direction.NONE
 
 	if Input.is_action_pressed("move_up"):
@@ -78,101 +89,109 @@ func handle_movement():
 		desired_dir = Direction.combine_dir(Direction.SOUTHEAST, desired_dir)
 
 	if not Input.is_action_pressed("stay"):
-		set_dir(desired_dir)
+		_set_dir(desired_dir)
 	$CharacterSprite.set_orient(desired_dir)
 
 
-func use_item():
-	if held_item != null and not mid_use:
+func _use_item() -> void:
+	if held_item != null and not _mid_use:
 		match held_item.type:
 			"Duck":
-				use_duck()
+				_use_duck()
 			"Health":
-				use_health()
+				_use_health()
 			"Sword":
-				use_sword()
+				_use_sword()
 			_:
-				discard_item()
+				_discard_item()
 	else:
 		$Reject.play()
 
 
-func use_sword():
-	targets_to_destroy = targets[$CharacterSprite.orientation].duplicate(true)
-	var slash_generated = _generate_sword_slash(32)
+func _use_sword() -> void:
+	_targets_to_destroy = _targets[$CharacterSprite.orientation].duplicate(true)
+	var slash_generated: bool = _generate_sword_slash(32)
 	slash_generated = _generate_sword_slash(64) or slash_generated
 
 	if slash_generated:
-		for target_to_destroy in targets_to_destroy:
+		for target_to_destroy in _targets_to_destroy:
 			if target_to_destroy != null:
 				target_to_destroy.attack()
 
-		discard_item()
+		_discard_item()
 	else:
 		$Reject.play()
 
 
-func _generate_sword_slash(num_pixels_away):
-	var slash_anim = null
+func _generate_sword_slash(num_pixels_away: float) -> bool:
+	var slash_anim: CanvasItem = null
 
-	if pos_in_bounds(
+	if _pos_in_bounds(
 		Direction.translate_pos(position, $CharacterSprite.orientation, num_pixels_away)
 	):
 		slash_anim = SWORD_SLASH.instance()
 		slash_anim.position = Direction.dir_to_rel_pos(
 			$CharacterSprite.orientation, num_pixels_away
 		)
-		slash_anim.connect("animation_finished", self, "_slash_anim_finished")
-		add_child(slash_anim)
+		var slash_status: int = slash_anim.connect(
+			"animation_finished", self, "_slash_anim_finished"
+		)
 
-	return slash_anim
+		if slash_status == OK:
+			add_child(slash_anim)
+		else:
+			printerr("Cannot generate sword slash.")
+			slash_anim.free()
+			slash_anim = null
+
+	return slash_anim != null
 
 
-func use_duck():
-	mid_use = true
+func _use_duck() -> void:
+	_mid_use = true
 
-	var duck_sfx = held_item.get_node("UseSFX")
+	var duck_sfx: AudioStreamPlayer = held_item.get_node("UseSFX")
 	duck_sfx.play()
 	yield(duck_sfx, "finished")
-	discard_item()
+	_discard_item()
 
 
-func use_health():
-	mid_use = true
+func _use_health() -> void:
+	_mid_use = true
 
-	if lives < START_LIVES:
-		lives += 1
-		var heal_sfx = held_item.get_node("UseSFX")
+	if _lives < START_LIVES:
+		_lives += 1
+		var heal_sfx: AudioStreamPlayer = held_item.get_node("UseSFX")
 
 		heal_sfx.play()
 		$CharacterSprite.show_heal()
-		emit_signal("health_change", lives)
+		emit_signal("health_change", _lives)
 		yield(heal_sfx, "finished")
 	else:
-		var heal_fail_sfx = held_item.get_node("Fail")
-		heal_fail_sfx.play()
-		yield(heal_fail_sfx, "animation_finished")
+		var heal_fail_anim: AnimationPlayer = held_item.get_node("Fail")
+		heal_fail_anim.play()
+		yield(heal_fail_anim, "animation_finished")
 
-	discard_item()
+	_discard_item()
 
 
-func discard_item():
+func _discard_item() -> void:
 	emit_signal("used_item", held_item.type)
 	held_item.destroy()
 	held_item = null
-	mid_use = false
+	_mid_use = false
 
 
-func _process(_delta):
-	if lives > 0:
-		if future_dir != Direction.NONE and $MoveTimer.is_stopped():
+func _process(_delta: float) -> void:
+	if _lives > 0:
+		if _future_dir != Direction.NONE and $MoveTimer.is_stopped():
 			$MoveTimer.start()
 
-		handle_action()
+		_handle_action()
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	hide()
 	$CollisionBox.set_deferred("disabled", true)
 	$RightCollisionBox.set_deferred("disabled", true)
@@ -181,23 +200,22 @@ func _ready():
 	$BottomCollisionBox.set_deferred("disabled", true)
 
 
-func spawn(pos, top_bound, bottom_bound, left_bound, right_bound):
+func spawn(
+	pos: Vector2, top_bound: float, bottom_bound: float, left_bound: float, right_bound: float
+) -> void:
 	$CharacterSprite.set_orient(Direction.SOUTH)
 	position = pos
-	bounds.left = left_bound
-	bounds.right = right_bound
-	bounds.top = top_bound
-	bounds.bottom = bottom_bound
+	_bounds.left = left_bound
+	_bounds.right = right_bound
+	_bounds.top = top_bound
+	_bounds.bottom = bottom_bound
 
 	held_item = null
-	future_dir = Direction.NONE
-	mid_use = false
+	_future_dir = Direction.NONE
+	_mid_use = false
 
-	lives = START_LIVES
-	emit_signal("health_change", lives)
-
-	assert(position.x >= bounds.left && position.x <= bounds.right)
-	assert(position.y >= bounds.top && position.y <= bounds.bottom)
+	_lives = START_LIVES
+	emit_signal("health_change", _lives)
 	show()
 
 	$CollisionBox.set_deferred("disabled", false)
@@ -207,28 +225,28 @@ func spawn(pos, top_bound, bottom_bound, left_bound, right_bound):
 	$BottomCollisionBox.set_deferred("disabled", false)
 
 
-func handle_collision(obj):
-	var collision_category = obj.get_class()
+func _handle_collision(obj: Area2D) -> void:
+	var collision_category: String = obj.get_class()
 	if collision_category == "Item":
 		if not held_item:
 			held_item = obj.acquire()
 			emit_signal("pick_up_item", held_item.type)
 	elif collision_category == "Enemy":
-		hurt()
+		_hurt()
 		obj.attack()
 		obj.destroy()
 
 
-func hurt():
+func _hurt() -> void:
 	if $ImmunityTimer.is_stopped() and not is_immortal():
-		if lives > 0:
-			lives -= 1
-		emit_signal("health_change", lives)
+		if _lives > 0:
+			_lives -= 1
+		emit_signal("health_change", _lives)
 		$CharacterSprite.show_hurt()
 		$HurtSFX.play()
 		$ImmunityTimer.start()
 
-		if lives <= 0:
+		if _lives <= 0:
 			$CollisionBox.set_deferred("disabled", true)
 			$RightCollisionBox.set_deferred("disabled", true)
 			$LeftCollisionBox.set_deferred("disabled", true)
@@ -236,42 +254,46 @@ func hurt():
 			$BottomCollisionBox.set_deferred("disabled", true)
 
 
-func move_to(pos):
+func move_to(pos: Vector2) -> void:
 	position = pos
 	$WalkSFX.play()
 
 
-func move_reject():
+func move_reject() -> void:
 	$Reject.play()
 
 
-func _on_MoveTimer_timeout():
-	if future_dir != Direction.NONE:
-		emit_signal("move_request", future_dir)
-		future_dir = Direction.NONE
+func _on_MoveTimer_timeout() -> void:
+	if _future_dir != Direction.NONE:
+		emit_signal("move_request", _future_dir)
+		_future_dir = Direction.NONE
 
 
-func _on_Player_area_shape_entered(_area_rid, area, _area_shape_index, local_shape_index):
-	var triggered_collisionbox = shape_owner_get_owner(local_shape_index)
+func _on_Player_area_shape_entered(
+	_area_rid: RID, area: Area2D, _area_shape_index: int, local_shape_index: int
+) -> void:
+	var triggered_collisionbox: CollisionShape2D = shape_owner_get_owner(local_shape_index)
 
 	if triggered_collisionbox.name == "CollisionBox":
-		handle_collision(area)
+		_handle_collision(area)
 	elif area.get_class() == "Enemy":
-		var target_orient = orient_from_collision_box(triggered_collisionbox)
+		var target_orient = _orient_from_collision_box(triggered_collisionbox)
 
-		targets[target_orient].append(area)
+		_targets[target_orient].append(area)
 
 
-func _on_Player_area_shape_exited(_area_rid, area, _area_shape_index, local_shape_index):
+func _on_Player_area_shape_exited(
+	_area_rid: RID, area: Area2D, _area_shape_index: int, local_shape_index: int
+) -> void:
 	if area != null:
-		var triggered_collisionbox = shape_owner_get_owner(local_shape_index)
+		var triggered_collisionbox: CollisionShape2D = shape_owner_get_owner(local_shape_index)
 		if triggered_collisionbox.name != "CollisionBox" and area.get_class() == "Enemy":
-			var target_orient = orient_from_collision_box(triggered_collisionbox)
-			targets[target_orient].erase(area)
+			var target_orient: int = _orient_from_collision_box(triggered_collisionbox)
+			_targets[target_orient].erase(area)
 
 
-func orient_from_collision_box(collisionbox):
-	var orient
+func _orient_from_collision_box(collisionbox: CollisionShape2D) -> int:
+	var orient: int
 
 	match collisionbox.name:
 		"RightCollisionBox":
@@ -288,22 +310,22 @@ func orient_from_collision_box(collisionbox):
 	return orient
 
 
-func _slash_anim_finished():
-	for target_to_destroy in targets_to_destroy:
+func _slash_anim_finished() -> void:
+	for target_to_destroy in _targets_to_destroy:
 		if target_to_destroy != null:
 			target_to_destroy.destroy()
 
-	targets_to_destroy.clear()
+	_targets_to_destroy.clear()
 
 
-func is_immortal():
-	return immortal
+func is_immortal() -> bool:
+	return _immortal
 
 
-func toggle_immortality():
-	immortal = not immortal
+func toggle_immortality() -> void:
+	_immortal = not _immortal
 
 
-func _on_CharacterSprite_effect_finish():
-	if lives <= 0:
+func _on_CharacterSprite_effect_finish() -> void:
+	if _lives <= 0:
 		$CharacterSprite.texture = PLAYER_DEATH
