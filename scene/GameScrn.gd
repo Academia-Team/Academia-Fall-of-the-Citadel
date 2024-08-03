@@ -3,7 +3,8 @@ extends Control
 
 const CHEAT_COUNT_REQ: int = 3
 
-var cheat_key_counter: int = 0
+var _cheat_key_counter: int = 0
+var _playing: bool = false
 
 
 func _ready() -> void:
@@ -14,6 +15,7 @@ func play(mode: String, seed_val: int = gen_seed()) -> void:
 	_stop()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	show()
+	_playing = true
 
 	$InfoBar.set_seed(seed_val)
 	$InfoBar.set_mode(mode)
@@ -26,6 +28,7 @@ func _stop() -> void:
 	$GameGrid.stop()
 	$InfoBar.reset()
 	hide()
+	_playing = false
 
 
 func _quit() -> void:
@@ -34,7 +37,7 @@ func _quit() -> void:
 
 
 func _process(_delta: float) -> void:
-	if visible:
+	if _playing:
 		if Input.is_action_just_pressed("quit"):
 			_quit()
 		elif Input.is_action_just_pressed("cheat_mode"):
@@ -44,10 +47,10 @@ func _process(_delta: float) -> void:
 func handle_cheat_toggling() -> void:
 	if $CheatInputTimeout.is_stopped():
 		$CheatInputTimeout.start()
-	cheat_key_counter += 1
+	_cheat_key_counter += 1
 
-	if cheat_key_counter == CHEAT_COUNT_REQ:
-		cheat_key_counter = 0
+	if _cheat_key_counter == CHEAT_COUNT_REQ:
+		_cheat_key_counter = 0
 		$InfoBar.toggle_cheats()
 
 		if $InfoBar.is_cheat_enabled():
@@ -72,7 +75,8 @@ func _on_GameGrid_game_over() -> void:
 	$GameGrid.cleanup()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$GameOver.start($InfoBar)
+	_playing = false
 
 
 func _on_CheatInputTimeout_timeout() -> void:
-	cheat_key_counter = 0
+	_cheat_key_counter = 0
