@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://class/CharacterSprite.gd" type="Script" id=1]
 [ext_resource path="res://resource/collision_rect.tres" type="Shape2D" id=2]
@@ -57,7 +57,6 @@ orientation = 4
 position = Vector2( 15, -32 )
 shape = SubResource( 4 )
 script = ExtResource( 10 )
-orientation = 1
 
 [node name="BottomCollisionBox" type="CollisionShape2D" parent="."]
 position = Vector2( 15, 62 )
