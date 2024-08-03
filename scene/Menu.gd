@@ -1,8 +1,9 @@
 class_name Menu
 extends ColorRect
 
-var seed_val: int = 0
-var seed_val_set: bool = false
+var _menu_enabled: bool = false
+var _seed_val: int = 0
+var _seed_val_set: bool = false
 
 
 func _ready() -> void:
@@ -21,13 +22,23 @@ func _ready() -> void:
 
 func enable() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	($Options as TabContainer).set_current_tab(0)
 	show()
-	seed_val_set = false
+	_seed_val_set = false
+	_menu_enabled = true
+
+	var options_container: TabContainer = $Options
+	var buttons: ButtonGridContainer = options_container.get_tab_control(0)
+	buttons.enable_buttons()
+	($Options as TabContainer).set_current_tab(0)
+
+
+func _disable() -> void:
+	_menu_enabled = false
+	_get_button_grid().disable_buttons()
 
 
 func _process(_delta: float) -> void:
-	if visible and Input.is_action_just_pressed("ui_cancel"):
+	if _menu_enabled and Input.is_action_just_pressed("ui_cancel"):
 		var options_container: TabContainer = $Options
 
 		if not _get_button_grid().are_buttons_disabled():
@@ -56,10 +67,10 @@ func _get_button_grid() -> ButtonGridContainer:
 
 
 func _activate_game(mode: String) -> void:
-	_get_button_grid().disable_buttons()
+	_disable()
 
-	if seed_val_set:
-		($Game as Game).play(mode, seed_val)
+	if _seed_val_set:
+		($Game as Game).play(mode, _seed_val)
 	else:
 		($Game as Game).play(mode)
 
@@ -70,18 +81,17 @@ func _on_Perish_button_effects_finished() -> void:
 
 func _on_Enter_button_input(event: InputEvent) -> void:
 	if event.is_action("button_options", true):
-		_get_button_grid().disable_buttons()
+		_disable()
 		($SeedDialog as LineDialog).prompt_integer("Seed:")
 
 
 func _on_HelpMe_button_effects_finished() -> void:
-	_get_button_grid().disable_buttons()
+	_disable()
 	($Instructions as Book).start()
 
 
 func _on_Credit_button_effects_finished() -> void:
-	_get_button_grid().disable_buttons()
-	($Credits as CanvasItem).visible = true
+	_disable()
 	($Credits as Credits).start()
 
 
@@ -99,25 +109,23 @@ func _on_SeedDialog_text_rejected() -> void:
 
 func _on_SeedDialog_integer_prompt_finished(text_entered: bool, value: int) -> void:
 	if text_entered:
-		seed_val = value
-		seed_val_set = true
+		_seed_val = value
+		_seed_val_set = true
 
-	# Delay the re-enabling of buttons to ensure that they don't accidently activate.
-	_get_button_grid().call_deferred("enable_buttons")
+	# Delay the re-enabling of the menu to ensure that buttons don't accidently activate.
+	call_deferred("enable")
 
 
 func _on_Instructions_finished() -> void:
 	($Instructions as Book).stop()
-	_get_button_grid().enable_buttons()
+	enable()
 
 
 func _on_Credits_done() -> void:
 	($Credits as Credits).stop()
 	($Credits as CanvasItem).hide()
-
-	var buttons: ButtonGridContainer = _get_button_grid()
-	buttons.enable_buttons()
-	(buttons as FocusedGridContainer).force_focus()
+	enable()
+	_get_button_grid().force_focus()
 
 
 func _on_Options_tab_changed(_tab: int) -> void:
