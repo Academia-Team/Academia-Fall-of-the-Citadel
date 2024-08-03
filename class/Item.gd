@@ -14,10 +14,6 @@ func _ready() -> void:
 	($ShoveSFX as AudioStreamPlayer).stream = shove_sfx
 
 
-func get_class() -> String:
-	return "Item"
-
-
 func acquire() -> Item:
 	.hide()
 	($Collisionbox as CollisionShape2D).set_deferred("disabled", true)
