@@ -9,11 +9,13 @@ func _ready() -> void:
 	hide()
 	($Version as Label).text = get_version_str()
 
-	if OS.get_name() == "HTML5":
-		var options_container: TabContainer = $Options
-		for index in options_container.get_tab_count:
-			var buttons: ButtonGridContainer = options_container.get_tab_control(index)
-			if not buttons.hide_and_disable("Perish"):
+	var options_container: TabContainer = $Options
+	for index in options_container.get_tab_count():
+		var buttons: ButtonGridContainer = options_container.get_tab_control(index)
+
+		if OS.get_name() == "HTML5":
+			var disable_success: bool = buttons.hide_and_disable("Perish")
+			if not disable_success:
 				print("Button 'Perish' not found in tab %d" % index)
 
 
