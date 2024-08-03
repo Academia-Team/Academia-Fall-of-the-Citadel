@@ -14,6 +14,7 @@ func start() -> void:
 	($TitleAnimation/Label as CanvasItem).visible = true
 	($TitleAnimation as AnimationPlayer).play("Fade Out")
 	($Music as Jukebox).start()
+	show()
 
 
 func stop() -> void:
@@ -22,6 +23,7 @@ func stop() -> void:
 	($ScrollContainer as AutomatedScrollContainer).stop()
 	($ScrollContainer as ScrollContainer).set_deferred("scroll_vertical", 0)
 	($Music as Jukebox).end()
+	hide()
 
 
 func _process(_delta: float) -> void:
