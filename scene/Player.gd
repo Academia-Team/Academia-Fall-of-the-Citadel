@@ -226,12 +226,11 @@ func spawn(
 
 
 func _handle_collision(obj: Area2D) -> void:
-	var collision_category: String = obj.get_class()
-	if collision_category == "Item":
+	if obj is Item:
 		if not held_item:
 			held_item = obj.acquire()
 			emit_signal("pick_up_item", held_item.type)
-	elif collision_category == "Enemy":
+	elif obj is Enemy:
 		_hurt()
 		obj.attack()
 		obj.destroy()
