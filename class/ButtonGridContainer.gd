@@ -41,3 +41,13 @@ func are_buttons_disabled() -> bool:
 			break
 
 	return all_disabled
+
+
+func get_button_by_name(button_name: String) -> BaseButton:
+	var children: Array = get_children()
+
+	for child in children:
+		if child is BaseButton and child.name == button_name:
+			return child
+
+	return null
