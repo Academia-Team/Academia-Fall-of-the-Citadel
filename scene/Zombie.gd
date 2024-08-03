@@ -12,10 +12,6 @@ var move_fail_counter = 0
 var type = "Zombie"
 
 
-func get_class():
-	return "Enemy"
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	hide()
