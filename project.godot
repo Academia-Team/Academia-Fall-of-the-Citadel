@@ -103,6 +103,11 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://scene/Player.gd"
+}, {
+"base": "Area2D",
+"class": "TargetTracker",
+"language": "GDScript",
+"path": "res://class/TargetTracker.gd"
 } ]
 _global_script_class_icons={
 "AutomatedScrollContainer": "",
@@ -123,7 +128,8 @@ _global_script_class_icons={
 "Jukebox": "",
 "LineDialog": "",
 "Menu": "",
-"Player": ""
+"Player": "",
+"TargetTracker": ""
 }
 
 [application]
