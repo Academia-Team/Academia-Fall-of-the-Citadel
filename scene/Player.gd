@@ -275,7 +275,7 @@ func _on_Player_area_shape_entered(
 
 	if triggered_collisionbox.name == "CollisionBox":
 		_handle_collision(area)
-	elif area.get_class() == "Enemy":
+	elif area is Enemy:
 		var target_orient = _orient_from_collision_box(triggered_collisionbox)
 
 		_targets[target_orient].append(area)
