@@ -286,7 +286,7 @@ func _on_Player_area_shape_exited(
 ) -> void:
 	if area != null:
 		var triggered_collisionbox: CollisionShape2D = shape_owner_get_owner(local_shape_index)
-		if triggered_collisionbox.name != "CollisionBox" and area.get_class() == "Enemy":
+		if triggered_collisionbox.name != "CollisionBox" and area is Enemy:
 			var target_orient: int = _orient_from_collision_box(triggered_collisionbox)
 			_targets[target_orient].erase(area)
 
