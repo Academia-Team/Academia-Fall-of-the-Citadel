@@ -12,9 +12,11 @@ const MAX_ZOMBIES = 5
 const VALID_DIST_FROM_PLAYER = 64
 const ZOMBIE_SPAWN_PROB = 0.6
 
-const MAX_HEALTH_POTIONS = 1
 const MAX_SWORDS = 2
-const HEALTH_SPAWN_PROB = 0.1
+
+const MAX_HEALTH_POTIONS = 1
+const BASE_HEALTH_SPAWN_PROB = 0.1
+const HEALTH_SPAWN_PROB_PER_LIFE = 0.1
 
 const INITIAL_SPAWN_PROB = 0.3
 
@@ -224,7 +226,7 @@ func spawn_enemy(scene, pos):
 
 
 func _on_item_spawn_timer_timeout():
-	if item_rng.randf() < HEALTH_SPAWN_PROB:
+	if item_rng.randf() < _get_health_probability():
 		if ref_counter.get("Health", 0) < MAX_HEALTH_POTIONS:
 			spawn_item(HEALTH_SCENE, get_spawn_pos())
 	else:
@@ -312,3 +314,7 @@ func get_interactable_obj_at_pos(pos: Vector2) -> Area2D:
 			return obj
 
 	return null
+
+
+func _get_health_probability() -> int:
+	return BASE_HEALTH_SPAWN_PROB + HEALTH_SPAWN_PROB_PER_LIFE * $Player.lives_lost()
