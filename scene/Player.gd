@@ -16,9 +16,6 @@ var _bounds: Dictionary = {
 	Direction.NORTH: 0, Direction.SOUTH: 0, Direction.WEST: 0, Direction.EAST: 0
 }
 var _lives: int = 0
-var _targets: Dictionary = {
-	Direction.NORTH: [], Direction.SOUTH: [], Direction.WEST: [], Direction.EAST: []
-}
 var _targets_to_destroy: Array = []
 
 var _future_dir: int = Direction.NONE
@@ -109,14 +106,15 @@ func _use_item() -> void:
 
 
 func _use_sword() -> void:
-	_targets_to_destroy = _targets[$CharacterSprite.orientation].duplicate(true)
+	var orient: int = ($CharacterSprite as CharacterSprite).orientation
+	_targets_to_destroy = ($TargetTracker as TargetTracker).get_targets(orient)
 	var slash_generated: bool = _generate_sword_slash(32)
 	slash_generated = _generate_sword_slash(64) or slash_generated
 
 	if slash_generated:
-		for target_to_destroy in _targets_to_destroy:
-			if target_to_destroy != null:
-				target_to_destroy.attack()
+		for target in _targets_to_destroy:
+			if target is Enemy:
+				target.attack()
 
 		_discard_item()
 	else:
@@ -193,11 +191,8 @@ func _process(_delta: float) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hide()
+	($TargetTracker as TargetTracker).disable()
 	$CollisionBox.set_deferred("disabled", true)
-	$RightCollisionBox.set_deferred("disabled", true)
-	$LeftCollisionBox.set_deferred("disabled", true)
-	$TopCollisionBox.set_deferred("disabled", true)
-	$BottomCollisionBox.set_deferred("disabled", true)
 
 
 func spawn(
@@ -218,22 +213,8 @@ func spawn(
 	emit_signal("health_change", _lives)
 	show()
 
+	($TargetTracker as TargetTracker).enable()
 	$CollisionBox.set_deferred("disabled", false)
-	$RightCollisionBox.set_deferred("disabled", false)
-	$LeftCollisionBox.set_deferred("disabled", false)
-	$TopCollisionBox.set_deferred("disabled", false)
-	$BottomCollisionBox.set_deferred("disabled", false)
-
-
-func _handle_collision(obj: Area2D) -> void:
-	if obj is Item:
-		if not held_item:
-			held_item = obj.acquire()
-			emit_signal("pick_up_item", held_item.type)
-	elif obj is Enemy:
-		_hurt()
-		obj.attack()
-		obj.destroy()
 
 
 func _hurt() -> void:
@@ -247,10 +228,7 @@ func _hurt() -> void:
 
 		if _lives <= 0:
 			$CollisionBox.set_deferred("disabled", true)
-			$RightCollisionBox.set_deferred("disabled", true)
-			$LeftCollisionBox.set_deferred("disabled", true)
-			$TopCollisionBox.set_deferred("disabled", true)
-			$BottomCollisionBox.set_deferred("disabled", true)
+			($TargetTracker as TargetTracker).disable()
 
 
 func move_to(pos: Vector2) -> void:
@@ -268,25 +246,15 @@ func _on_MoveTimer_timeout() -> void:
 		_future_dir = Direction.NONE
 
 
-func _on_Player_area_shape_entered(
-	_area_rid: RID, area: Area2D, _area_shape_index: int, local_shape_index: int
-) -> void:
-	var triggered_collisionbox: CollisionShape2D = shape_owner_get_owner(local_shape_index)
-
-	if triggered_collisionbox is Detector:
-		if area is Enemy:
-			_targets[triggered_collisionbox.orientation].append(area)
-	else:
-		_handle_collision(area)
-
-
-func _on_Player_area_shape_exited(
-	_area_rid: RID, area: Area2D, _area_shape_index: int, local_shape_index: int
-) -> void:
-	var triggered_collisionbox: CollisionShape2D = shape_owner_get_owner(local_shape_index)
-
-	if triggered_collisionbox is Detector and area is Enemy:
-		_targets[triggered_collisionbox.orientation].erase(area)
+func _on_Player_area_entered(area: Area2D):
+	if area is Item:
+		if not held_item:
+			held_item = area.acquire()
+			emit_signal("pick_up_item", held_item.type)
+	elif area is Enemy:
+		_hurt()
+		area.attack()
+		area.destroy()
 
 
 func _slash_anim_finished() -> void:
