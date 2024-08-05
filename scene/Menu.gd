@@ -8,7 +8,8 @@ var _seed_val_set: bool = false
 
 func _ready() -> void:
 	hide()
-	($Version as Label).text = get_version_str()
+	($Version as Label).text = ProjectSettings.get_setting("global/Version")
+	($Info/Dev as CanvasItem).visible = ProjectSettings.get_setting("global/Dev")
 
 	var options_container: TabContainer = $Options
 	for index in options_container.get_tab_count():
@@ -46,15 +47,6 @@ func _process(_delta: float) -> void:
 
 			if previous_tab >= 0:
 				options_container.set_current_tab(previous_tab)
-
-
-func get_version_str() -> String:
-	var version_str = ProjectSettings.get_setting("global/Version")
-
-	if ProjectSettings.get_setting("global/Dev"):
-		version_str += "-dev"
-
-	return version_str
 
 
 func _on_Enter_button_effects_finished() -> void:
