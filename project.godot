@@ -156,8 +156,8 @@ enabled=PoolStringArray( "res://addons/godot_icon/plugin.cfg" )
 
 [global]
 
-Version="v0.3.0"
-Dev=false
+Version="v0.3.1"
+Dev=true
 
 [gui]
 
