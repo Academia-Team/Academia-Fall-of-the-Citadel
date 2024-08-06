@@ -1,6 +1,9 @@
 class_name Menu
 extends ColorRect
 
+const MAIN_BTN_IDX: int = 0
+const MODE_BTN_IDX: int = 1
+
 var _menu_enabled: bool = false
 var _seed_val: int = 0
 var _seed_val_set: bool = false
@@ -8,9 +11,10 @@ var _seed_val_set: bool = false
 
 func _ready() -> void:
 	hide()
-	($Version as Label).text = get_version_str()
+	($Version as Label).text = ProjectSettings.get_setting("global/Version")
+	($VBoxContainer/Info/Dev as CanvasItem).visible = ProjectSettings.get_setting("global/Dev")
 
-	var options_container: TabContainer = $Options
+	var options_container: TabContainer = $VBoxContainer/Options
 	for index in options_container.get_tab_count():
 		var buttons: ButtonGridContainer = options_container.get_tab_control(index)
 
@@ -26,10 +30,10 @@ func enable() -> void:
 	_seed_val_set = false
 	_menu_enabled = true
 
-	var options_container: TabContainer = $Options
+	var options_container: TabContainer = $VBoxContainer/Options
 	var buttons: ButtonGridContainer = options_container.get_tab_control(0)
 	buttons.enable_buttons()
-	($Options as TabContainer).set_current_tab(0)
+	options_container.set_current_tab(0)
 
 
 func _disable() -> void:
@@ -39,7 +43,7 @@ func _disable() -> void:
 
 func _process(_delta: float) -> void:
 	if _menu_enabled and Input.is_action_just_pressed("ui_cancel"):
-		var options_container: TabContainer = $Options
+		var options_container: TabContainer = $VBoxContainer/Options
 
 		if not _get_button_grid().are_buttons_disabled():
 			var previous_tab: int = options_container.get_current_tab() - 1
@@ -48,22 +52,13 @@ func _process(_delta: float) -> void:
 				options_container.set_current_tab(previous_tab)
 
 
-func get_version_str() -> String:
-	var version_str = ProjectSettings.get_setting("global/Version")
-
-	if ProjectSettings.get_setting("global/Dev"):
-		version_str += "-dev"
-
-	return version_str
-
-
 func _on_Enter_button_effects_finished() -> void:
 	_get_button_grid().disable_buttons()
-	($Options as TabContainer).set_current_tab(($Options/ModeButtons as Node).get_index())
+	($VBoxContainer/Options as TabContainer).set_current_tab(MODE_BTN_IDX)
 
 
 func _get_button_grid() -> ButtonGridContainer:
-	return ($Options as TabContainer).get_current_tab_control() as ButtonGridContainer
+	return ($VBoxContainer/Options as TabContainer).get_current_tab_control() as ButtonGridContainer
 
 
 func _activate_game(mode: String) -> void:
