@@ -82,7 +82,7 @@ color = Color( 0.980392, 0.0431373, 0.0196078, 1 )
 [node name="Options" type="TabContainer" parent="VBoxContainer"]
 margin_top = 123.0
 margin_right = 800.0
-margin_bottom = 279.0
+margin_bottom = 357.0
 custom_styles/panel = SubResource( 21 )
 tabs_visible = false
 
@@ -91,6 +91,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+custom_constants/vseparation = 30
 script = ExtResource( 7 )
 
 [node name="Enter" type="Button" parent="VBoxContainer/Options/MainButtons"]
@@ -115,9 +116,9 @@ activate_sfx = ExtResource( 14 )
 
 [node name="HelpMe" type="Button" parent="VBoxContainer/Options/MainButtons"]
 margin_left = 334.0
-margin_top = 40.0
+margin_top = 66.0
 margin_right = 465.0
-margin_bottom = 76.0
+margin_bottom = 102.0
 focus_neighbour_left = NodePath("../Enter")
 focus_neighbour_top = NodePath("../Enter")
 focus_neighbour_right = NodePath("../Credit")
@@ -136,9 +137,9 @@ activate_sfx = ExtResource( 14 )
 
 [node name="Credit" type="Button" parent="VBoxContainer/Options/MainButtons"]
 margin_left = 333.0
-margin_top = 80.0
+margin_top = 132.0
 margin_right = 466.0
-margin_bottom = 116.0
+margin_bottom = 168.0
 focus_neighbour_left = NodePath("../HelpMe")
 focus_neighbour_top = NodePath("../HelpMe")
 focus_neighbour_right = NodePath("../Perish")
@@ -157,9 +158,9 @@ activate_sfx = ExtResource( 14 )
 
 [node name="Perish" type="Button" parent="VBoxContainer/Options/MainButtons"]
 margin_left = 347.0
-margin_top = 120.0
+margin_top = 198.0
 margin_right = 452.0
-margin_bottom = 156.0
+margin_bottom = 234.0
 focus_neighbour_left = NodePath("../Credit")
 focus_neighbour_top = NodePath("../Credit")
 focus_neighbour_right = NodePath("../Enter")
@@ -182,6 +183,7 @@ activate_sfx = ExtResource( 12 )
 visible = false
 margin_right = 798.0
 margin_bottom = 333.0
+custom_constants/vseparation = 30
 script = ExtResource( 7 )
 
 [node name="Regular" type="Button" parent="VBoxContainer/Options/ModeButtons"]
