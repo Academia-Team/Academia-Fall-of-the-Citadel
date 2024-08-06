@@ -1,0 +1,13 @@
+[remap]
+
+importer="academia_team.txt"
+type="PlainTextFile"
+path="res://.import/growl2.txt-6cab5787ed98b1e2edb8451edd6e30ba.res"
+
+[deps]
+
+source_file="res://asset/growl2.txt"
+dest_files=[ "res://.import/growl2.txt-6cab5787ed98b1e2edb8451edd6e30ba.res" ]
+
+[params]
+

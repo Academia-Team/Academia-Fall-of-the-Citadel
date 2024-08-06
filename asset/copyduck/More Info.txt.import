@@ -1,0 +1,13 @@
+[remap]
+
+importer="academia_team.txt"
+type="PlainTextFile"
+path="res://.import/More Info.txt-dcdc6defd57b6630ec9a03b0f93b42aa.res"
+
+[deps]
+
+source_file="res://asset/copyduck/More Info.txt"
+dest_files=[ "res://.import/More Info.txt-dcdc6defd57b6630ec9a03b0f93b42aa.res" ]
+
+[params]
+

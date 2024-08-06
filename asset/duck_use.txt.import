@@ -1,0 +1,13 @@
+[remap]
+
+importer="academia_team.txt"
+type="PlainTextFile"
+path="res://.import/duck_use.txt-acc3c333dc18e1cd25fa598e716251fe.res"
+
+[deps]
+
+source_file="res://asset/duck_use.txt"
+dest_files=[ "res://.import/duck_use.txt-acc3c333dc18e1cd25fa598e716251fe.res" ]
+
+[params]
+

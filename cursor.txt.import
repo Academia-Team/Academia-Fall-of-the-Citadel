@@ -1,0 +1,13 @@
+[remap]
+
+importer="academia_team.txt"
+type="PlainTextFile"
+path="res://.import/cursor.txt-080c01cf3b385cb3ba40d80e2fb274ca.res"
+
+[deps]
+
+source_file="res://cursor.txt"
+dest_files=[ "res://.import/cursor.txt-080c01cf3b385cb3ba40d80e2fb274ca.res" ]
+
+[params]
+

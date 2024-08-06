@@ -1,0 +1,13 @@
+[remap]
+
+importer="academia_team.txt"
+type="PlainTextFile"
+path="res://.import/license.txt-36bb5f55fc41a886dcdb50fd1c1735e4.res"
+
+[deps]
+
+source_file="res://asset/biometric_joe/license.txt"
+dest_files=[ "res://.import/license.txt-36bb5f55fc41a886dcdb50fd1c1735e4.res" ]
+
+[params]
+

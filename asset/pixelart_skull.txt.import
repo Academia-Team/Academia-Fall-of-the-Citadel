@@ -1,0 +1,13 @@
+[remap]
+
+importer="academia_team.txt"
+type="PlainTextFile"
+path="res://.import/pixelart_skull.txt-be985fbb652aca3dc5a2b5fb46be6142.res"
+
+[deps]
+
+source_file="res://asset/pixelart_skull.txt"
+dest_files=[ "res://.import/pixelart_skull.txt-be985fbb652aca3dc5a2b5fb46be6142.res" ]
+
+[params]
+

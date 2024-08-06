@@ -1,0 +1,13 @@
+[remap]
+
+importer="academia_team.txt"
+type="PlainTextFile"
+path="res://.import/OFL.txt-a2ee7eccb664dfe6e8dd187ec693cf48.res"
+
+[deps]
+
+source_file="res://asset/brazier_flame/OFL.txt"
+dest_files=[ "res://.import/OFL.txt-a2ee7eccb664dfe6e8dd187ec693cf48.res" ]
+
+[params]
+

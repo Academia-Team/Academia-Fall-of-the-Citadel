@@ -1,0 +1,13 @@
+[remap]
+
+importer="academia_team.txt"
+type="PlainTextFile"
+path="res://.import/health.txt-c4e29d85af2afff1d3f1981f3b81ba5b.res"
+
+[deps]
+
+source_file="res://asset/health.txt"
+dest_files=[ "res://.import/health.txt-c4e29d85af2afff1d3f1981f3b81ba5b.res" ]
+
+[params]
+
