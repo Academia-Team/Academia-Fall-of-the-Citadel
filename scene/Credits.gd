@@ -8,6 +8,7 @@ var _credits_active: bool = false
 
 func _ready() -> void:
 	stop()
+	#$ScrollContainer/VBoxContainer/Body.text_file = preload("res://LICENSE.txt")
 
 
 func start() -> void:
