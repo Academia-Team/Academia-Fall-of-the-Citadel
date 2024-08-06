@@ -1,6 +1,9 @@
 class_name Menu
 extends ColorRect
 
+const MAIN_BTN_IDX: int = 0
+const MODE_BTN_IDX: int = 1
+
 var _menu_enabled: bool = false
 var _seed_val: int = 0
 var _seed_val_set: bool = false
@@ -51,7 +54,7 @@ func _process(_delta: float) -> void:
 
 func _on_Enter_button_effects_finished() -> void:
 	_get_button_grid().disable_buttons()
-	($VBoxContainer/Options as TabContainer).set_current_tab(($VBoxContainer/Options/ModeButtons as Node).get_index())
+	($VBoxContainer/Options as TabContainer).set_current_tab(MODE_BTN_IDX)
 
 
 func _get_button_grid() -> ButtonGridContainer:
