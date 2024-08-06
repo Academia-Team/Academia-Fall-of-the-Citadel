@@ -44,13 +44,17 @@ anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
 script = ExtResource( 4 )
 
-[node name="Info" type="VBoxContainer" parent="."]
-anchor_right = 1.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_top = 26.0
-margin_bottom = 65.0
+margin_right = 40.0
+margin_bottom = 38.0
+
+[node name="Info" type="VBoxContainer" parent="VBoxContainer"]
+margin_right = 800.0
+margin_bottom = 114.0
 alignment = 1
 
-[node name="Title" type="Label" parent="Info"]
+[node name="Title" type="Label" parent="VBoxContainer/Info"]
 margin_right = 800.0
 margin_bottom = 65.0
 grow_horizontal = 2
@@ -58,7 +62,7 @@ theme = ExtResource( 3 )
 text = "Academia: Fall of the Citadel"
 align = 1
 
-[node name="Dev" type="Label" parent="Info"]
+[node name="Dev" type="Label" parent="VBoxContainer/Info"]
 margin_top = 69.0
 margin_right = 800.0
 margin_bottom = 114.0
@@ -68,30 +72,30 @@ text = "This version is unstable!"
 align = 1
 valign = 1
 
-[node name="Separator" type="ColorRect" parent="."]
-margin_top = 144.0
+[node name="Separator" type="ColorRect" parent="VBoxContainer"]
+margin_top = 118.0
 margin_right = 800.0
-margin_bottom = 145.0
-rect_min_size = Vector2( 0, 1 )
+margin_bottom = 119.0
+rect_min_size = Vector2( 800, 1 )
 color = Color( 0.980392, 0.0431373, 0.0196078, 1 )
 
-[node name="Options" type="TabContainer" parent="."]
-margin_top = 155.0
-margin_right = 798.0
-margin_bottom = 447.0
+[node name="Options" type="TabContainer" parent="VBoxContainer"]
+margin_top = 123.0
+margin_right = 800.0
+margin_bottom = 279.0
 custom_styles/panel = SubResource( 21 )
 tabs_visible = false
 
-[node name="MainButtons" type="GridContainer" parent="Options"]
+[node name="MainButtons" type="GridContainer" parent="VBoxContainer/Options"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource( 7 )
 
-[node name="Enter" type="Button" parent="Options/MainButtons"]
-margin_left = 352.0
-margin_right = 445.0
+[node name="Enter" type="Button" parent="VBoxContainer/Options/MainButtons"]
+margin_left = 353.0
+margin_right = 446.0
 margin_bottom = 36.0
 focus_neighbour_left = NodePath("../Perish")
 focus_neighbour_top = NodePath("../Perish")
@@ -109,11 +113,11 @@ script = ExtResource( 9 )
 select_sfx = ExtResource( 13 )
 activate_sfx = ExtResource( 14 )
 
-[node name="HelpMe" type="Button" parent="Options/MainButtons"]
-margin_left = 333.0
-margin_top = 74.0
-margin_right = 464.0
-margin_bottom = 110.0
+[node name="HelpMe" type="Button" parent="VBoxContainer/Options/MainButtons"]
+margin_left = 334.0
+margin_top = 40.0
+margin_right = 465.0
+margin_bottom = 76.0
 focus_neighbour_left = NodePath("../Enter")
 focus_neighbour_top = NodePath("../Enter")
 focus_neighbour_right = NodePath("../Credit")
@@ -130,11 +134,11 @@ script = ExtResource( 9 )
 select_sfx = ExtResource( 13 )
 activate_sfx = ExtResource( 14 )
 
-[node name="Credit" type="Button" parent="Options/MainButtons"]
-margin_left = 332.0
-margin_top = 148.0
-margin_right = 465.0
-margin_bottom = 184.0
+[node name="Credit" type="Button" parent="VBoxContainer/Options/MainButtons"]
+margin_left = 333.0
+margin_top = 80.0
+margin_right = 466.0
+margin_bottom = 116.0
 focus_neighbour_left = NodePath("../HelpMe")
 focus_neighbour_top = NodePath("../HelpMe")
 focus_neighbour_right = NodePath("../Perish")
@@ -151,11 +155,11 @@ script = ExtResource( 9 )
 select_sfx = ExtResource( 13 )
 activate_sfx = ExtResource( 14 )
 
-[node name="Perish" type="Button" parent="Options/MainButtons"]
-margin_left = 346.0
-margin_top = 222.0
-margin_right = 451.0
-margin_bottom = 258.0
+[node name="Perish" type="Button" parent="VBoxContainer/Options/MainButtons"]
+margin_left = 347.0
+margin_top = 120.0
+margin_right = 452.0
+margin_bottom = 156.0
 focus_neighbour_left = NodePath("../Credit")
 focus_neighbour_top = NodePath("../Credit")
 focus_neighbour_right = NodePath("../Enter")
@@ -174,13 +178,13 @@ script = ExtResource( 9 )
 select_sfx = ExtResource( 13 )
 activate_sfx = ExtResource( 12 )
 
-[node name="ModeButtons" type="GridContainer" parent="Options"]
+[node name="ModeButtons" type="GridContainer" parent="VBoxContainer/Options"]
 visible = false
 margin_right = 798.0
 margin_bottom = 333.0
 script = ExtResource( 7 )
 
-[node name="Regular" type="Button" parent="Options/ModeButtons"]
+[node name="Regular" type="Button" parent="VBoxContainer/Options/ModeButtons"]
 margin_left = 330.0
 margin_right = 467.0
 margin_bottom = 36.0
@@ -200,7 +204,7 @@ script = ExtResource( 9 )
 select_sfx = ExtResource( 13 )
 activate_sfx = ExtResource( 14 )
 
-[node name="Duck" type="Button" parent="Options/ModeButtons"]
+[node name="Duck" type="Button" parent="VBoxContainer/Options/ModeButtons"]
 margin_left = 346.0
 margin_top = 113.0
 margin_right = 452.0
@@ -229,7 +233,7 @@ script = ExtResource( 9 )
 select_sfx = ExtResource( 10 )
 activate_sfx = ExtResource( 11 )
 
-[node name="Perish" type="Button" parent="Options/ModeButtons"]
+[node name="Perish" type="Button" parent="VBoxContainer/Options/ModeButtons"]
 margin_left = 346.0
 margin_top = 225.0
 margin_right = 451.0
@@ -279,15 +283,15 @@ visible = false
 [node name="Game" parent="." instance=ExtResource( 17 )]
 visible = false
 
-[connection signal="tab_changed" from="Options" to="." method="_on_Options_tab_changed"]
-[connection signal="button_effects_finished" from="Options/MainButtons/Enter" to="." method="_on_Enter_button_effects_finished"]
-[connection signal="button_input" from="Options/MainButtons/Enter" to="." method="_on_Enter_button_input"]
-[connection signal="button_effects_finished" from="Options/MainButtons/HelpMe" to="." method="_on_HelpMe_button_effects_finished"]
-[connection signal="button_effects_finished" from="Options/MainButtons/Credit" to="." method="_on_Credit_button_effects_finished"]
-[connection signal="button_effects_finished" from="Options/MainButtons/Perish" to="." method="_on_Perish_button_effects_finished"]
-[connection signal="button_effects_finished" from="Options/ModeButtons/Regular" to="." method="_on_Regular_button_effects_finished"]
-[connection signal="button_effects_finished" from="Options/ModeButtons/Duck" to="." method="_on_Duck_button_effects_finished"]
-[connection signal="button_effects_finished" from="Options/ModeButtons/Perish" to="." method="_on_Perish_button_effects_finished"]
+[connection signal="tab_changed" from="VBoxContainer/Options" to="." method="_on_Options_tab_changed"]
+[connection signal="button_effects_finished" from="VBoxContainer/Options/MainButtons/Enter" to="." method="_on_Enter_button_effects_finished"]
+[connection signal="button_input" from="VBoxContainer/Options/MainButtons/Enter" to="." method="_on_Enter_button_input"]
+[connection signal="button_effects_finished" from="VBoxContainer/Options/MainButtons/HelpMe" to="." method="_on_HelpMe_button_effects_finished"]
+[connection signal="button_effects_finished" from="VBoxContainer/Options/MainButtons/Credit" to="." method="_on_Credit_button_effects_finished"]
+[connection signal="button_effects_finished" from="VBoxContainer/Options/MainButtons/Perish" to="." method="_on_Perish_button_effects_finished"]
+[connection signal="button_effects_finished" from="VBoxContainer/Options/ModeButtons/Regular" to="." method="_on_Regular_button_effects_finished"]
+[connection signal="button_effects_finished" from="VBoxContainer/Options/ModeButtons/Duck" to="." method="_on_Duck_button_effects_finished"]
+[connection signal="button_effects_finished" from="VBoxContainer/Options/ModeButtons/Perish" to="." method="_on_Perish_button_effects_finished"]
 [connection signal="integer_prompt_finished" from="SeedDialog" to="." method="_on_SeedDialog_integer_prompt_finished"]
 [connection signal="text_rejected" from="SeedDialog" to="." method="_on_SeedDialog_text_rejected"]
 [connection signal="finished" from="Instructions" to="." method="_on_Instructions_finished"]

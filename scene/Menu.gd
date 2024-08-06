@@ -9,9 +9,9 @@ var _seed_val_set: bool = false
 func _ready() -> void:
 	hide()
 	($Version as Label).text = ProjectSettings.get_setting("global/Version")
-	($Info/Dev as CanvasItem).visible = ProjectSettings.get_setting("global/Dev")
+	($VBoxContainer/Info/Dev as CanvasItem).visible = ProjectSettings.get_setting("global/Dev")
 
-	var options_container: TabContainer = $Options
+	var options_container: TabContainer = $VBoxContainer/Options
 	for index in options_container.get_tab_count():
 		var buttons: ButtonGridContainer = options_container.get_tab_control(index)
 
@@ -27,10 +27,10 @@ func enable() -> void:
 	_seed_val_set = false
 	_menu_enabled = true
 
-	var options_container: TabContainer = $Options
+	var options_container: TabContainer = $VBoxContainer/Options
 	var buttons: ButtonGridContainer = options_container.get_tab_control(0)
 	buttons.enable_buttons()
-	($Options as TabContainer).set_current_tab(0)
+	options_container.set_current_tab(0)
 
 
 func _disable() -> void:
@@ -40,7 +40,7 @@ func _disable() -> void:
 
 func _process(_delta: float) -> void:
 	if _menu_enabled and Input.is_action_just_pressed("ui_cancel"):
-		var options_container: TabContainer = $Options
+		var options_container: TabContainer = $VBoxContainer/Options
 
 		if not _get_button_grid().are_buttons_disabled():
 			var previous_tab: int = options_container.get_current_tab() - 1
@@ -51,11 +51,11 @@ func _process(_delta: float) -> void:
 
 func _on_Enter_button_effects_finished() -> void:
 	_get_button_grid().disable_buttons()
-	($Options as TabContainer).set_current_tab(($Options/ModeButtons as Node).get_index())
+	($VBoxContainer/Options as TabContainer).set_current_tab(($Options/ModeButtons as Node).get_index())
 
 
 func _get_button_grid() -> ButtonGridContainer:
-	return ($Options as TabContainer).get_current_tab_control() as ButtonGridContainer
+	return ($VBoxContainer/Options as TabContainer).get_current_tab_control() as ButtonGridContainer
 
 
 func _activate_game(mode: String) -> void:
