@@ -51,7 +51,7 @@ func _process(_delta: float) -> void:
 
 func _on_Enter_button_effects_finished() -> void:
 	_get_button_grid().disable_buttons()
-	($VBoxContainer/Options as TabContainer).set_current_tab(($Options/ModeButtons as Node).get_index())
+	($VBoxContainer/Options as TabContainer).set_current_tab(($VBoxContainer/Options/ModeButtons as Node).get_index())
 
 
 func _get_button_grid() -> ButtonGridContainer:
