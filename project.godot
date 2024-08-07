@@ -108,6 +108,11 @@ _global_script_classes=[ {
 "class": "TargetTracker",
 "language": "GDScript",
 "path": "res://class/TargetTracker.gd"
+}, {
+"base": "Reference",
+"class": "Version",
+"language": "GDScript",
+"path": "res://class/Version.gd"
 } ]
 _global_script_class_icons={
 "AutomatedScrollContainer": "",
@@ -129,7 +134,8 @@ _global_script_class_icons={
 "LineDialog": "",
 "Menu": "",
 "Player": "",
-"TargetTracker": ""
+"TargetTracker": "",
+"Version": ""
 }
 
 [application]
@@ -156,7 +162,6 @@ enabled=PoolStringArray( "res://addons/godot_icon/plugin.cfg" )
 
 [global]
 
-Version="v0.3.1"
 Dev=true
 
 [gui]

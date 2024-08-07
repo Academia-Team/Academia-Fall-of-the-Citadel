@@ -3,11 +3,25 @@ extends ColorRect
 
 signal done
 
+const CREDIT_PATH = "res://CREDIT.txt"
+
 var _credits_active: bool = false
 
 
 func _ready() -> void:
 	stop()
+
+	var credit_file: File = File.new()
+	if credit_file.file_exists(CREDIT_PATH):
+		var status: int = credit_file.open(CREDIT_PATH, File.READ)
+
+		if status == OK:
+			($ScrollContainer/VBoxContainer/Body as Label).text = credit_file.get_as_text()
+			credit_file.close()
+		else:
+			printerr('Failed to open "%s".' % CREDIT_PATH)
+	else:
+		printerr('File "%s" does not exist.' % CREDIT_PATH)
 
 
 func start() -> void:
