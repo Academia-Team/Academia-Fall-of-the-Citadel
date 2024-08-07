@@ -1,10 +1,13 @@
 tool
 extends Label
 
-export var file_path: String = ""
+export(String, FILE) var file_path: String = "" setget set_file_path
 
 
-func _enter_tree() -> void:
+func set_file_path(path: String) -> void:
+	text = ""
+	file_path = path
+
 	if not file_path.empty():
 		var file: File = File.new()
 		if file.file_exists(file_path):
