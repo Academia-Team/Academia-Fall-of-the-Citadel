@@ -35,5 +35,4 @@ func import(source_file: String, save_path: String, _options: Dictionary, _platf
 	var text: String = file.get_as_text()
 	var text_file: PlainTextFile = PlainTextFile.new()
 	text_file.text = text
-	text_file.close()
 	return ResourceSaver.save("%s.%s" % [save_path, get_save_extension()], text_file)
