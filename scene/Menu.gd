@@ -13,7 +13,6 @@ func _ready() -> void:
 	hide()
 
 	var version_info: Version = Version.new()
-	($Version as Label).text = version_info.get_version()
 	($VBoxContainer/Info/Dev as CanvasItem).visible = version_info.is_dev()
 
 	var options_container: TabContainer = $VBoxContainer/Options
