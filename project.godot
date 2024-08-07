@@ -108,11 +108,6 @@ _global_script_classes=[ {
 "class": "TargetTracker",
 "language": "GDScript",
 "path": "res://class/TargetTracker.gd"
-}, {
-"base": "Reference",
-"class": "Version",
-"language": "GDScript",
-"path": "res://class/Version.gd"
 } ]
 _global_script_class_icons={
 "AutomatedScrollContainer": "",
@@ -134,8 +129,7 @@ _global_script_class_icons={
 "LineDialog": "",
 "Menu": "",
 "Player": "",
-"TargetTracker": "",
-"Version": ""
+"TargetTracker": ""
 }
 
 [application]
