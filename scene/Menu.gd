@@ -11,8 +11,10 @@ var _seed_val_set: bool = false
 
 func _ready() -> void:
 	hide()
-	($Version as Label).text = ProjectSettings.get_setting("global/Version")
-	($VBoxContainer/Info/Dev as CanvasItem).visible = ProjectSettings.get_setting("global/Dev")
+
+	var version_info: Version = Version.new()
+	($Version as Label).text = version_info.get_version()
+	($VBoxContainer/Info/Dev as CanvasItem).visible = version_info.is_dev()
 
 	var options_container: TabContainer = $VBoxContainer/Options
 	for index in options_container.get_tab_count():
