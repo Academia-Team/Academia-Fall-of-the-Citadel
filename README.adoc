@@ -18,8 +18,4 @@ as long as possible. For it will eventually fall.
 image::screenshot/Regular Gameplay.png[]
 
 
-Before attempting to export the game in Godot, please change into the `tool` directory
-and run the `build_prep` script.
-
-
 For gameplay details, please check out the in-game instructions.
