@@ -11,16 +11,12 @@ enum ValidOrientation {
 	WEST = Direction.WEST
 }
 
-export var north_texture: Texture
-export var south_texture: Texture
-export var side_texture: Texture
+export var north_texture: Texture setget set_north_texture
+export var south_texture: Texture setget set_south_texture
+export var side_texture: Texture setget set_side_texture
 
 export(ValidOrientation) var orientation: int = Direction.SOUTH setget set_orient, get_orient
-export var faces_east: bool = false
-
-
-func _enter_tree() -> void:
-	texture = south_texture
+export var faces_east: bool = false setget set_faces_east
 
 
 func _is_valid_orient(orient: int) -> bool:
@@ -65,3 +61,20 @@ func set_orient(orient: int) -> void:
 
 func get_orient() -> int:
 	return orientation
+
+
+func set_north_texture(new_texture: Texture) -> void:
+	north_texture = new_texture
+	set_orient(orientation)
+
+func set_south_texture(new_texture: Texture) -> void:
+	south_texture = new_texture
+	set_orient(orientation)
+
+func set_side_texture(new_texture: Texture) -> void:
+	side_texture = new_texture
+	set_orient(orientation)
+
+func set_faces_east(value: bool) -> void:
+	faces_east = value
+	set_orient(orientation)
