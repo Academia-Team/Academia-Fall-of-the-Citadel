@@ -99,11 +99,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scene/Menu.gd"
 }, {
-"base": "Resource",
-"class": "PlainTextFile",
-"language": "GDScript",
-"path": "res://class/PlainTextFile.gd"
-}, {
 "base": "Area2D",
 "class": "Player",
 "language": "GDScript",
@@ -133,7 +128,6 @@ _global_script_class_icons={
 "Jukebox": "",
 "LineDialog": "",
 "Menu": "",
-"PlainTextFile": "",
 "Player": "",
 "TargetTracker": ""
 }
