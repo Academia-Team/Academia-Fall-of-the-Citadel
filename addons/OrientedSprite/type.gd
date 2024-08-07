@@ -1,5 +1,4 @@
 tool
-class_name OrientedSprite
 extends Sprite
 
 signal orientation_changed(old_orient, new_orient)
@@ -17,6 +16,10 @@ export var side_texture: Texture setget set_side_texture
 
 export(ValidOrientation) var orientation: int = Direction.SOUTH setget set_orient, get_orient
 export var faces_east: bool = false setget set_faces_east
+
+
+func _enter_tree():
+	centered = false
 
 
 func _is_valid_orient(orient: int) -> bool:

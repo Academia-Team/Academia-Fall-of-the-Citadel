@@ -1,4 +1,4 @@
-class_name CharacterSprite
+tool
 extends "res://addons/OrientedSprite/type.gd"
 
 signal effect_show

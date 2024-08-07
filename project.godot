@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://class/ButtonGridContainer.gd"
 }, {
-"base": "OrientedSprite",
+"base": "Sprite",
 "class": "CharacterSprite",
 "language": "GDScript",
 "path": "res://class/CharacterSprite.gd"
@@ -99,11 +99,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scene/Menu.gd"
 }, {
-"base": "Sprite",
-"class": "OrientedSprite",
-"language": "GDScript",
-"path": "res://addons/OrientedSprite/type.gd"
-}, {
 "base": "Area2D",
 "class": "Player",
 "language": "GDScript",
@@ -133,7 +128,6 @@ _global_script_class_icons={
 "Jukebox": "",
 "LineDialog": "",
 "Menu": "",
-"OrientedSprite": "",
 "Player": "",
 "TargetTracker": ""
 }
@@ -158,7 +152,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/FileLabel/plugin.cfg", "res://addons/OrientedSprite/plugin.cfg", "res://addons/godot_icon/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/CreatureSprite/plugin.cfg", "res://addons/FileLabel/plugin.cfg", "res://addons/OrientedSprite/plugin.cfg", "res://addons/godot_icon/plugin.cfg" )
 
 [global]
 
