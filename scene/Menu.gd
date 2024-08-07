@@ -18,7 +18,7 @@ func _ready() -> void:
 	for index in options_container.get_tab_count():
 		var buttons: ButtonGridContainer = options_container.get_tab_control(index)
 
-		if OS.get_name() == "HTML5":
+		if OS.has_feature("web"):
 			var disable_success: bool = buttons.hide_and_disable("Perish")
 			if not disable_success:
 				print("Button 'Perish' not found in tab %d" % index)
