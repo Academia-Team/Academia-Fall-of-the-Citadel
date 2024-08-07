@@ -106,7 +106,7 @@ func _use_item() -> void:
 
 
 func _use_sword() -> void:
-	var orient: int = ($CharacterSprite as CharacterSprite).orientation
+	var orient: int = $CharacterSprite.get_orient()
 	_targets_to_destroy = ($TargetTracker as TargetTracker).get_targets(orient)
 	var slash_generated: bool = _generate_sword_slash(32)
 	slash_generated = _generate_sword_slash(64) or slash_generated
@@ -125,11 +125,11 @@ func _generate_sword_slash(num_pixels_away: float) -> bool:
 	var slash_anim: CanvasItem = null
 
 	if _pos_in_bounds(
-		Direction.translate_pos(position, $CharacterSprite.orientation, num_pixels_away)
+		Direction.translate_pos(position, $CharacterSprite.get_orient(), num_pixels_away)
 	):
 		slash_anim = SWORD_SLASH.instance()
 		slash_anim.position = Direction.dir_to_rel_pos(
-			$CharacterSprite.orientation, num_pixels_away
+			$CharacterSprite.get_orient(), num_pixels_away
 		)
 		var slash_status: int = slash_anim.connect(
 			"animation_finished", self, "_slash_anim_finished"

@@ -24,11 +24,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://class/ButtonGridContainer.gd"
 }, {
-"base": "Sprite",
-"class": "CharacterSprite",
-"language": "GDScript",
-"path": "res://class/CharacterSprite.gd"
-}, {
 "base": "ColorRect",
 "class": "Credits",
 "language": "GDScript",
@@ -113,7 +108,6 @@ _global_script_class_icons={
 "AutomatedScrollContainer": "",
 "Book": "",
 "ButtonGridContainer": "",
-"CharacterSprite": "",
 "Credits": "",
 "Detector": "",
 "Direction": "",
@@ -152,7 +146,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/FileLabel/plugin.cfg", "res://addons/godot_icon/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/CreatureSprite/plugin.cfg", "res://addons/FileLabel/plugin.cfg", "res://addons/OrientedSprite/plugin.cfg", "res://addons/godot_icon/plugin.cfg" )
 
 [global]
 

@@ -1,6 +1,5 @@
 [gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://class/CharacterSprite.gd" type="Script" id=1]
 [ext_resource path="res://resource/collision_rect.tres" type="Shape2D" id=2]
 [ext_resource path="res://asset/Player_SIDE.png" type="Texture" id=3]
 [ext_resource path="res://asset/Player_NORTH.png" type="Texture" id=4]
@@ -11,6 +10,7 @@
 [ext_resource path="res://asset/Player_SOUTH.png" type="Texture" id=9]
 [ext_resource path="res://class/Detector.gd" type="Script" id=10]
 [ext_resource path="res://class/TargetTracker.gd" type="Script" id=11]
+[ext_resource path="res://addons/CreatureSprite/type.gd" type="Script" id=12]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 31, 15 )
@@ -32,8 +32,9 @@ position = Vector2( 15, 15 )
 shape = ExtResource( 2 )
 
 [node name="CharacterSprite" type="Sprite" parent="."]
-position = Vector2( 16, 16 )
-script = ExtResource( 1 )
+texture = ExtResource( 9 )
+centered = false
+script = ExtResource( 12 )
 north_texture = ExtResource( 4 )
 south_texture = ExtResource( 9 )
 side_texture = ExtResource( 3 )
@@ -81,5 +82,4 @@ one_shot = true
 stream = ExtResource( 6 )
 
 [connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]
-[connection signal="effect_finish" from="CharacterSprite" to="." method="_on_CharacterSprite_effect_finish"]
 [connection signal="timeout" from="MoveTimer" to="." method="_on_MoveTimer_timeout"]
