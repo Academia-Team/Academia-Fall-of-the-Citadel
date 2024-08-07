@@ -152,7 +152,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/FileLabel/plugin.cfg", "res://addons/godot_icon/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/FileLabel/plugin.cfg", "res://addons/OrientedSprite/plugin.cfg", "res://addons/godot_icon/plugin.cfg" )
 
 [global]
 
