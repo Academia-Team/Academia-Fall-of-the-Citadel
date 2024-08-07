@@ -4,9 +4,10 @@ extends Reference
 const VER_PATH: String = "res://VERSION.txt"
 
 var _ver: String = ""
+var _ver_set: bool = false
 
 
-func _init() -> void:
+func _set_ver() -> void:
 	var ver_file = File.new()
 
 	if ver_file.file_exists(VER_PATH):
@@ -20,8 +21,12 @@ func _init() -> void:
 	else:
 		printerr('File "%s" does not exist.' % VER_PATH)
 
+	_ver_set = true
+
 
 func get_version() -> String:
+	if not _ver_set:
+		_set_ver()
 	return _ver
 
 
