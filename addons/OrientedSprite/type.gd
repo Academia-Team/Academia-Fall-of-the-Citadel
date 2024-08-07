@@ -1,4 +1,5 @@
 tool
+class_name OrientedSprite
 extends Sprite
 
 signal orientation_changed(old_orient, new_orient)

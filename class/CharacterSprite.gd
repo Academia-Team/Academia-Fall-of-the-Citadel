@@ -1,5 +1,5 @@
 class_name CharacterSprite
-extends "res://addons/OrientedSprite/type.gd"
+extends OrientedSprite
 
 signal effect_show
 signal effect_finish
