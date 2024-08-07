@@ -6,7 +6,7 @@ const VER_PATH: String = "res://VERSION.txt"
 var _ver: String = ""
 
 
-func _ready() -> void:
+func _init() -> void:
 	var ver_file = File.new()
 
 	if ver_file.file_exists(VER_PATH):
