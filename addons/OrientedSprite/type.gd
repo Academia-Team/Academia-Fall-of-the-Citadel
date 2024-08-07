@@ -15,7 +15,7 @@ export var north_texture: Texture
 export var south_texture: Texture
 export var side_texture: Texture
 
-export(ValidOrientation) var orientation: int = Direction.SOUTH setget set_orient
+export(ValidOrientation) var orientation: int = Direction.SOUTH setget set_orient, get_orient
 export var faces_east: bool = false
 
 
@@ -61,3 +61,7 @@ func set_orient(orient: int) -> void:
 
 		if orient != old_orient:
 			emit_signal("orientation_changed", old_orient, orient)
+
+
+func get_orient() -> int:
+	return orientation
