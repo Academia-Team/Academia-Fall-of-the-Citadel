@@ -9,9 +9,18 @@
 
 [node name="Health" instance=ExtResource( 1 )]
 type = "Health"
-sprite = ExtResource( 6 )
+texture = ExtResource( 6 )
 acquire_sfx = ExtResource( 5 )
 shove_sfx = ExtResource( 4 )
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource( 6 )
+
+[node name="AcquireSFX" parent="." index="2"]
+stream = ExtResource( 5 )
+
+[node name="ShoveSFX" parent="." index="3"]
+stream = ExtResource( 4 )
 
 [node name="UseSFX" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource( 2 )

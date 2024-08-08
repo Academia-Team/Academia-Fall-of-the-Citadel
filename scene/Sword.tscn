@@ -7,6 +7,15 @@
 
 [node name="Sword" instance=ExtResource( 1 )]
 type = "Sword"
-sprite = ExtResource( 4 )
+texture = ExtResource( 4 )
 acquire_sfx = ExtResource( 2 )
 shove_sfx = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource( 4 )
+
+[node name="AcquireSFX" parent="." index="2"]
+stream = ExtResource( 2 )
+
+[node name="ShoveSFX" parent="." index="3"]
+stream = ExtResource( 3 )

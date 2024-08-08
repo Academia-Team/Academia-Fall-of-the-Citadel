@@ -1,15 +1,15 @@
+tool
 class_name Item
 extends Area2D
 
 export var shovable: bool = true
 export var type: String
-export var sprite: Texture
+export var texture: Texture setget set_texture, get_texture
 export var acquire_sfx: AudioStream
 export var shove_sfx: AudioStream
 
 
 func _ready() -> void:
-	($Sprite as Sprite).texture = sprite
 	($AcquireSFX as AudioStreamPlayer).stream = acquire_sfx
 	($ShoveSFX as AudioStreamPlayer).stream = shove_sfx
 
@@ -39,3 +39,12 @@ func is_shovable() -> bool:
 
 func destroy() -> void:
 	queue_free()
+
+
+func set_texture(value: Texture) -> void:
+	texture = value
+	($Sprite as Sprite).set_texture(value)
+
+
+func get_texture() -> Texture:
+	return texture
