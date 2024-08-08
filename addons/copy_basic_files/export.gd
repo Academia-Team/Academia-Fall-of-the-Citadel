@@ -18,14 +18,12 @@ func _export_end() -> void:
 		var project_dir_status: int = project_dir.open("res://")
 
 		if project_dir_status == OK:
-			var abs_project_dir: String = project_dir.get_current_dir()
-			for filename in ProjectSettings.get_setting(DESIRED_FILES_PROPERTY):
-				var source_path: String = "%s/%s" % [abs_project_dir, filename]
-				var dest_path: String = "%s/%s" % [target_dir, filename]
+			for source_path in ProjectSettings.get_setting(DESIRED_FILES_PROPERTY):
+				var dest_path: String = "%s/%s" % [target_dir, source_path.get_file()]
 				var copy_status: int = project_dir.copy(source_path, dest_path)
 
 				if copy_status != OK:
-					printerr('Failed to copy "%s" to "%s".' % [filename, target_dir])
+					printerr('Failed to copy "%s" to "%s".' % [source_path, dest_path])
 					break
 		else:
 			printerr("Cannot open project directory.")
