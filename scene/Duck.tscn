@@ -8,9 +8,18 @@
 
 [node name="Item" instance=ExtResource( 2 )]
 type = "Duck"
-sprite = ExtResource( 5 )
+texture = ExtResource( 5 )
 acquire_sfx = ExtResource( 1 )
 shove_sfx = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource( 5 )
+
+[node name="AcquireSFX" parent="." index="2"]
+stream = ExtResource( 1 )
+
+[node name="ShoveSFX" parent="." index="3"]
+stream = ExtResource( 3 )
 
 [node name="UseSFX" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource( 4 )
