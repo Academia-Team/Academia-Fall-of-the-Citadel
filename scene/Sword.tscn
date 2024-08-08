@@ -6,7 +6,7 @@
 [ext_resource path="res://asset/sword.png" type="Texture" id=4]
 
 [node name="Sword" instance=ExtResource( 1 )]
-texture = ExtResource( 4 )
 type = "Sword"
+sprite = ExtResource( 4 )
 acquire_sfx = ExtResource( 2 )
 shove_sfx = ExtResource( 3 )

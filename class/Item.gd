@@ -1,13 +1,15 @@
 class_name Item
-extends "res://addons/SpriteArea2D/type.gd"
+extends Area2D
 
 export var shovable: bool = true
 export var type: String
+export var sprite: Texture
 export var acquire_sfx: AudioStream
 export var shove_sfx: AudioStream
 
 
 func _ready() -> void:
+	($Sprite as Sprite).texture = sprite
 	($AcquireSFX as AudioStreamPlayer).stream = acquire_sfx
 	($ShoveSFX as AudioStreamPlayer).stream = shove_sfx
 
