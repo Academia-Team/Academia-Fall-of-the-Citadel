@@ -4,10 +4,11 @@ extends EditorExportPlugin
 const DESIRED_FILES_PROPERTY: String = "global/files_to_add_on_export"
 const TARGET_FEATURE: String = "directly_viewable"
 
-var target_dir: String = ""
+var target_dir: String
 
 
 func _export_begin(features: PoolStringArray, _is_debug: bool, path: String, _flags: int) -> void:
+	target_dir = ""
 	if TARGET_FEATURE in features:
 		target_dir = path.get_base_dir()
 

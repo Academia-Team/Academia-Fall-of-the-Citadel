@@ -5,10 +5,11 @@ const GODOT_ICON_SCRIPT: String = "res://addons/godot_icon/ReplaceIcon.gd"
 const TARGET_FEATURES: PoolStringArray = PoolStringArray(["64", "Windows"])
 const WIN_ICON_SETTING: String = "application/config/windows_native_icon"
 
-var target_executable: String = ""
+var target_executable: String
 
 
 func _export_begin(features: PoolStringArray, _is_debug: bool, path: String, _flags: int):
+	target_executable = ""
 	var has_required_features: bool = true
 	for target_feature in TARGET_FEATURES:
 		has_required_features = target_feature in features
