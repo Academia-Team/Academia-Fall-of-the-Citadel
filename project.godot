@@ -146,7 +146,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/CreatureSprite/plugin.cfg", "res://addons/FileLabel/plugin.cfg", "res://addons/OrientedSprite/plugin.cfg", "res://addons/copy_basic_files/plugin.cfg", "res://addons/godot_icon/plugin.cfg", "res://addons/prep_build_dir/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/CreatureSprite/plugin.cfg", "res://addons/FileLabel/plugin.cfg", "res://addons/OrientedSprite/plugin.cfg", "res://addons/auto_godot_icon/plugin.cfg", "res://addons/copy_basic_files/plugin.cfg", "res://addons/godot_icon/plugin.cfg", "res://addons/prep_build_dir/plugin.cfg" )
 
 [global]
 
