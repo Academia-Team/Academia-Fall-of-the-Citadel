@@ -1,7 +1,6 @@
 extends SceneTree
 
-const BUILD_DIR: String = "build"
-const DESIRED_FOLDERS: Array = ["linux64", "linux86", "web", "web-main", "win64", "win86"]
+const EXPORT_PRESET_PATH: String = "res://export_presets.cfg"
 
 
 func _init() -> void:
@@ -11,18 +10,41 @@ func _init() -> void:
 	if open_status != OK:
 		printerr("Cannot access project directory.")
 		quit(1)
+		return
 
-	if project_dir.dir_exists(BUILD_DIR):
-		var removal_status: int = _remove_all(project_dir, BUILD_DIR)
-		if removal_status != OK:
-			quit(1)
+	var paths_to_make: Array = _get_export_dir_dests()
 
-	var make_status: int = _make_dirs(project_dir)
-	if make_status != OK:
-		var removal_status: int = _remove_all(project_dir, BUILD_DIR)
+	if paths_to_make.empty():
+		printerr("Failed to get export paths.")
+		printerr("Please ensure you are running the script in a Godot project.")
+		quit(1)
+		return
+
+	var build_dir: String = _get_largest_array_substring(paths_to_make)
+
+	if build_dir.empty():
+		printerr("The found export paths have no build directory in common.")
+		quit(1)
+		return
+
+	if project_dir.dir_exists(build_dir):
+		var removal_status: int = _remove_all(project_dir, build_dir)
 		if removal_status != OK:
-			printerr("Failed to cleanup after error.")
+			printerr('Cannot clean up "%s".' % build_dir)
 			quit(1)
+			return
+
+	for path in paths_to_make:
+		var dir_create_status: int = project_dir.make_dir_recursive(path)
+
+		if dir_create_status != OK:
+			printerr('Failed to create "%s".' % path)
+			var removal_status: int = _remove_all(project_dir, build_dir)
+			if removal_status != OK:
+				printerr("Failed to cleanup after error.")
+			quit(1)
+			return
+
 	quit()
 
 
@@ -67,14 +89,75 @@ func _remove_all(dir: Directory, path: String) -> int:
 	return overall_status
 
 
-func _make_dirs(dir: Directory) -> int:
-	var dir_create_status: int = OK
-	if not dir.dir_exists(BUILD_DIR):
-		for folder_name in DESIRED_FOLDERS:
-			var target_path: String = "%s/%s" % [BUILD_DIR, folder_name]
-			dir_create_status = dir.make_dir_recursive(target_path)
+func _get_export_dir_dests() -> Array:
+	var export_dests: Array = []
+	var export_file: File = File.new()
+	var export_file_status: int = export_file.open(EXPORT_PRESET_PATH, File.READ)
 
-			if dir_create_status != OK:
-				printerr('Failed to create "%s".' % target_path)
-				break
-	return dir_create_status
+	if export_file_status == OK:
+		while export_file.get_position() < export_file.get_len() and export_file.get_error() == OK:
+			var line: String = export_file.get_line()
+			if line.begins_with("export_path="):
+				var export_dest: String = _get_line_value(line)
+				var abs_export_dest: String = _get_abs_path(export_dest)
+				var abs_base_path: String = abs_export_dest.get_base_dir()
+				export_dests.append(abs_base_path)
+
+		export_file.close()
+	else:
+		printerr('Failed to open "%s".' % EXPORT_PRESET_PATH)
+
+	return export_dests
+
+
+func _get_line_value(line: String) -> String:
+	line = line.get_slice("=", 1)
+	line = line.trim_prefix('"')
+	line = line.trim_suffix('"')
+
+	return line
+
+
+func _get_abs_path(rel_path: String) -> String:
+	var complete_path: String = "res://" + rel_path
+	return ProjectSettings.globalize_path(complete_path)
+
+
+func _get_largest_common_substring(str1: String, str2: String) -> String:
+	var same: bool = true
+	var smallest_size: int
+	var str1_size: int = str1.length()
+	var str2_size: int = str2.length()
+
+	if str1_size < str2_size:
+		smallest_size = str1_size
+	else:
+		smallest_size = str2_size
+
+	var substring: String = ""
+
+	var i: int = 0
+	while i < smallest_size and same:
+		same = str1[i] == str2[i]
+
+		if same:
+			substring += str1[i]
+
+		i += 1
+
+	return String(substring)
+
+
+func _get_largest_array_substring(array: Array) -> String:
+	var array_len: int = array.size()
+	var substring: String = ""
+
+	if array_len > 0:
+		substring = array[0]
+
+	var i: int = 1
+	while i < array_len and not substring.empty():
+		substring = _get_largest_common_substring(substring, array[i])
+		i += 1
+
+	return substring
