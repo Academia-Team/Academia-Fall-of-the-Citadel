@@ -19,12 +19,13 @@ func _ready() -> void:
 		start()
 
 
-func start(start_index: int = _index, position: float = _pos) -> void:
+func start(start_index: int = _index, position: float = 0) -> void:
 	if start_index >= music.size():
 		printerr("Error starting Jukebox: Index %d is out of range." % start_index)
 	else:
 		stream = music[start_index]
 		play(position)
+		_stopped = false
 
 
 func end() -> void:
@@ -47,7 +48,7 @@ func resume() -> void:
 
 func _on_finished() -> void:
 	if not _stopped:
-		var next_index = (_index + 1) % music.size()
+		var next_index: int = (_index + 1) % music.size()
 		start(next_index)
 		emit_signal("next_song", next_index)
 		_index = next_index
