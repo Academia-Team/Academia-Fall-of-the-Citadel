@@ -14,6 +14,7 @@ func set_file_path(path: String) -> void:
 			var file_status: int = file.open(file_path, File.READ)
 			if file_status == OK:
 				text = file.get_as_text()
+				file.close()
 			else:
 				printerr('Cannot open "%s".' % file.get_path())
 		else:
