@@ -75,6 +75,11 @@ _global_script_classes=[ {
 "path": "res://scene/InfoBar.gd"
 }, {
 "base": "Area2D",
+"class": "InteractableObject",
+"language": "GDScript",
+"path": "res://class/InteractableObject.gd"
+}, {
+"base": "Area2D",
 "class": "Item",
 "language": "GDScript",
 "path": "res://class/Item.gd"
@@ -118,6 +123,7 @@ _global_script_class_icons={
 "GameGrid": "",
 "GameOver": "",
 "InfoBar": "",
+"InteractableObject": "",
 "Item": "",
 "Jukebox": "",
 "LineDialog": "",
