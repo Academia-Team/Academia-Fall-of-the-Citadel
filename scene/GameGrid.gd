@@ -304,10 +304,11 @@ func _on_DuckTimer_timeout():
 	spawn_item(DUCK_SCENE, get_spawn_pos())
 
 
-# Returns the first object that exists at the given position or null if no object exists.
+# Returns the first non-player object that exists at the given position or null if no
+# object exists.
 func get_interactable_obj_at_pos(pos: Vector2) -> InteractableObject:
 	for obj in get_tree().get_nodes_in_group(InteractableObject.GROUP):
-		if obj.position == pos and obj.exists():
+		if not obj is Player and obj.position == pos and obj.exists():
 			return obj
 
 	return null
