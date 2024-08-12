@@ -1,5 +1,5 @@
 class_name Player
-extends Area2D
+extends InteractableObject
 
 signal health_change(lives)
 signal move_request(dir)
@@ -31,10 +31,6 @@ func lives_lost() -> int:
 	if _lives <= 0:
 		return START_LIVES
 	return START_LIVES - _lives
-
-
-func exists() -> bool:
-	return visible
 
 
 func _set_dir(dir) -> void:

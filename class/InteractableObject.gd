@@ -5,7 +5,13 @@ signal existence_changed(value)
 
 export var points: int = 0
 
+const GROUP: String = "interactable"
+
 var exists: bool = false setget set_existence, get_existence
+
+
+func _init() -> void:
+	add_to_group(GROUP, true)
 
 
 func set_existence(value: bool) -> void:
