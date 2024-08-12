@@ -39,7 +39,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://class/Direction.gd"
 }, {
-"base": "Area2D",
+"base": "InteractableObject",
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://scene/Zombie.gd"
@@ -79,7 +79,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://class/InteractableObject.gd"
 }, {
-"base": "Area2D",
+"base": "InteractableObject",
 "class": "Item",
 "language": "GDScript",
 "path": "res://class/Item.gd"
@@ -99,7 +99,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scene/Menu.gd"
 }, {
-"base": "Area2D",
+"base": "InteractableObject",
 "class": "Player",
 "language": "GDScript",
 "path": "res://scene/Player.gd"

@@ -1,6 +1,6 @@
 tool
 class_name Item
-extends Area2D
+extends InteractableObject
 
 export var shovable: bool = true
 export var type: String
@@ -19,10 +19,6 @@ func acquire() -> Item:
 	($Collisionbox as CollisionShape2D).set_deferred("disabled", true)
 	($AcquireSFX as AudioStreamPlayer).play()
 	return self
-
-
-func exists() -> bool:
-	return visible
 
 
 func shove_to(pos: Vector2) -> void:

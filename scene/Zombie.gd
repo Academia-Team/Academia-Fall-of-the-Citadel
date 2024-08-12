@@ -1,5 +1,5 @@
 class_name Enemy
-extends Area2D
+extends InteractableObject
 
 signal enemy_destroyed(enemy_type)
 signal move_request(ref)
@@ -47,10 +47,6 @@ func destroy():
 
 	if not $HurtSFX.playing:
 		queue_free()
-
-
-func exists():
-	return visible
 
 
 func is_shovable():
