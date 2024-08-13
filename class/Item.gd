@@ -4,7 +4,6 @@ extends InteractableObject
 
 const ITEM_DEFAULT_SCORE: int = 5
 
-export var type: String
 export var texture: Texture setget set_texture, get_texture
 export var acquire_sfx: AudioStream setget set_acquire_sfx, get_acquire_sfx
 
