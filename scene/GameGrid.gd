@@ -74,7 +74,7 @@ func spawn_initial_enemies():
 
 
 func cleanup():
-	($RefCounter as InteractableObjectTracker).cleanup()
+	$RefCounter.cleanup()
 
 
 func _process(_delta):
@@ -121,7 +121,7 @@ func set_up_player():
 
 
 func _on_Player_pick_up_item(item_ref):
-	var obj: Item = ($RefCounter as InteractableObjectTracker).remove_assocation(name, item_ref)
+	var obj: Item = $RefCounter.remove_assocation(name, item_ref)
 	if obj == null:
 		print("Item %s is not tracked." % item_ref.type)
 
@@ -164,7 +164,7 @@ func stop() -> void:
 
 
 func _on_Zombie_spawn_timer_timeout():
-	var num_zombies: int = ($RefCounter as InteractableObjectTracker).get_count("Zombie")
+	var num_zombies: int = $RefCounter.get_count("Zombie")
 	if num_zombies < MAX_ZOMBIES and enemy_rng.randf() < ZOMBIE_SPAWN_PROB:
 		spawn_enemy(ZOMBIE_SCENE, get_spawn_pos())
 
@@ -198,7 +198,7 @@ func valid_spawn_pos(pos):
 		)
 		and get_cellv(world_to_map(pos)) != INVALID_CELL
 	):
-		valid_pos = ($RefCounter as InteractableObjectTracker).get_reference_at_pos(pos) == null
+		valid_pos = $RefCounter.get_reference_at_pos(pos) == null
 
 	return valid_pos
 
@@ -207,18 +207,18 @@ func spawn_enemy(scene, pos):
 	var instance = scene.instance()
 	instance.connect("enemy_destroyed", self, "_on_Enemy_destroyed")
 	instance.connect("move_request", self, "_on_Enemy_move_request")
-	($RefCounter as InteractableObjectTracker).add(instance.type, instance)
+	$RefCounter.add(instance.type, instance)
 	var orient_facing_player = Direction.get_cardinal_dir_facing($Player.position, pos)
 	instance.spawn(pos, orient_facing_player)
 
 
 func _on_item_spawn_timer_timeout():
 	if item_rng.randf() < _get_health_probability():
-		var num_health: int = ($RefCounter as InteractableObjectTracker).get_count("Health")
+		var num_health: int = $RefCounter.get_count("Health")
 		if num_health < MAX_HEALTH_POTIONS:
 			spawn_item(HEALTH_SCENE, get_spawn_pos())
 	else:
-		var num_swords: int = ($RefCounter as InteractableObjectTracker).get_count("Sword")
+		var num_swords: int = $RefCounter.get_count("Sword")
 		if num_swords < MAX_SWORDS:
 			spawn_item(SWORD_SCENE, get_spawn_pos())
 
@@ -226,7 +226,7 @@ func _on_item_spawn_timer_timeout():
 func spawn_item(scene, pos):
 	if scene != null and pos != null:
 		var instance = scene.instance()
-		($RefCounter as InteractableObjectTracker).add(instance.type, instance)
+		$RefCounter.add(instance.type, instance)
 		instance.position = pos
 
 
@@ -237,9 +237,7 @@ func _on_Enemy_move_request(ref):
 	for pos in desired_positions:
 		# Want to ensure that all the enemies aren't moving on top of each other. If that is happening,
 		# just have the enemy lose its turn.
-		var obj_at_pos: InteractableObject = ($RefCounter as InteractableObjectTracker).get_reference_at_pos(
-			pos
-		)
+		var obj_at_pos: InteractableObject = $RefCounter.get_reference_at_pos(pos)
 
 		if obj_at_pos == null:
 			ref.move_to(pos)
@@ -260,7 +258,7 @@ func move_shovable_obj(ref, shove_dir):
 	var success = false
 
 	if (
-		($RefCounter as InteractableObjectTracker).get_reference_at_pos(dest_pos) == null
+		$RefCounter.get_reference_at_pos(dest_pos) == null
 		and get_cellv(world_to_map(dest_pos)) != INVALID_CELL
 		and ($Player.held_item == null or $Player.position != dest_pos)
 	):
@@ -278,9 +276,7 @@ func _on_Player_move_request(dir):
 		var future_pos = Direction.translate_pos($Player.position, dir, 32)
 
 		if get_cellv(world_to_map(future_pos)) != INVALID_CELL:
-			var interactable_obj = ($RefCounter as InteractableObjectTracker).get_reference_at_pos(
-				future_pos
-			)
+			var interactable_obj = $RefCounter.get_reference_at_pos(future_pos)
 			if $Player.held_item == null or interactable_obj == null or interactable_obj is Enemy:
 				$Player.move_to(future_pos)
 			elif not move_shovable_obj(interactable_obj, dir):
