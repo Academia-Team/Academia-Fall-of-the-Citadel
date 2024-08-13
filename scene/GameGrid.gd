@@ -123,7 +123,7 @@ func set_up_player():
 func _on_Player_pick_up_item(item_ref):
 	var obj: Item = $RefCounter.remove_assocation(name, item_ref)
 	if obj == null:
-		print("Item %s is not tracked." % item_ref.type)
+		printerr("Item %s is not tracked." % item_ref.type)
 
 	info_ref.update_score(item_ref.points)
 	info_ref.set_timed_status("Press space or first button to use item")
