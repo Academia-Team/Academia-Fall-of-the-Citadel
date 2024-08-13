@@ -9,7 +9,7 @@ export var shovable_sfx: AudioStream = null setget set_shovable_sfx, get_shovabl
 
 const GROUP: String = "interactable"
 
-var exists: bool = false setget set_existence, get_existence
+var exists: bool = true setget set_existence, get_existence
 
 var _shovable_sfx_player: AudioStreamPlayer = null
 
