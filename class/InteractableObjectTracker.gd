@@ -62,7 +62,7 @@ func get_reference_in_area(rect: Rect2) -> InteractableObject:
 
 # Removes the association of the object with its given name.
 # It does not remove the object as a child.
-func remove_assocation(name: String, obj: InteractableObject) -> InteractableObject:
+func remove_association(name: String, obj: InteractableObject) -> InteractableObject:
 	var obj_removed: InteractableObject = null
 	if name in _ref_counter:
 		var i: int = 0
@@ -99,6 +99,6 @@ func _set_initial_reference(name: String) -> void:
 
 func _on_child_exiting_tree(node: Node):
 	for name in _ref_counter:
-		var obj_removed: InteractableObject = remove_assocation(name, node)
+		var obj_removed: InteractableObject = remove_association(name, node)
 		if obj_removed != null:
 			break

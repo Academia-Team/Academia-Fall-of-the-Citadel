@@ -121,7 +121,7 @@ func set_up_player():
 
 
 func _on_Player_pick_up_item(item_ref):
-	var obj: Item = $RefCounter.remove_assocation(name, item_ref)
+	var obj: Item = $RefCounter.remove_association(name, item_ref)
 	if obj == null:
 		printerr("Item %s is not tracked." % item_ref.type)
 
