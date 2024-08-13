@@ -49,10 +49,6 @@ func destroy():
 		queue_free()
 
 
-func is_shovable():
-	return false
-
-
 func move_to(pos):
 	if alive:
 		move_fail_counter = 0
