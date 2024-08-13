@@ -82,12 +82,14 @@ func clean(name: String) -> void:
 	if name in _ref_counter:
 		for ref in _ref_counter[name][REF_IDX]:
 			ref.queue_free()
+		_ref_counter[name][REF_IDX].clear()
 
 
 # Destroys all objects in the InteractableObjectTracker.
 func cleanup() -> void:
 	for child in get_children():
 		child.queue_free()
+	_ref_counter.clear()
 
 
 # Prepares for the addition of objects to be associated
