@@ -10,10 +10,9 @@ export var shovable: bool = false setget set_shovable, is_shovable
 export var shovable_sfx: AudioStream = null setget set_shovable_sfx, get_shovable_sfx
 export var type: String = ""
 
-var _shovable_to_set: bool = false
-
 var exists: bool = true setget set_existence, get_existence
 
+var _shovable_to_set: bool = false
 var _shovable_sfx_player: AudioStreamPlayer = null
 
 
