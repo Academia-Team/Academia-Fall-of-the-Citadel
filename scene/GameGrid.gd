@@ -23,7 +23,6 @@ const HEALTH_SCENE = preload("res://scene/Health.tscn")
 const SWORD_SCENE = preload("res://scene/Sword.tscn")
 const ZOMBIE_SCENE = preload("res://scene/Zombie.tscn")
 
-var ref_counter = {}
 var info_ref = null
 var started = false
 
@@ -33,7 +32,6 @@ var item_rng = null
 
 func start(info_obj):
 	info_ref = info_obj
-	ref_counter = {}
 	$Music.play()
 	$PassiveTimer.start()
 	$ZombieSpawnTimer.start()
@@ -76,9 +74,7 @@ func spawn_initial_enemies():
 
 
 func cleanup():
-	for obj in get_tree().get_nodes_in_group(InteractableObject.GROUP):
-		if not obj is Player:
-			obj.queue_free()
+	($RefCounter as InteractableObjectTracker).cleanup()
 
 
 func _process(_delta):
@@ -125,9 +121,8 @@ func set_up_player():
 
 
 func _on_Player_pick_up_item(item_ref):
-	if ref_counter.has(item_ref.type):
-		ref_counter[item_ref.type] -= 1
-	else:
+	var obj: Item = ($RefCounter as InteractableObjectTracker).remove_assocation(name, item_ref)
+	if obj == null:
 		print("Item %s is not tracked." % item_ref.type)
 
 	info_ref.update_score(item_ref.points)
@@ -145,10 +140,6 @@ func _on_passive_timer_timeout():
 
 func _on_Enemy_destroyed(ref):
 	info_ref.update_score(ref.points)
-
-
-func _on_Zombie_tree_exiting():
-	ref_counter["Zombie"] -= 1
 
 
 func _on_Player_health_change(lives):
@@ -173,9 +164,9 @@ func stop() -> void:
 
 
 func _on_Zombie_spawn_timer_timeout():
-	if ref_counter.get("Zombie", 0) < MAX_ZOMBIES:
-		if enemy_rng.randf() < ZOMBIE_SPAWN_PROB:
-			spawn_enemy(ZOMBIE_SCENE, get_spawn_pos())
+	var num_zombies: int = ($RefCounter as InteractableObjectTracker).get_count("Zombie")
+	if num_zombies < MAX_ZOMBIES and enemy_rng.randf() < ZOMBIE_SPAWN_PROB:
+		spawn_enemy(ZOMBIE_SCENE, get_spawn_pos())
 
 
 func get_spawn_pos():
@@ -215,29 +206,28 @@ func valid_spawn_pos(pos):
 func spawn_enemy(scene, pos):
 	var instance = scene.instance()
 	instance.connect("enemy_destroyed", self, "_on_Enemy_destroyed")
-	instance.connect("tree_exiting", self, "_on_%s_tree_exiting" % instance.type)
 	instance.connect("move_request", self, "_on_Enemy_move_request")
-	add_child(instance)
+	($RefCounter as InteractableObjectTracker).add(instance.type, instance)
 	var orient_facing_player = Direction.get_cardinal_dir_facing($Player.position, pos)
 	instance.spawn(pos, orient_facing_player)
-	ref_counter[instance.type] = ref_counter.get(instance.type, 0) + 1
 
 
 func _on_item_spawn_timer_timeout():
 	if item_rng.randf() < _get_health_probability():
-		if ref_counter.get("Health", 0) < MAX_HEALTH_POTIONS:
+		var num_health: int = ($RefCounter as InteractableObjectTracker).get_count("Health")
+		if num_health < MAX_HEALTH_POTIONS:
 			spawn_item(HEALTH_SCENE, get_spawn_pos())
 	else:
-		if ref_counter.get("Sword", 0) < MAX_SWORDS:
+		var num_swords: int = ($RefCounter as InteractableObjectTracker).get_count("Sword")
+		if num_swords < MAX_SWORDS:
 			spawn_item(SWORD_SCENE, get_spawn_pos())
 
 
 func spawn_item(scene, pos):
 	if scene != null and pos != null:
 		var instance = scene.instance()
-		add_child(instance)
+		($RefCounter as InteractableObjectTracker).add(instance.type, instance)
 		instance.position = pos
-		ref_counter[instance.type] = ref_counter.get(instance.type, 0) + 1
 
 
 func _on_Enemy_move_request(ref):

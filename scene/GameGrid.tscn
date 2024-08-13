@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://asset/game_over.wav" type="AudioStream" id=1]
 [ext_resource path="res://scene/GameGrid.gd" type="Script" id=2]
 [ext_resource path="res://asset/slow_melancholic_theme_c64_style.ogg" type="AudioStream" id=3]
 [ext_resource path="res://resource/tileset.tres" type="TileSet" id=4]
 [ext_resource path="res://scene/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://class/InteractableObjectTracker.gd" type="Script" id=6]
 
 [node name="GameGrid" type="TileMap"]
 position = Vector2( 0, 33 )
@@ -15,6 +16,9 @@ tile_data = PoolIntArray( 0, 25, 0, 1, 25, 0, 2, 25, 0, 3, 25, 0, 4, 25, 0, 5, 2
 script = ExtResource( 2 )
 
 [node name="Player" parent="." groups=["interactable"] instance=ExtResource( 5 )]
+
+[node name="RefCounter" type="Node" parent="."]
+script = ExtResource( 6 )
 
 [node name="PassiveTimer" type="Timer" parent="."]
 wait_time = 60.0
