@@ -6,6 +6,7 @@
 [node name="Item" type="Area2D"]
 monitoring = false
 script = ExtResource( 2 )
+shovable = true
 
 [node name="Collisionbox" type="CollisionShape2D" parent="."]
 position = Vector2( 15, 15.6667 )
