@@ -68,7 +68,7 @@ func remove_assocation(name: String, obj: InteractableObject) -> InteractableObj
 		var obj_idx: int = _ref_counter[name][_REF_IDX].find(obj)
 		if obj_idx != -1:
 			obj_removed = obj
-			_ref_counter[name][_REF_IDX].remove(obj)
+			_ref_counter[name][_REF_IDX].remove(obj_idx)
 			_ref_counter[name][_COUNT_IDX] -= 1
 	return obj_removed
 
