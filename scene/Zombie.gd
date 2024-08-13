@@ -1,7 +1,7 @@
 class_name Enemy
 extends InteractableObject
 
-signal enemy_destroyed(enemy_type)
+signal enemy_destroyed(enemy_ref)
 signal move_request(ref)
 
 const MAX_ALLOWED_FAILED_MOVES = 10
