@@ -12,6 +12,7 @@ export var acquire_sfx: AudioStream setget set_acquire_sfx, get_acquire_sfx
 func _init() -> void:
 	points = ITEM_DEFAULT_SCORE
 	shovable = true
+	exists = true
 
 
 func set_acquire_sfx(value: AudioStream) -> void:

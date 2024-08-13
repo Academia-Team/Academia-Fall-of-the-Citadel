@@ -186,14 +186,13 @@ func _process(_delta: float) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	hide()
-	($TargetTracker as TargetTracker).disable()
-	$CollisionBox.set_deferred("disabled", true)
+	exists = false
 
 
 func spawn(
 	pos: Vector2, top_bound: float, bottom_bound: float, left_bound: float, right_bound: float
 ) -> void:
+	exists = true
 	$CharacterSprite.set_orient(Direction.SOUTH)
 	position = pos
 	_bounds.left = left_bound
@@ -207,7 +206,6 @@ func spawn(
 
 	_lives = START_LIVES
 	emit_signal("health_change", _lives)
-	show()
 
 	($TargetTracker as TargetTracker).enable()
 	$CollisionBox.set_deferred("disabled", false)
