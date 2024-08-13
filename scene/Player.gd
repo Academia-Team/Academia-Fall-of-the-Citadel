@@ -241,7 +241,7 @@ func _on_Player_area_entered(area: Area2D):
 	if area is Item:
 		if not held_item:
 			held_item = area.acquire()
-			emit_signal("pick_up_item", held_item.type)
+			emit_signal("pick_up_item", held_item)
 	elif area is Enemy:
 		_hurt()
 		area.attack()
