@@ -20,11 +20,12 @@ func _ready() -> void:
 func add(name: String, obj: InteractableObject) -> void:
 	_set_initial_reference(name)
 	if obj != null:
+		add_child(obj, true)
+		obj.id = _ref_counter[name][COUNT_IDX]
 		var count: int = _ref_counter[name][COUNT_IDX] + 1
 		var references: Array = _ref_counter[name][REF_IDX]
 		references.append(obj)
 		_ref_counter[name] = [count, references]
-		add_child(obj)
 
 
 # Returns the number of objects associated with the given name.
@@ -64,11 +65,15 @@ func get_reference_in_area(rect: Rect2) -> InteractableObject:
 func remove_assocation(name: String, obj: InteractableObject) -> InteractableObject:
 	var obj_removed: InteractableObject = null
 	if name in _ref_counter:
-		var obj_idx: int = _ref_counter[name][REF_IDX].find(obj)
-		if obj_idx != -1:
-			obj_removed = obj
-			_ref_counter[name][REF_IDX].remove(obj_idx)
-			_ref_counter[name][COUNT_IDX] -= 1
+		var i: int = 0
+		while i < _ref_counter[name][REF_IDX].size():
+			if _ref_counter[name][REF_IDX][i].id == obj.id:
+				obj_removed = _ref_counter[name][REF_IDX][i]
+				_ref_counter[name][REF_IDX].remove(i)
+				_ref_counter[name][COUNT_IDX] -= 1
+				break
+			i += 1
+
 	return obj_removed
 
 

@@ -11,6 +11,7 @@ export var shovable_sfx: AudioStream = null setget set_shovable_sfx, get_shovabl
 export var type: String = ""
 
 var exists: bool = true setget set_existence, get_existence
+var id: int
 
 var _shovable_to_set: bool = false
 var _shovable_sfx_player: AudioStreamPlayer = null
