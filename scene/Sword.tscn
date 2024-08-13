@@ -5,11 +5,11 @@
 [ext_resource path="res://asset/metal_scrape.wav" type="AudioStream" id=3]
 [ext_resource path="res://asset/sword.png" type="Texture" id=4]
 
-[node name="Sword" instance=ExtResource( 1 )]
+[node name="Sword" groups=["interactable"] instance=ExtResource( 1 )]
+shovable_sfx = ExtResource( 3 )
 type = "Sword"
 texture = ExtResource( 4 )
 acquire_sfx = ExtResource( 2 )
-shove_sfx = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="1"]
 texture = ExtResource( 4 )
