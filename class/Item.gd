@@ -2,14 +2,25 @@ tool
 class_name Item
 extends InteractableObject
 
+const ITEM_DEFAULT_SCORE: int = 5
+
 export var type: String
 export var texture: Texture setget set_texture, get_texture
-export var acquire_sfx: AudioStream
+export var acquire_sfx: AudioStream setget set_acquire_sfx, get_acquire_sfx
 
 
-func _ready() -> void:
+func _init() -> void:
+	points = ITEM_DEFAULT_SCORE
 	shovable = true
+
+
+func set_acquire_sfx(value: AudioStream) -> void:
+	acquire_sfx = value
 	($AcquireSFX as AudioStreamPlayer).stream = acquire_sfx
+
+
+func get_acquire_sfx() -> AudioStream:
+	return acquire_sfx
 
 
 func acquire() -> Item:
