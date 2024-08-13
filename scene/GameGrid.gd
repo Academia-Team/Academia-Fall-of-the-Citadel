@@ -76,7 +76,9 @@ func spawn_initial_enemies():
 
 
 func cleanup():
-	get_tree().call_group("interactable", "queue_free")
+	for obj in get_tree().get_nodes_in_group(InteractableObject.GROUP):
+		if not obj is Player:
+			obj.queue_free()
 
 
 func _process(_delta):
