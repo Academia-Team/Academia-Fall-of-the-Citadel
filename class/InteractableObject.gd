@@ -16,6 +16,7 @@ var _shovable_sfx_player: AudioStreamPlayer = null
 
 func _init() -> void:
 	_shovable_sfx_player = AudioStreamPlayer.new()
+	add_child(_shovable_sfx_player)
 	add_to_group(GROUP, true)
 
 
