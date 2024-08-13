@@ -4,9 +4,7 @@ extends TileMap
 signal game_over
 signal started
 
-const ITEM_SCORE = 5
 const PASSIVE_SCORE = 1
-const ZOMBIE_SCORE = 10
 
 const MAX_ZOMBIES = 5
 const VALID_DIST_FROM_PLAYER = 64
@@ -124,15 +122,15 @@ func set_up_player():
 	$Player.spawn(Vector2(0, 0), 0, screen_size.y - cell_size.y * 2, 0, screen_size.x - cell_size.x)
 
 
-func _on_Player_pick_up_item(item_name):
-	if ref_counter.has(item_name):
-		ref_counter[item_name] -= 1
+func _on_Player_pick_up_item(item_ref):
+	if ref_counter.has(item_ref.type):
+		ref_counter[item_ref.type] -= 1
 	else:
-		print("Item %s is not tracked." % item_name)
+		print("Item %s is not tracked." % item_ref.type)
 
-	info_ref.incr_score(ITEM_SCORE)
+	info_ref.incr_score(item_ref.points)
 	info_ref.set_timed_status("Press space or first button to use item")
-	info_ref.set_status(item_name)
+	info_ref.set_status(item_ref.type)
 
 
 func _on_Player_used_item(_item_name):
@@ -143,10 +141,8 @@ func _on_passive_timer_timeout():
 	info_ref.incr_score(PASSIVE_SCORE)
 
 
-func _on_Enemy_destroyed(enemy_type):
-	match enemy_type:
-		"Zombie":
-			info_ref.incr_score(ZOMBIE_SCORE)
+func _on_Enemy_destroyed(ref):
+	info_ref.incr_score(ref.points)
 
 
 func _on_Zombie_tree_exiting():

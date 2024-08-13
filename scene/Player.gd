@@ -3,7 +3,7 @@ extends InteractableObject
 
 signal health_change(lives)
 signal move_request(dir)
-signal pick_up_item(item_name)
+signal pick_up_item(item_ref)
 signal used_item(item_name)
 
 const PLAYER_DEATH: Texture = preload("res://asset/pixelart_skull.png")
