@@ -192,7 +192,6 @@ func _ready() -> void:
 func spawn(
 	pos: Vector2, top_bound: float, bottom_bound: float, left_bound: float, right_bound: float
 ) -> void:
-	exists = true
 	$CharacterSprite.set_orient(Direction.SOUTH)
 	position = pos
 	_bounds.left = left_bound
@@ -206,9 +205,7 @@ func spawn(
 
 	_lives = START_LIVES
 	emit_signal("health_change", _lives)
-
-	($TargetTracker as TargetTracker).enable()
-	$CollisionBox.set_deferred("disabled", false)
+	exists = true
 
 
 func _hurt() -> void:
