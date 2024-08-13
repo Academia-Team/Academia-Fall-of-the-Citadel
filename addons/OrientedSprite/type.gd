@@ -18,7 +18,7 @@ export(ValidOrientation) var orientation: int = Direction.SOUTH setget set_orien
 export var faces_east: bool = false setget set_faces_east
 
 
-func _enter_tree():
+func _enter_tree() -> void:
 	centered = false
 
 
@@ -70,13 +70,16 @@ func set_north_texture(new_texture: Texture) -> void:
 	north_texture = new_texture
 	set_orient(orientation)
 
+
 func set_south_texture(new_texture: Texture) -> void:
 	south_texture = new_texture
 	set_orient(orientation)
 
+
 func set_side_texture(new_texture: Texture) -> void:
 	side_texture = new_texture
 	set_orient(orientation)
+
 
 func set_faces_east(value: bool) -> void:
 	faces_east = value
