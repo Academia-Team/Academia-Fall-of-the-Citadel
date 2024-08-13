@@ -186,7 +186,7 @@ func _process(_delta: float) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	exists = false
+	set_existence(false)
 
 
 func spawn(
@@ -205,7 +205,7 @@ func spawn(
 
 	_lives = START_LIVES
 	emit_signal("health_change", _lives)
-	exists = true
+	set_existence(true)
 
 
 func _hurt() -> void:

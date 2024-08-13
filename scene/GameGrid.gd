@@ -301,7 +301,7 @@ func _on_DuckTimer_timeout():
 # object exists.
 func get_interactable_obj_at_pos(pos: Vector2) -> InteractableObject:
 	for obj in get_tree().get_nodes_in_group(InteractableObject.GROUP):
-		if not obj is Player and obj.position == pos and obj.exists():
+		if not obj is Player and obj.position == pos and obj.exists:
 			return obj
 
 	return null
