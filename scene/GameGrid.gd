@@ -128,7 +128,7 @@ func _on_Player_pick_up_item(item_ref):
 	if ref_counter.has(item_ref.type):
 		ref_counter[item_ref.type] -= 1
 	else:
-		print("Item %s is not tracked." % item_ref.type)
+		printerr("Item %s is not tracked." % item_ref.type)
 
 	info_ref.update_score(item_ref.points)
 	info_ref.set_timed_status("Press space or first button to use item")
