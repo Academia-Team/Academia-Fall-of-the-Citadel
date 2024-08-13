@@ -237,7 +237,9 @@ func _on_Enemy_move_request(ref):
 	for pos in desired_positions:
 		# Want to ensure that all the enemies aren't moving on top of each other. If that is happening,
 		# just have the enemy lose its turn.
-		var obj_at_pos: InteractableObject = ($RefCounter as InteractableObjectTracker).get_reference_at_pos(pos)
+		var obj_at_pos: InteractableObject = ($RefCounter as InteractableObjectTracker).get_reference_at_pos(
+			pos
+		)
 
 		if obj_at_pos == null:
 			ref.move_to(pos)
@@ -276,7 +278,9 @@ func _on_Player_move_request(dir):
 		var future_pos = Direction.translate_pos($Player.position, dir, 32)
 
 		if get_cellv(world_to_map(future_pos)) != INVALID_CELL:
-			var interactable_obj = ($RefCounter as InteractableObjectTracker).get_reference_at_pos(future_pos)
+			var interactable_obj = ($RefCounter as InteractableObjectTracker).get_reference_at_pos(
+				future_pos
+			)
 			if $Player.held_item == null or interactable_obj == null or interactable_obj is Enemy:
 				$Player.move_to(future_pos)
 			elif not move_shovable_obj(interactable_obj, dir):
