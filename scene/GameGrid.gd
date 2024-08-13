@@ -198,7 +198,7 @@ func valid_spawn_pos(pos):
 		)
 		and get_cellv(world_to_map(pos)) != INVALID_CELL
 	):
-		valid_pos = get_interactable_obj_at_pos(pos) == null
+		valid_pos = ($RefCounter as InteractableObjectTracker).get_reference_at_pos(pos) == null
 
 	return valid_pos
 
@@ -237,7 +237,7 @@ func _on_Enemy_move_request(ref):
 	for pos in desired_positions:
 		# Want to ensure that all the enemies aren't moving on top of each other. If that is happening,
 		# just have the enemy lose its turn.
-		var obj_at_pos = get_interactable_obj_at_pos(pos)
+		var obj_at_pos: InteractableObject = ($RefCounter as InteractableObjectTracker).get_reference_at_pos(pos)
 
 		if obj_at_pos == null:
 			ref.move_to(pos)
@@ -258,7 +258,7 @@ func move_shovable_obj(ref, shove_dir):
 	var success = false
 
 	if (
-		get_interactable_obj_at_pos(dest_pos) == null
+		($RefCounter as InteractableObjectTracker).get_reference_at_pos(dest_pos) == null
 		and get_cellv(world_to_map(dest_pos)) != INVALID_CELL
 		and ($Player.held_item == null or $Player.position != dest_pos)
 	):
@@ -276,7 +276,7 @@ func _on_Player_move_request(dir):
 		var future_pos = Direction.translate_pos($Player.position, dir, 32)
 
 		if get_cellv(world_to_map(future_pos)) != INVALID_CELL:
-			var interactable_obj = get_interactable_obj_at_pos(future_pos)
+			var interactable_obj = ($RefCounter as InteractableObjectTracker).get_reference_at_pos(future_pos)
 			if $Player.held_item == null or interactable_obj == null or interactable_obj is Enemy:
 				$Player.move_to(future_pos)
 			elif not move_shovable_obj(interactable_obj, dir):
@@ -287,16 +287,6 @@ func _on_Player_move_request(dir):
 
 func _on_DuckTimer_timeout():
 	spawn_item(DUCK_SCENE, get_spawn_pos())
-
-
-# Returns the first non-player object that exists at the given position or null if no
-# object exists.
-func get_interactable_obj_at_pos(pos: Vector2) -> InteractableObject:
-	for obj in get_tree().get_nodes_in_group(InteractableObject.GROUP):
-		if not obj is Player and obj.position == pos and obj.exists:
-			return obj
-
-	return null
 
 
 func _get_health_probability() -> int:
