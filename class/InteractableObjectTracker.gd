@@ -3,8 +3,8 @@
 class_name InteractableObjectTracker
 extends Node
 
-const _COUNT_IDX: int = 0
-const _REF_IDX: int = 1
+const COUNT_IDX: int = 0
+const REF_IDX: int = 1
 
 var _ref_counter: Dictionary = {}
 
@@ -20,8 +20,8 @@ func _ready() -> void:
 func add(name: String, obj: InteractableObject) -> void:
 	_set_initial_reference(name)
 	if obj != null:
-		var count: int = _ref_counter[name][_COUNT_IDX] + 1
-		var references: Array = _ref_counter[name][_REF_IDX]
+		var count: int = _ref_counter[name][COUNT_IDX] + 1
+		var references: Array = _ref_counter[name][REF_IDX]
 		references.append(obj)
 		_ref_counter[name] = [count, references]
 		add_child(obj)
@@ -30,20 +30,20 @@ func add(name: String, obj: InteractableObject) -> void:
 # Returns the number of objects associated with the given name.
 func get_count(name: String) -> int:
 	_set_initial_reference(name)
-	return _ref_counter[name][_COUNT_IDX]
+	return _ref_counter[name][COUNT_IDX]
 
 
 # Returns the objects associated with the given name.
 func get_references(name: String) -> Array:
 	_set_initial_reference(name)
-	return _ref_counter[name][_REF_IDX].duplicate(true)
+	return _ref_counter[name][REF_IDX].duplicate(true)
 
 
 # Returns the first InteractiveObject that is located at the position
 # (or null if no such object exists).
 func get_reference_at_pos(pos: Vector2) -> InteractableObject:
 	for name in _ref_counter:
-		for ref in _ref_counter[name][_REF_IDX]:
+		for ref in _ref_counter[name][REF_IDX]:
 			if (ref as InteractableObject).position == pos:
 				return ref
 	return null
@@ -53,7 +53,7 @@ func get_reference_at_pos(pos: Vector2) -> InteractableObject:
 # rectangular region (or null if no such object exists).
 func get_reference_in_area(rect: Rect2) -> InteractableObject:
 	for name in _ref_counter:
-		for ref in _ref_counter[name][_REF_IDX]:
+		for ref in _ref_counter[name][REF_IDX]:
 			if rect.has_point((ref as InteractableObject).position):
 				return ref
 	return null
@@ -64,18 +64,18 @@ func get_reference_in_area(rect: Rect2) -> InteractableObject:
 func remove_assocation(name: String, obj: InteractableObject) -> InteractableObject:
 	var obj_removed: InteractableObject = null
 	if name in _ref_counter:
-		var obj_idx: int = _ref_counter[name][_REF_IDX].find(obj)
+		var obj_idx: int = _ref_counter[name][REF_IDX].find(obj)
 		if obj_idx != -1:
 			obj_removed = obj
-			_ref_counter[name][_REF_IDX].remove(obj_idx)
-			_ref_counter[name][_COUNT_IDX] -= 1
+			_ref_counter[name][REF_IDX].remove(obj_idx)
+			_ref_counter[name][COUNT_IDX] -= 1
 	return obj_removed
 
 
 # Destroys all objects associated with the given name.
 func clean(name: String) -> void:
 	if name in _ref_counter:
-		for ref in _ref_counter[name][_REF_IDX]:
+		for ref in _ref_counter[name][REF_IDX]:
 			ref.queue_free()
 
 
