@@ -2,7 +2,10 @@ tool
 extends ConfirmationDialog
 
 const CreateIconScript := preload("res://addons/godot_icon/CreateIcon.gd")
-const HELP := "Please choose single file for your icon or six images with sizes:\n16x16, 32x32, 48x48, 64x64, 128x128 and 256x256."
+const HELP := """
+Please choose single file for your icon or six images with sizes:
+16x16, 32x32, 48x48, 64x64, 128x128 and 256x256.
+"""
 
 var create_icon := CreateIconScript.new()
 var image_paths := PoolStringArray()
@@ -57,7 +60,10 @@ func create_texture_rect(image: Image) -> TextureRect:
 
 
 func disable_ok() -> void:
-	get_ok().disabled = $ChooseIconDialog.current_file == "" or images.size() != 1 and images.size() != 6
+	get_ok().disabled = (
+		$ChooseIconDialog.current_file == ""
+		or images.size() != 1 and images.size() != 6
+	)
 
 
 func print_error(error_message) -> void:
