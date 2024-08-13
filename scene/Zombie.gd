@@ -21,7 +21,7 @@ func _ready():
 func attack():
 	alive = false
 	$CollisionBox.set_deferred("disabled", true)
-	emit_signal("enemy_destroyed", type)
+	emit_signal("enemy_destroyed", self)
 	$CharacterSprite.show_hurt()
 	$HurtSFX.play()
 	$MoveTimer.stop()
