@@ -6,7 +6,6 @@ extends Node
 const _COUNT_IDX: int = 0
 const _REF_IDX: int = 1
 
-
 var _ref_counter: Dictionary = {}
 
 
