@@ -25,8 +25,7 @@ func get_acquire_sfx() -> AudioStream:
 
 
 func acquire() -> Item:
-	.hide()
-	($Collisionbox as CollisionShape2D).set_deferred("disabled", true)
+	set_existence(false)
 	($AcquireSFX as AudioStreamPlayer).play()
 	return self
 
