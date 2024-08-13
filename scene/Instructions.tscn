@@ -31,7 +31,7 @@
 [node name="Instructions" type="Node"]
 script = ExtResource( 27 )
 
-[node name="Story" type="ColorRect" parent="." groups=["Page"]]
+[node name="Story" type="ColorRect" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -63,7 +63,7 @@ Now that the city has fallen, the corrupted army marches towards you and the cit
 \"I will defend what I have sworn to defend\", you scream, as you watch the walls surrounding you slowly crack. The nightmare has arrived."
 autowrap = true
 
-[node name="CardinalMovementControls" type="ColorRect" parent="." groups=["Page"]]
+[node name="CardinalMovementControls" type="ColorRect" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -217,7 +217,7 @@ margin_right = 320.0
 margin_bottom = 64.0
 texture = ExtResource( 18 )
 
-[node name="OrdinalMovementControls" type="ColorRect" parent="." groups=["Page"]]
+[node name="OrdinalMovementControls" type="ColorRect" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -524,7 +524,7 @@ margin_right = 145.0
 margin_bottom = 64.0
 texture = ExtResource( 18 )
 
-[node name="ActionControls" type="ColorRect" parent="." groups=["Page"]]
+[node name="ActionControls" type="ColorRect" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -684,7 +684,7 @@ margin_right = 200.0
 margin_bottom = 132.0
 texture = ExtResource( 1 )
 
-[node name="FunctionalControls" type="ColorRect" parent="." groups=["Page"]]
+[node name="FunctionalControls" type="ColorRect" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -844,7 +844,7 @@ margin_right = 200.0
 margin_bottom = 132.0
 texture = ExtResource( 1 )
 
-[node name="Gameplay1" type="ColorRect" parent="." groups=["Page"]]
+[node name="Gameplay1" type="ColorRect" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -872,7 +872,7 @@ text = "The game is a grid-based survival horror game. It is not possible to sur
 The player is able to move horizontally, vertically, and diagonally in all directions. (No enemy is able to move diagonally, thus giving the player a chance to escape tricky situations.) Movement input must be held in order to get the player to move, as movement will only occur after half a second has passed. During that time, if a complementary movement request is provided without a gap between providing the original input (such as holding down the up arrow key while holding the left arrow key), then the player will move diagonally based on what inputs have been provided. If input ceases or if conflicting input is provided (such as left and right arrow keys pressed simultaneously) when time runs out, then the player won't move."
 autowrap = true
 
-[node name="Gameplay2" type="ColorRect" parent="." groups=["Page"]]
+[node name="Gameplay2" type="ColorRect" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -900,7 +900,7 @@ text = "Player movement is separate from player orientation. When movement is re
 Orientation is important when it comes to wielding weapons. A weapon will affect different cells depending on which way the player is facing. For instance, the sword will slay all enemies on whatever two cells the player is orientated towards."
 autowrap = true
 
-[node name="Scoring" type="ColorRect" parent="." groups=["Page"]]
+[node name="Scoring" type="ColorRect" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
