@@ -172,6 +172,7 @@ func stop() -> void:
 	$PassiveTimer.stop()
 	$ZombieSpawnTimer.stop()
 	$ItemSpawnTimer.stop()
+	$DuckTimer.stop()
 
 
 func _on_Zombie_spawn_timer_timeout():
