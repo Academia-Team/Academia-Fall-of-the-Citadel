@@ -15,9 +15,5 @@ jobs:
     - uses: Academia-Team/godot-gdscript-toolkit@master
       with:
         version: "3.*"
-    - run: gdformat --check class/
-    - run: gdlint class/
-    - run: gdformat --check scene/
-    - run: gdlint scene/
-    - run: gdformat --check tool/
-    - run: gdlint tool/
+    - run: gdlint .
+    - run: gdformat --check .
