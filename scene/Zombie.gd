@@ -9,7 +9,6 @@ const MAX_ALLOWED_FAILED_MOVES = 10
 var alive = true
 var to_destroy = false
 var move_fail_counter = 0
-var type = "Zombie"
 
 
 # Called when the node enters the scene tree for the first time.

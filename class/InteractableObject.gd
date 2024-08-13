@@ -8,6 +8,7 @@ const GROUP: String = "interactable"
 export var points: int = 0 setget set_points, get_points
 export var shovable: bool = false setget set_shovable, is_shovable
 export var shovable_sfx: AudioStream = null setget set_shovable_sfx, get_shovable_sfx
+export var type: String = ""
 
 var exists: bool = true setget set_existence, get_existence
 
