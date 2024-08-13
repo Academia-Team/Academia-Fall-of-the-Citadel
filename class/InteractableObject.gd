@@ -10,6 +10,8 @@ export var shovable: bool = false setget set_shovable, is_shovable
 export var shovable_sfx: AudioStream = null setget set_shovable_sfx, get_shovable_sfx
 export var type: String = ""
 
+var _shovable_to_set: bool = false
+
 var exists: bool = true setget set_existence, get_existence
 
 var _shovable_sfx_player: AudioStreamPlayer = null
@@ -22,7 +24,9 @@ func _init() -> void:
 
 
 func set_shovable(value: bool) -> void:
-	shovable = value
+	if exists:
+		shovable = value
+	_shovable_to_set = value
 
 
 func is_shovable() -> bool:
@@ -56,6 +60,12 @@ func get_points() -> int:
 func set_existence(value: bool) -> void:
 	exists = value
 	set_visible(exists)
+
+	if exists:
+		shovable = _shovable_to_set
+	else:
+		shovable = false
+
 	for child in get_children():
 		if child is CollisionShape2D:
 			child.set_deferred("disabled", not exists)
