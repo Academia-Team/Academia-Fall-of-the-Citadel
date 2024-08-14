@@ -1,40 +1,32 @@
 tool
 class_name Item
-extends Area2D
+extends InteractableObject
 
-export var shovable: bool = true
-export var type: String
+const ITEM_DEFAULT_SCORE: int = 5
+
 export var texture: Texture setget set_texture, get_texture
-export var acquire_sfx: AudioStream
-export var shove_sfx: AudioStream
+export var acquire_sfx: AudioStream setget set_acquire_sfx, get_acquire_sfx
 
 
-func _ready() -> void:
+func _init() -> void:
+	points = ITEM_DEFAULT_SCORE
+	shovable = true
+	set_existence(true)
+
+
+func set_acquire_sfx(value: AudioStream) -> void:
+	acquire_sfx = value
 	($AcquireSFX as AudioStreamPlayer).stream = acquire_sfx
-	($ShoveSFX as AudioStreamPlayer).stream = shove_sfx
+
+
+func get_acquire_sfx() -> AudioStream:
+	return acquire_sfx
 
 
 func acquire() -> Item:
-	.hide()
-	($Collisionbox as CollisionShape2D).set_deferred("disabled", true)
+	set_existence(false)
 	($AcquireSFX as AudioStreamPlayer).play()
 	return self
-
-
-func exists() -> bool:
-	return visible
-
-
-func shove_to(pos: Vector2) -> void:
-	if shovable:
-		position = pos
-		($ShoveSFX as AudioStreamPlayer).play()
-	else:
-		print("Attempted to shove unshovable object.")
-
-
-func is_shovable() -> bool:
-	return shovable
 
 
 func destroy() -> void:

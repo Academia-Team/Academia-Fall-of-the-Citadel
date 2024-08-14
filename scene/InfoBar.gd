@@ -31,7 +31,7 @@ func reset():
 	reset_status()
 
 
-func incr_score(score_delta):
+func update_score(score_delta):
 	_score += score_delta
 	_write_score_text()
 

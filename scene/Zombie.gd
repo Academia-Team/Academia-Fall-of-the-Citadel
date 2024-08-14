@@ -1,7 +1,7 @@
 class_name Enemy
-extends Area2D
+extends InteractableObject
 
-signal enemy_destroyed(enemy_type)
+signal enemy_destroyed(enemy_ref)
 signal move_request(ref)
 
 const MAX_ALLOWED_FAILED_MOVES = 10
@@ -9,7 +9,6 @@ const MAX_ALLOWED_FAILED_MOVES = 10
 var alive = true
 var to_destroy = false
 var move_fail_counter = 0
-var type = "Zombie"
 
 
 # Called when the node enters the scene tree for the first time.
@@ -21,7 +20,7 @@ func _ready():
 func attack():
 	alive = false
 	$CollisionBox.set_deferred("disabled", true)
-	emit_signal("enemy_destroyed", type)
+	emit_signal("enemy_destroyed", self)
 	$CharacterSprite.show_hurt()
 	$HurtSFX.play()
 	$MoveTimer.stop()
@@ -47,14 +46,6 @@ func destroy():
 
 	if not $HurtSFX.playing:
 		queue_free()
-
-
-func exists():
-	return visible
-
-
-func is_shovable():
-	return false
 
 
 func move_to(pos):

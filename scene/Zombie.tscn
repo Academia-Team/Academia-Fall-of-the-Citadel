@@ -10,8 +10,10 @@
 [ext_resource path="res://asset/kenney_impact-sounds/Audio/footstep_concrete_001.ogg" type="AudioStream" id=9]
 [ext_resource path="res://addons/CreatureSprite/type.gd" type="Script" id=10]
 
-[node name="Zombie" type="Area2D" groups=["enemy", "interactable"]]
+[node name="Zombie" type="Area2D"]
 script = ExtResource( 3 )
+points = 10
+type = "Zombie"
 
 [node name="CollisionBox" type="CollisionShape2D" parent="."]
 position = Vector2( 15, 15 )

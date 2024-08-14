@@ -4,9 +4,7 @@ extends TileMap
 signal game_over
 signal started
 
-const ITEM_SCORE = 5
 const PASSIVE_SCORE = 1
-const ZOMBIE_SCORE = 10
 
 const MAX_ZOMBIES = 5
 const VALID_DIST_FROM_PLAYER = 64
@@ -78,7 +76,9 @@ func spawn_initial_enemies():
 
 
 func cleanup():
-	get_tree().call_group("interactable", "queue_free")
+	for obj in get_tree().get_nodes_in_group(InteractableObject.GROUP):
+		if not obj is Player:
+			obj.queue_free()
 
 
 func _process(_delta):
@@ -124,15 +124,15 @@ func set_up_player():
 	$Player.spawn(Vector2(0, 0), 0, screen_size.y - cell_size.y * 2, 0, screen_size.x - cell_size.x)
 
 
-func _on_Player_pick_up_item(item_name):
-	if ref_counter.has(item_name):
-		ref_counter[item_name] -= 1
+func _on_Player_pick_up_item(item_ref):
+	if ref_counter.has(item_ref.type):
+		ref_counter[item_ref.type] -= 1
 	else:
-		print("Item %s is not tracked." % item_name)
+		printerr("Item %s is not tracked." % item_ref.type)
 
-	info_ref.incr_score(ITEM_SCORE)
+	info_ref.update_score(item_ref.points)
 	info_ref.set_timed_status("Press space or first button to use item")
-	info_ref.set_status(item_name)
+	info_ref.set_status(item_ref.type)
 
 
 func _on_Player_used_item(_item_name):
@@ -140,13 +140,11 @@ func _on_Player_used_item(_item_name):
 
 
 func _on_passive_timer_timeout():
-	info_ref.incr_score(PASSIVE_SCORE)
+	info_ref.update_score(PASSIVE_SCORE)
 
 
-func _on_Enemy_destroyed(enemy_type):
-	match enemy_type:
-		"Zombie":
-			info_ref.incr_score(ZOMBIE_SCORE)
+func _on_Enemy_destroyed(ref):
+	info_ref.update_score(ref.points)
 
 
 func _on_Zombie_tree_exiting():
@@ -275,9 +273,7 @@ func move_shovable_obj(ref, shove_dir):
 		and get_cellv(world_to_map(dest_pos)) != INVALID_CELL
 		and ($Player.held_item == null or $Player.position != dest_pos)
 	):
-		if ref.is_shovable():
-			ref.shove_to(dest_pos)
-			success = true
+		success = ref.shove_to(dest_pos)
 
 	return success
 
@@ -304,10 +300,11 @@ func _on_DuckTimer_timeout():
 	spawn_item(DUCK_SCENE, get_spawn_pos())
 
 
-# Returns the first object that exists at the given position or null if no object exists.
-func get_interactable_obj_at_pos(pos: Vector2) -> Area2D:
-	for obj in get_tree().get_nodes_in_group("interactable"):
-		if obj.position == pos and obj.exists():
+# Returns the first non-player object that exists at the given position or null if no
+# object exists.
+func get_interactable_obj_at_pos(pos: Vector2) -> InteractableObject:
+	for obj in get_tree().get_nodes_in_group(InteractableObject.GROUP):
+		if not obj is Player and obj.position == pos and obj.exists:
 			return obj
 
 	return null

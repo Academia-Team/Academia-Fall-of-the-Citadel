@@ -1,9 +1,9 @@
 class_name Player
-extends Area2D
+extends InteractableObject
 
 signal health_change(lives)
 signal move_request(dir)
-signal pick_up_item(item_name)
+signal pick_up_item(item_ref)
 signal used_item(item_name)
 
 const PLAYER_DEATH: Texture = preload("res://asset/pixelart_skull.png")
@@ -31,10 +31,6 @@ func lives_lost() -> int:
 	if _lives <= 0:
 		return START_LIVES
 	return START_LIVES - _lives
-
-
-func exists() -> bool:
-	return visible
 
 
 func _set_dir(dir) -> void:
@@ -190,9 +186,7 @@ func _process(_delta: float) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	hide()
-	($TargetTracker as TargetTracker).disable()
-	$CollisionBox.set_deferred("disabled", true)
+	set_existence(false)
 
 
 func spawn(
@@ -211,10 +205,7 @@ func spawn(
 
 	_lives = START_LIVES
 	emit_signal("health_change", _lives)
-	show()
-
-	($TargetTracker as TargetTracker).enable()
-	$CollisionBox.set_deferred("disabled", false)
+	set_existence(true)
 
 
 func _hurt() -> void:
@@ -250,7 +241,7 @@ func _on_Player_area_entered(area: Area2D):
 	if area is Item:
 		if not held_item:
 			held_item = area.acquire()
-			emit_signal("pick_up_item", held_item.type)
+			emit_signal("pick_up_item", held_item)
 	elif area is Enemy:
 		_hurt()
 		area.attack()

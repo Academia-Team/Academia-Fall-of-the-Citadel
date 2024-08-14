@@ -3,9 +3,11 @@
 [ext_resource path="res://class/Item.gd" type="Script" id=2]
 [ext_resource path="res://resource/collision_rect.tres" type="Shape2D" id=3]
 
-[node name="Item" type="Area2D" groups=["interactable", "item"]]
+[node name="Item" type="Area2D" groups=["interactable"]]
 monitoring = false
 script = ExtResource( 2 )
+points = 5
+shovable = true
 
 [node name="Collisionbox" type="CollisionShape2D" parent="."]
 position = Vector2( 15, 15.6667 )
