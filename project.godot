@@ -109,6 +109,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://class/TargetTracker.gd"
 }, {
+"base": "Item",
+"class": "TargettedItem",
+"language": "GDScript",
+"path": "res://class/TargettedItem.gd"
+}, {
 "base": "TileMap",
 "class": "TileWorld",
 "language": "GDScript",
@@ -135,6 +140,7 @@ _global_script_class_icons={
 "Menu": "",
 "Player": "",
 "TargetTracker": "",
+"TargettedItem": "",
 "TileWorld": ""
 }
 
