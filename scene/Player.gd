@@ -130,6 +130,9 @@ func _handle_movement() -> void:
 
 func _use_item() -> void:
 	if held_item != null and not _mid_use:
+		if held_item is TargettedItem:
+			var orient: int = $CharacterSprite.get_orient()
+			held_item.set_targets($TargetRacker.get_targets(orient))
 		match held_item.type:
 			"Duck":
 				held_item.use()
