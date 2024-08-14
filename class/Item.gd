@@ -21,13 +21,23 @@ func _init() -> void:
 	points = ITEM_DEFAULT_SCORE
 	shovable = true
 
-	_sprite = Sprite.new()
-	add_child(_sprite, true)
-	_sprite.set_owner(self)
+	var possible_sprite: Sprite = _get_sprite()
+	if possible_sprite == null:
+		_sprite = Sprite.new()
+		add_child(_sprite, true)
+		_sprite.set_owner(self)
+	else:
+		_sprite = possible_sprite
 
 	_acquire_sfx_player = AudioStreamPlayer.new()
 	add_child(_acquire_sfx_player, true)
-	_acquire_sfx_player.set_owner(self)
+
+
+func _get_sprite() -> Sprite:
+	for child in get_children():
+		if child is Sprite:
+			return child
+	return null
 
 
 func spawn(spawned_into: TileWorld, pos: Vector2) -> void:
