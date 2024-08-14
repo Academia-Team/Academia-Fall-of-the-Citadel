@@ -81,15 +81,13 @@ func remove_association(name: String, obj: InteractableObject) -> InteractableOb
 func clean(name: String) -> void:
 	if name in _ref_counter:
 		for ref in _ref_counter[name][REF_IDX]:
-			ref.queue_free()
-		_ref_counter[name][REF_IDX].clear()
+			remove_child(ref)
 
 
 # Destroys all objects in the InteractableObjectTracker.
 func cleanup() -> void:
 	for child in get_children():
-		child.queue_free()
-	_ref_counter.clear()
+		remove_child(child)
 
 
 # Prepares for the addition of objects to be associated
@@ -100,7 +98,11 @@ func _set_initial_reference(name: String) -> void:
 
 
 func _on_child_exiting_tree(node: Node):
+	var obj_removed: InteractableObject = null
 	for name in _ref_counter:
-		var obj_removed: InteractableObject = remove_association(name, node)
+		obj_removed = remove_association(name, node)
 		if obj_removed != null:
 			break
+
+	assert(obj_removed != null)
+	node.queue_free()
