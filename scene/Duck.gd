@@ -1,3 +1,4 @@
+tool
 extends Item
 
 var _duck_quacked: bool = false
