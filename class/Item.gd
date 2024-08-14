@@ -28,6 +28,7 @@ func _init() -> void:
 		_sprite.set_owner(self)
 	else:
 		_sprite = possible_sprite
+	_sprite.centered = false
 
 	_acquire_sfx_player = AudioStreamPlayer.new()
 	add_child(_acquire_sfx_player, true)
