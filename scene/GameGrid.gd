@@ -43,7 +43,7 @@ func start(info_obj):
 		$DuckTimer.start()
 
 	set_up_rng()
-	set_up_player()
+	$Player.spawn(Vector2.ZERO)
 	spawn_initial_env()
 	emit_signal("started")
 	started = true
@@ -118,12 +118,6 @@ func handle_stop_spawn_options():
 		info_ref.set_timed_status("All spawners toggled.")
 	else:
 		info_ref.set_timed_status("Nothing toggled.")
-
-
-func set_up_player():
-	var screen_size = get_viewport_rect().size
-
-	$Player.spawn(Vector2(0, 0), 0, screen_size.y - cell_size.y * 2, 0, screen_size.x - cell_size.x)
 
 
 func _on_Player_pick_up_item(item_ref):

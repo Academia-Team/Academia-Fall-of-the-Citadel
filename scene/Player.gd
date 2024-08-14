@@ -13,14 +13,8 @@ const SWORD_SLASH: PackedScene = preload("res://scene/SwordAttack.tscn")
 var held_item: Item = null
 var lives: int = 0 setget set_lives, get_lives
 
-var _bounds: Dictionary = {
-	Direction.NORTH: 0, Direction.SOUTH: 0, Direction.WEST: 0, Direction.EAST: 0
-}
-var _targets_to_destroy: Array = []
-
 var _future_dir: int = Direction.NONE
 var _immortal: bool = false
-var _mid_use: bool = false
 
 
 func get_orient() -> int:
@@ -92,15 +86,6 @@ func kill() -> void:
 		yield($ImmunityTimer, "timeout")
 
 
-func _pos_in_bounds(pos: Vector2) -> bool:
-	return (
-		pos.x >= _bounds.left
-		&& pos.x <= _bounds.right
-		&& pos.y >= _bounds.top
-		&& pos.y <= _bounds.bottom
-	)
-
-
 func _handle_action() -> void:
 	_handle_movement()
 	if Input.is_action_just_pressed("action"):
@@ -133,68 +118,13 @@ func _handle_movement() -> void:
 
 
 func _use_item() -> void:
-	if held_item != null and not _mid_use:
+	if held_item != null:
 		if held_item is TargettedItem:
 			var orient: int = $CharacterSprite.get_orient()
 			held_item.set_targets($TargetRacker.get_targets(orient))
-		match held_item.type:
-			"Duck":
-				held_item.use()
-			"Health":
-				held_item.use()
-			"Sword":
-				_use_sword()
-			_:
-				_discard_item()
+		held_item.use()
 	else:
 		$Reject.play()
-
-
-func _use_sword() -> void:
-	var orient: int = $CharacterSprite.get_orient()
-	_targets_to_destroy = ($TargetTracker as TargetTracker).get_targets(orient)
-	var slash_generated: bool = _generate_sword_slash(32)
-	slash_generated = _generate_sword_slash(64) or slash_generated
-
-	if slash_generated:
-		for target in _targets_to_destroy:
-			if target is Enemy:
-				target.damage()
-
-		_discard_item()
-	else:
-		$Reject.play()
-
-
-func _generate_sword_slash(num_pixels_away: float) -> bool:
-	var slash_anim: CanvasItem = null
-
-	if _pos_in_bounds(
-		Direction.translate_pos(position, $CharacterSprite.get_orient(), num_pixels_away)
-	):
-		slash_anim = SWORD_SLASH.instance()
-		slash_anim.position = Direction.dir_to_rel_pos(
-			$CharacterSprite.get_orient(), num_pixels_away
-		)
-		var slash_status: int = slash_anim.connect(
-			"animation_finished", self, "_slash_anim_finished"
-		)
-
-		if slash_status == OK:
-			add_child(slash_anim)
-		else:
-			printerr("Cannot generate sword slash.")
-			slash_anim.free()
-			slash_anim = null
-
-	return slash_anim != null
-
-
-func _discard_item() -> void:
-	emit_signal("used_item", held_item.type)
-	held_item.destroy()
-	held_item = null
-	_mid_use = false
 
 
 func _process(_delta: float) -> void:
@@ -205,24 +135,16 @@ func _process(_delta: float) -> void:
 		_handle_action()
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_existence(false)
 
 
-func spawn(
-	pos: Vector2, top_bound: float, bottom_bound: float, left_bound: float, right_bound: float
-) -> void:
-	$CharacterSprite.set_orient(Direction.SOUTH)
+func spawn(pos: Vector2, orient: int = Direction.SOUTH) -> void:
+	$CharacterSprite.set_orient(orient)
 	position = pos
-	_bounds.left = left_bound
-	_bounds.right = right_bound
-	_bounds.top = top_bound
-	_bounds.bottom = bottom_bound
 
 	held_item = null
 	_future_dir = Direction.NONE
-	_mid_use = false
 
 	set_lives(START_LIVES)
 	set_existence(true)
@@ -261,14 +183,6 @@ func _on_Player_area_entered(area: Area2D):
 		damage()
 		area.damage()
 		area.destroy()
-
-
-func _slash_anim_finished() -> void:
-	for target_to_destroy in _targets_to_destroy:
-		if target_to_destroy != null:
-			target_to_destroy.destroy()
-
-	_targets_to_destroy.clear()
 
 
 func is_immortal() -> bool:
