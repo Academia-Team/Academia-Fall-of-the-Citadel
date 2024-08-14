@@ -1,31 +1,25 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://resource/collision_rect.tres" type="Shape2D" id=1]
-[ext_resource path="res://asset/Waterharpsound-ding01.wav" type="AudioStream" id=2]
+[ext_resource path="res://class/TargettedItem.gd" type="Script" id=1]
+[ext_resource path="res://resource/collision_rect.tres" type="Shape2D" id=2]
 [ext_resource path="res://asset/metal_scrape.wav" type="AudioStream" id=3]
 [ext_resource path="res://asset/sword.png" type="Texture" id=4]
-[ext_resource path="res://class/Item.gd" type="Script" id=5]
+[ext_resource path="res://asset/Waterharpsound-ding01.wav" type="AudioStream" id=5]
 
 [node name="Sword" type="Area2D" groups=["interactable"]]
-monitoring = false
-script = ExtResource( 5 )
+script = ExtResource( 1 )
+collision_shape = ExtResource( 2 )
 points = 5
 shovable = true
 shovable_sfx = ExtResource( 3 )
 type = "Sword"
 texture = ExtResource( 4 )
-acquire_sfx = ExtResource( 2 )
+acquire_sfx = ExtResource( 5 )
 
-[node name="Collisionbox" type="CollisionShape2D" parent="."]
-position = Vector2( 15, 15.6667 )
-shape = ExtResource( 1 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 16, 16 )
+shape = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 16, 16 )
 texture = ExtResource( 4 )
-
-[node name="AcquireSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
-
-[node name="ShoveSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
+centered = false
