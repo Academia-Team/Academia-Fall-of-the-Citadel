@@ -208,11 +208,15 @@ func valid_spawn_pos(pos):
 			abs(pos.x - $Player.position.x) >= VALID_DIST_FROM_PLAYER
 			or abs(pos.y - $Player.position.y) >= VALID_DIST_FROM_PLAYER
 		)
-		and get_cellv(world_to_map(pos)) != INVALID_CELL
+		and pos_in_world(pos)
 	):
 		valid_pos = get_interactable_obj_at_pos(pos) == null
 
 	return valid_pos
+
+
+func pos_in_world(pos: Vector2) -> bool:
+	return get_cellv(world_to_map(pos)) != INVALID_CELL
 
 
 func spawn_enemy(scene, pos):
@@ -272,7 +276,7 @@ func move_shovable_obj(ref, shove_dir):
 
 	if (
 		get_interactable_obj_at_pos(dest_pos) == null
-		and get_cellv(world_to_map(dest_pos)) != INVALID_CELL
+		and pos_in_world(dest_pos)
 		and ($Player.held_item == null or $Player.position != dest_pos)
 	):
 		success = ref.shove_to(dest_pos)
@@ -288,7 +292,7 @@ func _on_Player_move_request(dir):
 	if $Player.get_lives() > 0:
 		var future_pos = Direction.translate_pos($Player.position, dir, 32)
 
-		if get_cellv(world_to_map(future_pos)) != INVALID_CELL:
+		if pos_in_world(future_pos):
 			var interactable_obj = get_interactable_obj_at_pos(future_pos)
 			if $Player.held_item == null or interactable_obj == null or interactable_obj is Enemy:
 				$Player.move_to(future_pos)
