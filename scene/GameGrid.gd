@@ -1,5 +1,5 @@
 class_name GameGrid
-extends TileMap
+extends TileWorld
 
 signal game_over
 signal started
@@ -213,10 +213,6 @@ func valid_spawn_pos(pos):
 		valid_pos = get_interactable_obj_at_pos(pos) == null
 
 	return valid_pos
-
-
-func pos_in_world(pos: Vector2) -> bool:
-	return get_cellv(world_to_map(pos)) != INVALID_CELL
 
 
 func spawn_enemy(scene, pos):

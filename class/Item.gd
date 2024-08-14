@@ -10,7 +10,7 @@ const ITEM_DEFAULT_SCORE: int = 5
 export var texture: Texture setget set_texture, get_texture
 export var acquire_sfx: AudioStream setget set_acquire_sfx, get_acquire_sfx
 
-var _gamegrid: GameGrid = null
+var _gamegrid: TileWorld = null
 var _owner: Area2D = null
 
 
@@ -19,7 +19,7 @@ func _init() -> void:
 	shovable = true
 
 
-func spawn(spawned_into: GameGrid, pos: Vector2) -> void:
+func spawn(spawned_into: TileWorld, pos: Vector2) -> void:
 	set_existence(true)
 	_gamegrid = spawned_into
 	position = pos
