@@ -232,8 +232,15 @@ func _on_Player_area_entered(area: Area2D):
 	if area is Item:
 		if not held_item:
 			held_item = area.acquire(self)
-			area.connect("used", self, "_on_item_used")
-			area.connect("failed_use", self, "_on_item_failed_use")
+
+			var used_status: int =  area.connect("used", self, "_on_item_used")
+			if used_status != OK:
+				printerr('Item "%s" cannot be used.' % area.type)
+
+			var failed_status: int = area.connect("failed_use", self, "_on_item_failed_use")
+			if failed_status != OK:
+				printerr('Item "%s" cannot report failure.' % area.type)
+
 			emit_signal("pick_up_item", held_item)
 	elif area is Enemy:
 		_hurt()
