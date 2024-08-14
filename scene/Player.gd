@@ -11,11 +11,11 @@ const START_LIVES: int = 3
 const SWORD_SLASH: PackedScene = preload("res://scene/SwordAttack.tscn")
 
 var held_item: Item = null
+var lives: int = 0 setget set_lives, get_lives
 
 var _bounds: Dictionary = {
 	Direction.NORTH: 0, Direction.SOUTH: 0, Direction.WEST: 0, Direction.EAST: 0
 }
-var _lives: int = 0
 var _targets_to_destroy: Array = []
 
 var _future_dir: int = Direction.NONE
@@ -24,13 +24,55 @@ var _mid_use: bool = false
 
 
 func get_lives() -> int:
-	return _lives
+	return lives
+
+
+func set_lives(value: int) -> void:
+	if lives > 0 and lives != value and value >= 0 and value <= START_LIVES:
+		if value < lives:
+			_damaged(value)
+		else:
+			_healed()
+
+		lives = value
+		emit_signal("health_change", value)
+
+
+func _damaged(remaining_lives: int) -> void:
+	if $ImmunityTimer.is_stopped() and not is_immortal():
+		if remaining_lives > 0:
+			$CharacterSprite.show_hurt()
+			$HurtSFX.play()
+			$ImmunityTimer.start()
+		else:
+			set_existence(false)
+			set_visible(true)
+
+
+func _healed() -> void:
+	$CharacterSprite.show_heal()
 
 
 func lives_lost() -> int:
-	if _lives <= 0:
+	if lives <= 0:
 		return START_LIVES
-	return START_LIVES - _lives
+	return START_LIVES - lives
+
+
+func damage(damage_amount: int = 1) -> void:
+	if damage_amount > 0:
+		var new_lives = lives - damage_amount
+		if new_lives < 0:
+			new_lives = 0
+		set_lives(new_lives)
+
+
+func heal(heal_amount: int = 1) -> void:
+	if heal_amount > 0:
+		var new_lives: int = lives + heal_amount
+		if new_lives > START_LIVES:
+			new_lives = START_LIVES
+		set_lives(new_lives)
 
 
 func _set_dir(dir) -> void:
@@ -38,11 +80,11 @@ func _set_dir(dir) -> void:
 
 
 func kill() -> void:
-	while exists and _lives > 0:
+	while exists and lives > 0:
 		if is_immortal():
 			toggle_immortality()
 
-		_hurt()
+		damage()
 		yield($ImmunityTimer, "timeout")
 
 
@@ -92,7 +134,7 @@ func _use_item() -> void:
 			"Duck":
 				held_item.use()
 			"Health":
-				_use_health()
+				held_item.use()
 			"Sword":
 				_use_sword()
 			_:
@@ -141,25 +183,6 @@ func _generate_sword_slash(num_pixels_away: float) -> bool:
 	return slash_anim != null
 
 
-func _use_health() -> void:
-	_mid_use = true
-
-	if _lives < START_LIVES:
-		_lives += 1
-		var heal_sfx: AudioStreamPlayer = held_item.get_node("UseSFX")
-
-		heal_sfx.play()
-		$CharacterSprite.show_heal()
-		emit_signal("health_change", _lives)
-		yield(heal_sfx, "finished")
-	else:
-		var heal_fail_anim: AnimationPlayer = held_item.get_node("Fail")
-		heal_fail_anim.play()
-		yield(heal_fail_anim, "animation_finished")
-
-	_discard_item()
-
-
 func _discard_item() -> void:
 	emit_signal("used_item", held_item.type)
 	held_item.destroy()
@@ -194,23 +217,8 @@ func spawn(
 	_future_dir = Direction.NONE
 	_mid_use = false
 
-	_lives = START_LIVES
-	emit_signal("health_change", _lives)
+	set_lives(START_LIVES)
 	set_existence(true)
-
-
-func _hurt() -> void:
-	if $ImmunityTimer.is_stopped() and not is_immortal():
-		if _lives > 0:
-			_lives -= 1
-		emit_signal("health_change", _lives)
-		$CharacterSprite.show_hurt()
-		$HurtSFX.play()
-		$ImmunityTimer.start()
-
-		if _lives <= 0:
-			set_existence(false)
-			set_visible(true)
 
 
 func move_to(pos: Vector2) -> void:
@@ -243,7 +251,7 @@ func _on_Player_area_entered(area: Area2D):
 
 			emit_signal("pick_up_item", held_item)
 	elif area is Enemy:
-		_hurt()
+		damage()
 		area.attack()
 		area.destroy()
 
@@ -265,7 +273,7 @@ func toggle_immortality() -> void:
 
 
 func _on_CharacterSprite_effect_finish() -> void:
-	if _lives <= 0:
+	if lives <= 0:
 		$CharacterSprite.texture = PLAYER_DEATH
 
 

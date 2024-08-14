@@ -1,10 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://class/Item.gd" type="Script" id=1]
+[ext_resource path="res://scene/Health.gd" type="Script" id=1]
 [ext_resource path="res://asset/heal_use.wav" type="AudioStream" id=2]
 [ext_resource path="res://scene/HealthFail.tscn" type="PackedScene" id=3]
-[ext_resource path="res://asset/health_move.wav" type="AudioStream" id=4]
-[ext_resource path="res://asset/bottle-clay-uncork-02.wav" type="AudioStream" id=5]
 [ext_resource path="res://asset/health.png" type="Texture" id=6]
 [ext_resource path="res://resource/collision_rect.tres" type="Shape2D" id=7]
 
@@ -12,10 +10,10 @@
 script = ExtResource( 1 )
 points = 5
 shovable = true
-shovable_sfx = ExtResource( 4 )
-type = "Health"
+
+[node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 6 )
-acquire_sfx = ExtResource( 5 )
+centered = false
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 6 )
@@ -33,3 +31,6 @@ centered = false
 
 [node name="UseSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
+
+[connection signal="animation_finished" from="Fail" to="." method="_on_Fail_animation_finished"]
+[connection signal="finished" from="UseSFX" to="." method="_on_UseSFX_finished"]
