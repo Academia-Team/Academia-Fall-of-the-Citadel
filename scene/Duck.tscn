@@ -20,6 +20,10 @@ acquire_sfx = ExtResource( 1 )
 texture = ExtResource( 5 )
 centered = false
 
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 5 )
+centered = false
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 15, 15 )
 shape = ExtResource( 2 )
@@ -30,3 +34,5 @@ centered = false
 
 [node name="UseSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+
+[connection signal="finished" from="UseSFX" to="." method="_on_UseSFX_finished"]
