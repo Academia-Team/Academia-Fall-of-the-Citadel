@@ -233,7 +233,7 @@ func _on_Player_area_entered(area: Area2D):
 		if not held_item:
 			held_item = area.acquire(self)
 
-			var used_status: int =  area.connect("used", self, "_on_item_used")
+			var used_status: int = area.connect("used", self, "_on_item_used")
 			if used_status != OK:
 				printerr('Item "%s" cannot be used.' % area.type)
 
