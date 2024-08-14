@@ -63,8 +63,7 @@ func spawn(pos: Vector2, orient: int = Direction.SOUTH) -> void:
 	position = pos
 	$CharacterSprite.set_orient(orient)
 
-	show()
-	$CollisionBox.set_deferred("disabled", false)
+	set_existence(true)
 	$SpawnSFX.play()
 	$MoveTimer.start()
 
