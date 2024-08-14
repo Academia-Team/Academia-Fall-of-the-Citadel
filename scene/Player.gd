@@ -125,7 +125,7 @@ func _use_item() -> void:
 	if held_item != null:
 		if held_item is TargettedItem:
 			var orient: int = $CharacterSprite.get_orient()
-			held_item.set_targets($TargetRacker.get_targets(orient))
+			held_item.set_targets($TargetTracker.get_targets(orient))
 		held_item.use()
 	else:
 		$Reject.play()
