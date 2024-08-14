@@ -12,6 +12,8 @@ func _use() -> void:
 			_health_used = true
 		else:
 			$Fail.play()
+	else:
+		emit_signal("failed_use")
 
 
 func _on_UseSFX_finished() -> void:
