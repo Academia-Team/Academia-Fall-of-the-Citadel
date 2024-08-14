@@ -155,7 +155,7 @@ func _use_sword() -> void:
 	if slash_generated:
 		for target in _targets_to_destroy:
 			if target is Enemy:
-				target.attack()
+				target.damage()
 
 		_discard_item()
 	else:
@@ -255,7 +255,7 @@ func _on_Player_area_entered(area: Area2D):
 			emit_signal("pick_up_item", held_item)
 	elif area is Enemy:
 		damage()
-		area.attack()
+		area.damage()
 		area.destroy()
 
 

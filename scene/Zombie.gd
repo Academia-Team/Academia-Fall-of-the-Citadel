@@ -17,7 +17,7 @@ func _ready():
 	$CollisionBox.set_deferred("disabled", true)
 
 
-func attack():
+func damage():
 	alive = false
 	$CollisionBox.set_deferred("disabled", true)
 	emit_signal("enemy_destroyed", self)
