@@ -90,7 +90,7 @@ func _use_item() -> void:
 	if held_item != null and not _mid_use:
 		match held_item.type:
 			"Duck":
-				_use_duck()
+				held_item.use()
 			"Health":
 				_use_health()
 			"Sword":
@@ -139,15 +139,6 @@ func _generate_sword_slash(num_pixels_away: float) -> bool:
 			slash_anim = null
 
 	return slash_anim != null
-
-
-func _use_duck() -> void:
-	_mid_use = true
-
-	var duck_sfx: AudioStreamPlayer = held_item.get_node("UseSFX")
-	duck_sfx.play()
-	yield(duck_sfx, "finished")
-	_discard_item()
 
 
 func _use_health() -> void:
@@ -241,6 +232,8 @@ func _on_Player_area_entered(area: Area2D):
 	if area is Item:
 		if not held_item:
 			held_item = area.acquire(self)
+			area.connect("used", self, "_on_item_used")
+			area.connect("failed_use", self, "_on_item_failed_use")
 			emit_signal("pick_up_item", held_item)
 	elif area is Enemy:
 		_hurt()
@@ -267,3 +260,13 @@ func toggle_immortality() -> void:
 func _on_CharacterSprite_effect_finish() -> void:
 	if _lives <= 0:
 		$CharacterSprite.texture = PLAYER_DEATH
+
+
+func _on_item_used() -> void:
+	emit_signal("used_item", held_item.type)
+	held_item.queue_free()
+	held_item = null
+
+
+func _on_item_failed_use() -> void:
+	$Reject.play()
