@@ -12,11 +12,11 @@ const ITEM_DEFAULT_SCORE: int = 5
 export var texture: Texture setget set_texture, get_texture
 export var acquire_sfx: AudioStream setget set_acquire_sfx, get_acquire_sfx
 
+var holder: Area2D = null
+var gameworld: TileWorld = null
+
 var _sprite: Sprite
 var _acquire_sfx_player: AudioStreamPlayer
-
-var _gamegrid: TileWorld = null
-var _owner: Area2D = null
 
 
 func _init() -> void:
@@ -45,7 +45,7 @@ func _get_sprite() -> Sprite:
 
 func spawn(spawned_into: TileWorld, pos: Vector2) -> void:
 	set_existence(true)
-	_gamegrid = spawned_into
+	gameworld = spawned_into
 	position = pos
 
 
@@ -68,7 +68,7 @@ func get_acquire_sfx() -> AudioStream:
 
 func acquire(acquiree: Area2D) -> Item:
 	set_existence(false)
-	_owner = acquiree
+	holder = acquiree
 	_acquire_sfx_player.play()
 
 	return self
