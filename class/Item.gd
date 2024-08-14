@@ -7,11 +7,18 @@ const ITEM_DEFAULT_SCORE: int = 5
 export var texture: Texture setget set_texture, get_texture
 export var acquire_sfx: AudioStream setget set_acquire_sfx, get_acquire_sfx
 
+var _gamegrid: GameGrid = null
+
 
 func _init() -> void:
 	points = ITEM_DEFAULT_SCORE
 	shovable = true
+
+
+func spawn(spawned_into: GameGrid, pos: Vector2) -> void:
 	set_existence(true)
+	_gamegrid = spawned_into
+	position = pos
 
 
 func set_acquire_sfx(value: AudioStream) -> void:

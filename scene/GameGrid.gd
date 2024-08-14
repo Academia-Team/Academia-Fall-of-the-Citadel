@@ -240,11 +240,10 @@ func _on_item_spawn_timer_timeout():
 
 
 func spawn_item(scene, pos):
-	if scene != null and pos != null:
-		var instance = scene.instance()
-		add_child(instance)
-		instance.position = pos
-		ref_counter[instance.type] = ref_counter.get(instance.type, 0) + 1
+	var instance = scene.instance()
+	add_child(instance)
+	instance.spawn(self, pos)
+	ref_counter[instance.type] = ref_counter.get(instance.type, 0) + 1
 
 
 func _on_Enemy_move_request(ref):
