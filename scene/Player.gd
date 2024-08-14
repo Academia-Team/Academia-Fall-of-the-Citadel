@@ -36,6 +36,11 @@ func set_lives(value: int) -> void:
 		emit_signal("health_change", value)
 
 
+func _set_initial_lives(value: int = START_LIVES) -> void:
+	lives = value
+	emit_signal("health_change", value)
+
+
 func _damaged(remaining_lives: int) -> void:
 	if $ImmunityTimer.is_stopped() and not is_immortal():
 		if remaining_lives > 0:
@@ -146,7 +151,7 @@ func spawn(pos: Vector2, orient: int = Direction.SOUTH) -> void:
 	held_item = null
 	_future_dir = Direction.NONE
 
-	set_lives(START_LIVES)
+	_set_initial_lives()
 	set_existence(true)
 
 
