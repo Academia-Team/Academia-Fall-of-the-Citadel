@@ -2,6 +2,9 @@ tool
 class_name Item
 extends InteractableObject
 
+signal used
+signal failed_use
+
 const ITEM_DEFAULT_SCORE: int = 5
 
 export var texture: Texture setget set_texture, get_texture
@@ -20,6 +23,14 @@ func spawn(spawned_into: GameGrid, pos: Vector2) -> void:
 	set_existence(true)
 	_gamegrid = spawned_into
 	position = pos
+
+
+func use() -> void:
+	if has_method("_use"):
+		call("_use")
+	else:
+		printerr('Item "%s" has no _use() method.' % type)
+		emit_signal("failed_use")
 
 
 func set_acquire_sfx(value: AudioStream) -> void:
