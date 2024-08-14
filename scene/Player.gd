@@ -8,7 +8,6 @@ signal used_item(item_name)
 
 const PLAYER_DEATH: Texture = preload("res://asset/pixelart_skull.png")
 const START_LIVES: int = 3
-const SWORD_SLASH: PackedScene = preload("res://scene/SwordAttack.tscn")
 
 var held_item: Item = null
 var lives: int = 0 setget set_lives, get_lives
