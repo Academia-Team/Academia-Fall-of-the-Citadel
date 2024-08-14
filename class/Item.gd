@@ -2,6 +2,8 @@ tool
 class_name Item
 extends InteractableObject
 
+# warning-ignore:unused_signal
+# The used signal is supposed to be used in all inheriting classes.
 signal used
 signal failed_use
 
