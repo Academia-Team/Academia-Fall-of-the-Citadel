@@ -8,6 +8,7 @@ export var texture: Texture setget set_texture, get_texture
 export var acquire_sfx: AudioStream setget set_acquire_sfx, get_acquire_sfx
 
 var _gamegrid: GameGrid = null
+var _owner: Area2D = null
 
 
 func _init() -> void:
@@ -30,9 +31,11 @@ func get_acquire_sfx() -> AudioStream:
 	return acquire_sfx
 
 
-func acquire() -> Item:
+func acquire(acquiree: Area2D) -> Item:
 	set_existence(false)
+	_owner = acquiree
 	($AcquireSFX as AudioStreamPlayer).play()
+
 	return self
 
 

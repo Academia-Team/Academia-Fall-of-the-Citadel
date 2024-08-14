@@ -240,7 +240,7 @@ func _on_MoveTimer_timeout() -> void:
 func _on_Player_area_entered(area: Area2D):
 	if area is Item:
 		if not held_item:
-			held_item = area.acquire()
+			held_item = area.acquire(self)
 			emit_signal("pick_up_item", held_item)
 	elif area is Enemy:
 		_hurt()
