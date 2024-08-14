@@ -36,7 +36,7 @@ func show_hurt(length: float = hurt_length) -> void:
 func _show_effect(length: float, color: Color) -> void:
 	if not effect_timer.is_stopped():
 		effect_timer.stop()
-		effect_timer.signal("timeout")
+		effect_timer.emit_signal("timeout")
 		effect_timer.yield("timeout")
 
 	effect_timer.wait_time = length
