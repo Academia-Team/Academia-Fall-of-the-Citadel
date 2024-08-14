@@ -41,7 +41,7 @@ func get_shovable_sfx() -> AudioStream:
 func shove_to(pos: Vector2) -> bool:
 	if shovable:
 		position = pos
-		($ShoveSFX as AudioStreamPlayer).play()
+		_shovable_sfx_player.play()
 	return shovable
 
 
