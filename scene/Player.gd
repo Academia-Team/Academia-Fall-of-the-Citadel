@@ -10,6 +10,7 @@ const PLAYER_DEATH: Texture = preload("res://asset/pixelart_skull.png")
 const START_LIVES: int = 3
 const SWORD_SLASH: PackedScene = preload("res://scene/SwordAttack.tscn")
 
+var exists: bool = true setget set_existence, get_existence
 var held_item: Item = null
 
 var _bounds: Dictionary = {
@@ -23,6 +24,23 @@ var _immortal: bool = false
 var _mid_use: bool = false
 
 
+func set_existence(value: bool) -> void:
+	exists = value
+	set_visible(exists)
+	for child in get_children():
+		if child is CollisionShape2D:
+			child.set_deferred("disabled", not exists)
+		elif child is TargetTracker:
+			if exists:
+				child.enable()
+			else:
+				child.disable()
+
+
+func get_existence() -> bool:
+	return exists
+
+
 func get_lives() -> int:
 	return _lives
 
@@ -33,16 +51,12 @@ func lives_lost() -> int:
 	return START_LIVES - _lives
 
 
-func exists() -> bool:
-	return visible
-
-
 func _set_dir(dir) -> void:
 	_future_dir = dir
 
 
 func kill() -> void:
-	while _lives > 0:
+	while exists and _lives > 0:
 		if is_immortal():
 			toggle_immortality()
 
@@ -181,7 +195,7 @@ func _discard_item() -> void:
 
 
 func _process(_delta: float) -> void:
-	if _lives > 0:
+	if exists:
 		if _future_dir != Direction.NONE and $MoveTimer.is_stopped():
 			$MoveTimer.start()
 
@@ -191,8 +205,7 @@ func _process(_delta: float) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hide()
-	($TargetTracker as TargetTracker).disable()
-	$CollisionBox.set_deferred("disabled", true)
+	set_existence(false)
 
 
 func spawn(
@@ -211,10 +224,7 @@ func spawn(
 
 	_lives = START_LIVES
 	emit_signal("health_change", _lives)
-	show()
-
-	($TargetTracker as TargetTracker).enable()
-	$CollisionBox.set_deferred("disabled", false)
+	set_existence(true)
 
 
 func _hurt() -> void:
@@ -227,8 +237,8 @@ func _hurt() -> void:
 		$ImmunityTimer.start()
 
 		if _lives <= 0:
-			$CollisionBox.set_deferred("disabled", true)
-			($TargetTracker as TargetTracker).disable()
+			set_existence(false)
+			set_visible(true)
 
 
 func move_to(pos: Vector2) -> void:
@@ -241,7 +251,7 @@ func move_reject() -> void:
 
 
 func _on_MoveTimer_timeout() -> void:
-	if _future_dir != Direction.NONE:
+	if _future_dir != Direction.NONE and exists:
 		emit_signal("move_request", _future_dir)
 		_future_dir = Direction.NONE
 

@@ -79,6 +79,7 @@ func spawn_initial_enemies():
 
 func cleanup():
 	get_tree().call_group("interactable", "queue_free")
+	$Player.set_existence(false)
 
 
 func _process(_delta):
