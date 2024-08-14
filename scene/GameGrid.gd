@@ -77,7 +77,9 @@ func spawn_initial_enemies():
 
 func cleanup():
 	for obj in get_tree().get_nodes_in_group(InteractableObject.GROUP):
-		if not obj is Player:
+		if obj is Player:
+			obj.set_existence(false)
+		else:
 			obj.queue_free()
 
 

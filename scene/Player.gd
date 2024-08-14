@@ -38,7 +38,7 @@ func _set_dir(dir) -> void:
 
 
 func kill() -> void:
-	while _lives > 0:
+	while exists and _lives > 0:
 		if is_immortal():
 			toggle_immortality()
 
@@ -177,7 +177,7 @@ func _discard_item() -> void:
 
 
 func _process(_delta: float) -> void:
-	if _lives > 0:
+	if exists:
 		if _future_dir != Direction.NONE and $MoveTimer.is_stopped():
 			$MoveTimer.start()
 
@@ -218,8 +218,8 @@ func _hurt() -> void:
 		$ImmunityTimer.start()
 
 		if _lives <= 0:
-			$CollisionBox.set_deferred("disabled", true)
-			($TargetTracker as TargetTracker).disable()
+			set_existence(false)
+			set_visible(true)
 
 
 func move_to(pos: Vector2) -> void:
@@ -232,7 +232,7 @@ func move_reject() -> void:
 
 
 func _on_MoveTimer_timeout() -> void:
-	if _future_dir != Direction.NONE:
+	if _future_dir != Direction.NONE and exists:
 		emit_signal("move_request", _future_dir)
 		_future_dir = Direction.NONE
 
