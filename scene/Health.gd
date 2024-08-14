@@ -9,6 +9,7 @@ func _use() -> void:
 		if holder.lives_lost() > 0:
 			holder.heal()
 			$UseSFX.play()
+			_health_used = true
 		else:
 			$Fail.play()
 
