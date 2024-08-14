@@ -10,7 +10,6 @@
 
 [node name="Item" type="Area2D" groups=["interactable"]]
 script = ExtResource( 1 )
-collision_shape = ExtResource( 7 )
 points = 5
 shovable = true
 shovable_sfx = ExtResource( 4 )
@@ -18,8 +17,12 @@ type = "Health"
 texture = ExtResource( 6 )
 acquire_sfx = ExtResource( 5 )
 
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 6 )
+centered = false
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 16, 16 )
+position = Vector2( 15, 15 )
 shape = ExtResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="."]

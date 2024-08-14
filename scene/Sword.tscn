@@ -8,7 +8,6 @@
 
 [node name="Sword" type="Area2D" groups=["interactable"]]
 script = ExtResource( 1 )
-collision_shape = ExtResource( 2 )
 points = 5
 shovable = true
 shovable_sfx = ExtResource( 3 )
@@ -16,8 +15,12 @@ type = "Sword"
 texture = ExtResource( 4 )
 acquire_sfx = ExtResource( 5 )
 
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+centered = false
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 16, 16 )
+position = Vector2( 15, 15 )
 shape = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
