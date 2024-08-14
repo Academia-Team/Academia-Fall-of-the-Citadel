@@ -23,6 +23,10 @@ var _immortal: bool = false
 var _mid_use: bool = false
 
 
+func get_orient() -> int:
+	return $CharacterSprite.get_orient()
+
+
 func get_lives() -> int:
 	return lives
 
