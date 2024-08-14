@@ -23,6 +23,8 @@ func _init() -> void:
 	points = ITEM_DEFAULT_SCORE
 	shovable = true
 
+
+func _ready():
 	var possible_sprite: Sprite = _get_sprite()
 	if possible_sprite == null:
 		_sprite = Sprite.new()
