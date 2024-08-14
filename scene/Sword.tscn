@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://class/TargettedItem.gd" type="Script" id=1]
+[ext_resource path="res://scene/Sword.gd" type="Script" id=1]
 [ext_resource path="res://resource/collision_rect.tres" type="Shape2D" id=2]
 [ext_resource path="res://asset/metal_scrape.wav" type="AudioStream" id=3]
 [ext_resource path="res://asset/sword.png" type="Texture" id=4]
