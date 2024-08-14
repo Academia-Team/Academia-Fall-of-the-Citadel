@@ -15,10 +15,6 @@ type = "Sword"
 texture = ExtResource( 4 )
 acquire_sfx = ExtResource( 5 )
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 4 )
-centered = false
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 15, 15 )
 shape = ExtResource( 2 )
