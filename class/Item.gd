@@ -60,6 +60,8 @@ func use() -> void:
 
 
 func set_acquire_sfx(value: AudioStream) -> void:
+	if _acquire_sfx_player == null:
+		yield(self, "ready")
 	acquire_sfx = value
 	_acquire_sfx_player.stream = acquire_sfx
 
@@ -81,6 +83,8 @@ func destroy() -> void:
 
 
 func set_texture(value: Texture) -> void:
+	if _sprite == null:
+		yield(self, "ready")
 	texture = value
 	_sprite.texture = value
 
