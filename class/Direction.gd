@@ -127,7 +127,7 @@ static func translate_pos(pos: Vector2, dir: int, step: float = 32) -> Vector2:
 
 
 static func get_cardinal_dir_facing(pos_to_face: Vector2, pos: Vector2) -> int:
-	if (pos - pos_to_face) != Vector2(0, 0):
+	if (pos - pos_to_face) != Vector2.ZERO:
 		if abs(pos.x - pos_to_face.x) < abs(pos.y - pos_to_face.y) or (pos.y - pos_to_face.y) == 0:
 			if (pos.x - pos_to_face.x) >= 0:
 				return WEST
