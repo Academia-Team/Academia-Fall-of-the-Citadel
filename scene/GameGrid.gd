@@ -178,7 +178,7 @@ func get_spawn_pos():
 
 	while spawn_pos == null and num_available_cells > 0:
 		var rand_cell_idx = randi() % num_available_cells
-		proposed_spawn_pos = map_to_world(available_cells[rand_cell_idx])
+		proposed_spawn_pos = to_global(map_to_world(available_cells[rand_cell_idx]))
 
 		if valid_spawn_pos(proposed_spawn_pos):
 			spawn_pos = proposed_spawn_pos
@@ -194,8 +194,8 @@ func valid_spawn_pos(pos):
 
 	if (
 		(
-			abs(pos.x - $Player.position.x) >= VALID_DIST_FROM_PLAYER
-			or abs(pos.y - $Player.position.y) >= VALID_DIST_FROM_PLAYER
+			abs(pos.x - $Player.global_position.x) >= VALID_DIST_FROM_PLAYER
+			or abs(pos.y - $Player.global_position.y) >= VALID_DIST_FROM_PLAYER
 		)
 		and get_cellv(world_to_map(pos)) != INVALID_CELL
 	):
@@ -209,7 +209,7 @@ func spawn_enemy(scene, pos):
 	instance.connect("enemy_destroyed", self, "_on_Enemy_destroyed")
 	instance.connect("move_request", self, "_on_Enemy_move_request")
 	$RefCounter.add(instance.type, instance)
-	var orient_facing_player = Direction.get_cardinal_dir_facing($Player.position, pos)
+	var orient_facing_player = Direction.get_cardinal_dir_facing($Player.global_position, pos)
 	instance.spawn(pos, orient_facing_player)
 
 
@@ -232,7 +232,7 @@ func spawn_item(scene, pos):
 
 
 func _on_Enemy_move_request(ref):
-	var desired_positions = ref.desired_positions($Player.position)
+	var desired_positions = ref.desired_positions($Player.global_position)
 	var moved = false
 
 	for pos in desired_positions:
@@ -261,7 +261,7 @@ func move_shovable_obj(ref, shove_dir):
 	if (
 		$RefCounter.get_reference_at_pos(dest_pos) == null
 		and get_cellv(world_to_map(dest_pos)) != INVALID_CELL
-		and ($Player.held_item == null or $Player.position != dest_pos)
+		and ($Player.held_item == null or $Player.global_position != dest_pos)
 	):
 		success = ref.shove_to(dest_pos)
 
