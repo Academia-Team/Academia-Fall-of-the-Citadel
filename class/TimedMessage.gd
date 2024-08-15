@@ -1,14 +1,13 @@
-extends Node
+class_name TimedMessage
+extends Message
 
 signal message_expired
 
 var _amount_time: float = 0.0
 var _expired: bool = false
-var _message: String = "" setget , get_message
 
 
-func _init(message: String, time: float) -> void:
-	_message = message
+func _init(message: String, time: float).(message) -> void:
 	_amount_time = time
 
 
@@ -28,7 +27,3 @@ func expire() -> void:
 	if not _expired:
 		_expired = true
 		emit_signal("message_expired")
-
-
-func get_message() -> String:
-	return _message
