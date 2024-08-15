@@ -42,13 +42,14 @@ func _set_initial_lives(value: int = START_LIVES) -> void:
 
 func _damaged(remaining_lives: int) -> void:
 	if $ImmunityTimer.is_stopped() and not is_immortal():
-		if remaining_lives > 0:
+		if remaining_lives >= 0:
 			$CharacterSprite.show_hurt()
 			$HurtSFX.play()
 			$ImmunityTimer.start()
-		else:
+		if remaining_lives == 0:
 			set_existence(false)
 			set_visible(true)
+			$CharacterSprite.texture = PLAYER_DEATH
 
 
 func _healed() -> void:
@@ -195,11 +196,6 @@ func is_immortal() -> bool:
 
 func toggle_immortality() -> void:
 	_immortal = not _immortal
-
-
-func _on_CharacterSprite_effect_finish() -> void:
-	if lives <= 0:
-		$CharacterSprite.texture = PLAYER_DEATH
 
 
 func _on_item_used() -> void:
