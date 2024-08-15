@@ -35,6 +35,10 @@ func pop() -> Message:
 	return message
 
 
+func discard_top() -> void:
+	var _popped_message: Message = pop()
+
+
 func push(message: Message) -> bool:
 	if is_full():
 		return false
