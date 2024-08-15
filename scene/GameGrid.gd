@@ -1,5 +1,5 @@
 class_name GameGrid
-extends TileMap
+extends TileWorld
 
 signal game_over
 signal started
@@ -43,7 +43,7 @@ func start(info_obj):
 		$DuckTimer.start()
 
 	set_up_rng()
-	set_up_player()
+	$Player.spawn(Vector2.ZERO)
 	spawn_initial_env()
 	emit_signal("started")
 	started = true
@@ -118,12 +118,6 @@ func handle_stop_spawn_options():
 		info_ref.set_timed_status("All spawners toggled.")
 	else:
 		info_ref.set_timed_status("Nothing toggled.")
-
-
-func set_up_player():
-	var screen_size = get_viewport_rect().size
-
-	$Player.spawn(Vector2(0, 0), 0, screen_size.y - cell_size.y * 2, 0, screen_size.x - cell_size.x)
 
 
 func _on_Player_pick_up_item(item_ref):
@@ -208,7 +202,7 @@ func valid_spawn_pos(pos):
 			abs(pos.x - $Player.position.x) >= VALID_DIST_FROM_PLAYER
 			or abs(pos.y - $Player.position.y) >= VALID_DIST_FROM_PLAYER
 		)
-		and get_cellv(world_to_map(pos)) != INVALID_CELL
+		and pos_in_world(pos)
 	):
 		valid_pos = get_interactable_obj_at_pos(pos) == null
 
@@ -236,11 +230,10 @@ func _on_item_spawn_timer_timeout():
 
 
 func spawn_item(scene, pos):
-	if scene != null and pos != null:
-		var instance = scene.instance()
-		add_child(instance)
-		instance.position = pos
-		ref_counter[instance.type] = ref_counter.get(instance.type, 0) + 1
+	var instance = scene.instance()
+	add_child(instance)
+	instance.spawn(self, pos)
+	ref_counter[instance.type] = ref_counter.get(instance.type, 0) + 1
 
 
 func _on_Enemy_move_request(ref):
@@ -272,7 +265,7 @@ func move_shovable_obj(ref, shove_dir):
 
 	if (
 		get_interactable_obj_at_pos(dest_pos) == null
-		and get_cellv(world_to_map(dest_pos)) != INVALID_CELL
+		and pos_in_world(dest_pos)
 		and ($Player.held_item == null or $Player.position != dest_pos)
 	):
 		success = ref.shove_to(dest_pos)
@@ -288,7 +281,7 @@ func _on_Player_move_request(dir):
 	if $Player.get_lives() > 0:
 		var future_pos = Direction.translate_pos($Player.position, dir, 32)
 
-		if get_cellv(world_to_map(future_pos)) != INVALID_CELL:
+		if pos_in_world(future_pos):
 			var interactable_obj = get_interactable_obj_at_pos(future_pos)
 			if $Player.held_item == null or interactable_obj == null or interactable_obj is Enemy:
 				$Player.move_to(future_pos)

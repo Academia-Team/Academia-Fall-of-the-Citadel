@@ -59,7 +59,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scene/GameScrn.gd"
 }, {
-"base": "TileMap",
+"base": "TileWorld",
 "class": "GameGrid",
 "language": "GDScript",
 "path": "res://scene/GameGrid.gd"
@@ -108,6 +108,16 @@ _global_script_classes=[ {
 "class": "TargetTracker",
 "language": "GDScript",
 "path": "res://class/TargetTracker.gd"
+}, {
+"base": "Item",
+"class": "TargettedItem",
+"language": "GDScript",
+"path": "res://class/TargettedItem.gd"
+}, {
+"base": "TileMap",
+"class": "TileWorld",
+"language": "GDScript",
+"path": "res://class/TileWorld.gd"
 } ]
 _global_script_class_icons={
 "AutomatedScrollContainer": "",
@@ -129,7 +139,9 @@ _global_script_class_icons={
 "LineDialog": "",
 "Menu": "",
 "Player": "",
-"TargetTracker": ""
+"TargetTracker": "",
+"TargettedItem": "",
+"TileWorld": ""
 }
 
 [application]

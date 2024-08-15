@@ -4,82 +4,74 @@ extends InteractableObject
 signal enemy_destroyed(enemy_ref)
 signal move_request(ref)
 
-const MAX_ALLOWED_FAILED_MOVES = 10
+const MAX_ALLOWED_FAILED_MOVES: int = 10
 
-var alive = true
-var to_destroy = false
-var move_fail_counter = 0
+var _move_fail_counter: int = 0
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	hide()
-	$CollisionBox.set_deferred("disabled", true)
+func _ready() -> void:
+	set_existence(false)
 
 
-func attack():
-	alive = false
-	$CollisionBox.set_deferred("disabled", true)
+func damage() -> void:
+	set_existence(false)
+	set_visible(true)
 	emit_signal("enemy_destroyed", self)
 	$CharacterSprite.show_hurt()
 	$HurtSFX.play()
 	$MoveTimer.stop()
 
 
-func desired_positions(target_pos):
-	var dir = Direction.get_dir_facing(target_pos, position)
+func desired_positions(target_pos: Vector2) -> Array:
+	var dir: int = Direction.get_dir_facing(target_pos, position)
 
-	var component_directions = Direction.get_dir_components(dir)
+	var component_directions: Array = Direction.get_dir_components(dir)
 
-	var possible_positions = []
+	var possible_positions: Array = []
 
-	if alive:
+	if exists:
 		for direction in component_directions:
 			possible_positions.append(Direction.translate_pos(position, direction, 32))
 
 	return possible_positions
 
 
-func destroy():
-	hide()
-	to_destroy = true
+func destroy() -> void:
+	set_existence(false)
 
 	if not $HurtSFX.playing:
 		queue_free()
 
 
-func move_to(pos):
-	if alive:
-		move_fail_counter = 0
+func move_to(pos: Vector2) -> void:
+	if exists:
+		_move_fail_counter = 0
 		var diff_pos = pos - position
 		position = pos
 		$CharacterSprite.set_orient(Direction.rel_pos_to_dir(diff_pos))
 		$WalkSFX.play()
 
 
-func move_reject():
-	move_fail_counter += 1
+func move_reject() -> void:
+	_move_fail_counter += 1
 
-	if move_fail_counter >= MAX_ALLOWED_FAILED_MOVES:
-		alive = false
-		queue_free()
+	if _move_fail_counter >= MAX_ALLOWED_FAILED_MOVES:
+		destroy()
 
 
-func spawn(pos, orient):
+func spawn(pos: Vector2, orient: int = Direction.SOUTH) -> void:
 	position = pos
 	$CharacterSprite.set_orient(orient)
 
-	show()
-	$CollisionBox.set_deferred("disabled", false)
+	set_existence(true)
 	$SpawnSFX.play()
 	$MoveTimer.start()
 
 
-func _on_MoveTimer_timeout():
-	if alive:
+func _on_MoveTimer_timeout() -> void:
+	if exists:
 		emit_signal("move_request", self)
 
 
-func _on_HurtSFX_finished():
-	if to_destroy:
-		destroy()
+func _on_HurtSFX_finished() -> void:
+	destroy()
