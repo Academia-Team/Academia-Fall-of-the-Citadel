@@ -3,7 +3,7 @@ extends Message
 
 signal message_expired
 
-var _expired: bool = false
+var _expired: bool = false setget , is_expired
 
 
 func _init(message: String, timer: SceneTreeTimer).(message) -> void:
@@ -21,3 +21,7 @@ func expire() -> void:
 	if not _expired:
 		_expired = true
 		emit_signal("message_expired")
+
+
+func is_expired() -> bool:
+	return _expired
