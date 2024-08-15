@@ -3,16 +3,10 @@ extends Message
 
 signal message_expired
 
-var _amount_time: float = 0.0
 var _expired: bool = false
 
 
-func _init(message: String, time: float).(message) -> void:
-	_amount_time = time
-
-
-func _ready() -> void:
-	var timer: SceneTreeTimer = get_tree().create_timer(_amount_time)
+func _init(message: String, timer: SceneTreeTimer).(message) -> void:
 	var connect_status: int = timer.connect("timeout", self, "_on_timeout")
 	if connect_status != OK:
 		printerr('Unable to create timed message "%s".' % _message)

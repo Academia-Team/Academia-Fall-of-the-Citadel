@@ -1,5 +1,5 @@
 class_name Message
-extends Node
+extends Reference
 
 var _message: String = "" setget , get_message
 
