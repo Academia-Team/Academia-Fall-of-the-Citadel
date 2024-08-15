@@ -30,13 +30,15 @@ func pop() -> Message:
 	if _num_messages > 0:
 		_num_messages -= 1
 		message = _messages[_num_messages]
-		var _num_popped: int = _pop_expired_messages()
+		# warning-ignore: return_value_discarded
+		_pop_expired_messages()
 		emit_signal("contents_changed")
 	return message
 
 
 func discard_top() -> void:
-	var _popped_message: Message = pop()
+	# warning-ignore: return_value_discarded
+	pop()
 
 
 func push(message: Message) -> bool:
