@@ -44,7 +44,9 @@ func _generate_slashes(num_slashes: int, dist_between: float) -> int:
 func _generate_sword_slash(num_pixels_away: float) -> bool:
 	var slash_anim: CanvasItem = null
 	var holder_orient: int = holder.get_orient()
-	var target_pos: Vector2 = Direction.translate_pos(holder.position, holder_orient, num_pixels_away)
+	var target_pos: Vector2 = Direction.translate_pos(
+		holder.position, holder_orient, num_pixels_away
+	)
 
 	if gameworld.pos_in_world(target_pos):
 		slash_anim = SWORD_SLASH.instance()
