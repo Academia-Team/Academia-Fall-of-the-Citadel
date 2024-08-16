@@ -21,6 +21,7 @@ visible = false
 one_shot = true
 
 [connection signal="game_over" from="GameGrid" to="." method="_on_GameGrid_game_over"]
+[connection signal="message_change_request" from="GameGrid" to="." method="_on_GameGrid_message_change_request"]
 [connection signal="leave" from="GameOver" to="." method="_on_GameOver_leave"]
 [connection signal="retry" from="GameOver" to="." method="_on_GameOver_retry"]
 [connection signal="timeout" from="CheatInputTimeout" to="." method="_on_CheatInputTimeout_timeout"]
