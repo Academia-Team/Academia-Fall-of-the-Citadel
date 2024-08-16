@@ -43,7 +43,7 @@ func start(info_obj):
 		$DuckTimer.start()
 
 	set_up_rng()
-	$Player.spawn(Vector2.ZERO)
+	$Player.spawn(self, Vector2.ZERO)
 	spawn_initial_env()
 	emit_signal("started")
 	started = true
