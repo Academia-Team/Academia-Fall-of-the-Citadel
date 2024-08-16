@@ -25,6 +25,8 @@ func is_empty() -> bool:
 
 
 func peek() -> Message:
+	if _pop_expired_messages() > 0:
+		emit_signal("contents_changed")
 	if _num_messages > 0:
 		return _messages[_num_messages - 1]
 	return null
