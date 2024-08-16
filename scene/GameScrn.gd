@@ -80,3 +80,10 @@ func _on_GameGrid_game_over() -> void:
 
 func _on_CheatInputTimeout_timeout() -> void:
 	_cheat_key_counter = 0
+
+
+func _on_GameGrid_message_change_request(text: String, duration: float):
+	if duration == TileWorld.EVENT_NO_LIMIT:
+		$InfoBar.set_status(text)
+	else:
+		$InfoBar.set_timed_status(text, duration)
