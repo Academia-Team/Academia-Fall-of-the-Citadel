@@ -3,7 +3,6 @@ extends ColorRect
 
 export var num_messages_to_support: int = 10 setget set_num_messages, get_num_messages
 
-var _lives = 0
 var _initial_lives = 0
 var _mode = null
 var _score = 0
@@ -31,13 +30,12 @@ func _ready():
 func reset():
 	$StatusTimer.stop()
 	_cheat_enabled = false
-	_lives = 0
+	_initial_lives = 0
 	_score = 0
 	_seed = null
 	_tainted = false
 
 	_write_score_text()
-	_write_lives_text()
 	reset_status()
 
 
@@ -62,18 +60,10 @@ func get_score():
 	return _score
 
 
-func set_lives(life_count):
-	if life_count >= 0:
-		_lives = life_count
-
-		if _initial_lives == 0:
-			_initial_lives = life_count
-
-		_write_lives_text()
-
-
-func _write_lives_text():
-	$LivesCounter.text = "Lives: %d / %d" % [_lives, _initial_lives]
+func display_lives(life_count):
+	if _initial_lives == 0:
+		_initial_lives = life_count
+	$LivesCounter.text = "Lives: %d / %d" % [life_count, _initial_lives]
 
 
 func set_seed(seed_val):
