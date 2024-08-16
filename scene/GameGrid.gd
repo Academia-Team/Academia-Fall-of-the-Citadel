@@ -127,7 +127,6 @@ func _on_Player_pick_up_item(item_ref):
 		printerr("Item %s is not tracked." % item_ref.type)
 
 	info_ref.update_score(item_ref.points)
-	info_ref.set_timed_status("Press space or first button to use item")
 	info_ref.set_status(item_ref.type)
 
 
