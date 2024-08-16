@@ -10,6 +10,7 @@ var _num_messages: int = 0 setget , get_size
 
 func set_size(size: int) -> void:
 	_messages.resize(size)
+	_max_messages = size
 
 
 func get_size() -> int:
