@@ -1,6 +1,8 @@
 class_name InfoBar
 extends ColorRect
 
+export var num_messages_to_support: int = 10 setget set_num_messages, get_num_messages
+
 var _lives = 0
 var _initial_lives = 0
 var _mode = null
@@ -13,6 +15,7 @@ var _tainted = false
 
 
 func _ready():
+	_status_messages.set_size(num_messages_to_support)
 	var message_connect: int = _status_messages.connect(
 		"contents_changed", self, "_on_status_contents_changed"
 	)
@@ -121,6 +124,15 @@ func is_cheat_enabled():
 
 func is_tainted():
 	return _tainted
+
+
+func set_num_messages(value: int) -> void:
+	num_messages_to_support = value
+	_status_messages.set_size(value)
+
+
+func get_num_messages() -> int:
+	return num_messages_to_support
 
 
 func _on_status_contents_changed() -> void:
