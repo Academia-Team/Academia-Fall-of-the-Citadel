@@ -9,6 +9,7 @@ signal used_item(item_name)
 const PLAYER_DEATH: Texture = preload("res://asset/pixelart_skull.png")
 const START_LIVES: int = 3
 
+var gameworld: TileWorld = null
 var held_item: Item = null
 var lives: int = 0 setget set_lives, get_lives
 
@@ -144,7 +145,8 @@ func _ready() -> void:
 	set_existence(false)
 
 
-func spawn(pos: Vector2, orient: int = Direction.SOUTH) -> void:
+func spawn(spawned_into: TileWorld, pos: Vector2, orient: int = Direction.SOUTH) -> void:
+	gameworld = spawned_into
 	$CharacterSprite.set_orient(orient)
 	position = pos
 
