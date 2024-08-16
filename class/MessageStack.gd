@@ -20,6 +20,10 @@ func is_full() -> bool:
 	return _num_messages == _max_messages
 
 
+func is_empty() -> bool:
+	return _num_messages == 0
+
+
 func peek() -> Message:
 	if _num_messages > 0:
 		return _messages[_num_messages - 1]
