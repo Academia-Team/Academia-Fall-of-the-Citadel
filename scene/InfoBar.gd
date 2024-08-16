@@ -41,7 +41,7 @@ func reset() -> void:
 
 func set_score(value: int) -> void:
 	score = value
-	$ScoreCounter.text = "Score: %d" % score	
+	$ScoreCounter.text = "Score: %d" % score
 
 
 func update_score(score_delta: int) -> void:
