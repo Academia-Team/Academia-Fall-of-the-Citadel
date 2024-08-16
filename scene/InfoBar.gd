@@ -29,7 +29,6 @@ func _ready() -> void:
 
 
 func reset() -> void:
-	$StatusTimer.stop()
 	set_cheat_enabled(false)
 	set_score(0)
 	set_seed(0)
