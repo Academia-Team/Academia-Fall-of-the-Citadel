@@ -11,7 +11,7 @@ func _init() -> void:
 	var untimed_status: int = _untimed_messages.connect(
 		"contents_changed", self, "_on_contents_changed"
 	)
-	var timed_status: int = _timed_messages.conntect(
+	var timed_status: int = _timed_messages.connect(
 		"contents_changed", self, "_on_contents_changed"
 	)
 
