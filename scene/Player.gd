@@ -6,9 +6,19 @@ signal move_request(dir)
 signal pick_up_item(item_ref)
 signal used_item(item_name)
 
+# Player event IDs.
+enum { INITIAL_MOVEMENT, INITIAL_ITEM_PICKUP }
+
 const PLAYER_DEATH: Texture = preload("res://asset/pixelart_skull.png")
 const START_LIVES: int = 3
 
+const MOVEMENT_MSG: String = "Hold movement controls for %.1f second(s) to move."
+const MOVEMENT_MSG_TIME: float = 5.0
+
+const ITEM_PICKUP_MSG: String = "Press space or first button to use item"
+const ITEM_PICKUP_MSG_TIME: float = 3.0
+
+var events: Dictionary = {}
 var gameworld: TileWorld = null
 var held_item: Item = null
 var lives: int = 0 setget set_lives, get_lives
@@ -122,6 +132,9 @@ func _handle_movement() -> void:
 		_set_dir(desired_dir)
 	$CharacterSprite.set_orient(desired_dir)
 
+	if desired_dir != Direction.NONE:
+		gameworld.send_event(events[INITIAL_MOVEMENT], MOVEMENT_MSG_TIME)
+
 
 func _use_item() -> void:
 	if held_item != null:
@@ -145,6 +158,12 @@ func _ready() -> void:
 	set_existence(false)
 
 
+func _set_events():
+	events.clear()
+	events[INITIAL_MOVEMENT] = TileWorld.Event.new(MOVEMENT_MSG % $MoveTimer.wait_time, 1)
+	events[INITIAL_ITEM_PICKUP] = TileWorld.Event.new(ITEM_PICKUP_MSG, 1)
+
+
 func spawn(spawned_into: TileWorld, pos: Vector2, orient: int = Direction.SOUTH) -> void:
 	gameworld = spawned_into
 	$CharacterSprite.set_orient(orient)
@@ -154,6 +173,7 @@ func spawn(spawned_into: TileWorld, pos: Vector2, orient: int = Direction.SOUTH)
 	_future_dir = Direction.NONE
 
 	_set_initial_lives()
+	_set_events()
 	set_existence(true)
 
 
@@ -176,6 +196,7 @@ func _on_Player_area_entered(area: Area2D):
 	if area is Item:
 		if not held_item:
 			held_item = area.acquire(self)
+			gameworld.send_event(events[INITIAL_ITEM_PICKUP], ITEM_PICKUP_MSG_TIME)
 
 			var used_status: int = area.connect("used", self, "_on_item_used")
 			if used_status != OK:
