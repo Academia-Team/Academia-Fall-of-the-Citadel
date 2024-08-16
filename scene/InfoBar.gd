@@ -4,17 +4,17 @@ extends ColorRect
 export var default_timed_message_length: int = 3
 export var num_messages_to_support: int = 10 setget set_num_messages, get_num_messages
 
-var _initial_lives = 0
-var _mode = null
-var _score = 0
-var _seed = null
+var _initial_lives: int = 0
 var _status_messages: OrderedMessageStack = OrderedMessageStack.new()
+var _tainted: bool = false setget , is_tainted
 
-var _cheat_enabled = false
-var _tainted = false
+var cheat_enabled: bool = false setget set_cheat_enabled, is_cheat_enabled
+var mode: String = "" setget set_mode, get_mode
+var score: int = 0 setget set_score, get_score
+var seed_value: int = 0 setget set_seed, get_seed
 
 
-func _ready():
+func _ready() -> void:
 	_status_messages.set_size(num_messages_to_support)
 	var message_connect: int = _status_messages.connect(
 		"contents_changed", self, "_on_status_contents_changed"
@@ -28,70 +28,69 @@ func _ready():
 		printerr("Failed to display initial status message.")
 
 
-func reset():
+func reset() -> void:
 	$StatusTimer.stop()
-	_cheat_enabled = false
-	_initial_lives = 0
-	_score = 0
-	_seed = null
+	set_cheat_enabled(false)
+	set_score(0)
+	set_seed(0)
 	_tainted = false
 
-	_write_score_text()
+	_initial_lives = 0
 	reset_status()
 
 
-func update_score(score_delta):
-	_score += score_delta
-	_write_score_text()
+func set_score(value: int) -> void:
+	score = value
+	$ScoreCounter.text = "Score: %d" % score	
 
 
-func _write_score_text():
-	$ScoreCounter.text = "Score: %d" % _score
+func update_score(score_delta: int) -> void:
+	set_score(get_score() + score_delta)
 
 
-func set_mode(mode):
-	_mode = mode
+func set_mode(value: String) -> void:
+	mode = value
 
 
-func get_mode():
-	return _mode
+func get_mode() -> String:
+	return mode
 
 
-func get_score():
-	return _score
+func get_score() -> int:
+	return score
 
 
-func display_lives(life_count):
+func display_lives(life_count: int) -> void:
 	if _initial_lives == 0:
 		_initial_lives = life_count
 	$LivesCounter.text = "Lives: %d / %d" % [life_count, _initial_lives]
 
 
-func set_seed(seed_val):
-	_seed = seed_val
+func set_seed(value: int) -> void:
+	seed_value = value
 
 
-func get_seed():
-	return _seed
+func get_seed() -> int:
+	return seed_value
 
 
-func set_timed_status(status_str, sec = default_timed_message_length):
+func set_timed_status(status: String, sec: float = default_timed_message_length) -> void:
 	var timer: SceneTreeTimer = get_tree().create_timer(sec)
-	var message: TimedMessage = TimedMessage.new(status_str, timer)
+	var message: TimedMessage = TimedMessage.new(status, timer)
 	var message_success: bool = _status_messages.push(message)
 	if not message_success:
-		printerr('Failed to display message "%s" for %f seconds' % [status_str, sec])
+		printerr('Failed to display message "%s" for %f seconds' % [status, sec])
 
 
 # All timed status messages have priority above non-timed status messages.
-func set_status(status_str):
-	var message: Message = Message.new(status_str)
+func set_status(status: String) -> void:
+	var message: Message = Message.new(status)
 	var message_success: bool = _status_messages.push(message)
 	if not message_success:
-		printerr('Failed to display message "%s".' % status_str)
+		printerr('Failed to display message "%s".' % status)
 
 
-func get_status():
+func get_status() -> String:
 	var status: String = ""
 	var message: Message = _status_messages.peek()
 	if message != null:
@@ -100,20 +99,25 @@ func get_status():
 
 
 # Discards all messages except the first one.
-func reset_status():
+func reset_status() -> void:
 	_status_messages.preserve_only_first()
 
 
-func toggle_cheats():
-	_cheat_enabled = not _cheat_enabled
-	_tainted = true
+func toggle_cheats() -> void:
+	set_cheat_enabled(not is_cheat_enabled())
 
 
-func is_cheat_enabled():
-	return _cheat_enabled
+func set_cheat_enabled(value: bool) -> void:
+	cheat_enabled = value
+	if value:
+		_tainted = true
 
 
-func is_tainted():
+func is_cheat_enabled() -> bool:
+	return cheat_enabled
+
+
+func is_tainted() -> bool:
 	return _tainted
 
 
