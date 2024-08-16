@@ -4,14 +4,14 @@ extends ColorRect
 export var default_timed_message_length: int = 3
 export var num_messages_to_support: int = 10 setget set_num_messages, get_num_messages
 
-var _initial_lives: int = 0
-var _status_messages: OrderedMessageStack = OrderedMessageStack.new()
-var _tainted: bool = false setget , is_tainted
-
 var cheat_enabled: bool = false setget set_cheat_enabled, is_cheat_enabled
 var mode: String = "" setget set_mode, get_mode
 var score: int = 0 setget set_score, get_score
 var seed_value: int = 0 setget set_seed, get_seed
+
+var _initial_lives: int = 0
+var _status_messages: OrderedMessageStack = OrderedMessageStack.new()
+var _tainted: bool = false setget , is_tainted
 
 
 func _ready() -> void:
