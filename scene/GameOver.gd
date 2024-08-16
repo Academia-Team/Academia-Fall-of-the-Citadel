@@ -16,8 +16,8 @@ func _ready() -> void:
 
 func start(info_obj: InfoBar) -> void:
 	info_ref = info_obj
-	_set_seed_text(info_obj.get_seed())
-	_set_mode_text(info_obj.get_mode())
+	$Seed.text = "Seed: %d" % info_obj.get_seed()
+	$Mode.text = "Mode: %s" % info_obj.get_mode()
 
 	if not info_obj.is_tainted():
 		$Tainted.hide()
@@ -31,14 +31,6 @@ func stop() -> void:
 	new_seed_val_set = false
 	($Buttons as ButtonGridContainer).disable_buttons()
 	hide()
-
-
-func _set_seed_text(seed_val: int) -> void:
-	$Seed.text = "Seed: %d" % seed_val
-
-
-func _set_mode_text(mode: String) -> void:
-	$Mode.text = "Mode: %s" % mode
 
 
 func _on_GameOver_draw() -> void:
