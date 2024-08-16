@@ -1,21 +1,28 @@
 class_name InfoBar
 extends ColorRect
 
-var _cur_status_text = ""
 var _lives = 0
 var _initial_lives = 0
 var _mode = null
-var _orig_status_text = ""
 var _score = 0
 var _seed = null
+var _status_messages: OrderedMessageStack = OrderedMessageStack.new()
 
 var _cheat_enabled = false
 var _tainted = false
 
 
 func _ready():
-	_cur_status_text = $Status.text
-	_orig_status_text = $Status.text
+	var message_connect: int = _status_messages.connect(
+		"contents_changed", self, "_on_status_contents_changed"
+	)
+	if message_connect != OK:
+		printerr("Cannot display status messages.")
+
+	var initial_message: Message = Message.new($Status.text)
+	var push_success: bool = _status_messages.push(initial_message)
+	if not push_success:
+		printerr("Failed to display initial status message.")
 
 
 func reset():
@@ -75,41 +82,32 @@ func get_seed():
 
 
 func set_timed_status(status_str, sec = 3):
-	$Status.text = status_str
-
-	# Ensure all other timed status messages are replaced.
-	if not $StatusTimer.is_stopped():
-		$StatusTimer.stop()
-
-	$StatusTimer.start(sec)
+	var timer: SceneTreeTimer = get_tree().create_timer(sec)
+	var message: TimedMessage = TimedMessage.new(status_str, timer)
+	var message_success: bool = _status_messages.push(message)
+	if not message_success:
+		printerr('Failed to display message "%s" for %f seconds' % [status_str, sec])
 
 
 # All timed status messages have priority above non-timed status messages.
 func set_status(status_str):
-	if $StatusTimer.is_stopped():
-		_orig_status_text = $Status.text
-		$Status.text = status_str
-
-	_cur_status_text = status_str
+	var message: Message = Message.new(status_str)
+	var message_success: bool = _status_messages.push(message)
+	if not message_success:
+		printerr('Failed to display message "%s".' % status_str)
 
 
 func get_status():
-	return $Status.text
+	var status: String = ""
+	var message: Message = _status_messages.peek()
+	if message != null:
+		status = message.get_message()
+	return status
 
 
-# Has no effect on temporary (timed) status messages.
-# Those will be reset when the timer times out.
+# Discards all messages except the first one.
 func reset_status():
-	if $StatusTimer.is_stopped():
-		$Status.text = _orig_status_text
-
-	_cur_status_text = _orig_status_text
-
-
-func cancel_timed_status():
-	if not $StatusTimer.is_stopped():
-		$StatusTimer.stop()
-		$Status.text = _cur_status_text
+	_status_messages.preserve_only_first()
 
 
 func toggle_cheats():
@@ -125,5 +123,9 @@ func is_tainted():
 	return _tainted
 
 
-func _on_StatusTimer_timeout():
-	$Status.text = _cur_status_text
+func _on_status_contents_changed() -> void:
+	var message: Message = _status_messages.peek()
+	if message != null:
+		$Status.text = message.get_message()
+	else:
+		$Status.text = ""

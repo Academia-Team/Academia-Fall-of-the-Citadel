@@ -155,7 +155,7 @@ func _on_Player_health_change(lives):
 
 	if lives <= 0:
 		stop()
-		info_ref.cancel_timed_status()
+		info_ref.reset_status()
 		info_ref.set_status("Goodbye Forever!")
 		$GameOverSFX.play()
 
