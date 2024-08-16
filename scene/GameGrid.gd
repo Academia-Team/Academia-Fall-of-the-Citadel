@@ -151,11 +151,11 @@ func _on_Player_health_change(lives):
 	if not started:
 		yield(self, "started")
 
-	info_ref.set_lives(lives)
+	info_ref.display_lives(lives)
 
 	if lives <= 0:
 		stop()
-		info_ref.cancel_timed_status()
+		info_ref.reset_status()
 		info_ref.set_status("Goodbye Forever!")
 		$GameOverSFX.play()
 

@@ -99,6 +99,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scene/Menu.gd"
 }, {
+"base": "Reference",
+"class": "Message",
+"language": "GDScript",
+"path": "res://class/Message.gd"
+}, {
+"base": "Reference",
+"class": "MessageStack",
+"language": "GDScript",
+"path": "res://class/MessageStack.gd"
+}, {
+"base": "Reference",
+"class": "OrderedMessageStack",
+"language": "GDScript",
+"path": "res://class/OrderedMessageStack.gd"
+}, {
 "base": "InteractableObject",
 "class": "Player",
 "language": "GDScript",
@@ -118,6 +133,11 @@ _global_script_classes=[ {
 "class": "TileWorld",
 "language": "GDScript",
 "path": "res://class/TileWorld.gd"
+}, {
+"base": "Message",
+"class": "TimedMessage",
+"language": "GDScript",
+"path": "res://class/TimedMessage.gd"
 } ]
 _global_script_class_icons={
 "AutomatedScrollContainer": "",
@@ -138,10 +158,14 @@ _global_script_class_icons={
 "Jukebox": "",
 "LineDialog": "",
 "Menu": "",
+"Message": "",
+"MessageStack": "",
+"OrderedMessageStack": "",
 "Player": "",
 "TargetTracker": "",
 "TargettedItem": "",
-"TileWorld": ""
+"TileWorld": "",
+"TimedMessage": ""
 }
 
 [application]
