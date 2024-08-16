@@ -1,6 +1,7 @@
 class_name InfoBar
 extends ColorRect
 
+export var default_timed_message_length: int = 3
 export var num_messages_to_support: int = 10 setget set_num_messages, get_num_messages
 
 var _initial_lives = 0
@@ -74,7 +75,7 @@ func get_seed():
 	return _seed
 
 
-func set_timed_status(status_str, sec = 3):
+func set_timed_status(status_str, sec = default_timed_message_length):
 	var timer: SceneTreeTimer = get_tree().create_timer(sec)
 	var message: TimedMessage = TimedMessage.new(status_str, timer)
 	var message_success: bool = _status_messages.push(message)
