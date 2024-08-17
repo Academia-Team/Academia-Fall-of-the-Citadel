@@ -4,6 +4,8 @@ extends "res://addons/OrientedSprite/type.gd"
 signal effect_show
 signal effect_finish
 
+export var death_texture: Texture setget set_death_texture
+
 export var heal_color: Color = Color.pink
 export var hurt_color: Color = Color.tomato
 export var heal_length: float = 1.0
@@ -25,12 +27,20 @@ func _ready() -> void:
 	add_child(effect_timer)
 
 
+func set_death_texture(new_texture: Texture) -> void:
+	death_texture = new_texture
+
+
 func show_heal(length: float = heal_length) -> void:
 	_show_effect(length, heal_color)
 
 
 func show_hurt(length: float = hurt_length) -> void:
 	_show_effect(length, hurt_color)
+
+
+func show_death() -> void:
+	texture = death_texture
 
 
 func _show_effect(length: float, color: Color) -> void:
