@@ -5,7 +5,7 @@ var finish_intro: bool = false
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	($AnimationPlayer as AnimationPlayer).play("Fade In")
+	$AnimationPlayer.play("Fade In")
 
 
 # Allow for skipping the animation.
@@ -21,5 +21,5 @@ func _advance_to_end() -> void:
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 	if anim_name == "Fade Out":
 		finish_intro = true
-		($Sound as AudioStreamPlayer).stop()
-		($Menu as Menu).enable()
+		$Sound.stop()
+		$Menu.enable()
