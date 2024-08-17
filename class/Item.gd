@@ -88,6 +88,9 @@ func acquire(acquiree: InteractableObject) -> Item:
 	set_holder(acquiree)
 	_acquire_sfx_player.play()
 
+	if has_method("_acquire"):
+		call("_acquire")
+
 	return self
 
 
