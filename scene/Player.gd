@@ -155,6 +155,9 @@ func _process(_delta: float) -> void:
 
 func _ready() -> void:
 	set_existence(false)
+	var connect_status: int = connect("existence_changed", self, "_on_existence_changed")
+	if connect_status != OK:
+		printerr("Can not clean up Player when game ends.")
 
 
 func _set_events():
@@ -221,10 +224,16 @@ func toggle_immortality() -> void:
 
 
 func _on_item_used() -> void:
-	emit_signal("used_item", held_item.type)
-	held_item.queue_free()
-	held_item = null
+	if exists:
+		emit_signal("used_item", held_item.type)
+		held_item.queue_free()
+		held_item = null
 
 
 func _on_item_failed_use() -> void:
 	$Reject.play()
+
+
+func _on_existence_changed(value: bool) -> void:
+	if not value:
+		held_item = null
