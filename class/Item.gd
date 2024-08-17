@@ -7,12 +7,13 @@ extends InteractableObject
 signal used
 signal failed_use
 
+const EXISTENCE_CHANGE_RESPONSE_FUNC := "_on_holder_existence_changed"
 const ITEM_DEFAULT_SCORE := 5
 
 export var texture: Texture setget set_texture, get_texture
 export var acquire_sfx: AudioStream setget set_acquire_sfx, get_acquire_sfx
 
-var holder: Area2D = null
+var holder: InteractableObject = null setget set_holder, get_holder
 var gameworld: TileWorld = null
 
 var _sprite: Sprite
@@ -36,6 +37,18 @@ func _ready():
 
 	_acquire_sfx_player = AudioStreamPlayer.new()
 	add_child(_acquire_sfx_player, true)
+
+
+func set_holder(value: InteractableObject) -> void:
+	holder = value
+	if holder != null and has_method(EXISTENCE_CHANGE_RESPONSE_FUNC):
+		var status: int = holder.connect("existence_changed", self, EXISTENCE_CHANGE_RESPONSE_FUNC)
+		if status != OK:
+			printerr("%s: Unable to respond to holder existence changes." % type)
+
+
+func get_holder() -> InteractableObject:
+	return holder
 
 
 func _get_sprite() -> Sprite:
@@ -70,9 +83,9 @@ func get_acquire_sfx() -> AudioStream:
 	return acquire_sfx
 
 
-func acquire(acquiree: Area2D) -> Item:
+func acquire(acquiree: InteractableObject) -> Item:
 	set_existence(false)
-	holder = acquiree
+	set_holder(acquiree)
 	_acquire_sfx_player.play()
 
 	return self
