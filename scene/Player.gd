@@ -17,13 +17,13 @@ const ITEM_PICKUP_MSG_TIME: float = 3.0
 
 const START_LIVES: int = 3
 
-var events: Dictionary = {}
-var gameworld: TileWorld = null
-var held_item: Item = null
-var lives: int = 0 setget set_lives, get_lives
+var events: Dictionary
+var gameworld: TileWorld
+var held_item: Item
+var lives: int setget set_lives, get_lives
 
-var _future_dir: int = Direction.NONE
-var _immortal: bool = false
+var _future_dir: int setget _set_dir
+var _immortal: bool
 
 
 func get_orient() -> int:
@@ -88,7 +88,7 @@ func heal(heal_amount: int = 1) -> void:
 		set_lives(new_lives)
 
 
-func _set_dir(dir) -> void:
+func _set_dir(dir: int) -> void:
 	_future_dir = dir
 
 
@@ -171,9 +171,6 @@ func spawn(spawned_into: TileWorld, pos: Vector2, orient: int = Direction.SOUTH)
 	$CharacterSprite.set_orient(orient)
 	position = pos
 
-	held_item = null
-	_future_dir = Direction.NONE
-
 	_set_initial_lives()
 	_set_events()
 	set_existence(true)
@@ -236,4 +233,10 @@ func _on_item_failed_use() -> void:
 
 func _on_existence_changed(value: bool) -> void:
 	if not value:
+		events.clear()
+		gameworld = null
 		held_item = null
+		lives = 0
+
+		_future_dir = Direction.NONE
+		_immortal = false
