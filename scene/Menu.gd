@@ -11,17 +11,7 @@ var _seed_val_set: bool = false
 
 func _ready() -> void:
 	hide()
-
 	($VBoxContainer/Info/Dev as CanvasItem).visible = ProjectSettings.get_setting("global/Dev")
-
-	var options_container: TabContainer = $VBoxContainer/Options
-	for index in options_container.get_tab_count():
-		var buttons: ButtonGridContainer = options_container.get_tab_control(index)
-
-		if OS.has_feature("web"):
-			var disable_success: bool = buttons.hide_and_disable("Perish")
-			if not disable_success:
-				print("Button 'Perish' not found in tab %d" % index)
 
 
 func enable() -> void:
@@ -71,7 +61,12 @@ func _activate_game(mode: String) -> void:
 
 
 func _on_Perish_button_effects_finished() -> void:
-	get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)
+	if OS.has_feature("web"):
+		var reload_status: int = get_tree().reload_current_scene()
+		if reload_status != OK:
+			printerr("Unable to reload game.")
+	else:
+		get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)
 
 
 func _on_Enter_button_input(event: InputEvent) -> void:
