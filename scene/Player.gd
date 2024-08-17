@@ -9,14 +9,13 @@ signal used_item(item_name)
 # Player event IDs.
 enum { INITIAL_MOVEMENT, INITIAL_ITEM_PICKUP }
 
-const PLAYER_DEATH: Texture = preload("res://asset/pixelart_skull.png")
-const START_LIVES: int = 3
-
 const MOVEMENT_MSG: String = "Hold movement controls for %.1f second(s) to move."
 const MOVEMENT_MSG_TIME: float = 5.0
 
 const ITEM_PICKUP_MSG: String = "Press space or first button to use item"
 const ITEM_PICKUP_MSG_TIME: float = 3.0
+
+const START_LIVES: int = 3
 
 var events: Dictionary = {}
 var gameworld: TileWorld = null
@@ -60,7 +59,7 @@ func _damaged(remaining_lives: int) -> void:
 		if remaining_lives == 0:
 			set_existence(false)
 			set_visible(true)
-			$CharacterSprite.texture = PLAYER_DEATH
+			$CharacterSprite.show_death()
 
 
 func _healed() -> void:
