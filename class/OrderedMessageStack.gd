@@ -3,8 +3,8 @@ extends Reference
 
 signal contents_changed
 
-var _untimed_messages: MessageStack = MessageStack.new()
-var _timed_messages: MessageStack = MessageStack.new()
+var _untimed_messages := Stack.new()
+var _timed_messages := Stack.new()
 
 
 func _init() -> void:
@@ -39,15 +39,15 @@ func is_empty() -> bool:
 	return _untimed_messages.is_empty() and _timed_messages.is_empty()
 
 
-func peek() -> Message:
+func peek() -> String:
 	if not _timed_messages.is_empty():
-		return _timed_messages.peek()
+		return _timed_messages.peek().get_item()
 	return _untimed_messages.peek()
 
 
-func pop() -> Message:
+func pop() -> String:
 	if not _timed_messages.is_empty():
-		return _timed_messages.pop()
+		return _timed_messages.pop().get_item()
 	return _untimed_messages.pop()
 
 
@@ -58,10 +58,12 @@ func discard_top() -> void:
 		_untimed_messages.discard_top()
 
 
-func push(message: Message) -> bool:
-	if message is TimedMessage:
+func push(message) -> bool:
+	if message is String:
+		return _untimed_messages.push(message)
+	if message is Expirable and message.get_item() is String:
 		return _timed_messages.push(message)
-	return _untimed_messages.push(message)
+	return false
 
 
 func clear() -> void:
@@ -69,10 +71,16 @@ func clear() -> void:
 	_untimed_messages.clear()
 
 
-func get_first() -> Message:
+func get_first() -> String:
+	var value := ""
 	if not _untimed_messages.is_empty():
-		return _untimed_messages.get_first()
-	return _timed_messages.get_first()
+		value = _untimed_messages.get_first()
+	elif not _timed_messages.is_empty():
+		var timed_message: Expirable = _timed_messages.get_first()
+		if timed_message != null:
+			value = timed_message.get_item()
+		value = _timed_messages.get_first().get_item()
+	return value
 
 
 func preserve_only_first() -> void:
