@@ -1,7 +1,7 @@
 extends SceneTree
 
-const BUILD_PREP_PATH: String = "res://tool/build_prep.gd"
-const EXPORT_PRESET_PATH: String = "res://export_presets.cfg"
+const BUILD_PREP_PATH := "res://tool/build_prep.gd"
+const EXPORT_PRESET_PATH := "res://export_presets.cfg"
 
 var godot_exec_path: String
 
@@ -39,7 +39,7 @@ func _run_build_prep() -> int:
 
 func _get_exports() -> Dictionary:
 	var export_preset_path: Dictionary = {}
-	var export_file: File = File.new()
+	var export_file := File.new()
 	var export_file_status: int = export_file.open(EXPORT_PRESET_PATH, File.READ)
 
 	if export_file_status == OK:

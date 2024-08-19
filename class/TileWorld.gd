@@ -6,7 +6,7 @@ extends TileMap
 signal message_change_request(text, duration)
 signal music_change_request(stream, duration)
 
-const EVENT_NO_LIMIT: int = -1
+const EVENT_NO_LIMIT := -1
 
 
 class Event:

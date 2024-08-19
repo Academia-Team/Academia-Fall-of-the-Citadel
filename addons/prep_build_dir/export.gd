@@ -1,11 +1,11 @@
 tool
 extends EditorExportPlugin
 
-const BUILD_PREP_PATH: String = "res://tool/build_prep.gd"
+const BUILD_PREP_PATH := "res://tool/build_prep.gd"
 
 
 func _export_begin(_features: PoolStringArray, _is_debug: bool, path: String, _flags: int) -> void:
-	var project_dir: Directory = Directory.new()
+	var project_dir := Directory.new()
 	var project_dir_status: int = project_dir.open("res://")
 
 	if project_dir_status == OK:

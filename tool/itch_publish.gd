@@ -1,14 +1,14 @@
 extends SceneTree
 
-const DEV_PROPERTY: String = "global/Dev"
-const EXPORT_ALL_PATH: String = "res://tool/export_all.gd"
-const EXPORT_PRESET_PATH: String = "res://export_presets.cfg"
-const PUBLISH_PRESET_PROPERTY: String = "global/Itch Presets To Publish"
-const VERSION_PATH: String = "res://VERSION.txt"
+const DEV_PROPERTY := "global/Dev"
+const EXPORT_ALL_PATH := "res://tool/export_all.gd"
+const EXPORT_PRESET_PATH := "res://export_presets.cfg"
+const PUBLISH_PRESET_PROPERTY := "global/Itch Presets To Publish"
+const VERSION_PATH := "res://VERSION.txt"
 
-const USER_ARG: int = 0
-const GAME_ARG: int = 1
-const REQ_NUM_ARGS: int = 2
+const USER_ARG := 0
+const GAME_ARG := 1
+const REQ_NUM_ARGS := 2
 
 var godot_exec_path: String
 
@@ -89,7 +89,7 @@ func _init() -> void:
 
 
 func _strip_godot_engine_args(raw_args: PoolStringArray) -> PoolStringArray:
-	var script_args: PoolStringArray = PoolStringArray()
+	var script_args := PoolStringArray()
 	var script_name_idx: int = 0
 
 	for arg in raw_args:
@@ -106,7 +106,7 @@ func _strip_godot_engine_args(raw_args: PoolStringArray) -> PoolStringArray:
 
 
 func _parse_args(raw_args: PoolStringArray) -> Args:
-	var args: Args = Args.new()
+	var args := Args.new()
 	var script_args: PoolStringArray = _strip_godot_engine_args(raw_args)
 	var num_args: int = script_args.size()
 	var valid: bool = true
@@ -197,7 +197,7 @@ func _validate_publish_info(publish_info: Dictionary) -> bool:
 
 func _get_channel_path(preset_channel: Dictionary) -> Dictionary:
 	var channel_path: Dictionary = {}
-	var export_file: File = File.new()
+	var export_file := File.new()
 	var export_file_status: int = export_file.open(EXPORT_PRESET_PATH, File.READ)
 
 	if export_file_status == OK:

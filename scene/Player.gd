@@ -9,13 +9,13 @@ signal used_item(item_name)
 # Player event IDs.
 enum { INITIAL_MOVEMENT, INITIAL_ITEM_PICKUP }
 
-const MOVEMENT_MSG: String = "Hold movement controls for %.1f second(s) to move."
-const MOVEMENT_MSG_TIME: float = 5.0
+const MOVEMENT_MSG := "Hold movement controls for %.1f second(s) to move."
+const MOVEMENT_MSG_TIME := 5.0
 
-const ITEM_PICKUP_MSG: String = "Press space or first button to use item"
-const ITEM_PICKUP_MSG_TIME: float = 3.0
+const ITEM_PICKUP_MSG := "Press space or first button to use item"
+const ITEM_PICKUP_MSG_TIME := 3.0
 
-const START_LIVES: int = 3
+const START_LIVES := 3
 
 var events: Dictionary
 var gameworld: TileWorld

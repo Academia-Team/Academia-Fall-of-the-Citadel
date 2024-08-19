@@ -4,24 +4,24 @@ extends TileWorld
 signal game_over
 signal started
 
-const PASSIVE_SCORE = 1
+const PASSIVE_SCORE := 1
 
-const MAX_ZOMBIES = 5
-const VALID_DIST_FROM_PLAYER = 64
-const ZOMBIE_SPAWN_PROB = 0.6
+const MAX_ZOMBIES := 5
+const VALID_DIST_FROM_PLAYER := 64.0
+const ZOMBIE_SPAWN_PROB := 0.6
 
-const MAX_SWORDS = 2
+const MAX_SWORDS := 2
 
-const MAX_HEALTH_POTIONS = 1
-const BASE_HEALTH_SPAWN_PROB = 0.1
-const HEALTH_SPAWN_PROB_PER_LIFE = 0.1
+const MAX_HEALTH_POTIONS := 1
+const BASE_HEALTH_SPAWN_PROB := 0.1
+const HEALTH_SPAWN_PROB_PER_LIFE := 0.1
 
-const INITIAL_SPAWN_PROB = 0.3
+const INITIAL_SPAWN_PROB := 0.3
 
-const DUCK_SCENE = preload("res://scene/Duck.tscn")
-const HEALTH_SCENE = preload("res://scene/Health.tscn")
-const SWORD_SCENE = preload("res://scene/Sword.tscn")
-const ZOMBIE_SCENE = preload("res://scene/Zombie.tscn")
+const DUCK_SCENE: PackedScene = preload("res://scene/Duck.tscn")
+const HEALTH_SCENE: PackedScene = preload("res://scene/Health.tscn")
+const SWORD_SCENE: PackedScene = preload("res://scene/Sword.tscn")
+const ZOMBIE_SCENE: PackedScene = preload("res://scene/Zombie.tscn")
 
 var ref_counter = {}
 var info_ref = null

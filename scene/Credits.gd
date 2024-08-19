@@ -3,7 +3,7 @@ extends ColorRect
 
 signal done
 
-const CREDIT_PATH = "res://CREDIT.txt"
+const CREDIT_PATH := "res://CREDIT.txt"
 
 var _credits_active: bool = false
 

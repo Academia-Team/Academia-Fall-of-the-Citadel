@@ -3,7 +3,7 @@ extends Area2D
 
 signal existence_changed(value)
 
-const GROUP: String = "interactable"
+const GROUP := "interactable"
 
 export var points: int = 0 setget set_points, get_points
 export var shovable: bool = false setget set_shovable, is_shovable

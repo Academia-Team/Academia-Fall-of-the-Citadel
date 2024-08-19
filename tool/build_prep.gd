@@ -1,10 +1,10 @@
 extends SceneTree
 
-const EXPORT_PRESET_PATH: String = "res://export_presets.cfg"
+const EXPORT_PRESET_PATH := "res://export_presets.cfg"
 
 
 func _init() -> void:
-	var project_dir: Directory = Directory.new()
+	var project_dir := Directory.new()
 	var open_status: int = project_dir.open("res://")
 
 	if open_status != OK:
@@ -91,7 +91,7 @@ func _remove_all(dir: Directory, path: String) -> int:
 
 func _get_export_dir_dests() -> Array:
 	var export_dests: Array = []
-	var export_file: File = File.new()
+	var export_file := File.new()
 	var export_file_status: int = export_file.open(EXPORT_PRESET_PATH, File.READ)
 
 	if export_file_status == OK:
