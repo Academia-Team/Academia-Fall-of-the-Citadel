@@ -110,11 +110,6 @@ _global_script_classes=[ {
 "path": "res://class/Message.gd"
 }, {
 "base": "Reference",
-"class": "MessageStack",
-"language": "GDScript",
-"path": "res://class/MessageStack.gd"
-}, {
-"base": "Reference",
 "class": "OrderedMessageStack",
 "language": "GDScript",
 "path": "res://class/OrderedMessageStack.gd"
@@ -175,7 +170,6 @@ _global_script_class_icons={
 "LineDialog": "",
 "Menu": "",
 "Message": "",
-"MessageStack": "",
 "OrderedMessageStack": "",
 "Player": "",
 "SingleUseAudioPlayer": "",
