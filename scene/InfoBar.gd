@@ -10,7 +10,7 @@ var score: int = 0 setget set_score, get_score
 var seed_value: int = 0 setget set_seed, get_seed
 
 var _initial_lives: int = 0
-var _status_messages: OrderedMessageStack = OrderedMessageStack.new()
+var _status_messages := OrderedMessageStack.new()
 var _tainted: bool = false setget , is_tainted
 
 
@@ -22,7 +22,7 @@ func _ready() -> void:
 	if message_connect != OK:
 		printerr("Cannot display status messages.")
 
-	var initial_message: Message = Message.new($Status.text)
+	var initial_message: String = $Status.text
 	var push_success: bool = _status_messages.push(initial_message)
 	if not push_success:
 		printerr("Failed to display initial status message.")
@@ -75,26 +75,21 @@ func get_seed() -> int:
 
 func set_timed_status(status: String, sec: float = default_timed_message_length) -> void:
 	var timer: SceneTreeTimer = get_tree().create_timer(sec)
-	var message: TimedMessage = TimedMessage.new(status, timer)
-	var message_success: bool = _status_messages.push(message)
+	var timed_message := Expirable.new(status, timer)
+	var message_success: bool = _status_messages.push(timed_message)
 	if not message_success:
 		printerr('Failed to display message "%s" for %f seconds' % [status, sec])
 
 
 # All timed status messages have priority above non-timed status messages.
 func set_status(status: String) -> void:
-	var message: Message = Message.new(status)
-	var message_success: bool = _status_messages.push(message)
+	var message_success: bool = _status_messages.push(status)
 	if not message_success:
 		printerr('Failed to display message "%s".' % status)
 
 
 func get_status() -> String:
-	var status: String = ""
-	var message: Message = _status_messages.peek()
-	if message != null:
-		status = message.get_message()
-	return status
+	return _status_messages.peek()
 
 
 # Discards all messages except the first one.
@@ -130,8 +125,4 @@ func get_num_messages() -> int:
 
 
 func _on_status_contents_changed() -> void:
-	var message: Message = _status_messages.peek()
-	if message != null:
-		$Status.text = message.get_message()
-	else:
-		$Status.text = ""
+	$Status.text = _status_messages.peek()
