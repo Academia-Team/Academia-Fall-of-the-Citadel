@@ -143,11 +143,6 @@ _global_script_classes=[ {
 "class": "TileWorld",
 "language": "GDScript",
 "path": "res://class/TileWorld.gd"
-}, {
-"base": "Message",
-"class": "TimedMessage",
-"language": "GDScript",
-"path": "res://class/TimedMessage.gd"
 } ]
 _global_script_class_icons={
 "AutomatedScrollContainer": "",
@@ -176,8 +171,7 @@ _global_script_class_icons={
 "Stack": "",
 "TargetTracker": "",
 "TargettedItem": "",
-"TileWorld": "",
-"TimedMessage": ""
+"TileWorld": ""
 }
 
 [application]
