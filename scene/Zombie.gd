@@ -6,7 +6,7 @@ signal move_request(ref)
 
 const MAX_ALLOWED_FAILED_MOVES := 10
 
-var _move_fail_counter: int = 0
+var _move_fail_counter := 0
 
 
 func _ready() -> void:
@@ -27,7 +27,7 @@ func desired_positions(target_pos: Vector2) -> Array:
 
 	var component_directions: Array = Direction.get_dir_components(dir)
 
-	var possible_positions: Array = []
+	var possible_positions := []
 
 	if exists:
 		for direction in component_directions:
@@ -46,7 +46,7 @@ func destroy() -> void:
 func move_to(pos: Vector2) -> void:
 	if exists:
 		_move_fail_counter = 0
-		var diff_pos = pos - position
+		var diff_pos := pos - position
 		position = pos
 		$CharacterSprite.set_orient(Direction.rel_pos_to_dir(diff_pos))
 		$WalkSFX.play()

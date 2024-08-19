@@ -1,7 +1,7 @@
 tool
 extends Item
 
-var _health_used: bool = false
+var _health_used := false
 
 
 func _use() -> void:

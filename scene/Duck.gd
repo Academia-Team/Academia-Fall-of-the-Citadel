@@ -1,7 +1,7 @@
 tool
 extends Item
 
-var _duck_quacked: bool = false
+var _duck_quacked := false
 
 
 func _use() -> void:

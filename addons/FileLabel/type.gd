@@ -1,7 +1,7 @@
 tool
 extends Label
 
-export(String, FILE) var file_path: String = "" setget set_file_path
+export(String, FILE) var file_path := "" setget set_file_path
 
 
 func set_file_path(path: String) -> void:

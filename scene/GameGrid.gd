@@ -23,9 +23,9 @@ const HEALTH_SCENE: PackedScene = preload("res://scene/Health.tscn")
 const SWORD_SCENE: PackedScene = preload("res://scene/Sword.tscn")
 const ZOMBIE_SCENE: PackedScene = preload("res://scene/Zombie.tscn")
 
-var ref_counter = {}
+var ref_counter := {}
 var info_ref = null
-var started = false
+var started := false
 
 var enemy_rng = null
 var item_rng = null
@@ -194,7 +194,7 @@ func get_spawn_pos():
 
 
 func valid_spawn_pos(pos):
-	var valid_pos = false
+	var valid_pos := false
 
 	if (
 		(
@@ -237,7 +237,7 @@ func spawn_item(scene, pos):
 
 func _on_Enemy_move_request(ref):
 	var desired_positions = ref.desired_positions($Player.position)
-	var moved = false
+	var moved := false
 
 	for pos in desired_positions:
 		# Want to ensure that all the enemies aren't moving on top of each other. If that is happening,
@@ -260,7 +260,7 @@ func _on_Enemy_move_request(ref):
 
 func move_shovable_obj(ref, shove_dir):
 	var dest_pos = Direction.translate_pos(ref.position, shove_dir, 32)
-	var success = false
+	var success := false
 
 	if (
 		get_interactable_obj_at_pos(dest_pos) == null

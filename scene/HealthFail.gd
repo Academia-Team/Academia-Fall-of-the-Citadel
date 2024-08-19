@@ -1,6 +1,6 @@
 extends AnimationPlayer
 
-var is_setup = false
+var is_setup := false
 
 
 func _ready():

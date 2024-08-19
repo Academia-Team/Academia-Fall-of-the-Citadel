@@ -6,12 +6,12 @@ signal text_rejected
 
 const MAX_INT_LEN := 19
 
-export var line_length: int = 0
+export var line_length := 0
 
-var _int_value: int = 0
-var _int_entered: bool = false
+var _int_value := 0
+var _int_entered := false
 
-var _text_handled: bool = false
+var _text_handled := false
 
 
 func _ready() -> void:

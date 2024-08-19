@@ -6,14 +6,14 @@ signal end_reached(automated)
 
 enum ScrollType { SCROLL_UP, SCROLL_DOWN }
 
-export var vert_scroll_amount: int = 16
-export var autostart: bool = false
-export(ScrollType) var scroll_direction: int = ScrollType.SCROLL_DOWN
-export var time_between_scrolls: float = 0.1
+export var vert_scroll_amount := 16
+export var autostart := false
+export(ScrollType) var scroll_direction := ScrollType.SCROLL_DOWN
+export var time_between_scrolls := 0.1
 
 var curr_scroll_dir: int
 var is_automated: bool
-var scroll_fail: bool = false
+var scroll_fail := false
 
 var scroll_timer: Timer
 

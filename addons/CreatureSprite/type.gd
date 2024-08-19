@@ -6,10 +6,10 @@ signal effect_finish
 
 export var death_texture: Texture setget set_death_texture
 
-export var heal_color: Color = Color.pink
-export var hurt_color: Color = Color.tomato
-export var heal_length: float = 1.0
-export var hurt_length: float = 0.3
+export var heal_color := Color.pink
+export var hurt_color := Color.tomato
+export var heal_length := 1.0
+export var hurt_length := 0.3
 
 var effect_timer: Timer
 var initial_texture: Texture

@@ -10,7 +10,7 @@ var target_executable: String
 
 func _export_begin(features: PoolStringArray, _is_debug: bool, path: String, _flags: int):
 	target_executable = ""
-	var has_required_features: bool = true
+	var has_required_features := true
 	for target_feature in TARGET_FEATURES:
 		has_required_features = target_feature in features
 		if not has_required_features:

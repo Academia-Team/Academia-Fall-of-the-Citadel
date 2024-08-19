@@ -2,7 +2,7 @@ tool
 class_name TargettedItem
 extends Item
 
-var targets: Array = [] setget set_targets, get_targets
+var targets := [] setget set_targets, get_targets
 
 
 func set_targets(value: Array) -> void:

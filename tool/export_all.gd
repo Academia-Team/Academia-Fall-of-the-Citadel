@@ -38,16 +38,16 @@ func _run_build_prep() -> int:
 
 
 func _get_exports() -> Dictionary:
-	var export_preset_path: Dictionary = {}
+	var export_preset_path := {}
 	var export_file := File.new()
 	var export_file_status: int = export_file.open(EXPORT_PRESET_PATH, File.READ)
 
 	if export_file_status == OK:
-		var desired_dict: Dictionary = {}
-		var presets_found: int = 0
-		var presets_handled: int = 0
-		var preset_name: String = ""
-		var preset_valid: bool = true
+		var desired_dict := {}
+		var presets_found := 0
+		var presets_handled := 0
+		var preset_name := ""
+		var preset_valid := true
 
 		while (
 			export_file.get_position() < export_file.get_len()
@@ -100,7 +100,7 @@ func _get_line_value(line: String) -> String:
 
 
 func _run_export(preset_name: String, output_path: String) -> int:
-	var output: Array = []
+	var output := []
 	var exec_return_code: int = OS.execute(
 		godot_exec_path, ["--export", preset_name, output_path], true, output
 	)
@@ -112,5 +112,5 @@ func _run_export(preset_name: String, output_path: String) -> int:
 
 
 func _get_abs_path(rel_path: String) -> String:
-	var complete_path: String = "res://" + rel_path
+	var complete_path := "res://" + rel_path
 	return ProjectSettings.globalize_path(complete_path)

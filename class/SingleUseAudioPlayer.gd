@@ -7,12 +7,12 @@ extends Node
 
 signal finished
 
-export var autoplay: bool = false setget set_autoplay, get_autoplay
-export var playing: bool = false setget , is_playing
+export var autoplay := false setget set_autoplay, get_autoplay
+export var playing := false setget , is_playing
 export var stream: AudioStream = null setget set_stream, get_stream
 
 var _player: AudioStreamPlayer
-var _stop: bool = false
+var _stop := false
 
 
 func _init() -> void:

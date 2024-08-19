@@ -12,4 +12,4 @@ enum ValidOrientation {
 	SOUTHWEST = Direction.SOUTHWEST
 }
 
-export(ValidOrientation) var orientation: int = Direction.NORTH
+export(ValidOrientation) var orientation := Direction.NORTH

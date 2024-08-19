@@ -20,7 +20,7 @@ func _export_end() -> void:
 
 		if project_dir_status == OK:
 			for source_path in ProjectSettings.get_setting(DESIRED_FILES_PROPERTY):
-				var dest_path: String = "%s/%s" % [target_dir, source_path.get_file()]
+				var dest_path := "%s/%s" % [target_dir, source_path.get_file()]
 				var copy_status: int = project_dir.copy(source_path, dest_path)
 
 				if copy_status != OK:

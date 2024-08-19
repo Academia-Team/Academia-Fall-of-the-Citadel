@@ -74,7 +74,7 @@ func lives_lost() -> int:
 
 func damage(damage_amount: int = 1) -> void:
 	if damage_amount > 0:
-		var new_lives = lives - damage_amount
+		var new_lives := lives - damage_amount
 		if new_lives < 0:
 			new_lives = 0
 		set_lives(new_lives)
@@ -82,7 +82,7 @@ func damage(damage_amount: int = 1) -> void:
 
 func heal(heal_amount: int = 1) -> void:
 	if heal_amount > 0:
-		var new_lives: int = lives + heal_amount
+		var new_lives := lives + heal_amount
 		if new_lives > START_LIVES:
 			new_lives = START_LIVES
 		set_lives(new_lives)
@@ -108,7 +108,7 @@ func _handle_action() -> void:
 
 
 func _handle_movement() -> void:
-	var desired_dir: int = Direction.NONE
+	var desired_dir := Direction.NONE
 
 	if Input.is_action_pressed("move_up"):
 		desired_dir = Direction.combine_dir(Direction.NORTH, desired_dir)

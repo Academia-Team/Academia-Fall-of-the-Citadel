@@ -1,7 +1,7 @@
 class_name TargetTracker
 extends Area2D
 
-var _targets: Dictionary = {
+var _targets := {
 	Direction.NORTH: [],
 	Direction.SOUTH: [],
 	Direction.WEST: [],
