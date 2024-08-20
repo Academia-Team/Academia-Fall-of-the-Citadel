@@ -1,7 +1,7 @@
 tool
 extends Label
 
-export(String, FILE) var file_path: String = "" setget set_file_path
+export(String, FILE) var file_path := "" setget set_file_path
 
 
 func set_file_path(path: String) -> void:
@@ -9,7 +9,7 @@ func set_file_path(path: String) -> void:
 	file_path = path
 
 	if not file_path.empty():
-		var file: File = File.new()
+		var file := File.new()
 		if file.file_exists(file_path):
 			var file_status: int = file.open(file_path, File.READ)
 			if file_status == OK:

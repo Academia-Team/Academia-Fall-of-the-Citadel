@@ -3,14 +3,14 @@ extends Area2D
 
 signal existence_changed(value)
 
-const GROUP: String = "interactable"
+const GROUP := "interactable"
 
-export var points: int = 0 setget set_points, get_points
-export var shovable: bool = false setget set_shovable, is_shovable
+export var points := 0 setget set_points, get_points
+export var shovable := false setget set_shovable, is_shovable
 export var shovable_sfx: AudioStream = null setget set_shovable_sfx, get_shovable_sfx
-export var type: String = ""
+export var type := ""
 
-var exists: bool = true setget set_existence, get_existence
+var exists := true setget set_existence, get_existence
 
 var _shovable_sfx_player: AudioStreamPlayer = null
 

@@ -5,8 +5,8 @@ signal leave
 signal retry(mode, seed_val)
 
 var info_ref: InfoBar = null
-var new_seed_val: int = 0
-var new_seed_val_set: bool = false
+var new_seed_val := 0
+var new_seed_val_set := false
 
 
 func _ready() -> void:

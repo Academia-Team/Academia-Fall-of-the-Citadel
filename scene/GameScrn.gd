@@ -1,10 +1,10 @@
 class_name Game
 extends Control
 
-const CHEAT_COUNT_REQ: int = 3
+const CHEAT_COUNT_REQ := 3
 
-var _cheat_key_counter: int = 0
-var _playing: bool = false
+var _cheat_key_counter := 0
+var _playing := false
 
 
 func _ready() -> void:

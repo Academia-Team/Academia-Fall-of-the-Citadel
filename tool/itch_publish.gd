@@ -1,14 +1,14 @@
 extends SceneTree
 
-const DEV_PROPERTY: String = "global/Dev"
-const EXPORT_ALL_PATH: String = "res://tool/export_all.gd"
-const EXPORT_PRESET_PATH: String = "res://export_presets.cfg"
-const PUBLISH_PRESET_PROPERTY: String = "global/Itch Presets To Publish"
-const VERSION_PATH: String = "res://VERSION.txt"
+const DEV_PROPERTY := "global/Dev"
+const EXPORT_ALL_PATH := "res://tool/export_all.gd"
+const EXPORT_PRESET_PATH := "res://export_presets.cfg"
+const PUBLISH_PRESET_PROPERTY := "global/Itch Presets To Publish"
+const VERSION_PATH := "res://VERSION.txt"
 
-const USER_ARG: int = 0
-const GAME_ARG: int = 1
-const REQ_NUM_ARGS: int = 2
+const USER_ARG := 0
+const GAME_ARG := 1
+const REQ_NUM_ARGS := 2
 
 var godot_exec_path: String
 
@@ -16,8 +16,8 @@ var godot_exec_path: String
 class Args:
 	enum Status { VALID, MISSING_USER, MISSING_GAME, UNPROCESSED, INVALID, TOO_MANY }
 	var status: int = Status.UNPROCESSED
-	var username: String = ""
-	var gamename: String = ""
+	var username := ""
+	var gamename := ""
 
 
 func _init() -> void:
@@ -89,15 +89,15 @@ func _init() -> void:
 
 
 func _strip_godot_engine_args(raw_args: PoolStringArray) -> PoolStringArray:
-	var script_args: PoolStringArray = PoolStringArray()
-	var script_name_idx: int = 0
+	var script_args := PoolStringArray()
+	var script_name_idx := 0
 
 	for arg in raw_args:
 		script_name_idx += 1
 		if arg == "-s" or arg == "--script":
 			break
 
-	var i: int = script_name_idx + 1
+	var i := script_name_idx + 1
 	while i < raw_args.size():
 		script_args.append(raw_args[i])
 		i += 1
@@ -106,10 +106,10 @@ func _strip_godot_engine_args(raw_args: PoolStringArray) -> PoolStringArray:
 
 
 func _parse_args(raw_args: PoolStringArray) -> Args:
-	var args: Args = Args.new()
+	var args := Args.new()
 	var script_args: PoolStringArray = _strip_godot_engine_args(raw_args)
 	var num_args: int = script_args.size()
-	var valid: bool = true
+	var valid := true
 
 	if num_args == REQ_NUM_ARGS:
 		for arg in script_args:
@@ -174,7 +174,7 @@ func _run_export_all() -> int:
 
 
 func _get_publish_info() -> Dictionary:
-	var publish_info: Dictionary = {}
+	var publish_info := {}
 
 	if ProjectSettings.has_setting(PUBLISH_PRESET_PROPERTY):
 		publish_info = ProjectSettings.get_setting(PUBLISH_PRESET_PROPERTY)
@@ -183,7 +183,7 @@ func _get_publish_info() -> Dictionary:
 
 
 func _validate_publish_info(publish_info: Dictionary) -> bool:
-	var valid: bool = true
+	var valid := true
 	var keys: Array = publish_info.keys()
 
 	for key in keys:
@@ -196,16 +196,16 @@ func _validate_publish_info(publish_info: Dictionary) -> bool:
 
 
 func _get_channel_path(preset_channel: Dictionary) -> Dictionary:
-	var channel_path: Dictionary = {}
-	var export_file: File = File.new()
+	var channel_path := {}
+	var export_file := File.new()
 	var export_file_status: int = export_file.open(EXPORT_PRESET_PATH, File.READ)
 
 	if export_file_status == OK:
-		var desired_dict: Dictionary = {}
-		var find_path: bool = false
-		var presets_found: int = 0
-		var presets_handled: int = 0
-		var channel_name: String = ""
+		var desired_dict := {}
+		var find_path := false
+		var presets_found := 0
+		var presets_handled := 0
+		var channel_name := ""
 
 		while export_file.get_position() < export_file.get_len() and export_file.get_error() == OK:
 			var line: String = export_file.get_line()
@@ -249,14 +249,14 @@ func _get_line_value(line: String) -> String:
 
 
 func _get_abs_path(rel_path: String) -> String:
-	var complete_path: String = "res://" + rel_path
+	var complete_path := "res://" + rel_path
 	return ProjectSettings.globalize_path(complete_path)
 
 
 func publish(path: String, channel: String, user: String, game: String) -> int:
 	var abs_version_file_path: String = ProjectSettings.globalize_path(VERSION_PATH)
-	var upload_target: String = "%s/%s:%s" % [user, game, channel]
-	var output: Array = []
+	var upload_target := "%s/%s:%s" % [user, game, channel]
+	var output := []
 
 	var return_code: int = OS.execute(
 		"butler",

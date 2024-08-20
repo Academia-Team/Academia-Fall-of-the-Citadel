@@ -1,6 +1,6 @@
 extends ColorRect
 
-var finish_intro: bool = false
+var finish_intro := false
 
 
 func _ready() -> void:

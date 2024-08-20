@@ -1,7 +1,7 @@
 class_name ButtonGridContainer
 extends FocusedGridContainer
 
-var _disabled_buttons: Array = []
+var _disabled_buttons := []
 
 
 func enable_buttons() -> void:

@@ -1,17 +1,17 @@
 class_name InfoBar
 extends ColorRect
 
-export var default_timed_message_length: int = 3
-export var num_messages_to_support: int = 10 setget set_num_messages, get_num_messages
+export var default_timed_message_length := 3
+export var num_messages_to_support := 10 setget set_num_messages, get_num_messages
 
-var cheat_enabled: bool = false setget set_cheat_enabled, is_cheat_enabled
-var mode: String = "" setget set_mode, get_mode
-var score: int = 0 setget set_score, get_score
-var seed_value: int = 0 setget set_seed, get_seed
+var cheat_enabled := false setget set_cheat_enabled, is_cheat_enabled
+var mode := "" setget set_mode, get_mode
+var score := 0 setget set_score, get_score
+var seed_value := 0 setget set_seed, get_seed
 
-var _initial_lives: int = 0
+var _initial_lives := 0
 var _status_messages := OrderedMessageStack.new()
-var _tainted: bool = false setget , is_tainted
+var _tainted := false setget , is_tainted
 
 
 func _ready() -> void:

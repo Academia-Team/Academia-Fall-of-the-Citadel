@@ -1,10 +1,10 @@
 extends SceneTree
 
-const EXPORT_PRESET_PATH: String = "res://export_presets.cfg"
+const EXPORT_PRESET_PATH := "res://export_presets.cfg"
 
 
 func _init() -> void:
-	var project_dir: Directory = Directory.new()
+	var project_dir := Directory.new()
 	var open_status: int = project_dir.open("res://")
 
 	if open_status != OK:
@@ -51,8 +51,8 @@ func _init() -> void:
 func _remove_all(dir: Directory, path: String) -> int:
 	var curr_path: String = dir.get_current_dir()
 	var dir_change_status: int = dir.change_dir(path)
-	var overall_status: int = OK
-	var found_dirs: Array = []
+	var overall_status := OK
+	var found_dirs := []
 
 	if dir_change_status != OK:
 		printerr('Failed to change to "%s".' % path)
@@ -90,8 +90,8 @@ func _remove_all(dir: Directory, path: String) -> int:
 
 
 func _get_export_dir_dests() -> Array:
-	var export_dests: Array = []
-	var export_file: File = File.new()
+	var export_dests := []
+	var export_file := File.new()
 	var export_file_status: int = export_file.open(EXPORT_PRESET_PATH, File.READ)
 
 	if export_file_status == OK:
@@ -119,12 +119,12 @@ func _get_line_value(line: String) -> String:
 
 
 func _get_abs_path(rel_path: String) -> String:
-	var complete_path: String = "res://" + rel_path
+	var complete_path := "res://" + rel_path
 	return ProjectSettings.globalize_path(complete_path)
 
 
 func _get_largest_common_substring(str1: String, str2: String) -> String:
-	var same: bool = true
+	var same := true
 	var smallest_size: int
 	var str1_size: int = str1.length()
 	var str2_size: int = str2.length()
@@ -134,9 +134,9 @@ func _get_largest_common_substring(str1: String, str2: String) -> String:
 	else:
 		smallest_size = str2_size
 
-	var substring: String = ""
+	var substring := ""
 
-	var i: int = 0
+	var i := 0
 	while i < smallest_size and same:
 		same = str1[i] == str2[i]
 
@@ -150,12 +150,12 @@ func _get_largest_common_substring(str1: String, str2: String) -> String:
 
 func _get_largest_array_substring(array: Array) -> String:
 	var array_len: int = array.size()
-	var substring: String = ""
+	var substring := ""
 
 	if array_len > 0:
 		substring = array[0]
 
-	var i: int = 1
+	var i := 1
 	while i < array_len and not substring.empty():
 		substring = _get_largest_common_substring(substring, array[i])
 		i += 1

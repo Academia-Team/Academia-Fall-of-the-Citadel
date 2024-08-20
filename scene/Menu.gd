@@ -1,12 +1,12 @@
 class_name Menu
 extends ColorRect
 
-const MAIN_BTN_IDX: int = 0
-const MODE_BTN_IDX: int = 1
+const MAIN_BTN_IDX := 0
+const MODE_BTN_IDX := 1
 
-var _menu_enabled: bool = false
-var _seed_val: int = 0
-var _seed_val_set: bool = false
+var _menu_enabled := false
+var _seed_val := 0
+var _seed_val_set := false
 
 
 func _ready() -> void:

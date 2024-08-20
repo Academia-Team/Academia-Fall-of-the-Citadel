@@ -4,9 +4,9 @@ extends AudioStreamPlayer
 signal next_song(song_index)
 
 export(Array, AudioStream) var music: Array
-var _stopped: bool = false
-var _index: int = 0
-var _pos: float = 0
+var _stopped := false
+var _index := 0
+var _pos := 0.0
 
 
 func _ready() -> void:
@@ -48,7 +48,7 @@ func resume() -> void:
 
 func _on_finished() -> void:
 	if not _stopped:
-		var next_index: int = (_index + 1) % music.size()
+		var next_index := (_index + 1) % music.size()
 		start(next_index)
 		emit_signal("next_song", next_index)
 		_index = next_index

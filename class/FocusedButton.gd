@@ -9,8 +9,8 @@ export var activate_sfx: AudioStream
 
 var select_audio_player: AudioStreamPlayer
 var activate_audio_player: AudioStreamPlayer
-var button_activated: bool = false
-var play_select_audio: bool = true
+var button_activated := false
+var play_select_audio := true
 
 
 func _ready() -> void:

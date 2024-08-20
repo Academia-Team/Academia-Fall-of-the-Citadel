@@ -3,12 +3,12 @@ extends TargettedItem
 
 const SWORD_SLASH: PackedScene = preload("res://scene/SwordAttack.tscn")
 
-export var distance_between_slashes: float = 32
-export var max_number_of_slashes: int = 2
+export var distance_between_slashes := 32.0
+export var max_number_of_slashes := 2
 
-var _slash_counter: int = 0
-var _sword_slashed: bool = false
-var _targets_to_destroy: Array = []
+var _slash_counter := 0
+var _sword_slashed := false
+var _targets_to_destroy := []
 
 
 func _use() -> void:
@@ -27,9 +27,9 @@ func _use() -> void:
 
 
 func _generate_slashes(num_slashes: int, dist_between: float) -> int:
-	var num_pixels_away: float = dist_between
-	var num_generated: int = 0
-	var success: bool = true
+	var num_pixels_away := dist_between
+	var num_generated := 0
+	var success := true
 
 	while success and num_generated < num_slashes:
 		success = _generate_sword_slash(num_pixels_away)

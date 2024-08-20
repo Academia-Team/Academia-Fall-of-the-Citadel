@@ -3,9 +3,9 @@ extends ColorRect
 
 signal done
 
-const CREDIT_PATH = "res://CREDIT.txt"
+const CREDIT_PATH := "res://CREDIT.txt"
 
-var _credits_active: bool = false
+var _credits_active := false
 
 
 func _ready() -> void:
@@ -39,7 +39,7 @@ func _process(_delta: float) -> void:
 
 func _on_ScrollContainer_gui_input(event: InputEvent) -> void:
 	if _credits_active:
-		var scroll_container = $ScrollContainer as AutomatedScrollContainer
+		var scroll_container := $ScrollContainer as AutomatedScrollContainer
 
 		if event.is_action("ui_scroll_down", true):
 			scroll_container.stop()

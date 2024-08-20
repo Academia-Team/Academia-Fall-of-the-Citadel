@@ -4,34 +4,36 @@ extends TileWorld
 signal game_over
 signal started
 
-const PASSIVE_SCORE = 1
+const PASSIVE_SCORE := 1
 
-const MAX_ZOMBIES = 5
-const VALID_DIST_FROM_PLAYER = 64
-const ZOMBIE_SPAWN_PROB = 0.6
+const MAX_ZOMBIES := 5
+const VALID_DIST_FROM_PLAYER := 64.0
+const ZOMBIE_SPAWN_PROB := 0.6
 
-const MAX_SWORDS = 2
+const MAX_SWORDS := 2
 
-const MAX_HEALTH_POTIONS = 1
-const BASE_HEALTH_SPAWN_PROB = 0.1
-const HEALTH_SPAWN_PROB_PER_LIFE = 0.1
+const MAX_HEALTH_POTIONS := 1
+const BASE_HEALTH_SPAWN_PROB := 0.1
+const HEALTH_SPAWN_PROB_PER_LIFE := 0.1
 
-const INITIAL_SPAWN_PROB = 0.3
+const INITIAL_SPAWN_PROB := 0.3
 
-const DUCK_SCENE = preload("res://scene/Duck.tscn")
-const HEALTH_SCENE = preload("res://scene/Health.tscn")
-const SWORD_SCENE = preload("res://scene/Sword.tscn")
-const ZOMBIE_SCENE = preload("res://scene/Zombie.tscn")
+const DUCK_SCENE: PackedScene = preload("res://scene/Duck.tscn")
+const HEALTH_SCENE: PackedScene = preload("res://scene/Health.tscn")
+const SWORD_SCENE: PackedScene = preload("res://scene/Sword.tscn")
+const ZOMBIE_SCENE: PackedScene = preload("res://scene/Zombie.tscn")
 
-var ref_counter = {}
-var info_ref = null
-var started = false
+const INVALID_VECTOR := Vector2(-1, -1)
 
-var enemy_rng = null
-var item_rng = null
+var ref_counter := {}
+var info_ref: InfoBar = null
+var started := false
+
+var enemy_rng := RandomNumberGenerator.new()
+var item_rng := RandomNumberGenerator.new()
 
 
-func start(info_obj):
+func start(info_obj: InfoBar) -> void:
 	info_ref = info_obj
 	ref_counter = {}
 	$Music.play()
@@ -49,33 +51,30 @@ func start(info_obj):
 	started = true
 
 
-func set_up_rng():
-	enemy_rng = RandomNumberGenerator.new()
-	item_rng = RandomNumberGenerator.new()
-
+func set_up_rng() -> void:
 	enemy_rng.set_seed(info_ref.get_seed())
 	item_rng.set_seed(info_ref.get_seed())
 	seed(info_ref.get_seed())
 
 
-func spawn_initial_env():
+func spawn_initial_env() -> void:
 	spawn_initial_items()
 	spawn_initial_enemies()
 
 
-func spawn_initial_items():
+func spawn_initial_items() -> void:
 	for _counter in range(MAX_SWORDS):
 		if item_rng.randf() < INITIAL_SPAWN_PROB:
 			spawn_item(SWORD_SCENE, get_spawn_pos())
 
 
-func spawn_initial_enemies():
+func spawn_initial_enemies() -> void:
 	for _counter in range(MAX_ZOMBIES):
 		if enemy_rng.randf() < INITIAL_SPAWN_PROB:
 			spawn_enemy(ZOMBIE_SCENE, get_spawn_pos())
 
 
-func cleanup():
+func cleanup() -> void:
 	for obj in get_tree().get_nodes_in_group(InteractableObject.GROUP):
 		if obj is Player:
 			obj.set_existence(false)
@@ -83,7 +82,7 @@ func cleanup():
 			obj.queue_free()
 
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	if started and info_ref.is_cheat_enabled():
 		if Input.is_action_just_pressed("cheat_suicide"):
 			$Player.kill()
@@ -99,7 +98,7 @@ func _process(_delta):
 			handle_stop_spawn_options()
 
 
-func handle_stop_spawn_options():
+func handle_stop_spawn_options() -> void:
 	if Input.is_action_pressed("cheat_item"):
 		$ItemSpawnTimer.paused = not $ItemSpawnTimer.paused
 		info_ref.set_timed_status("Item spawn toggled.")
@@ -120,7 +119,7 @@ func handle_stop_spawn_options():
 		info_ref.set_timed_status("Nothing toggled.")
 
 
-func _on_Player_pick_up_item(item_ref):
+func _on_Player_pick_up_item(item_ref: Item) -> void:
 	if ref_counter.has(item_ref.type):
 		ref_counter[item_ref.type] -= 1
 	else:
@@ -130,23 +129,23 @@ func _on_Player_pick_up_item(item_ref):
 	info_ref.set_status(item_ref.type)
 
 
-func _on_Player_used_item(_item_name):
+func _on_Player_used_item(_item_name: String) -> void:
 	info_ref.reset_status()
 
 
-func _on_passive_timer_timeout():
+func _on_passive_timer_timeout() -> void:
 	info_ref.update_score(PASSIVE_SCORE)
 
 
-func _on_Enemy_destroyed(ref):
+func _on_Enemy_destroyed(ref: Enemy) -> void:
 	info_ref.update_score(ref.points)
 
 
-func _on_Zombie_tree_exiting():
+func _on_Zombie_tree_exiting() -> void:
 	ref_counter["Zombie"] -= 1
 
 
-func _on_Player_health_change(lives):
+func _on_Player_health_change(lives: int) -> void:
 	if not started:
 		yield(self, "started")
 
@@ -168,20 +167,20 @@ func stop() -> void:
 	$DuckTimer.stop()
 
 
-func _on_Zombie_spawn_timer_timeout():
+func _on_Zombie_spawn_timer_timeout() -> void:
 	if ref_counter.get("Zombie", 0) < MAX_ZOMBIES:
 		if enemy_rng.randf() < ZOMBIE_SPAWN_PROB:
 			spawn_enemy(ZOMBIE_SCENE, get_spawn_pos())
 
 
-func get_spawn_pos():
-	var available_cells = get_used_cells()
-	var num_available_cells = available_cells.size()
-	var spawn_pos = null
-	var proposed_spawn_pos
+func get_spawn_pos() -> Vector2:
+	var available_cells: Array = get_used_cells()
+	var num_available_cells: int = available_cells.size()
+	var spawn_pos := INVALID_VECTOR
+	var proposed_spawn_pos: Vector2
 
-	while spawn_pos == null and num_available_cells > 0:
-		var rand_cell_idx = randi() % num_available_cells
+	while spawn_pos == INVALID_VECTOR and num_available_cells > 0:
+		var rand_cell_idx := randi() % num_available_cells
 		proposed_spawn_pos = map_to_world(available_cells[rand_cell_idx])
 
 		if valid_spawn_pos(proposed_spawn_pos):
@@ -193,8 +192,8 @@ func get_spawn_pos():
 	return spawn_pos
 
 
-func valid_spawn_pos(pos):
-	var valid_pos = false
+func valid_spawn_pos(pos: Vector2) -> bool:
+	var valid_pos := false
 
 	if (
 		(
@@ -208,18 +207,26 @@ func valid_spawn_pos(pos):
 	return valid_pos
 
 
-func spawn_enemy(scene, pos):
-	var instance = scene.instance()
-	instance.connect("enemy_destroyed", self, "_on_Enemy_destroyed")
-	instance.connect("tree_exiting", self, "_on_%s_tree_exiting" % instance.type)
-	instance.connect("move_request", self, "_on_Enemy_move_request")
-	add_child(instance)
-	var orient_facing_player = Direction.get_cardinal_dir_facing($Player.position, pos)
-	instance.spawn(pos, orient_facing_player)
-	ref_counter[instance.type] = ref_counter.get(instance.type, 0) + 1
+func spawn_enemy(scene: PackedScene, pos: Vector2) -> void:
+	if pos != INVALID_VECTOR:
+		var instance: Enemy = scene.instance()
+
+		var destroyed_status: int = instance.connect("enemy_destroyed", self, "_on_Enemy_destroyed")
+		var exiting_status: int = instance.connect(
+			"tree_exiting", self, "_on_%s_tree_exiting" % instance.type
+		)
+		var move_status: int = instance.connect("move_request", self, "_on_Enemy_move_request")
+
+		if destroyed_status == OK and exiting_status == OK and move_status == OK:
+			add_child(instance)
+			var orient_facing_player: int = Direction.get_cardinal_dir_facing($Player.position, pos)
+			instance.spawn(pos, orient_facing_player)
+			ref_counter[instance.type] = ref_counter.get(instance.type, 0) + 1
+		else:
+			printerr("Failed to properly set up enemy. Nothing will be spawned.")
 
 
-func _on_item_spawn_timer_timeout():
+func _on_item_spawn_timer_timeout() -> void:
 	if item_rng.randf() < _get_health_probability():
 		if ref_counter.get("Health", 0) < MAX_HEALTH_POTIONS:
 			spawn_item(HEALTH_SCENE, get_spawn_pos())
@@ -228,28 +235,29 @@ func _on_item_spawn_timer_timeout():
 			spawn_item(SWORD_SCENE, get_spawn_pos())
 
 
-func spawn_item(scene, pos):
-	var instance = scene.instance()
-	add_child(instance)
-	instance.spawn(self, pos)
-	ref_counter[instance.type] = ref_counter.get(instance.type, 0) + 1
+func spawn_item(scene: PackedScene, pos: Vector2) -> void:
+	if pos != INVALID_VECTOR:
+		var instance: Item = scene.instance()
+		add_child(instance)
+		instance.spawn(self, pos)
+		ref_counter[instance.type] = ref_counter.get(instance.type, 0) + 1
 
 
-func _on_Enemy_move_request(ref):
-	var desired_positions = ref.desired_positions($Player.position)
-	var moved = false
+func _on_Enemy_move_request(ref: Enemy) -> void:
+	var desired_positions: Array = ref.desired_positions($Player.position)
+	var moved := false
 
 	for pos in desired_positions:
 		# Want to ensure that all the enemies aren't moving on top of each other. If that is happening,
 		# just have the enemy lose its turn.
-		var obj_at_pos = get_interactable_obj_at_pos(pos)
+		var obj_at_pos: InteractableObject = get_interactable_obj_at_pos(pos)
 
 		if obj_at_pos == null:
 			ref.move_to(pos)
 			moved = true
 			break
 		elif obj_at_pos.is_shovable():
-			var dir_to_shove = Direction.get_cardinal_dir_facing(pos, ref.position)
+			var dir_to_shove: int = Direction.get_cardinal_dir_facing(pos, ref.position)
 			if move_shovable_obj(obj_at_pos, dir_to_shove):
 				moved = true
 				break
@@ -258,9 +266,9 @@ func _on_Enemy_move_request(ref):
 			ref.move_reject()
 
 
-func move_shovable_obj(ref, shove_dir):
-	var dest_pos = Direction.translate_pos(ref.position, shove_dir, 32)
-	var success = false
+func move_shovable_obj(ref: InteractableObject, shove_dir: int) -> bool:
+	var dest_pos: Vector2 = Direction.translate_pos(ref.position, shove_dir, 32)
+	var success := false
 
 	if (
 		get_interactable_obj_at_pos(dest_pos) == null
@@ -272,16 +280,16 @@ func move_shovable_obj(ref, shove_dir):
 	return success
 
 
-func _on_gameover_sfx_finished():
+func _on_gameover_sfx_finished() -> void:
 	emit_signal("game_over")
 
 
-func _on_Player_move_request(dir):
+func _on_Player_move_request(dir: int) -> void:
 	if $Player.get_lives() > 0:
-		var future_pos = Direction.translate_pos($Player.position, dir, 32)
+		var future_pos: Vector2 = Direction.translate_pos($Player.position, dir, 32)
 
 		if pos_in_world(future_pos):
-			var interactable_obj = get_interactable_obj_at_pos(future_pos)
+			var interactable_obj: InteractableObject = get_interactable_obj_at_pos(future_pos)
 			if $Player.held_item == null or interactable_obj == null or interactable_obj is Enemy:
 				$Player.move_to(future_pos)
 			elif not move_shovable_obj(interactable_obj, dir):
@@ -290,7 +298,7 @@ func _on_Player_move_request(dir):
 			$Player.move_reject()
 
 
-func _on_DuckTimer_timeout():
+func _on_DuckTimer_timeout() -> void:
 	spawn_item(DUCK_SCENE, get_spawn_pos())
 
 
