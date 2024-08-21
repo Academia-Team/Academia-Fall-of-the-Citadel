@@ -1,8 +1,9 @@
 tool
 extends "res://addons/OrientedSprite/type.gd"
 
-signal effect_show
-signal effect_finish
+signal effect_changed
+
+const MAX_EFFECTS := 3
 
 export var death_texture: Texture setget set_death_texture
 
@@ -11,20 +12,19 @@ export var hurt_color := Color.tomato
 export var heal_length := 1.0
 export var hurt_length := 0.3
 
-var effect_timer: Timer
-var initial_texture: Texture
-onready var orig_self_modulate: Color = self_modulate
+var _tint_stack := Stack.new()
 
 
-func _ready() -> void:
-	effect_timer = Timer.new()
-	effect_timer.one_shot = true
-	var connect_status: int = effect_timer.connect("timeout", self, "_on_effect_timeout")
+func _init() -> void:
+	_tint_stack.set_size(MAX_EFFECTS)
 
-	if connect_status != OK:
-		printerr("Timer connect failure: Status effects will be displayed indefinitely.")
-
-	add_child(effect_timer)
+	var tint_connect: int = _tint_stack.connect("contents_changed", self, "_on_tint_changed")
+	if tint_connect == OK:
+		var push_success: bool = _tint_stack.push(self_modulate)
+		if not push_success:
+			printerr("Failed to push initial effect data.")
+	else:
+		printerr("Unable to keep track of creature effects.")
 
 
 func set_death_texture(new_texture: Texture) -> void:
@@ -44,20 +44,20 @@ func show_death() -> void:
 
 
 func _show_effect(length: float, color: Color) -> void:
-	if not effect_timer.is_stopped():
-		effect_timer.stop()
-		effect_timer.emit_signal("timeout")
-		yield(effect_timer, "timeout")
+	var timer: SceneTreeTimer = get_tree().create_timer(length)
+	var tint := Expirable.new(color, timer)
+	_tint_stack.push(tint)
 
-	effect_timer.wait_time = length
 
-	orig_self_modulate = self_modulate
+func _on_tint_changed() -> void:
+	var tint = _tint_stack.peek()
+	var color: Color
+
+	if tint is Color:
+		color = tint
+
+	if tint is Expirable:
+		color = tint.get_item()
+
 	self_modulate = color
-
-	effect_timer.start()
-	emit_signal("effect_show")
-
-
-func _on_effect_timeout() -> void:
-	self_modulate = orig_self_modulate
-	emit_signal("effect_finish")
+	emit_signal("effect_changed")
