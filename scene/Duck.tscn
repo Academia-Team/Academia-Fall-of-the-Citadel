@@ -15,6 +15,7 @@ shovable_sfx = ExtResource( 3 )
 type = "Duck"
 texture = ExtResource( 5 )
 acquire_sfx = ExtResource( 1 )
+mega_duck_uses = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 15, 15 )
@@ -22,5 +23,9 @@ shape = ExtResource( 2 )
 
 [node name="UseSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 5 )
+centered = false
 
 [connection signal="finished" from="UseSFX" to="." method="_on_UseSFX_finished"]
