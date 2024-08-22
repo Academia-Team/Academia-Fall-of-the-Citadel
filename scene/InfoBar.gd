@@ -10,7 +10,7 @@ var score := 0 setget set_score, get_score
 var seed_value := 0 setget set_seed, get_seed
 
 var _initial_lives := 0
-var _status_messages := OrderedMessageStack.new()
+var _status_messages := OrderedStack.new()
 var _tainted := false setget , is_tainted
 
 
@@ -89,7 +89,10 @@ func set_status(status: String) -> void:
 
 
 func get_status() -> String:
-	return _status_messages.peek()
+	var item = _status_messages.peek()
+	if item is Expirable:
+		return item.get_item()
+	return item
 
 
 # Discards all messages except the first one.
@@ -125,4 +128,4 @@ func get_num_messages() -> int:
 
 
 func _on_status_contents_changed() -> void:
-	$Status.text = _status_messages.peek()
+	$Status.text = get_status()
