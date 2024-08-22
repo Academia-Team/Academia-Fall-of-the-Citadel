@@ -25,6 +25,8 @@ const ZOMBIE_SCENE: PackedScene = preload("res://scene/Zombie.tscn")
 
 const INVALID_VECTOR := Vector2(-1, -1)
 
+export var game_over_color := Color.gray
+
 var ref_counter := {}
 var info_ref: InfoBar = null
 var started := false
@@ -155,6 +157,7 @@ func _on_Player_health_change(lives: int) -> void:
 		stop()
 		info_ref.reset_status()
 		info_ref.set_status("Goodbye Forever!")
+		set_tint(game_over_color)
 		$GameOverSFX.play()
 
 
@@ -165,6 +168,7 @@ func stop() -> void:
 	$ZombieSpawnTimer.stop()
 	$ItemSpawnTimer.stop()
 	$DuckTimer.stop()
+	reset_tint()
 
 
 func _on_Zombie_spawn_timer_timeout() -> void:
