@@ -1,6 +1,11 @@
 class_name InfoBar
 extends ColorRect
 
+const NUM_PRIORITIES := 3
+const LOW_PRIORITY := 0
+const MED_PRIORITY := 1
+const HIGH_PRIORITY := 2
+
 export var default_timed_message_length := 3
 export var num_messages_to_support := 10 setget set_num_messages, get_num_messages
 
@@ -10,20 +15,22 @@ var score := 0 setget set_score, get_score
 var seed_value := 0 setget set_seed, get_seed
 
 var _initial_lives := 0
-var _status_messages := OrderedStack.new()
+var _status_messages := PriorityStack.new()
 var _tainted := false setget , is_tainted
 
 
 func _ready() -> void:
-	_status_messages.set_size(num_messages_to_support)
+	_status_messages.set_global_size(num_messages_to_support)
+	_status_messages.set_priority_levels(NUM_PRIORITIES)
+
 	var message_connect: int = _status_messages.connect(
 		"contents_changed", self, "_on_status_contents_changed"
 	)
 	if message_connect != OK:
 		printerr("Cannot display status messages.")
 
-	var initial_message: String = $Status.text
-	var push_success: bool = _status_messages.push(initial_message)
+	var low_priority: OrderedStack = _status_messages.get_level(LOW_PRIORITY)
+	var push_success: bool = low_priority.push($Status.text)
 	if not push_success:
 		printerr("Failed to display initial status message.")
 
@@ -73,19 +80,31 @@ func get_seed() -> int:
 	return seed_value
 
 
-func set_timed_status(status: String, sec: float = default_timed_message_length) -> void:
+func set_timed_status(
+	status: String, sec: float = default_timed_message_length, priority: int = MED_PRIORITY
+) -> void:
 	var timer: SceneTreeTimer = get_tree().create_timer(sec)
 	var timed_message := Expirable.new(status, timer)
-	var message_success: bool = _status_messages.push(timed_message)
-	if not message_success:
-		printerr('Failed to display message "%s" for %f seconds' % [status, sec])
+	var stack: OrderedStack = _status_messages.get_level(priority)
+
+	if stack != null:
+		var message_success: bool = stack.push(timed_message)
+		if not message_success:
+			printerr('Failed to display message "%s" for %f seconds' % [status, sec])
+	else:
+		printerr("Priority level %d is inaccessible." % priority)
 
 
 # All timed status messages have priority above non-timed status messages.
-func set_status(status: String) -> void:
-	var message_success: bool = _status_messages.push(status)
-	if not message_success:
-		printerr('Failed to display message "%s".' % status)
+func set_status(status: String, priority: int = MED_PRIORITY) -> void:
+	var stack: OrderedStack = _status_messages.get_level(priority)
+
+	if stack != null:
+		var message_success: bool = stack.push(status)
+		if not message_success:
+			printerr('Failed to display message "%s".' % status)
+	else:
+		printerr("Priority level %d is inaccessible." % priority)
 
 
 func get_status() -> String:
@@ -93,6 +112,17 @@ func get_status() -> String:
 	if item is Expirable:
 		return item.get_item()
 	return item
+
+
+# If the first priority is targetted, care is taken to ensure that something remains in the
+# stack.
+func clear_priority(priority: int) -> void:
+	var stack: OrderedStack = _status_messages.get_level(priority)
+	if stack != null:
+		if priority == LOW_PRIORITY:
+			stack.preserve_only_first()
+		else:
+			stack.clear()
 
 
 # Discards all messages except the first one.
