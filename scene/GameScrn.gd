@@ -85,11 +85,11 @@ func _on_CheatInputTimeout_timeout() -> void:
 	_cheat_key_counter = 0
 
 
-func _on_GameGrid_message_change_request(text: String, duration: float):
+func _on_GameGrid_message_change_request(text: String, duration: float, priority: int):
 	if duration == TileWorld.EVENT_NO_LIMIT:
-		$InfoBar.set_status(text)
+		$InfoBar.set_status(text, priority)
 	else:
-		$InfoBar.set_timed_status(text, duration)
+		$InfoBar.set_timed_status(text, duration, priority)
 
 
 func _on_GameGrid_music_change_request(stream: AudioStream):

@@ -3,13 +3,19 @@
 class_name TileWorld
 extends TileMap
 
-signal message_change_request(text, duration)
+signal message_change_request(text, duration, priority)
 signal music_change_request(stream)
 signal tint_changed(color)
 signal event_started(event)
 signal event_finished(event)
 
 const EVENT_NO_LIMIT := -1
+
+const EVENT_MAX_PRIORITIES := 3
+const EVENT_LOW_PRIORITY := 0
+const EVENT_MED_PRIORITY := 1
+const EVENT_HIGH_PRIORITY := 2
+
 const MAX_TINT_REQUESTS := 3
 
 var _tint_stack := OrderedStack.new()
@@ -54,12 +60,14 @@ func _init() -> void:
 		printerr("Unable to keep track of requests for tinting.")
 
 
-func send_event(event: Event, duration: float = EVENT_NO_LIMIT) -> void:
+func send_event(
+	event: Event, duration: float = EVENT_NO_LIMIT, priority: int = EVENT_HIGH_PRIORITY
+) -> void:
 	if event.max_times == EVENT_NO_LIMIT or event.num_times < event.max_times:
 		event.num_times += 1
 
 		if not event.message.empty():
-			emit_signal("message_change_request", event.message, duration)
+			emit_signal("message_change_request", event.message, duration, priority)
 
 		set_tint(event.game_tint, duration)
 
