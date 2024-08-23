@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://asset/game_over.wav" type="AudioStream" id=1]
 [ext_resource path="res://scene/GameGrid.gd" type="Script" id=2]
-[ext_resource path="res://asset/slow_melancholic_theme_c64_style.ogg" type="AudioStream" id=3]
 [ext_resource path="res://resource/tileset.tres" type="TileSet" id=4]
 [ext_resource path="res://scene/Player.tscn" type="PackedScene" id=5]
 
@@ -27,9 +26,6 @@ wait_time = 6.0
 
 [node name="DuckTimer" type="Timer" parent="."]
 wait_time = 2.0
-
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
 
 [node name="GameOverSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
