@@ -59,10 +59,10 @@ func discard_top() -> void:
 		_untimed_items.discard_top()
 
 
-func push(item) -> bool:
+func push(item, silent: bool = false) -> bool:
 	if item is Expirable:
-		return _timed_items.push(item)
-	return _untimed_items.push(item)
+		return _timed_items.push(item, silent)
+	return _untimed_items.push(item, silent)
 
 
 func clear() -> void:
