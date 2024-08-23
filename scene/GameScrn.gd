@@ -20,6 +20,7 @@ func play(mode: String, seed_val: int = gen_seed()) -> void:
 	$InfoBar.set_seed(seed_val)
 	$InfoBar.set_mode(mode)
 	$GameGrid.start($InfoBar)
+	$Audio.play()
 
 
 func _stop() -> void:
@@ -27,6 +28,7 @@ func _stop() -> void:
 	$GameOver.stop()
 	$GameGrid.stop()
 	$InfoBar.reset()
+	$Audio.reset()
 	hide()
 	_playing = false
 
@@ -72,6 +74,7 @@ func _on_GameOver_leave() -> void:
 
 
 func _on_GameGrid_game_over() -> void:
+	$Audio.reset()
 	$GameGrid.cleanup()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$GameOver.start($InfoBar)
@@ -87,3 +90,7 @@ func _on_GameGrid_message_change_request(text: String, duration: float):
 		$InfoBar.set_status(text)
 	else:
 		$InfoBar.set_timed_status(text, duration)
+
+
+func _on_GameGrid_music_change_request(stream: AudioStream):
+	$Audio.push(stream)

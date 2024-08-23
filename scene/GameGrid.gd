@@ -38,7 +38,6 @@ var item_rng := RandomNumberGenerator.new()
 func start(info_obj: InfoBar) -> void:
 	info_ref = info_obj
 	ref_counter = {}
-	$Music.play()
 	$PassiveTimer.start()
 	$ZombieSpawnTimer.start()
 	$ItemSpawnTimer.start()
@@ -160,7 +159,6 @@ func _on_Player_health_change(lives: int) -> void:
 
 func stop() -> void:
 	started = false
-	$Music.stop()
 	$PassiveTimer.stop()
 	$ZombieSpawnTimer.stop()
 	$ItemSpawnTimer.stop()
