@@ -51,7 +51,7 @@ func discard_top() -> void:
 	pop()
 
 
-func push(item) -> bool:
+func push(item, silent: bool = false) -> bool:
 	if is_full():
 		return false
 	if item is Expirable:
@@ -60,7 +60,9 @@ func push(item) -> bool:
 			return false
 	_stack[_num_items] = item
 	_num_items += 1
-	emit_signal("contents_changed")
+
+	if not silent:
+		emit_signal("contents_changed")
 
 	return true
 
