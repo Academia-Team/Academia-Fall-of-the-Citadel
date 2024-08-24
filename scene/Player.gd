@@ -159,8 +159,10 @@ func _ready() -> void:
 
 func _set_events():
 	events.clear()
-	events[EventDefs.P_INIT_MOV] = TileWorld.Event.new(MOVEMENT_MSG % $MoveTimer.wait_time, 1)
-	events[EventDefs.P_INIT_PICK] = TileWorld.Event.new(ITEM_PICKUP_MSG, 1)
+	events[EventDefs.P_INIT_MOV] = TileWorld.Event.new(
+		EventDefs.P_INIT_MOV, MOVEMENT_MSG % $MoveTimer.wait_time, 1
+	)
+	events[EventDefs.P_INIT_PICK] = TileWorld.Event.new(EventDefs.P_INIT_PICK, ITEM_PICKUP_MSG, 1)
 
 
 func spawn(spawned_into: TileWorld, pos: Vector2, orient: int = Direction.SOUTH) -> void:
