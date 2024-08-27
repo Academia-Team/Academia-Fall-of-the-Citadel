@@ -147,9 +147,6 @@ func _on_Zombie_tree_exiting() -> void:
 func _on_Player_health_change(lives: int) -> void:
 	info_ref.display_lives(lives)
 
-	if lives <= 0:
-		stop()
-
 
 func stop() -> void:
 	_stop_cheats()
@@ -315,3 +312,17 @@ func get_interactable_obj_at_pos(pos: Vector2) -> InteractableObject:
 
 func _get_health_probability() -> int:
 	return BASE_HEALTH_SPAWN_PROB + HEALTH_SPAWN_PROB_PER_LIFE * $Player.lives_lost()
+
+
+func _on_GameGrid_event_started(event: TileWorld.Event):
+	match event.identifier:
+		EventDefs.P_DEATH:
+			_stop_cheats()
+			_stop_spawners()
+
+
+func _on_GameGrid_event_finished(event: TileWorld.Event):
+	match event.identifier:
+		EventDefs.P_DEATH:
+			stop()
+			emit_signal("game_over")
