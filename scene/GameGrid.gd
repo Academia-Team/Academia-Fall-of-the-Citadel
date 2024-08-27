@@ -152,12 +152,20 @@ func _on_Player_health_change(lives: int) -> void:
 
 
 func stop() -> void:
+	_stop_cheats()
+	_stop_spawners()
+	reset_tint()
+
+
+func _stop_cheats() -> void:
 	started = false
+
+
+func _stop_spawners():
 	$PassiveTimer.stop()
 	$ZombieSpawnTimer.stop()
 	$ItemSpawnTimer.stop()
 	$DuckTimer.stop()
-	reset_tint()
 
 
 func _on_Zombie_spawn_timer_timeout() -> void:
