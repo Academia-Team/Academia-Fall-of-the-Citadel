@@ -6,6 +6,8 @@ extends TileMap
 signal message_change_request(text, duration)
 signal music_change_request(stream, duration)
 signal tint_changed(color)
+signal event_started(event)
+signal event_finished(event)
 
 const EVENT_NO_LIMIT := -1
 const MAX_TINT_REQUESTS := 3
@@ -19,16 +21,19 @@ class Event:
 	var num_times: int
 	var max_times: int
 
+	var identifier: int
 	var message: String
 	var music: AudioStream
 	var game_tint: Color
 
 	func _init(
-		text: String,
+		id: int,
+		text: String = "",
 		max_occurences: int = EVENT_NO_LIMIT,
 		song: AudioStream = null,
 		tint: Color = Color.white
 	):
+		identifier = id
 		num_times = 0
 		max_times = max_occurences
 
@@ -52,10 +57,19 @@ func _init() -> void:
 func send_event(event: Event, duration: float = EVENT_NO_LIMIT) -> void:
 	if event.max_times == EVENT_NO_LIMIT or event.num_times < event.max_times:
 		event.num_times += 1
-		emit_signal("message_change_request", event.message, duration)
+
+		if not event.message.empty():
+			emit_signal("message_change_request", event.message, duration)
+
 		set_tint(event.game_tint, duration)
+
 		if event.music != null:
 			emit_signal("music_change_request", event.music, duration)
+
+		emit_signal("event_started", event)
+		if duration != EVENT_NO_LIMIT:
+			yield(get_tree().create_timer(duration), "timeout")
+			emit_signal("event_finished", event)
 
 
 func set_tint(tint: Color, duration: float = 0.0) -> void:

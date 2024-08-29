@@ -6,9 +6,6 @@ signal move_request(dir)
 signal pick_up_item(item_ref)
 signal used_item(item_name)
 
-# Player event IDs.
-enum { INITIAL_MOVEMENT, INITIAL_ITEM_PICKUP }
-
 const MOVEMENT_MSG := "Hold movement controls for %.1f second(s) to move."
 const MOVEMENT_MSG_TIME := 5.0
 
@@ -132,7 +129,7 @@ func _handle_movement() -> void:
 	$CharacterSprite.set_orient(desired_dir)
 
 	if desired_dir != Direction.NONE:
-		gameworld.send_event(events[INITIAL_MOVEMENT], MOVEMENT_MSG_TIME)
+		gameworld.send_event(events[EventDefs.P_INIT_MOV], MOVEMENT_MSG_TIME)
 
 
 func _use_item() -> void:
@@ -162,8 +159,10 @@ func _ready() -> void:
 
 func _set_events():
 	events.clear()
-	events[INITIAL_MOVEMENT] = TileWorld.Event.new(MOVEMENT_MSG % $MoveTimer.wait_time, 1)
-	events[INITIAL_ITEM_PICKUP] = TileWorld.Event.new(ITEM_PICKUP_MSG, 1)
+	events[EventDefs.P_INIT_MOV] = TileWorld.Event.new(
+		EventDefs.P_INIT_MOV, MOVEMENT_MSG % $MoveTimer.wait_time, 1
+	)
+	events[EventDefs.P_INIT_PICK] = TileWorld.Event.new(EventDefs.P_INIT_PICK, ITEM_PICKUP_MSG, 1)
 
 
 func spawn(spawned_into: TileWorld, pos: Vector2, orient: int = Direction.SOUTH) -> void:
@@ -195,7 +194,7 @@ func _on_Player_area_entered(area: Area2D):
 	if area is Item:
 		if not held_item:
 			held_item = area.acquire(self)
-			gameworld.send_event(events[INITIAL_ITEM_PICKUP], ITEM_PICKUP_MSG_TIME)
+			gameworld.send_event(events[EventDefs.P_INIT_PICK], ITEM_PICKUP_MSG_TIME)
 
 			var used_status: int = area.connect("used", self, "_on_item_used")
 			if used_status != OK:

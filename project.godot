@@ -45,6 +45,11 @@ _global_script_classes=[ {
 "path": "res://scene/Zombie.gd"
 }, {
 "base": "Reference",
+"class": "EventDefs",
+"language": "GDScript",
+"path": "res://class/EventDefs.gd"
+}, {
+"base": "Reference",
 "class": "Expirable",
 "language": "GDScript",
 "path": "res://class/Expirable.gd"
@@ -147,6 +152,7 @@ _global_script_class_icons={
 "Detector": "",
 "Direction": "",
 "Enemy": "",
+"EventDefs": "",
 "Expirable": "",
 "FocusedButton": "",
 "FocusedGridContainer": "",
