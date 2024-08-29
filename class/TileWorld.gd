@@ -56,7 +56,7 @@ func _init() -> void:
 
 
 func send_event(
-	event: Event, duration: float = EVENT_NO_LIMIT, priority: int = TriPriorityStack.HIGH_PRIORITY
+	event: Event, duration: float = EVENT_NO_LIMIT, priority: int = TriPriorityStack.MED_PRIORITY
 ) -> void:
 	if event.max_times == EVENT_NO_LIMIT or event.num_times < event.max_times:
 		event.num_times += 1
