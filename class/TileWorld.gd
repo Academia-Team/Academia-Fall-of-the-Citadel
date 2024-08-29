@@ -4,7 +4,7 @@ class_name TileWorld
 extends TileMap
 
 signal message_change_request(text, duration, priority)
-signal music_change_request(stream)
+signal music_change_request(stream, priority)
 signal tint_changed(color)
 signal event_started(event)
 signal event_finished(event)
@@ -71,7 +71,7 @@ func send_event(
 		set_tint(event.game_tint, priority, duration)
 
 		if event.music != null:
-			emit_signal("music_change_request", event.music)
+			emit_signal("music_change_request", event.music, priority)
 
 		emit_signal("event_started", event)
 		if duration != EVENT_NO_LIMIT:

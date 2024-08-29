@@ -92,7 +92,7 @@ func _on_GameGrid_message_change_request(text: String, duration: float, priority
 		$InfoBar.set_timed_status(text, duration, priority)
 
 
-func _on_GameGrid_music_change_request(stream: AudioStream):
-	var status: bool = $Audio.push(stream)
+func _on_GameGrid_music_change_request(stream: AudioStream, priority: int):
+	var status: bool = $Audio.push(stream, priority)
 	if not status:
-		printerr('Failed to add stream "%s".' % stream)
+		printerr('Failed to add stream "%s" with priority %d.' % [stream, priority])
