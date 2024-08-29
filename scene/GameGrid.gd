@@ -148,9 +148,6 @@ func _on_Zombie_tree_exiting() -> void:
 
 
 func _on_Player_health_change(lives: int) -> void:
-	if not started:
-		yield(self, "started")
-
 	info_ref.display_lives(lives)
 
 	if lives <= 0:
