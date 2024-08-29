@@ -12,7 +12,13 @@ const MOVEMENT_MSG_TIME := 5.0
 const ITEM_PICKUP_MSG := "Press space or first button to use item"
 const ITEM_PICKUP_MSG_TIME := 3.0
 
+const DEATH_MSG := "Goodbye Forever!"
+const DEATH_MSG_TIME := 1.85
+
 const START_LIVES := 3
+
+export var death_tint := Color.gray
+export var death_sfx: AudioStream
 
 var events: Dictionary
 var gameworld: TileWorld
@@ -54,6 +60,7 @@ func _damaged(remaining_lives: int) -> void:
 			$HurtSFX.play()
 			$ImmunityTimer.start()
 		if remaining_lives == 0:
+			gameworld.send_event(events[EventDefs.P_DEATH], DEATH_MSG_TIME)
 			set_existence(false)
 			set_visible(true)
 			$CharacterSprite.show_death()
@@ -163,6 +170,9 @@ func _set_events():
 		EventDefs.P_INIT_MOV, MOVEMENT_MSG % $MoveTimer.wait_time, 1
 	)
 	events[EventDefs.P_INIT_PICK] = TileWorld.Event.new(EventDefs.P_INIT_PICK, ITEM_PICKUP_MSG, 1)
+	events[EventDefs.P_DEATH] = TileWorld.Event.new(
+		EventDefs.P_DEATH, DEATH_MSG, 1, death_sfx, death_tint
+	)
 
 
 func spawn(spawned_into: TileWorld, pos: Vector2, orient: int = Direction.SOUTH) -> void:

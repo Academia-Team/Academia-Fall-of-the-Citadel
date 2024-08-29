@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://asset/game_over.wav" type="AudioStream" id=1]
 [ext_resource path="res://scene/GameGrid.gd" type="Script" id=2]
 [ext_resource path="res://resource/tileset.tres" type="TileSet" id=4]
 [ext_resource path="res://scene/Player.tscn" type="PackedScene" id=5]
@@ -27,9 +26,8 @@ wait_time = 6.0
 [node name="DuckTimer" type="Timer" parent="."]
 wait_time = 2.0
 
-[node name="GameOverSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 1 )
-
+[connection signal="event_finished" from="." to="." method="_on_GameGrid_event_finished"]
+[connection signal="event_started" from="." to="." method="_on_GameGrid_event_started"]
 [connection signal="health_change" from="Player" to="." method="_on_Player_health_change"]
 [connection signal="move_request" from="Player" to="." method="_on_Player_move_request"]
 [connection signal="pick_up_item" from="Player" to="." method="_on_Player_pick_up_item"]
@@ -38,4 +36,3 @@ stream = ExtResource( 1 )
 [connection signal="timeout" from="ZombieSpawnTimer" to="." method="_on_Zombie_spawn_timer_timeout"]
 [connection signal="timeout" from="ItemSpawnTimer" to="." method="_on_item_spawn_timer_timeout"]
 [connection signal="timeout" from="DuckTimer" to="." method="_on_DuckTimer_timeout"]
-[connection signal="finished" from="GameOverSFX" to="." method="_on_gameover_sfx_finished"]

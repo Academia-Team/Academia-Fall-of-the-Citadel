@@ -25,8 +25,6 @@ const ZOMBIE_SCENE: PackedScene = preload("res://scene/Zombie.tscn")
 
 const INVALID_VECTOR := Vector2(-1, -1)
 
-export var game_over_color := Color.gray
-
 var ref_counter := {}
 var info_ref: InfoBar = null
 var started := false
@@ -149,21 +147,22 @@ func _on_Zombie_tree_exiting() -> void:
 func _on_Player_health_change(lives: int) -> void:
 	info_ref.display_lives(lives)
 
-	if lives <= 0:
-		stop()
-		info_ref.reset_status()
-		info_ref.set_status("Goodbye Forever!")
-		set_tint(game_over_color)
-		$GameOverSFX.play()
-
 
 func stop() -> void:
+	_stop_cheats()
+	_stop_spawners()
+	reset_tint()
+
+
+func _stop_cheats() -> void:
 	started = false
+
+
+func _stop_spawners():
 	$PassiveTimer.stop()
 	$ZombieSpawnTimer.stop()
 	$ItemSpawnTimer.stop()
 	$DuckTimer.stop()
-	reset_tint()
 
 
 func _on_Zombie_spawn_timer_timeout() -> void:
@@ -313,3 +312,17 @@ func get_interactable_obj_at_pos(pos: Vector2) -> InteractableObject:
 
 func _get_health_probability() -> int:
 	return BASE_HEALTH_SPAWN_PROB + HEALTH_SPAWN_PROB_PER_LIFE * $Player.lives_lost()
+
+
+func _on_GameGrid_event_started(event: TileWorld.Event):
+	match event.identifier:
+		EventDefs.P_DEATH:
+			_stop_cheats()
+			_stop_spawners()
+
+
+func _on_GameGrid_event_finished(event: TileWorld.Event):
+	match event.identifier:
+		EventDefs.P_DEATH:
+			stop()
+			emit_signal("game_over")
