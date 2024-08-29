@@ -11,11 +11,6 @@ signal event_finished(event)
 
 const EVENT_NO_LIMIT := -1
 
-const EVENT_MAX_PRIORITIES := 3
-const EVENT_LOW_PRIORITY := 0
-const EVENT_MED_PRIORITY := 1
-const EVENT_HIGH_PRIORITY := 2
-
 const MAX_TINT_REQUESTS := 3
 
 var _tint_stack := OrderedStack.new()
@@ -61,7 +56,7 @@ func _init() -> void:
 
 
 func send_event(
-	event: Event, duration: float = EVENT_NO_LIMIT, priority: int = EVENT_HIGH_PRIORITY
+	event: Event, duration: float = EVENT_NO_LIMIT, priority: int = TriPriorityStack.HIGH_PRIORITY
 ) -> void:
 	if event.max_times == EVENT_NO_LIMIT or event.num_times < event.max_times:
 		event.num_times += 1

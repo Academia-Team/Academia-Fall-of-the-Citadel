@@ -125,11 +125,11 @@ func _on_Player_pick_up_item(item_ref: Item) -> void:
 		printerr("Item %s is not tracked." % item_ref.type)
 
 	info_ref.update_score(item_ref.points)
-	info_ref.set_status(item_ref.type, info_ref.LOW_PRIORITY)
+	info_ref.set_status(item_ref.type, TriPriorityStack.LOW_PRIORITY)
 
 
 func _on_Player_used_item(_item_name: String) -> void:
-	info_ref.clear_priority(info_ref.LOW_PRIORITY)
+	info_ref.clear_priority(TriPriorityStack.LOW_PRIORITY)
 
 
 func _on_passive_timer_timeout() -> void:
