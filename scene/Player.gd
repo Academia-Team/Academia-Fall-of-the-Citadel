@@ -60,7 +60,9 @@ func _damaged(remaining_lives: int) -> void:
 			$HurtSFX.play()
 			$ImmunityTimer.start()
 		if remaining_lives == 0:
-			gameworld.send_event(events[EventDefs.P_DEATH], DEATH_MSG_TIME)
+			gameworld.send_event(
+				events[EventDefs.P_DEATH], DEATH_MSG_TIME, gameworld.EVENT_HIGH_PRIORITY
+			)
 			set_existence(false)
 			set_visible(true)
 			$CharacterSprite.show_death()
