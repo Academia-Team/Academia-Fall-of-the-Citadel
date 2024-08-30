@@ -1,0 +1,25 @@
+Cheat mode is toggled by:
+Pressing <Shift> three times.
+
+
+Kill off Player by:
+Pressing <Delete>.
+
+
+Toggle Player Immunity by:
+Pressing <Period>.
+
+
+Select object to toggle spawning by:
+Pressing <Comma>.
+
+NOTE: Duck spawning can not be disabled.
+
+> Stop spawning all objects by:
+> Pressing <Comma>.
+
+> Stop spawning all enemies by:
+> Pressing <E>.
+
+> Stop spawning Zombies by:
+> Pressing <Z>.
