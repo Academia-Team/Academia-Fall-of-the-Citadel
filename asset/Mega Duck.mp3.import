@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Mega Duck.mp3-476c5a14bd1a7632be3639e592963524.mp3str"
+
+[deps]
+
+source_file="res://asset/Mega Duck.mp3"
+dest_files=[ "res://.import/Mega Duck.mp3-476c5a14bd1a7632be3639e592963524.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

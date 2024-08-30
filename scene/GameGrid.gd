@@ -73,12 +73,20 @@ func spawn_initial_enemies() -> void:
 			spawn_enemy(ZOMBIE_SCENE, get_spawn_pos())
 
 
-func cleanup() -> void:
+func obj_reaper() -> int:
+	var points: int = 0
 	for obj in get_tree().get_nodes_in_group(InteractableObject.GROUP):
-		if obj is Player:
-			obj.set_existence(false)
-		else:
+		if not obj is Player:
+			if obj.exists:
+				points += obj.points
 			obj.queue_free()
+	return points
+
+
+func cleanup() -> void:
+	# warning-ignore: return_value_discarded
+	obj_reaper()
+	$Player.set_existence(false)
 
 
 func _process(_delta: float) -> void:
@@ -319,6 +327,9 @@ func _on_GameGrid_event_started(event: TileWorld.Event):
 		EventDefs.P_DEATH:
 			_stop_cheats()
 			_stop_spawners()
+		EventDefs.D_MEGA:
+			var points: int = obj_reaper()
+			info_ref.update_score(points)
 
 
 func _on_GameGrid_event_finished(event: TileWorld.Event):

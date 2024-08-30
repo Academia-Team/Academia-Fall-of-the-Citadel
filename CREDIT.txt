@@ -362,6 +362,14 @@ SPDX-License-Identifier: CC0-1.0
 DuckSneeze_sqeeeek.wav by sqeeeek -- https://freesound.org/s/380121/ -- License: Creative Commons 0
 
 
+Mega Duck Event Music:
+https://opengameart.org/content/crazy-duck-melodies-vol02
+~3 seconds of The Horizon Awaits
+
+Copyright/Attribution Notice: 
+If used link to my site: http://www.crazyduckgames.de
+
+
 This game uses Godot Engine, available under the following license:
 
 Copyright (c) 2014-present Godot Engine contributors. Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
