@@ -327,6 +327,9 @@ func _on_GameGrid_event_started(event: TileWorld.Event):
 		EventDefs.P_DEATH:
 			_stop_cheats()
 			_stop_spawners()
+		EventDefs.D_MEGA:
+			var points: int = obj_reaper()
+			info_ref.update_score(points)
 
 
 func _on_GameGrid_event_finished(event: TileWorld.Event):
