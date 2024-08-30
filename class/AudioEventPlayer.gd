@@ -98,7 +98,7 @@ func stop() -> void:
 func push(audio: AudioStream) -> bool:
 	var info := StreamInfo.new(audio)
 
-	if not reset_stream_on_change and _player.is_playing():
+	if _player.is_playing():
 		_preserve_stream_duration()
 
 	return _streams.push(info)
@@ -135,7 +135,7 @@ func _on_streams_contents_changed() -> void:
 
 		_player.stream = stream_info.stream
 		if play_desired:
-			_player.play(stream_info.position)
+			_player.play(stream_info.position if not reset_stream_on_change else 0.0)
 
 
 func _on_player_finished() -> void:
