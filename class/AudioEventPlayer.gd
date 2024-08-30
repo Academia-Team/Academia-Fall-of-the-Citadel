@@ -111,7 +111,7 @@ func _preserve_stream_duration() -> void:
 	# It is possible that several AudioStreams have been pushed on.
 	# In that case, the currently playing AudioStream has already been
 	# handled.
-	if played_stream_info == _player.stream:
+	if played_stream_info != null and played_stream_info.stream == _player.stream:
 		played_stream_info.position = _player.get_playback_position()
 
 	var restore_stream: bool = _streams.push(played_stream_info, true)
