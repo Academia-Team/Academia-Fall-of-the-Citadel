@@ -93,4 +93,6 @@ func _on_GameGrid_message_change_request(text: String, duration: float):
 
 
 func _on_GameGrid_music_change_request(stream: AudioStream):
-	$Audio.push(stream)
+	var status: bool = $Audio.push(stream)
+	if not status:
+		printerr('Failed to add stream "%s".' % stream)
