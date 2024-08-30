@@ -185,8 +185,14 @@ func spawn(spawned_into: TileWorld, pos: Vector2, orient: int = Direction.SOUTH)
 	position = pos
 
 	_set_initial_lives()
+	_clear_meta()
 	_set_events()
 	set_existence(true)
+
+
+func _clear_meta() -> void:
+	for meta in get_meta_list():
+		remove_meta(meta)
 
 
 func move_to(pos: Vector2) -> void:
