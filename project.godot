@@ -124,6 +124,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scene/Player.gd"
 }, {
+"base": "Reference",
+"class": "PriorityStack",
+"language": "GDScript",
+"path": "res://class/PriorityStack.gd"
+}, {
 "base": "Node",
 "class": "SingleUseAudioPlayer",
 "language": "GDScript",
@@ -148,6 +153,11 @@ _global_script_classes=[ {
 "class": "TileWorld",
 "language": "GDScript",
 "path": "res://class/TileWorld.gd"
+}, {
+"base": "PriorityStack",
+"class": "TriPriorityStack",
+"language": "GDScript",
+"path": "res://class/TriPriorityStack.gd"
 } ]
 _global_script_class_icons={
 "AudioEventPlayer": "",
@@ -173,11 +183,13 @@ _global_script_class_icons={
 "Menu": "",
 "OrderedStack": "",
 "Player": "",
+"PriorityStack": "",
 "SingleUseAudioPlayer": "",
 "Stack": "",
 "TargetTracker": "",
 "TargettedItem": "",
-"TileWorld": ""
+"TileWorld": "",
+"TriPriorityStack": ""
 }
 
 [application]

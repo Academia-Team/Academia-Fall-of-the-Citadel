@@ -60,7 +60,9 @@ func _damaged(remaining_lives: int) -> void:
 			$HurtSFX.play()
 			$ImmunityTimer.start()
 		if remaining_lives == 0:
-			gameworld.send_event(events[EventDefs.P_DEATH], DEATH_MSG_TIME)
+			gameworld.send_event(
+				events[EventDefs.P_DEATH], DEATH_MSG_TIME, TriPriorityStack.HIGH_PRIORITY
+			)
 			set_existence(false)
 			set_visible(true)
 			$CharacterSprite.show_death()
@@ -136,7 +138,9 @@ func _handle_movement() -> void:
 	$CharacterSprite.set_orient(desired_dir)
 
 	if desired_dir != Direction.NONE:
-		gameworld.send_event(events[EventDefs.P_INIT_MOV], MOVEMENT_MSG_TIME)
+		gameworld.send_event(
+			events[EventDefs.P_INIT_MOV], MOVEMENT_MSG_TIME, TriPriorityStack.LOW_PRIORITY
+		)
 
 
 func _use_item() -> void:
@@ -204,7 +208,9 @@ func _on_Player_area_entered(area: Area2D):
 	if area is Item:
 		if not held_item:
 			held_item = area.acquire(self)
-			gameworld.send_event(events[EventDefs.P_INIT_PICK], ITEM_PICKUP_MSG_TIME)
+			gameworld.send_event(
+				events[EventDefs.P_INIT_PICK], ITEM_PICKUP_MSG_TIME, TriPriorityStack.LOW_PRIORITY
+			)
 
 			var used_status: int = area.connect("used", self, "_on_item_used")
 			if used_status != OK:

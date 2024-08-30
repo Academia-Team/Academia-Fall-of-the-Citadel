@@ -10,7 +10,7 @@ export var supported_streams := 1 setget set_supported_streams, get_supported_st
 var play_desired := false setget set_play, will_play
 
 var _player := AudioStreamPlayer.new()
-var _streams := Stack.new()
+var _streams := TriPriorityStack.new()
 
 
 class StreamInfo:
@@ -22,7 +22,7 @@ class StreamInfo:
 
 
 func _init() -> void:
-	_streams.set_size(supported_streams)
+	_streams.set_global_size(supported_streams)
 
 	var streams_status: int = _streams.connect(
 		"contents_changed", self, "_on_streams_contents_changed"
@@ -53,11 +53,15 @@ func get_autoplay() -> bool:
 
 
 func set_initial_stream(value: AudioStream) -> void:
-	var status: bool = _streams.push(StreamInfo.new(value))
-	if status:
-		initial_stream = value
+	var low_stack: OrderedStack = _streams.get_level(_streams.LOW_PRIORITY)
+	if low_stack != null:
+		var status: bool = low_stack.push(StreamInfo.new(value))
+		if status:
+			initial_stream = value
+		else:
+			printerr("Unable to set up initial stream.")
 	else:
-		printerr("Unable to set up initial stream.")
+		printerr("Cannot access priority level used for initial stream.")
 
 
 func get_initial_stream() -> AudioStream:
@@ -67,7 +71,7 @@ func get_initial_stream() -> AudioStream:
 func set_supported_streams(value: int) -> void:
 	if value >= 0:
 		supported_streams = value
-		_streams.set_size(supported_streams)
+		_streams.set_global_size(supported_streams)
 
 
 func get_supported_streams() -> int:
@@ -95,28 +99,32 @@ func stop() -> void:
 	set_play(false)
 
 
-func push(audio: AudioStream) -> bool:
+func push(audio: AudioStream, priority: int = _streams.MED_PRIORITY) -> bool:
 	var info := StreamInfo.new(audio)
 
 	if _player.is_playing():
 		_preserve_stream_duration()
+		_player.stop()
 
-	return _streams.push(info)
+	var stack: OrderedStack = _streams.get_level(priority)
+
+	return stack != null and stack.push(info)
 
 
 func _preserve_stream_duration() -> void:
-	var played_stream_info: StreamInfo = _streams.pop()
-	_player.stop()
+	for priority in range(_streams.NUM_PRIORITIES - 1, -1, -1):
+		var stack: OrderedStack = _streams.get_level(priority)
+		var played_stream_info: StreamInfo = stack.peek()
+		# It is possible that several AudioStreams have been pushed on.
+		# In that case, the currently playing AudioStream has already been
+		# handled.
+		if played_stream_info != null and played_stream_info.stream == _player.stream:
+			stack.discard_top()
+			played_stream_info.position = _player.get_playback_position()
 
-	# It is possible that several AudioStreams have been pushed on.
-	# In that case, the currently playing AudioStream has already been
-	# handled.
-	if played_stream_info != null and played_stream_info.stream == _player.stream:
-		played_stream_info.position = _player.get_playback_position()
-
-	var restore_stream: bool = _streams.push(played_stream_info, true)
-	if not restore_stream:
-		printerr("Failed to restore AudioStream. It has been lost.")
+			var restore_stream: bool = stack.push(played_stream_info, true)
+			if not restore_stream:
+				printerr("Failed to restore AudioStream in priority level %d." % priority)
 
 
 func pause() -> void:
