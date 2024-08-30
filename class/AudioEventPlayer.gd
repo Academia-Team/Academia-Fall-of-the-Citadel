@@ -128,7 +128,7 @@ func discard() -> void:
 
 
 func _on_streams_contents_changed() -> void:
-	var stream_info: StreamInfo = _streams.pop()
+	var stream_info: StreamInfo = _streams.peek()
 	if stream_info != null:
 		_player.stop()
 		_player.stream_paused = false
@@ -136,11 +136,6 @@ func _on_streams_contents_changed() -> void:
 		_player.stream = stream_info.stream
 		if play_desired:
 			_player.play(stream_info.position)
-
-		stream_info.position = 0.0
-		var reset_position: bool = _streams.push(stream_info, true)
-		if not reset_position:
-			printerr("Failed to reset AudioStream position. AudioStream has been lost.")
 
 
 func _on_player_finished() -> void:
