@@ -216,7 +216,7 @@ enabled=PoolStringArray( "res://addons/CreatureSprite/plugin.cfg", "res://addons
 
 [global]
 
-Dev=true
+Dev=false
 files_to_add_on_export=PoolStringArray( "res://CREDIT.txt", "res://LICENSE.txt", "res://README.adoc", "res://VERSION.txt" )
 "Itch Presets To Publish"={
 "HTML5": "web",
