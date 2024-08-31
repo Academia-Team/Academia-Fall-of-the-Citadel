@@ -99,12 +99,11 @@ func _set_dir(dir: int) -> void:
 
 
 func kill() -> void:
-	while exists and lives > 0:
+	if exists and lives > 0:
 		if is_immortal():
 			toggle_immortality()
 
-		damage()
-		yield($ImmunityTimer, "timeout")
+		set_lives(0)
 
 
 func _handle_action() -> void:
